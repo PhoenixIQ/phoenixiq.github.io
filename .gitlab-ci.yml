@@ -1,0 +1,34 @@
+stages:
+  - deploy
+
+image: harbor.iquantex.com/base_images/maven:3.6.1-jdk-8-alpine
+
+before_script:
+  - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD}  harbor.iquantex.com
+
+# 打完镜像会自动推送到镜像仓库, 以分支名或TAG名作为镜像的版本
+docker-deploy:
+  stage: deploy
+  script:
+    # 通过Dockerfile生成phoenix-docs镜像
+    - docker build -t harbor.iquantex.com/phoenix/phoenix-website:$CI_BUILD_REF_NAME . && docker push harbor.iquantex.com/phoenix/phoenix-website:$CI_BUILD_REF_NAME
+    - helm init --client-only
+    - helm repo add quantex http://10.116.18.93:8080/
+    - helm dep update devops/phoenix-website/
+    - helm push --version="${CI_BUILD_REF_NAME}"  devops/phoenix-website/ quantex
+  only:
+    - master
+
+deploy_k8s:
+  stage: deploy
+  script:
+    - helm upgrade --kubeconfig devops/phoenix-website/.kube/config phoenix-${CI_BUILD_REF_NAME} --install --namespace=phoenix-${CI_BUILD_REF_NAME} --set phoenix.version=$CI_COMMIT_SHA  devops/phoenix-website/
+  only:
+    - master
+
+deploy_k8s_demo:
+  stage: deploy
+  script:
+    - helm upgrade --kubeconfig devops/phoenix-website/.kube/config-demo phoenix-demo --install --namespace=phoenix-demo --set phoenix.version=${CI_BUILD_REF_NAME}  devops/phoenix-website/
+  only:
+    - master
