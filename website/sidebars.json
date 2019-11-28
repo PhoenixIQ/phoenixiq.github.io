@@ -1,0 +1,13 @@
+{
+  "docs": {
+    "Docusaurus": ["doc1"],
+    "First Category": ["doc2"],
+    "Second Category": ["doc3"],
+    "Docusaurus introduce": ["introduce"],
+    "Roadmap": ["roadmap"]
+  },
+  "phoenix": {
+    "Phoenix 白皮书": ["whitepaper"]
+  }
+}
+
