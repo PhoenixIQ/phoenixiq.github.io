@@ -1,0 +1,139 @@
+# Default values for phoenix-platform.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+nameOverride: ""
+fullnameOverride: ""
+
+## 依赖服务配置
+### kafka
+kafka:
+  replicas: 3
+  fullnameOverride: "kafka"
+  configurationOverrides:
+    "offsets.topic.replication.factor": 3
+    "confluent.support.metrics.enable": false
+    "auto.create.topics.enable": true
+    "log.retention.hours": 168
+  external:
+    enabled: false
+  persistence:
+    enabled: false
+  prometheus:
+    jmx:
+      enabled: false
+    kafka:
+      enabled: false
+  zookeeper:
+    enabled: true
+    fullnameOverride: "zookeeper"
+    persistence:
+      enabled: false
+    replicaCount: 1
+    tickTime: 5000
+    initLimit: 10
+    syncLimit: 5
+    maxCLIENTCnxns: 60
+    allowAnonymousLogin: false
+    auth:
+      enabled: true
+    metrics:
+      enabled: false
+
+### elasticsearch
+elasticsearch:
+  cluster:
+    name: phoenix
+
+### eureka
+#### none
+
+### mysql
+mysql:
+  root:
+    password: test@123
+  db:
+    name: phoenix_store
+  replication:
+    enabled: false
+  master:
+    persistence:
+      enabled: false
+  slave:
+    replicas: 0
+    persistence:
+      enabled: false
+
+## phoenix全局配置
+phoenix:
+  version: master-SNAPSHOT
+global:
+  mysql:
+    driver: com.mysql.jdbc.Driver
+    phoenix_store0:
+      url: jdbc:mysql://mysql:3306/phoenix_store?useUnicode=true&characterEncoding=utf-8&verifyServerCertificate=false&useSSL=false&requireSSL=false
+    username: "root"
+    password: "test@123"
+  elasticsearch:
+    ## 由于es没有好的helm-charts暂时使用208的
+    url: "10.16.18.208:9300"
+    clusterName: "elasticsearch"
+  mq:
+    type: "kafka"
+    kafka:
+      address: "kafka:9092"
+    topic:
+      request_topic: req_topic
+      response_topic: res_topic
+      command_topic: command_topic
+      event_topic: event_topic
+  eureka:
+    url: "eureka:80"
+
+
+## 01-akka-auth
+### none
+
+## 02-phoenix-persist
+phoenix_persist:
+  replicaCount: 2
+  name: phoenix-persist
+  image:
+    repository: harbor.iquantex.com/phoenix/phoenix-persist
+    pullPolicy: Always
+  service:
+    type: ClusterIP
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  resources:
+    requests:
+      cpu: 2
+      memory: 256Mi
+    limits:
+      cpu: 2
+      memory: 512Mi
+
+## 03-bank-account配置
+phoenix_bank_account:
+  replicaCount: 2
+  name: bank-account
+  image:
+    repository: harbor.iquantex.com/phoenix/phoenix-bank-account-server
+    pullPolicy: Always
+  service:
+    type: NodePort
+  env: []
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+resources:
+  requests:
+    cpu: 2
+    memory: 512Mi
+  limits:
+    cpu: 2
+    memory: 1024Mi
+
+## k8s公共配置
+### 镜像拉取权限配置
+imagePullSecrets: []

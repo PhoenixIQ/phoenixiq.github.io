@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.phoenix-website.name | quote }}
+  labels:
+{{ include "phoenix.labels" . | indent 4 }}
+    app.name: {{ .Values.phoenix-website.name | quote }}
+spec:
+  replicas: {{ .Values.phoenix-website.replicaCount }}
+  selector:
+    matchLabels:
+  template:
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+        - name: {{ .Values.phoenix-website.name | quote }}
+          image: "{{ .Values.phoenix-website.image.repository }}:{{ include "phoenix.tag" . }}"    # 下面也有一个
+          imagePullPolicy: {{ .Values.phoenix-website.image.pullPolicy }}
+          ports:
+            - name: {{ .Values.phoenix-website.name | quote }}
+              containerPort: 3000
+              protocol: TCP
+          env:  # 不需要环境变量
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.phoenix_bank_account.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.phoenix_bank_account.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.phoenix_bank_account.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.phoenix-website.name | quote }}
+  labels:
+{{ include "phoenix.labels" . | indent 4 }}
+    app.name: {{ .Values.phoenix-website.name | quote }}
+spec:
+  type: {{ .Values.phoenix-website.service.type }}
+  ports:
+    - name: {{ .Values.phoenix-website.name | quote }}
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: {{ include "phoenix.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.name: {{ .Values.phoenix-website.name | quote }}
+
