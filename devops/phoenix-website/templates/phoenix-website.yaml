@@ -13,6 +13,11 @@ spec:
       app.kubernetes.io/instance: {{ .Release.Name }}
       app.name: {{ .Values.phoenix_website.name | quote }}
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "phoenix.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.name: {{ .Values.phoenix_website.name | quote }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
