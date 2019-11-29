@@ -12,7 +12,7 @@ deploy_k8s:
   stage: deploy
   script:
     - docker build -t harbor.iquantex.com/phoenix/phoenix-website:$CI_COMMIT_SHA . && docker push harbor.iquantex.com/phoenix/phoenix-website:$CI_COMMIT_SHA
-    - helm upgrade --kubeconfig devops/phoenix-website/.kube/config phoenix-website-${CI_BUILD_REF_NAME} --install --namespace=phoenix-websit-${CI_BUILD_REF_NAME} --set phoenix-websit.version=$CI_COMMIT_SHA  devops/phoenix-website/
+    - helm upgrade --kubeconfig devops/phoenix-website/.kube/config-demo phoenix-website-${CI_BUILD_REF_NAME} --install --namespace=phoenix-websit-${CI_BUILD_REF_NAME} --set phoenix-websit.version=$CI_COMMIT_SHA  devops/phoenix-website/
   only:
     - master
 
