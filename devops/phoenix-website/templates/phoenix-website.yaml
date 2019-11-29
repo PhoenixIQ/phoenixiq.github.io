@@ -26,7 +26,6 @@ spec:
             - name: {{ .Values.phoenix_website.name | quote }}
               containerPort: 3000
               protocol: TCP
-          env: []
           resources:
             {{- toYaml .Values.phoenix_website.resources | nindent 12 }}
       {{- with .Values.phoenix_website.nodeSelector }}
