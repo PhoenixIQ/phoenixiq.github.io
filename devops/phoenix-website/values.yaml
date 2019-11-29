@@ -10,9 +10,10 @@ phoenix_website:
   name: phoenix-website
   image:
     repository: harbor.iquantex.com/phoenix/phoenix-website
+    tag: master
     pullPolicy: Always
   service:
-    type: ClusterIP
+    type: NodePort
   nodeSelector: {}
   tolerations: []
   affinity: {}

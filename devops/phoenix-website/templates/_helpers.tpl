@@ -44,19 +44,6 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
-{{/*
-根据charts的version和phoenix.version得出phoenix镜像的tag
-如果charts.version=0.0.0则表明是正常使用发布，需要使用phoenix.version
-如果charts.version!=0.0.9则表明是release，需要使用charts.version
-*/}}
-{{- define "phoenix.tag" -}}
-{{- if eq .Chart.Version "0.0.0" }}
-{{- .Values.phoenix.version -}}
-{{- else -}}
-{{- .Chart.Version -}}
-{{- end }}
-{{- end -}}
-
 
 {{- define "phoenix-namespace" -}}
 {{- printf "%s" .Release.Namespace | trunc 63 -}}
