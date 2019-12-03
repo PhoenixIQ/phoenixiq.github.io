@@ -21,18 +21,16 @@ function Help(props) {
 
   const supportLinks = [
     {
-      content: `Learn more using the [documentation on this site.](${docUrl(
-        'doc1.html',
-      )})`,
-      title: 'Browse Docs',
+      content: `使用此站点上的文档了解更多信息。`,
+      title: '文档',
     },
     {
-      content: 'Ask questions about the documentation and project',
-      title: 'Join the community',
+      content: '深圳项目组成员：<br/><br/> 蓝文昌 、 郭超学 、 孙心原 、 高彦良 <br/><br/> 上海项目组：<br/><br/>石宝迪 、 申政杰',
+      title: '联系项目组成员',
     },
     {
-      content: "Find out what's new with this project",
-      title: 'Stay up to date',
+      content: "了解此项目的新功能",
+      title: '保持关注',
     },
   ];
 
@@ -41,9 +39,9 @@ function Help(props) {
       <Container className="mainContainer documentContainer postContainer">
         <div className="post">
           <header className="postHeader">
-            <h1>Need help?</h1>
+          <h1>需要帮助吗?</h1>
           </header>
-          <p>This project is maintained by a dedicated group of people.</p>
+          <p>该项目由北京宽拓智融科技有限公司Phoenix项目组进行维护</p>
           <GridBlock contents={supportLinks} layout="threeColumn" />
         </div>
       </Container>

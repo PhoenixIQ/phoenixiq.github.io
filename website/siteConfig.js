@@ -10,16 +10,17 @@
 
 // List of projects/orgs using your project for the users page.
 // 用户页面中使用Phoenix的项目/组织列表。 暂时不配置，之后有需求再配置
-const users = [
-  {
-    caption: 'User1',
-    // You will need to prepend the image path with your baseUrl
-    // if it is not '/', like: '/test-site/img/image.jpg'.
-    image: '/img/undraw_open_source.svg',
-    infoLink: 'https://www.facebook.com',
-    pinned: true,
-  },
-];
+const users = require('./data/users');
+// const users = [
+//   {
+//     caption: 'User1',
+//     // You will need to prepend the image path with your baseUrl
+//     // if it is not '/', like: '/test-site/img/image.jpg'.
+//     image: '/img/undraw_open_source.svg',
+//     infoLink: 'https://www.facebook.com',
+//     pinned: true,
+//   },
+// ];
 
 // 网站配置
 const siteConfig = {
