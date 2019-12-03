@@ -1,13 +1,12 @@
 {
-  "docs": {
-    "Docusaurus": ["doc1"],
-    "First Category": ["doc2"],
-    "Second Category": ["doc3"],
-    "Docusaurus introduce": ["introduce"],
-    "Roadmap": ["roadmap"]
+  "phoenix1x": {
+    "目录标题一": ["phoenix-1.x/quick-start-1x", "phoenix-1.x/cqrs", "phoenix-1.x/akka"],
+    "目录标题二": ["phoenix-1.x/eventstore", "phoenix-1.x/eventsourcing"],
+    "...": ["phoenix-1.x/test"]
   },
-  "phoenix": {
-    "Phoenix 白皮书": ["whitepaper"]
+  "phoenix2x": {
+    "目录标题一": ["phoenix-2.x/quick-start-2x", "phoenix-2.x/cqrs", "phoenix-2.x/akka"],
+    "目录标题二": ["phoenix-2.x/eventstore", "phoenix-2.x/eventsourcing"],
+    "...": ["phoenix-2.x/test"]
   }
 }
-

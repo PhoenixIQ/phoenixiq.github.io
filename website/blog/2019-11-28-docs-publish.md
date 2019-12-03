@@ -36,19 +36,6 @@ sidebar_label: Document
 ---
 ```
 
-经过版本控制的文档在被复制时会更改其 id 这样才能包含版本号。 新的 id 为 version-${version}-${id}, 其中 ${version} 是该文档的版本号, $ {id} 是原始的 id。 此外，版本文档可得到original_id 文件，使用原版的文件id。
-
-例如：
-
-```
----
-id: version-1.0.0-doc1
-title: My Document
-sidebar_label: Document
-original_id: doc1
----
-```
-
 ## 更多功能
 
 ### 链接到其他文档
@@ -193,11 +180,10 @@ The above will generate:
 
 ```js
   headerLinks: [
-    {doc: 'doc1', label: 'Docs'},
-    {doc: 'doc4', label: 'API'},
-    {page: 'help', label: 'Help'},
-    {blog: true, label: 'Blog'},
-    {doc: 'whitepaper', label: 'Phoenix 白皮书'},
-    { href: "https://gitlab.iquantex.com/yanliang.gao/docs", label: "GitLab" }
+    {href: "http://phoenix-website.sz.iquantex.com/docs/next/phoenix-1.x/quick-start-1x", label: "Phoenix1.x"},
+    {href: "http://phoenix-website.sz.iquantex.com/docs/next/phoenix-2.x/quick-start-2x", label: "Phoenix2.x"},
+    {blog: true, label: '博客'},
+    {page: 'help', label: '帮助'},
+    {page: 'users', label: '使用用户'},
   ],
 ```

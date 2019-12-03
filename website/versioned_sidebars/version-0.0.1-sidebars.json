@@ -1,22 +1,30 @@
 {
-  "version-0.0.1-docs": {
-    "Docusaurus": [
-      "version-0.0.1-doc1"
+  "version-0.0.1-phoenix1x": {
+    "目录标题一": [
+      "version-0.0.1-phoenix-1.x/quick-start-1x",
+      "version-0.0.1-phoenix-1.x/cqrs",
+      "version-0.0.1-phoenix-1.x/akka"
     ],
-    "First Category": [
-      "version-0.0.1-doc2"
+    "目录标题二": [
+      "version-0.0.1-phoenix-1.x/eventstore",
+      "version-0.0.1-phoenix-1.x/eventsourcing"
     ],
-    "Second Category": [
-      "version-0.0.1-doc3"
-    ],
-    "Docusaurus introduce": [
-      "version-0.0.1-introduce"
+    "...": [
+      "version-0.0.1-phoenix-1.x/test"
     ]
   },
-  "version-0.0.1-docs-other": {
-    "First Category": [
-      "version-0.0.1-doc4",
-      "version-0.0.1-doc5"
+  "version-0.0.1-phoenix2x": {
+    "目录标题一": [
+      "version-0.0.1-phoenix-2.x/quick-start-2x",
+      "version-0.0.1-phoenix-2.x/cqrs",
+      "version-0.0.1-phoenix-2.x/akka"
+    ],
+    "目录标题二": [
+      "version-0.0.1-phoenix-2.x/eventstore",
+      "version-0.0.1-phoenix-2.x/eventsourcing"
+    ],
+    "...": [
+      "version-0.0.1-phoenix-2.x/test"
     ]
   }
 }

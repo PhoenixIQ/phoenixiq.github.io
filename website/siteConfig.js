@@ -9,6 +9,7 @@
 // site configuration options.
 
 // List of projects/orgs using your project for the users page.
+// 用户页面中使用Phoenix的项目/组织列表。 暂时不配置，之后有需求再配置
 const users = [
   {
     caption: 'User1',
@@ -20,8 +21,9 @@ const users = [
   },
 ];
 
+// 网站配置
 const siteConfig = {
-  title: 'Phoenix Docs', // Title for your website.
+  title: 'Phoenix', // Title for your website.
   tagline: 'Phoenix 官方文档',
   url: 'https://phoenix-docs.sz.iquantex.com', // Your website URL
   baseUrl: '/', // Base URL for your project */
@@ -30,20 +32,19 @@ const siteConfig = {
   //   baseUrl: '/test-site/',
 
   // Used for publishing and more
-  projectName: 'phoenix-docs',
-  organizationName: 'quantex',
+  projectName: 'phoenix-website',
+  organizationName: 'phoenix group',
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
   //   organizationName: 'JoelMarcey'
 
-  // For no header links in the top nav bar -> headerLinks: [],
+  // For no header links in the top nav bar -> headerLinks: [], 导航栏
   headerLinks: [
-    {doc: 'doc1', label: 'Docs'},
-    {doc: 'doc4', label: 'API'},
-    {page: 'help', label: 'Help'},
-    {blog: true, label: 'Blog'},
-    {doc: 'whitepaper', label: 'Phoenix 白皮书'},
-    { href: "https://gitlab.iquantex.com/yanliang.gao/docs", label: "GitLab" }
+    {href: "http://phoenix-website.sz.iquantex.com/docs/next/phoenix-1.x/quick-start-1x", label: "Phoenix1.x"},
+    {href: "http://phoenix-website.sz.iquantex.com/docs/next/phoenix-2.x/quick-start-2x", label: "Phoenix2.x"},
+    {blog: true, label: '博客'},
+    {page: 'help', label: '帮助'},
+    {page: 'users', label: '使用用户'},
   ],
 
   // If you have users set above, you add it here:
@@ -56,8 +57,8 @@ const siteConfig = {
 
   /* Colors for website */
   colors: {
-    primaryColor: '#479874',
-    secondaryColor: '#316a51',
+    primaryColor: '#822127',
+    secondaryColor: '#5b171b',
   },
 
   /* Custom fonts for website */
@@ -83,6 +84,7 @@ const siteConfig = {
   },
 
   // Add custom scripts here that would be placed in <script> tags.
+  // 在此处添加将放置在<script>标记中的自定义脚本。
   scripts: ['https://buttons.github.io/buttons.js'],
 
   // On page navigation for the current documentation page.
@@ -104,13 +106,11 @@ const siteConfig = {
   // Show documentation's last update time.
   // enableUpdateTime: true,
 
+    // blog 侧边栏默认显示的文章个数
+    blogSidebarCount: 'ALL',
   // You may provide arbitrary config keys to be used as needed by your
   // template. For example, if you need your repo's URL...
   //   repoUrl: 'https://github.com/facebook/test-site',
-
-  // blog
-  blogSidebarCount: 'ALL',
-  // editUrl: 'https://gitlab.iquantex.com/yanliang.gao/docs/edit',
 };
 
 module.exports = siteConfig;
