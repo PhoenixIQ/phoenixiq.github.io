@@ -52,11 +52,11 @@ phoenix-website
 
 ## 如何发布一篇博客
 
-[如何发布一篇博客](2019-11-27-blog-introduction.md)
+[如何发布一篇博客](http://phoenix-website.sz.iquantex.com/blog/2019/11/27/blog-introduction)
 
 ## 如何新增文档
 
-[如何新增文档](2019-11-28-docs-publish.md)
+[如何新增文档](http://phoenix-website.sz.iquantex.com/blog/2019/11/28/docs-publish)
 
 ## 版本管理机制
-[版本管理机制](2019-11-27-docs-versions.md)
+[版本管理机制](http://phoenix-website.sz.iquantex.com/blog/2019/11/27/docs-versions)
