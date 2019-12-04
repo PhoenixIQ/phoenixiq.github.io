@@ -25,7 +25,7 @@ function Help(props) {
       title: '文档',
     },
     {
-      content: '深圳项目组成员：<br/><br/> 蓝文昌 、 郭超学 、 孙心原 、 高彦良 <br/><br/> 上海项目组：<br/><br/>石宝迪 、 申政杰',
+      content: '深圳项目组成员：<br/><br/> 蓝文昌 、 郭超学 、 孙心原 、 高彦良 <br/><br/> 上海项目组成员：<br/><br/>石宝迪 、 申政杰',
       title: '联系项目组成员',
     },
     {
@@ -41,7 +41,7 @@ function Help(props) {
           <header className="postHeader">
           <h1>需要帮助吗?</h1>
           </header>
-          <p>该项目由北京宽拓智融科技有限公司Phoenix项目组进行维护</p>
+          <p>该项目由北京宽拓智融科技有限公司 - Phoenix项目组进行维护</p>
           <GridBlock contents={supportLinks} layout="threeColumn" />
         </div>
       </Container>
