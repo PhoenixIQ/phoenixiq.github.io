@@ -42,7 +42,7 @@
         "title": "Phoenix-admin 接入指南"
       },
       "phoenix-1.x/operation/admin/admin-introduction-1x": {
-        "title": "Phoenix-admin ç®€ä»‹"
+        "title": "Phoenix-admin 简介"
       },
       "phoenix-1.x/operation/configuration-1x": {
         "title": "Phoenix 配置"
@@ -145,11 +145,10 @@
       }
     },
     "links": {
-      "Phoenix1.x": "Phoenix1.x",
-      "Phoenix2.x": "Phoenix2.x",
+      "文档": "文档",
       "博客": "博客",
-      "帮助": "帮助",
-      "使用用户": "使用用户"
+      "用户": "用户",
+      "关于我们": "关于我们"
     },
     "categories": {
       "关于 Phoenix": "关于 Phoenix",

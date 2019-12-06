@@ -41,11 +41,11 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [], 导航栏
   headerLinks: [
-    {href: "http://phoenix-website.sz.iquantex.com/docs/next/phoenix-1.x/about/introduction-1x", label: "Phoenix1.x"},
-    {href: "http://phoenix-website.sz.iquantex.com/docs/next/phoenix-2.x/about/introduction-2x", label: "Phoenix2.x"},
+    // {href: "http://phoenix-website.sz.iquantex.com/docs/next/phoenix-1.x/about/introduction-1x", label: "Phoenix1.x"},
+    {href: "http://phoenix-website.sz.iquantex.com/docs/next/phoenix-2.x/about/introduction-2x", label: "文档"},
     {blog: true, label: '博客'},
-    {page: 'help', label: '帮助'},
-    {page: 'users', label: '使用用户'},
+    {page: 'users', label: '用户'},
+    {page: 'help', label: '关于我们'},
   ],
 
   // If you have users set above, you add it here:
