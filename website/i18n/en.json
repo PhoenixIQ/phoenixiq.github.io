@@ -5,41 +5,107 @@
     "previous": "Previous",
     "tagline": "Phoenix 官方文档",
     "docs": {
-      "phoenix-1.x/akka": {
-        "title": "akka 介绍"
+      "phoenix-1.x/about/benchmark-1x": {
+        "title": "Phoenix 基准测试"
       },
-      "phoenix-1.x/cqrs": {
-        "title": "CQRS 介绍"
+      "phoenix-1.x/about/introduction-1x": {
+        "title": "Phoenix 简介"
       },
-      "phoenix-1.x/eventsourcing": {
-        "title": "eventsourcing 介绍"
+      "phoenix-1.x/business-1x": {
+        "title": "业务场景"
       },
-      "phoenix-1.x/eventstore": {
-        "title": "EventStore 介绍"
+      "phoenix-1.x/framework/features/availability-1x": {
+        "title": "高可用"
       },
-      "phoenix-1.x/quick-start-1x": {
-        "title": "Phoenix 快速入门"
+      "phoenix-1.x/framework/features/cqrs-1x": {
+        "title": "CQRS"
       },
-      "phoenix-1.x/test": {
-        "title": "test 文档"
+      "phoenix-1.x/framework/features/eventdriver-1x": {
+        "title": "事件驱动"
       },
-      "phoenix-2.x/akka": {
-        "title": "akka 介绍"
+      "phoenix-1.x/framework/features/eventsourcing-1x": {
+        "title": "事件溯源"
       },
-      "phoenix-2.x/cqrs": {
-        "title": "CQRS 介绍"
+      "phoenix-1.x/framework/features/eventstore-1x": {
+        "title": "事件存储"
       },
-      "phoenix-2.x/eventsourcing": {
-        "title": "eventsourcing 介绍"
+      "phoenix-1.x/framework/features/expansibility-1x": {
+        "title": "扩展性"
       },
-      "phoenix-2.x/eventstore": {
-        "title": "EventStore 介绍"
+      "phoenix-1.x/framework/overview-1x": {
+        "title": "Phoenix 整体架构"
       },
-      "phoenix-2.x/quick-start-2x": {
-        "title": "Phoenix 快速入门"
+      "phoenix-1.x/glossary-1x": {
+        "title": "术语表"
       },
-      "phoenix-2.x/test": {
-        "title": "test文档"
+      "phoenix-1.x/operation/admin/admin-access-1x": {
+        "title": "Phoenix-admin 接入指南"
+      },
+      "phoenix-1.x/operation/admin/admin-introduction-1x": {
+        "title": "Phoenix-admin ç®€ä»‹"
+      },
+      "phoenix-1.x/operation/configuration-1x": {
+        "title": "Phoenix 配置"
+      },
+      "phoenix-1.x/operation/quickstart-1x": {
+        "title": "Quick Start"
+      },
+      "phoenix-1.x/roadmap-1x": {
+        "title": "Phoenix 路线图"
+      },
+      "phoenix-1.x/version-1x": {
+        "title": "版本发布历史"
+      },
+      "phoenix-2.x/about/benchmark-2x": {
+        "title": "Phoenix 基准测试"
+      },
+      "phoenix-2.x/about/introduction-2x": {
+        "title": "Phoenix 简介"
+      },
+      "phoenix-2.x/business-2x": {
+        "title": "业务场景"
+      },
+      "phoenix-2.x/framework/features/availability-2x": {
+        "title": "高可用"
+      },
+      "phoenix-2.x/framework/features/cqrs-2x": {
+        "title": "CQRS"
+      },
+      "phoenix-2.x/framework/features/eventdriver-2x": {
+        "title": "事件驱动"
+      },
+      "phoenix-2.x/framework/features/eventsourcing-2x": {
+        "title": "事件溯源"
+      },
+      "phoenix-2.x/framework/features/eventstore-2x": {
+        "title": "事件存储"
+      },
+      "phoenix-2.x/framework/features/expansibility-2x": {
+        "title": "扩展性"
+      },
+      "phoenix-2.x/framework/overview-2x": {
+        "title": "Phoenix 整体架构"
+      },
+      "phoenix-2.x/glossary-2x": {
+        "title": "术语表"
+      },
+      "phoenix-2.x/operation/admin/admin-access-2x": {
+        "title": "Phoenix-admin 接入指南"
+      },
+      "phoenix-2.x/operation/admin/admin-introduction-2x": {
+        "title": "Phoenix-admin 简介"
+      },
+      "phoenix-2.x/operation/configuration-2x": {
+        "title": "Phoenix 配置"
+      },
+      "phoenix-2.x/operation/quickstart-2x": {
+        "title": "Quick Start"
+      },
+      "phoenix-2.x/roadmap-2x": {
+        "title": "Phoenix 路线图"
+      },
+      "phoenix-2.x/version-2x": {
+        "title": "版本发布历史"
       },
       "version-0.0.1/phoenix-1.x/version-0.0.1-akka": {
         "title": "akka 介绍"
@@ -86,6 +152,10 @@
       "使用用户": "使用用户"
     },
     "categories": {
+      "关于 Phoenix": "关于 Phoenix",
+      "架构概述": "架构概述",
+      "操作指南": "操作指南",
+      "其他": "其他",
       "目录标题一": "目录标题一",
       "目录标题二": "目录标题二",
       "...": "..."

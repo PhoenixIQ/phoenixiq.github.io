@@ -1,12 +1,80 @@
 {
   "phoenix1x": {
-    "目录标题一": ["phoenix-1.x/quick-start-1x", "phoenix-1.x/cqrs", "phoenix-1.x/akka"],
-    "目录标题二": ["phoenix-1.x/eventstore", "phoenix-1.x/eventsourcing"],
-    "...": ["phoenix-1.x/test"]
+    "关于 Phoenix": [
+      "phoenix-1.x/about/introduction-1x", 
+      "phoenix-1.x/about/benchmark-1x"
+    ],
+    "架构概述": [
+      "phoenix-1.x/framework/overview-1x", 
+      {
+        "type": "subcategory",
+        "label": "核心特性",
+        "ids": [
+          "phoenix-1.x/framework/features/expansibility-1x",
+          "phoenix-1.x/framework/features/availability-1x",
+          "phoenix-1.x/framework/features/eventdriver-1x",
+          "phoenix-1.x/framework/features/cqrs-1x",
+          "phoenix-1.x/framework/features/eventstore-1x",
+          "phoenix-1.x/framework/features/eventsourcing-1x"
+        ]
+      }
+    ],
+    "操作指南": [
+      "phoenix-1.x/operation/quickstart-1x",
+      "phoenix-1.x/operation/configuration-1x",
+      {
+        "type": "subcategory",
+        "label": "监控",
+        "ids": [
+          "phoenix-1.x/operation/admin/admin-introduction-1x",
+          "phoenix-1.x/operation/admin/admin-access-1x"
+        ]
+      }
+    ],
+    "其他": [
+      "phoenix-1.x/business-1x",
+      "phoenix-1.x/roadmap-1x",
+      "phoenix-1.x/version-1x",
+      "phoenix-1.x/glossary-1x"
+    ]
   },
   "phoenix2x": {
-    "目录标题一": ["phoenix-2.x/quick-start-2x", "phoenix-2.x/cqrs", "phoenix-2.x/akka"],
-    "目录标题二": ["phoenix-2.x/eventstore", "phoenix-2.x/eventsourcing"],
-    "...": ["phoenix-2.x/test"]
+    "关于 Phoenix": [
+      "phoenix-2.x/about/introduction-2x", 
+      "phoenix-2.x/about/benchmark-2x"
+    ],
+    "架构概述": [
+      "phoenix-2.x/framework/overview-2x", 
+      {
+        "type": "subcategory",
+        "label": "核心特性",
+        "ids": [
+          "phoenix-2.x/framework/features/expansibility-2x",
+          "phoenix-2.x/framework/features/availability-2x",
+          "phoenix-2.x/framework/features/eventdriver-2x",
+          "phoenix-2.x/framework/features/cqrs-2x",
+          "phoenix-2.x/framework/features/eventstore-2x",
+          "phoenix-2.x/framework/features/eventsourcing-2x"
+        ]
+      }
+    ],
+    "操作指南": [
+      "phoenix-2.x/operation/quickstart-2x",
+      "phoenix-2.x/operation/configuration-2x",
+      {
+        "type": "subcategory",
+        "label": "监控",
+        "ids": [
+          "phoenix-2.x/operation/admin/admin-introduction-2x",
+          "phoenix-2.x/operation/admin/admin-access-2x"
+        ]
+      }
+    ],
+    "其他": [
+      "phoenix-2.x/business-2x",
+      "phoenix-2.x/roadmap-2x",
+      "phoenix-2.x/version-2x",
+      "phoenix-2.x/glossary-2x"
+    ]
   }
 }
