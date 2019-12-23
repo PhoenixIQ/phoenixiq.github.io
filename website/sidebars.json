@@ -1,8 +1,8 @@
 {
   "phoenix2x": {
     "快速入门": [
-      "phoenix-2.x/quick-start/phoenix-lite", 
-      "phoenix-2.x/quick-start/phoenix-cloud"
+      "phoenix-2.x/quick/lite", 
+      "phoenix-2.x/quick/cloud"
     ],
     "文档": [
       {
