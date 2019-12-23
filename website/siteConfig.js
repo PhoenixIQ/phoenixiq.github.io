@@ -10,7 +10,7 @@
 
 // List of projects/orgs using your project for the users page.
 // 用户页面中使用Phoenix的项目/组织列表。 暂时不配置，之后有需求再配置
-const users = require('./data/users.js');
+const users = require('./data/users');
 // const users = [
 //   {
 //     caption: 'User1',
@@ -86,7 +86,7 @@ const siteConfig = {
 
   // Add custom scripts here that would be placed in <script> tags.
   // 在此处添加将放置在<script>标记中的自定义脚本。
-  scripts: ['./data/buttons.js'],
+  scripts: ['js/buttons.js'],
 
   // On page navigation for the current documentation page.
   onPageNav: 'separate',
