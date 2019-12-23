@@ -44,10 +44,10 @@
       "phoenix-2.x/phoenix-lite/http-api": {
         "title": "HTTP API"
       },
-      "phoenix-2.x/quick-start/phoenix-cloud": {
+      "phoenix-2.x/quick/cloud": {
         "title": "quantex cloud 银行账户加减金额"
       },
-      "phoenix-2.x/quick-start/phoenix-lite": {
+      "phoenix-2.x/quick/lite": {
         "title": "quantex lite 银行账户加减金额"
       },
       "phoenix-2.x/roadmap": {
