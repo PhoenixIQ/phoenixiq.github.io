@@ -1,6 +1,4 @@
 ---
-id: roadmap-2x
+id: roadmap
 title: Phoenix 路线图
 ---
-
-# Phoenix 路线图
