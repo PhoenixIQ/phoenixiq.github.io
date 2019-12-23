@@ -86,7 +86,7 @@ const siteConfig = {
 
   // Add custom scripts here that would be placed in <script> tags.
   // 在此处添加将放置在<script>标记中的自定义脚本。
-  scripts: ['https://buttons.github.io/buttons.js'],
+  scripts: ['./data/users'],
 
   // On page navigation for the current documentation page.
   onPageNav: 'separate',
