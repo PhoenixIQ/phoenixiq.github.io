@@ -5,107 +5,65 @@
     "previous": "Previous",
     "tagline": "Phoenix 官方文档",
     "docs": {
-      "phoenix-1.x/about/benchmark-1x": {
-        "title": "Phoenix 基准测试"
+      "phoenix-2.x/phoenix-admin/build": {
+        "title": "服务搭建"
       },
-      "phoenix-1.x/about/introduction-1x": {
-        "title": "Phoenix 简介"
+      "phoenix-2.x/phoenix-admin/function": {
+        "title": "功能介绍"
       },
-      "phoenix-1.x/business-1x": {
-        "title": "业务场景"
+      "phoenix-2.x/phoenix-admin/instructions": {
+        "title": "使用说明"
       },
-      "phoenix-1.x/framework/features/availability-1x": {
-        "title": "高可用"
+      "phoenix-2.x/phoenix-admin/monitor": {
+        "title": "监控指标"
       },
-      "phoenix-1.x/framework/features/cqrs-1x": {
-        "title": "CQRS"
+      "phoenix-2.x/phoenix-cloud/function": {
+        "title": "功能介绍"
       },
-      "phoenix-1.x/framework/features/eventdriver-1x": {
-        "title": "事件驱动"
+      "phoenix-2.x/phoenix-cloud/config": {
+        "title": "配置"
       },
-      "phoenix-1.x/framework/features/eventsourcing-1x": {
-        "title": "事件溯源"
+      "phoenix-2.x/phoenix-cloud/transaction": {
+        "title": "分布式事务"
       },
-      "phoenix-1.x/framework/features/eventstore-1x": {
-        "title": "事件存储"
+      "phoenix-2.x/phoenix-lite/api": {
+        "title": "API"
       },
-      "phoenix-1.x/framework/features/expansibility-1x": {
-        "title": "扩展性"
+      "phoenix-2.x/phoenix-lite/concept": {
+        "title": "基本概念"
       },
-      "phoenix-1.x/framework/overview-1x": {
-        "title": "Phoenix 整体架构"
+      "phoenix-2.x/phoenix-lite/config": {
+        "title": "配置"
       },
-      "phoenix-1.x/glossary-1x": {
-        "title": "术语表"
+      "phoenix-2.x/phoenix-lite/data-table": {
+        "title": "数据表"
       },
-      "phoenix-1.x/operation/admin/admin-access-1x": {
-        "title": "Phoenix-admin 接入指南"
+      "phoenix-2.x/phoenix-lite/feature": {
+        "title": "特性介绍"
       },
-      "phoenix-1.x/operation/admin/admin-introduction-1x": {
-        "title": "Phoenix-admin 简介"
+      "phoenix-2.x/phoenix-lite/http-api": {
+        "title": "HTTP API"
       },
-      "phoenix-1.x/operation/configuration-1x": {
-        "title": "Phoenix 配置"
+      "phoenix-2.x/quick-start/phoenix-cloud": {
+        "title": "quantex cloud 银行账户加减金额"
       },
-      "phoenix-1.x/operation/quickstart-1x": {
-        "title": "Quick Start"
+      "phoenix-2.x/quick-start/phoenix-lite": {
+        "title": "quantex lite 银行账户加减金额"
       },
-      "phoenix-1.x/roadmap-1x": {
-        "title": "Phoenix 路线图"
+      "phoenix-2.x/roadmap": {
+        "title": "phoenix-2.x/roadmap"
       },
-      "phoenix-1.x/version-1x": {
-        "title": "版本发布历史"
+      "phoenix-2.x/test/availabe-test": {
+        "title": "phoenix-2.x/test/availabe-test"
       },
-      "phoenix-2.x/about/benchmark-2x": {
-        "title": "Phoenix 基准测试"
+      "phoenix-2.x/test/elasticity-test": {
+        "title": "phoenix-2.x/test/elasticity-test"
       },
-      "phoenix-2.x/about/introduction-2x": {
-        "title": "Phoenix 简介"
+      "phoenix-2.x/test/performance-test": {
+        "title": "phoenix-2.x/test/performance-test"
       },
-      "phoenix-2.x/business-2x": {
-        "title": "业务场景"
-      },
-      "phoenix-2.x/framework/features/availability-2x": {
-        "title": "高可用"
-      },
-      "phoenix-2.x/framework/features/cqrs-2x": {
-        "title": "CQRS"
-      },
-      "phoenix-2.x/framework/features/eventdriver-2x": {
-        "title": "事件驱动"
-      },
-      "phoenix-2.x/framework/features/eventsourcing-2x": {
-        "title": "事件溯源"
-      },
-      "phoenix-2.x/framework/features/eventstore-2x": {
-        "title": "事件存储"
-      },
-      "phoenix-2.x/framework/features/expansibility-2x": {
-        "title": "扩展性"
-      },
-      "phoenix-2.x/framework/overview-2x": {
-        "title": "Phoenix 整体架构"
-      },
-      "phoenix-2.x/glossary-2x": {
-        "title": "术语表"
-      },
-      "phoenix-2.x/operation/admin/admin-access-2x": {
-        "title": "Phoenix-admin 接入指南"
-      },
-      "phoenix-2.x/operation/admin/admin-introduction-2x": {
-        "title": "Phoenix-admin 简介"
-      },
-      "phoenix-2.x/operation/configuration-2x": {
-        "title": "Phoenix 配置"
-      },
-      "phoenix-2.x/operation/quickstart-2x": {
-        "title": "Quick Start"
-      },
-      "phoenix-2.x/roadmap-2x": {
-        "title": "Phoenix 路线图"
-      },
-      "phoenix-2.x/version-2x": {
-        "title": "版本发布历史"
+      "phoenix-2.x/white-page": {
+        "title": "phoenix-2.x/white-page"
       },
       "version-0.0.1/phoenix-1.x/version-0.0.1-akka": {
         "title": "akka 介绍"
@@ -151,6 +109,11 @@
       "关于我们": "关于我们"
     },
     "categories": {
+      "快速入门": "快速入门",
+      "文档": "文档",
+      "非功能性测试": "非功能性测试",
+      "白皮书": "白皮书",
+      "Roadmap": "Roadmap",
       "关于 Phoenix": "关于 Phoenix",
       "架构概述": "架构概述",
       "操作指南": "操作指南",
