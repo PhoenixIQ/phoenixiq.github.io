@@ -5,65 +5,68 @@
     "previous": "Previous",
     "tagline": "Phoenix 官方文档",
     "docs": {
-      "phoenix-2.x/phoenix-admin/build": {
+      "phoenix-2.x/phoenix-admin/admin-build-2x": {
         "title": "服务搭建"
       },
-      "phoenix-2.x/phoenix-admin/function": {
+      "phoenix-2.x/phoenix-admin/admin-function-2x": {
         "title": "功能介绍"
       },
-      "phoenix-2.x/phoenix-admin/instructions": {
+      "phoenix-2.x/phoenix-admin/admin-instructions-2x": {
         "title": "使用说明"
       },
-      "phoenix-2.x/phoenix-admin/monitor": {
+      "phoenix-2.x/phoenix-admin/admin-monitor-2x": {
         "title": "监控指标"
       },
-      "phoenix-2.x/phoenix-cloud/function": {
-        "title": "功能介绍"
-      },
-      "phoenix-2.x/phoenix-cloud/config": {
-        "title": "配置"
-      },
-      "phoenix-2.x/phoenix-cloud/transaction": {
-        "title": "分布式事务"
-      },
-      "phoenix-2.x/phoenix-lite/api": {
+      "phoenix-2.x/phoenix-cloud/phoenix-cloud-api-2x": {
         "title": "API"
       },
-      "phoenix-2.x/phoenix-lite/concept": {
-        "title": "基本概念"
-      },
-      "phoenix-2.x/phoenix-lite/config": {
+      "phoenix-2.x/phoenix-cloud/phoenix-cloud-config-2x": {
         "title": "配置"
       },
-      "phoenix-2.x/phoenix-lite/data-table": {
+      "phoenix-2.x/phoenix-cloud/phoenix-cloud-function-2x": {
+        "title": "功能介绍"
+      },
+      "phoenix-2.x/phoenix-cloud/phoenix-cloud-transaction-2x": {
+        "title": "分布式事务"
+      },
+      "phoenix-2.x/phoenix-lite/phoenix-lite-api-2x": {
+        "title": "API"
+      },
+      "phoenix-2.x/phoenix-lite/phoenix-lite-concept-2x": {
+        "title": "基本概念"
+      },
+      "phoenix-2.x/phoenix-lite/phoenix-lite-config-2x": {
+        "title": "配置"
+      },
+      "phoenix-2.x/phoenix-lite/phoenix-lite-data-table-2x": {
         "title": "数据表"
       },
-      "phoenix-2.x/phoenix-lite/feature": {
+      "phoenix-2.x/phoenix-lite/phoenix-lite-feature-2x": {
         "title": "特性介绍"
       },
-      "phoenix-2.x/phoenix-lite/http-api": {
+      "phoenix-2.x/phoenix-lite/phoenix-lite-http-api-2x": {
         "title": "HTTP API"
       },
-      "phoenix-2.x/quick/cloud": {
+      "phoenix-2.x/phoenix-test/available-test-2x": {
+        "title": "高可用测试"
+      },
+      "phoenix-2.x/phoenix-test/elasticity-test-2x": {
+        "title": "弹性伸缩测试"
+      },
+      "phoenix-2.x/phoenix-test/performance-test-2x": {
+        "title": "性能测试"
+      },
+      "phoenix-2.x/phoenix/phoenix-roadmap-2x": {
+        "title": "Phoenix 路线图"
+      },
+      "phoenix-2.x/phoenix/phoenix-white-page-2x": {
+        "title": "Phoenix 白皮书"
+      },
+      "phoenix-2.x/quick-start/phoenix-cloud-2x": {
         "title": "quantex cloud 银行账户加减金额"
       },
-      "phoenix-2.x/quick/lite": {
+      "phoenix-2.x/quick-start/phoenix-lite-2x": {
         "title": "quantex lite 银行账户加减金额"
-      },
-      "phoenix-2.x/roadmap": {
-        "title": "phoenix-2.x/roadmap"
-      },
-      "phoenix-2.x/test/availabe-test": {
-        "title": "phoenix-2.x/test/availabe-test"
-      },
-      "phoenix-2.x/test/elasticity-test": {
-        "title": "phoenix-2.x/test/elasticity-test"
-      },
-      "phoenix-2.x/test/performance-test": {
-        "title": "phoenix-2.x/test/performance-test"
-      },
-      "phoenix-2.x/white-page": {
-        "title": "phoenix-2.x/white-page"
       },
       "version-0.0.1/phoenix-1.x/version-0.0.1-akka": {
         "title": "akka 介绍"
@@ -100,6 +103,66 @@
       },
       "version-0.0.1/phoenix-2.x/version-0.0.1-test": {
         "title": "test文档"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-admin/version-0.0.2-admin-build-2x": {
+        "title": "服务搭建"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-admin/version-0.0.2-admin-function-2x": {
+        "title": "功能介绍"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-admin/version-0.0.2-admin-instructions-2x": {
+        "title": "使用说明"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-admin/version-0.0.2-admin-monitor-2x": {
+        "title": "监控指标"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-cloud/version-0.0.2-phoenix-cloud-api-2x": {
+        "title": "API"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-cloud/version-0.0.2-phoenix-cloud-config-2x": {
+        "title": "配置"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-cloud/version-0.0.2-phoenix-cloud-function-2x": {
+        "title": "功能介绍"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-cloud/version-0.0.2-phoenix-cloud-transaction-2x": {
+        "title": "分布式事务"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-lite/version-0.0.2-phoenix-lite-api-2x": {
+        "title": "API"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-lite/version-0.0.2-phoenix-lite-concept-2x": {
+        "title": "基本概念"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-lite/version-0.0.2-phoenix-lite-config-2x": {
+        "title": "配置"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-lite/version-0.0.2-phoenix-lite-data-table-2x": {
+        "title": "数据表"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-lite/version-0.0.2-phoenix-lite-feature-2x": {
+        "title": "特性介绍"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-lite/version-0.0.2-phoenix-lite-http-api-2x": {
+        "title": "HTTP API"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-test/version-0.0.2-available-test-2x": {
+        "title": "高可用测试"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-test/version-0.0.2-elasticity-test-2x": {
+        "title": "弹性伸缩测试"
+      },
+      "version-0.0.2/phoenix-2.x/phoenix-test/version-0.0.2-performance-test-2x": {
+        "title": "性能测试"
+      },
+      "version-0.0.2/phoenix-2.x/quick-start/version-0.0.2-phoenix-cloud-2x": {
+        "title": "quantex cloud 银行账户加减金额"
+      },
+      "version-0.0.2/phoenix-2.x/quick-start/version-0.0.2-phoenix-lite-2x": {
+        "title": "quantex lite 银行账户加减金额"
+      },
+      "version-0.0.2/phoenix-2.x/version-0.0.2-phoenix-roadmap-2x": {
+        "title": "Phoenix 路线图"
       }
     },
     "links": {
@@ -114,10 +177,6 @@
       "非功能性测试": "非功能性测试",
       "白皮书": "白皮书",
       "Roadmap": "Roadmap",
-      "关于 Phoenix": "关于 Phoenix",
-      "架构概述": "架构概述",
-      "操作指南": "操作指南",
-      "其他": "其他",
       "目录标题一": "目录标题一",
       "目录标题二": "目录标题二",
       "...": "..."

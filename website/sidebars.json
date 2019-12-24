@@ -1,92 +1,53 @@
 {
   "phoenix2x": {
     "快速入门": [
-      "phoenix-2.x/quick/lite", 
-      "phoenix-2.x/quick/cloud"
+      "phoenix-2.x/quick-start/phoenix-lite-2x", 
+      "phoenix-2.x/quick-start/phoenix-cloud-2x"
     ],
     "文档": [
       {
         "type": "subcategory",
         "label": "phoenix-lite",
         "ids": [
-          "phoenix-2.x/phoenix-lite/concept",
-          "phoenix-2.x/phoenix-lite/config",
-          "phoenix-2.x/phoenix-lite/feature",
-          "phoenix-2.x/phoenix-lite/data-table",
-          "phoenix-2.x/phoenix-lite/api",
-          "phoenix-2.x/phoenix-lite/http-api"
+          "phoenix-2.x/phoenix-lite/phoenix-lite-concept-2x",
+          "phoenix-2.x/phoenix-lite/phoenix-lite-feature-2x",
+          "phoenix-2.x/phoenix-lite/phoenix-lite-config-2x",
+          "phoenix-2.x/phoenix-lite/phoenix-lite-data-table-2x",
+          "phoenix-2.x/phoenix-lite/phoenix-lite-api-2x",
+          "phoenix-2.x/phoenix-lite/phoenix-lite-http-api-2x"
         ]
       },
       {
         "type": "subcategory",
         "label": "phoenix-cloud",
         "ids": [
-          "phoenix-2.x/phoenix-cloud/function",
-          "phoenix-2.x/phoenix-cloud/transaction",
-          "phoenix-2.x/phoenix-cloud/config",
-          "phoenix-2.x/phoenix-cloud/api"
+          "phoenix-2.x/phoenix-cloud/phoenix-cloud-function-2x",
+          "phoenix-2.x/phoenix-cloud/phoenix-cloud-transaction-2x",
+          "phoenix-2.x/phoenix-cloud/phoenix-cloud-config-2x",
+          "phoenix-2.x/phoenix-cloud/phoenix-cloud-api-2x"
         ]
       },
       {
         "type": "subcategory",
         "label": "phoenix-admin",
         "ids": [
-          "phoenix-2.x/phoenix-admin/function",
-          "phoenix-2.x/phoenix-admin/build",
-          "phoenix-2.x/phoenix-admin/instructions",
-          "phoenix-2.x/phoenix-admin/monitor"
+          "phoenix-2.x/phoenix-admin/admin-function-2x",
+          "phoenix-2.x/phoenix-admin/admin-build-2x",
+          "phoenix-2.x/phoenix-admin/admin-instructions-2x",
+          "phoenix-2.x/phoenix-admin/admin-monitor-2x"
         ]
       }
     ],
     "非功能性测试": [
-      "phoenix-2.x/test/performance",
-      "phoenix-2.x/test/available",
-      "phoenix-2.x/test/elasticity"
+      "phoenix-2.x/phoenix-test/performance-test-2x",
+      "phoenix-2.x/phoenix-test/available-test-2x",
+      "phoenix-2.x/phoenix-test/elasticity-test-2x"
     ],
     "白皮书": [
-      "phoenix-2.x/white"
+      "phoenix-2.x/phoenix/phoenix-white-page-2x"
     ],
     "Roadmap": [
-      "phoenix-2.x/roadmap"
-    ]
-  },
-  "phoenix1x": {
-    "关于 Phoenix": [
-      "phoenix-1.x/about/introduction-1x", 
-      "phoenix-1.x/about/benchmark-1x"
-    ],
-    "架构概述": [
-      "phoenix-1.x/framework/overview-1x", 
-      {
-        "type": "subcategory",
-        "label": "核心特性",
-        "ids": [
-          "phoenix-1.x/framework/features/expansibility-1x",
-          "phoenix-1.x/framework/features/availability-1x",
-          "phoenix-1.x/framework/features/eventdriver-1x",
-          "phoenix-1.x/framework/features/cqrs-1x",
-          "phoenix-1.x/framework/features/eventstore-1x",
-          "phoenix-1.x/framework/features/eventsourcing-1x"
-        ]
-      }
-    ],
-    "操作指南": [
-      "phoenix-1.x/operation/quickstart-1x",
-      "phoenix-1.x/operation/configuration-1x",
-      {
-        "type": "subcategory",
-        "label": "监控",
-        "ids": [
-          "phoenix-1.x/operation/admin/admin-introduction-1x",
-          "phoenix-1.x/operation/admin/admin-access-1x"
-        ]
-      }
-    ],
-    "其他": [
-      "phoenix-1.x/business-1x",
-      "phoenix-1.x/roadmap-1x",
-      "phoenix-1.x/version-1x",
-      "phoenix-1.x/glossary-1x"
+      "phoenix-2.x/phoenix/phoenix-roadmap-2x"
     ]
   }
 }

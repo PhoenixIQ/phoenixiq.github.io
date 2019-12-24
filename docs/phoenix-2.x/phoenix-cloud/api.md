@@ -1,5 +1,5 @@
 ---
-id: function
-title: 功能
+id: phoenix-cloud-api-2x
+title: API 
 ---
 
