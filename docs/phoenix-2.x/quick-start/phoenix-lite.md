@@ -1,5 +1,5 @@
 ---
 id: phoenix-lite-2x 
-title: quantex lite 银行账户加减金额
+title: phoenix lite 银行账户划拨
 ---
 
