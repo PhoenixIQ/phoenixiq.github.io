@@ -63,10 +63,10 @@
         "title": "Phoenix 白皮书"
       },
       "phoenix-2.x/quick-start/phoenix-cloud-2x": {
-        "title": "quantex cloud 银行账户加减金额"
+        "title": "phoenix cloud 银行账户转账"
       },
       "phoenix-2.x/quick-start/phoenix-lite-2x": {
-        "title": "quantex lite 银行账户加减金额"
+        "title": "phoenix lite 银行账户划拨"
       },
       "version-0.0.1/phoenix-1.x/version-0.0.1-akka": {
         "title": "akka 介绍"

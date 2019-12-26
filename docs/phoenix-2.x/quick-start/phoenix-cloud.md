@@ -38,7 +38,7 @@ title: phoenix cloud 银行账户转账
 
 **转账事务编排如下：**
 
-![trans-bianpai](../../assets/trans-bianpai.png)
+![](assets/phoenix2.x/phoenix-lite/trans-bianpai.png)
 
 ## 聚合定义
 
