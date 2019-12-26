@@ -330,4 +330,4 @@ public class BankAccountApplication {
 
 然后我们可以调用内存查询接口 `http://localhost:8080/accounts/`，来验证是否转账成功。出现如下图片则转账成功。
 
-![](../../assets/Colin.png)
+![Colin](../../assets/Colin.png)
