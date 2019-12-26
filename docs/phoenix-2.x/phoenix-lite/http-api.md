@@ -3,11 +3,11 @@ id: phoenix-lite-http-api-2x
 title: HTTP API
 ---
 
-```
-**接口描述: ** 根据指定聚合ID查询聚合根对象 
-**请求类型: ** GET
-**请求Url : ** /root/{aggregateId}/aggregate
-```
+
+>**接口描述:** 根据指定聚合ID查询聚合根对象 
+>**请求类型:** GET
+>**请求Url :** /root/{aggregateId}/aggregate
+
 
 请求参数列表
 
