@@ -38,7 +38,7 @@ title: 数据表
   - 采用聚合根ID+cmdId作为唯一索引，确保同一个Cmd不会被聚合根处理两遍
   - 支持采用聚合根ID+cmdID查询指定Event消息，用于Cmd幂等处理，返回已处理的Event消息
 
-
+---
 
 ## Snapshot 表设计 （待更新）
 

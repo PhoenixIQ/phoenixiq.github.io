@@ -5,7 +5,7 @@ title: phoenix cloud 银行账户转账
 
 # 银行账户转账
 
-在 [银行账户划拨案例](./phoenix-lite-2x) 中介绍了一个简单的案例，单个账户的划拨操作。 展示了 phoenix 框架在不涉及事务的案例中的具体操作。在 phoenix-cloud 中我们将展示如何利用 phoenix 框架处理有事务存在的案例。
+在 [银行账户划拨案例](./phoenix-lite-2x) 中介绍了一个简单的案例：单个账户的划拨操作。 该案例展示了 phoenix 框架在不涉及事务的案例中的具体实现。在 phoenix-cloud 中我们将展示如何利用 phoenix 框架处理有事务存在的案例。
 
 ## 业务场景
 
@@ -19,7 +19,7 @@ title: phoenix cloud 银行账户转账
 
 ## 统一语言
 
-基于上述业务场景的不断讨论，最终在本案例里面，我们得出如下统一术语
+基于上述业务场景，在本案例里面，我们得出如下统一术语
 
 - **银行账户：**此案例里面提到的具有转入或转出金额的账户， 下文中可简称账户
 - **账户余额：**账面上的钱
@@ -35,6 +35,10 @@ title: phoenix cloud 银行账户转账
 2. 对转入账户，增加账户余额（转入操作框架幂等，事务管理器不断重试保证一定成功）
 
 转账失败场景比较简单：判断，账户可用=账户余额-转出金额大于等于0，返回可用不足，转账失败。
+
+**转账事务编排如下：**
+
+![](../../assets/phoenix2.x/phoenix-lite/trans-bianpai.png)
 
 ## 聚合定义
 
@@ -52,16 +56,18 @@ title: phoenix cloud 银行账户转账
 引入 phoenix 的 maven 依赖
 
 ```xml
-<dependency>
-    <groupId>com.iquantex</groupId>
-    <artifactId>phoenix-server-starter</artifactId>
-</dependency>
+<dependencies>
+	<dependency>
+		<groupId>com.iquantex</groupId>
+		<artifactId>phoenix-server-starter</artifactId>
+	</dependency>
 
-<!-- phoenix 事务依赖包 -->
-<dependency>
-    <groupId>com.iquantex</groupId>
-    <artifactId>phoenix-transaction</artifactId>
-</dependency>
+	<!-- phoenix 事务依赖包 -->
+	<dependency>
+		<groupId>com.iquantex</groupId>
+		<artifactId>phoenix-transaction</artifactId>
+	</dependency>
+</dependencies>
 ```
 
 phoenix 相关配置
@@ -70,7 +76,7 @@ phoenix 相关配置
 # app info config
 spring:
   application:
-    name: account-tn
+    name: demo-tn
     
 quantex:
   phoenix:
@@ -84,9 +90,9 @@ quantex:
       cinnamon-application: ${spring.application.name}
     routers:
       - message: com.iquantex.phoenix.bankaccount.api.AccountAllocateCmd
-        dst: account-server/EA/BankAccount
+        dst: demo/EA/BankAccount
       - message: com.iquantex.phoenix.bankaccount.api.AccountTransferReq
-        dst: account-tn/TA/BankTransferSaga
+        dst: demo-tn/TA/BankTransferSaga
     server:
       name: ${spring.application.name}
       mq:
@@ -128,19 +134,13 @@ public class AccountAllocateFailEvent implements Serializable {
   private String result; *// 失败原因*
 }
 
-
-
-// 账户划拨成功事件
-
+// 账户划拨成功事
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountAllocateOkEvent implements Serializable {
-
   private String accountCode; *// 划拨账户*
-
   private double amt; *// 划拨金额*
-
 }
 
 // 账户转账请求
@@ -153,8 +153,6 @@ public class AccountTransferReq implements Serializable {
 	private double amt; // 转入金额(正)
 }
 ```
-
-
 
 ## 业务代码编写
 

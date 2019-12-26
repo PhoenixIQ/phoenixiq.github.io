@@ -5,7 +5,7 @@ title: API
 
 ## 消息定义
 
-server 端 act 方法返回值 `ActReturn`
+**server 端 act 方法返回值** `ActReturn`
 
 ```java
 @Getter
@@ -20,19 +20,6 @@ public class ActReturn {
 	private final Map<String, Object> metaData;  // （可选项）
 
     ...
-
-	public static class Builder {
-
-		private RetCode retCode;
-
-		private Object event;
-
-		private Object reply;
-
-		private Map<String, Object> metaData;
-
-        ...
-	}
 
 }
 
@@ -52,7 +39,7 @@ public enum RetCode {
 ```
 
 
-Client端 rpc 调用返回值 `RpcResult`
+**Client端 rpc 调用返回值** `RpcResult`
 
 ```java
 @Setter
@@ -120,25 +107,38 @@ public enum RpcResultCode {
 
 ### 注解
 
-```java
-// 这个注释是为了找到聚合器类，为spring ioc注入存储库。 
-@Documented 
-@Retention(RetentionPolicy.RUNTIME) 
-@Target(ElementType.TYPE) 
-public @interface EntityAggregateAnnotation { 	
-    String aggregateRootType(); 
-}  
-```
+#### @EntityAggregateAnnotation
+
+这个注释是为了找到聚合根类，为spring ioc注入存储库。 使用 `aggregateRootType` 标识该聚合根的类型
 
 ```java
-@Documented 
-@Retention(RetentionPolicy.RUNTIME) 
-@Target(ElementType.METHOD) 
-public @interface AggregateIdAnnotation { 	
-    /**     
-     * 事件中的属性，该属性将提供查找Saga实例的值。通常，此值是特定saga监视的聚合的聚合标识符。  
-     */ 
-    String aggregateId(); 
+@Getter
+@Setter
+@EntityAggregateAnnotation(aggregateRootType = "BankAccount")
+public class BankAccountAggregate implements Serializable {
+
+	// 核心业务数据
+	...
+
+	@AggregateIdAnnotation(aggregateId = "accountCode")
+	public ActReturn act(MockCmd cmd) {}
+
+	public void on(MockEvent event) {}
+
+}
+```
+
+#### @AggregateIdAnnotation
+
+该注解一般用于 `act` 方法，aggregateId用于标识事件中的属性，该属性将提供查找Saga实例的值。通常，此值是特定saga监视的聚合的聚合标识符。  
+
+
+```java
+@AggregateIdAnnotation(aggregateId = "accountCode")
+public ActReturn act(MockCmd cmd) {
+
+	...
+
 }
 ```
 

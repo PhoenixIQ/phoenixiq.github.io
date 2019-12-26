@@ -15,11 +15,11 @@ title: phoenix lite 银行账户划拨
 - 支持账户转入或转出指定金额
 - 支持查看系统内所有账户的金额汇总
 
-基于上述功能描述，不管系统运行多久，运行多少转账记录，一个永恒正确的公式： sum(账户余额) = 账户数量 * 1000
+基于上述功能描述，不管系统运行多久，运行多少转账记录，一个永恒正确的公式： `sum(账户余额) = 账户数量 * 1000`
 
 ## 统一语言
 
-基于上述业务场景的不断讨论，最终在本案例里面，我们得出如下统一术语
+基于上述业务场景，在本案例里面，我们得出如下统一术语
 
 - **银行账户：**此案例里面提到的具有转入或转出金额的账户， 下文中可简称账户
 - **账户余额：**账面上的钱
@@ -47,18 +47,20 @@ title: phoenix lite 银行账户划拨
 
 引入 phoenix 的 maven 依赖
 
-```xml
-<!-- phoenix服务端自动配置依赖包 -->
-<dependency>
-    <groupId>com.iquantex</groupId>
-    <artifactId>phoenix-server-starter</artifactId>
-</dependency>
+```xml        
+<dependencies>
+	<!-- phoenix服务端自动配置依赖包 -->
+	<dependency>
+		<groupId>com.iquantex</groupId>
+		<artifactId>phoenix-server-starter</artifactId>
+	</dependency>
 
-<!-- phoenix服务端依赖包 -->
-<dependency>
-    <groupId>com.iquantex</groupId>
-    <artifactId>phoenix-server</artifactId>
-</dependency>
+	<!-- phoenix服务端依赖包 -->
+	<dependency>
+		<groupId>com.iquantex</groupId>
+		<artifactId>phoenix-server</artifactId>
+	</dependency>
+</dependencies>
 ```
 
 Phoenix  采用全 Spring 配置方式，透明化接入应用，对应用没有任何 API 侵入，只需用 Spring 加载 Phoenix 的配置即可。
@@ -67,8 +69,12 @@ Phoenix  采用全 Spring 配置方式，透明化接入应用，对应用没有
 # app info config
 spring:
   application:
-    name: account-server
-    
+    name: demo
+
+# web config
+server:
+  port: 8080
+
 quantex:
   phoenix:
     akka:
@@ -76,14 +82,12 @@ quantex:
       akka-parallelism-min: 1
       akka-parallelism-factor: 3
       akka-parallelism-max: 128
-      service-name: bank-account-server
+      service-name: ${spring.application.name}
       discovery-method: kubernetes-api
-      cinnamon-application: bank-account-server
+      cinnamon-application: ${spring.application.name}
     routers:
-      - message: com.iquantex.phoenix.bankaccount.api.AccountAllocateCmd
-        dst: bank-account-server/EA/BankAccount
-      - message: com.iquantex.phoenix.bankaccount.api.AccountTransferReq
-        dst: bank-account-tn/TA/BankTransferSaga
+      - message: com.iquantex.phoenix.bankaccount.api.AccountAllocateCmd    # mock 数据
+        dst: demo/EA/BankAccount                             # mock 数据
     server:
       name: ${spring.application.name}
       mq:
@@ -97,12 +101,12 @@ quantex:
           username: sa
           password: 
    client:
-      name: bank-account-web
+      name: demo-web
       mq:
         type: kafka
-        group: bank-account-web
+        group: demo-web
         address: embedded
-        subscribe-topic: bank-account-web
+        subscribe-topic: demo-web
 ```
 
 ## API 定义
@@ -263,8 +267,8 @@ public class BankAccountController extends AggregateController {
 
 	/**
 	 * 定向划拨
-	 * @param account
-	 * @param amt
+	 * @param account  账户
+	 * @param amt      划拨金额（默认：大于0为转入，小于0为转出）
 	 * @return
 	 */
 	@PutMapping("/transfers/{account}/{amt}")
@@ -317,3 +321,13 @@ public class BankAccountApplication {
 	}
 }
 ```
+
+## 运行
+
+下面我们模拟给账户 `Colin` 转入 `100` 元
+
+运行程序之后 在Terminal中键入 `curl -X PUT http://localhost:8080/accounts/transfers/Colin/100`
+
+然后我们可以调用内存查询接口 `http://localhost:8080/accounts/`，来验证是否转账成功。出现如下图片则转账成功。
+
+![](../../assets/phoenix2.x/phoenix-lite/Colin.png)
