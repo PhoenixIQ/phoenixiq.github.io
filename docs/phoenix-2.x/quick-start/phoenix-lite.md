@@ -262,37 +262,6 @@ public class BankAccountController extends AggregateController {
 	}
 
 	/**
-	 * 随机划拨
-	 * @param total
-	 * @param tps
-	 * @param aggregateNum
-	 * @return
-	 */
-	@GetMapping("/transfers/pf/{total}/{tps}/{aggregateNum}")
-	public String startMessageTest(@PathVariable int total, @PathVariable int tps, @PathVariable int aggregateNum) {
-		if (tps <= 0) {
-			return "tps cannot be less than 1";
-		}
-		if (total <= 0) {
-			return "total cannot be less than 1";
-		}
-		if (aggregateNum < 1) {
-			return "aggregateNum cannot be less than 1";
-		}
-
-		log.info("start a message test: aggregateNum<{}> total<{}>, tps<{}>", aggregateNum, total, tps);
-		int timeout = total / tps + 5;
-		RateLimiter messageTestTask = new RateLimiter(tps, total, timeout, () -> {
-			String account = String.format("A%08d", new Random().nextInt(aggregateNum));
-			int amt = (100 - new Random().nextInt(200));
-			AccountAllocateCmd cmd = new AccountAllocateCmd(account, amt);
-			client.send(cmd, "");
-		}, "account", new RateLimiter.RunMonitor(false));
-		messageTestTask.start();
-		return "account test started";
-	}
-
-	/**
 	 * 定向划拨
 	 * @param account
 	 * @param amt
@@ -305,39 +274,7 @@ public class BankAccountController extends AggregateController {
 		return result.getMessage();
 	}
 
-	public String showAsHTML(List<BankAccountAggregate> aggList) {
-		double totalBalanceAmt = 0;
-		int totalSuccessTransferOut = 0;
-		int totalFailTransferOut = 0;
-		int totalSuccessTransferIn = 0;
-		StringBuffer sb = new StringBuffer();
-		sb.append("<table border=1 width='1200px'>");
-		sb.append("<tr><th>银行账户</th><th>账户余额</th><th>成功转出次数</th><th>失败转出次数</th><th>成功转入次数</th></tr>");
-		for (BankAccountAggregate aggregate : aggList) {
-			sb.append("<tr>");
-			sb.append("<td>" + aggregate.getAccount().split("/")[2] + "</td>"); // 由于聚合根id已经拼接类名，为了显示美观，这里截取一下。
-			sb.append("<td>" + aggregate.getBalanceAmt() + "</td>");
-			sb.append("<td>" + aggregate.getSuccessTransferOut() + "</td>");
-			sb.append("<td>" + aggregate.getFailTransferOut() + "</td>");
-			sb.append("<td>" + aggregate.getSuccessTransferIn() + "</td>");
-			sb.append("</tr>");
-			totalBalanceAmt += aggregate.getBalanceAmt();
-			totalSuccessTransferOut += aggregate.getSuccessTransferOut();
-			totalFailTransferOut += aggregate.getFailTransferOut();
-			totalSuccessTransferIn += aggregate.getSuccessTransferIn();
-		}
-		if (aggList.size() > 1) {
-			sb.append("<tr>");
-			sb.append("<td>账户数量:" + aggList.size() + "</td>");
-			sb.append("<td>账户余额汇总:" + totalBalanceAmt + "</td>");
-			sb.append("<td>成功转出汇总：" + totalSuccessTransferOut + "</td>");
-			sb.append("<td>失败转出汇总：" + totalFailTransferOut + "</td>");
-			sb.append("<td>成功转入汇总：" + totalSuccessTransferIn + "</td>");
-			sb.append("</tr>");
-		}
-		sb.append("</table>");
-		return sb.toString();
-	}
+
 
 }
 ```
