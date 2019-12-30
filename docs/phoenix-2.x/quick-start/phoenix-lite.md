@@ -3,6 +3,8 @@ id: phoenix-lite-2x
 title: phoenix lite 银行账户划拨
 ---
 
+[Demo 下载]()
+
 # 银行账户划拨案例介绍
 
 本文将展示如何使用 `Phoenix` 构建一个银行账户划拨的应用程序。
@@ -69,7 +71,7 @@ Phoenix  采用全 Spring 配置方式，透明化接入应用，对应用没有
 # app info config
 spring:
   application:
-    name: demo
+    name: account-server
 
 # web config
 server:
@@ -83,11 +85,13 @@ quantex:
       akka-parallelism-factor: 3
       akka-parallelism-max: 128
       service-name: ${spring.application.name}
-      discovery-method: kubernetes-api
+      discovery-method: config
       cinnamon-application: ${spring.application.name}
     routers:
-      - message: com.iquantex.phoenix.bankaccount.api.AccountAllocateCmd    # mock 数据
-        dst: demo/EA/BankAccount                             # mock 数据
+      - message: com.iquantex.phoenix.bankaccount.api.AccountAllocateCmd  
+        dst: account-server/EA/BankAccount
+      - message: com.iquantex.phoenix.bankaccount.api.AccountTransferReq
+        dst: account-tn/TA/BankTransferSaga
     server:
       name: ${spring.application.name}
       mq:
@@ -99,19 +103,19 @@ quantex:
       event-stores:
         - url: jdbc:h2:file:./data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
           username: sa
-          password: 
-   client:
-      name: demo-web
+          password:
+    client:
+      name: ${spring.application.name}-client
       mq:
         type: kafka
-        group: demo-web
+        group: ${spring.application.name}-client
         address: embedded
-        subscribe-topic: demo-web
+        subscribe-topic: ${spring.application.name}-client
 ```
 
 ## API 定义
 
-phoenix 支持的API定义支持 `google protocol-buffers` 和 `java bean` ， 这里为了快速实现选用 `java bean` 来定义
+phoenix 的API定义支持 `google protocol-buffers` 和 `java bean` ， 这里为了快速实现选用 `java bean` 来定义
 
 类定义必须支持Serializable， 因为消息在通讯传输和存储的时候， 都需要支持序列化和反序列化
 
@@ -119,10 +123,10 @@ phoenix 支持的API定义支持 `google protocol-buffers` 和 `java bean` ， �
 // 账户划拨命令
 @Data
 @NoArgsConstructor
-@AllArgsConstructor    
+@AllArgsConstructor  
 public class AccountAllocateCmd implements Serializable {
-	private String accountCode; // 划拨账户
-	private double amt; // 划拨金额,允许正负
+  private String accountCode; *// 划拨账户*
+  private double amt; *// 划拨金额,允许正负*
 }
 
 // 账户划拨失败事件
@@ -130,18 +134,28 @@ public class AccountAllocateCmd implements Serializable {
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountAllocateFailEvent implements Serializable {
-	private String accountCode; // 划拨账户
-	private double amt; // 划拨金额
-	private String result; // 失败原因
+  private String accountCode; *// 划拨账户*
+  private double amt; *// 划拨金额*
+  private String result; *// 失败原因*
 }
 
-// 账户划拨成功事件
+// 账户划拨成功事
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountAllocateOkEvent implements Serializable {
-	private String accountCode; // 划拨账户
-	private double amt; // 划拨金额
+  private String accountCode; *// 划拨账户*
+  private double amt; *// 划拨金额*
+}
+
+// 账户转账请求
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class AccountTransferReq implements Serializable {
+	private String inAccountCode; // 转入账户
+	private String outAccountCode; // 转出账户
+	private double amt; // 转入金额(正)
 }
 ```
 
@@ -227,62 +241,6 @@ public class BankAccountAggregate implements Serializable {
 }
 ```
 
-**http接口及内存数据查询接口**
-
-```java
-@Slf4j
-@RestController
-@RequestMapping("/accounts")
-public class BankAccountController extends AggregateController {
-
-	@Autowired
-	private PhoenixClient client;
-
-	/**
-	 * 账户总览
-	 * @return
-	 */
-	@GetMapping("")
-	public String accounts() {
-		int pageIndex = 1;
-		int pageSize = 1000;
-		List<BankAccountAggregate> aggList = new ArrayList<>();
-		while (true) {
-			List<String> tmpList = AggregateRepository.getInstance()
-					.getAggregateIdListByAggregateRootType("BankAccount", pageIndex, pageSize);
-			log.info("select all aggregate:{}", tmpList);
-			if (tmpList.isEmpty()) {
-				break;
-			}
-			for (String aggId : tmpList) {
-				BankAccountAggregate aggregate = (BankAccountAggregate) AggregateRepository.getInstance().load(aggId)
-						.getAggregateRoot();
-				aggregate.setAccount(aggId);
-				aggList.add(aggregate);
-			}
-			pageIndex++;
-		}
-		return showAsHTML(aggList);
-	}
-
-	/**
-	 * 定向划拨
-	 * @param account  账户
-	 * @param amt      划拨金额（默认：大于0为转入，小于0为转出）
-	 * @return
-	 */
-	@PutMapping("/transfers/{account}/{amt}")
-	public String transfer(@PathVariable String account, @PathVariable double amt) {
-		AccountAllocateCmd cmd = new AccountAllocateCmd(account, amt);
-		RpcResult result = client.rpc(cmd, "", 1000);
-		return result.getMessage();
-	}
-
-
-
-}
-```
-
 **runner类**
 
 ```java
@@ -324,10 +282,21 @@ public class BankAccountApplication {
 
 ## 运行
 
-下面我们模拟给账户 `Colin` 转入 `100` 元
+程序运行之后，可访问 [http://localhost:8080/](http://localhost:8080/) 进行下单测试。
 
-运行程序之后 在Terminal中键入 `curl -X PUT http://localhost:8080/accounts/transfers/Colin/100`
+![Colin](assets/phoenix2.x/phoenix-lite/show.png)
 
-然后我们可以调用内存查询接口 `http://localhost:8080/accounts/`，来验证是否转账成功。出现如下图片则转账成功。
+phoenix-lite 提供两种下单方式
 
-![Colin](assets/phoenix2.x/phoenix-lite/Colin.png)
+ - 随机划拨：指定划拨总数、 每秒划拨的次数、账户总数，账户之间可进行随机的划拨
+ - 定向划拨：可以向指定账户划拨指定的金额
+
+下面我们分别使用上面的两种下单方式进行测试：
+
+1. 模拟10个账户之间随机划拨100次，每秒划拨10笔
+
+![Colin](assets/phoenix2.x/phoenix-lite/show2.png)
+
+2. 向账户 `Colin` 转入 100 元
+
+![Colin](assets/phoenix2.x/phoenix-lite/show1.png)

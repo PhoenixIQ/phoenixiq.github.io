@@ -3,9 +3,11 @@ id: phoenix-cloud-2x
 title: phoenix cloud 银行账户转账
 ---
 
+[Demo 下载]()
+
 # 银行账户转账
 
-在 [银行账户划拨案例](./phoenix-lite-2x) 中介绍了一个简单的案例：单个账户的划拨操作。 该案例展示了 phoenix 框架在不涉及事务的案例中的具体实现。在 phoenix-cloud 中我们将展示如何利用 phoenix 框架处理有事务存在的案例。
+在 [银行账户划拨案例](./phoenix-lite-2x) 中介绍了一个简单的案例：单个账户的划拨操作。 下面我们在[Phoenix-lite](./phoenix-lite-2x)的基础上实现多个账户之间的划拨操作。多个账户之间的划拨操作涉及分布式事务问题，Phoenix 引入了事务协调器的概念来解决分布式事务问题。
 
 ## 业务场景
 
@@ -39,6 +41,10 @@ title: phoenix cloud 银行账户转账
 **转账事务编排如下：**
 
 ![](assets/phoenix2.x/phoenix-lite/trans-bianpai.png)
+
+**消息流转图**
+
+![](assets/phoenix2.x/phoenix-lite/trans.png)
 
 ## 聚合定义
 
@@ -76,12 +82,12 @@ phoenix 相关配置
 # app info config
 spring:
   application:
-    name: demo-tn
-    
+    name: account-tn
+
 quantex:
   phoenix:
     akka:
-      akka-conf: application.conf                     # 这里指定akka的配置文件
+      akka-conf: application.conf      # 这里指定akka的配置文件
       akka-parallelism-min: 1
       akka-parallelism-factor: 3
       akka-parallelism-max: 128
@@ -89,10 +95,10 @@ quantex:
       discovery-method: config
       cinnamon-application: ${spring.application.name}
     routers:
-      - message: com.iquantex.phoenix.bankaccount.api.AccountAllocateCmd
-        dst: demo/EA/BankAccount
+      - message: com.iquantex.phoenix.bankaccount.api.AccountAllocateCmd  
+        dst: account-server/EA/BankAccount
       - message: com.iquantex.phoenix.bankaccount.api.AccountTransferReq
-        dst: demo-tn/TA/BankTransferSaga
+        dst: account-tn/TA/BankTransferSaga
     server:
       name: ${spring.application.name}
       mq:
@@ -105,7 +111,6 @@ quantex:
         - url: jdbc:h2:file:./data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
           username: sa
           password:
-
 ```
 
 ## API 定义
@@ -114,117 +119,17 @@ phoenix 支持的API定义支持 `google protocol-buffers` 和 `java bean` ， �
 
 类定义必须支持Serializable， 因为消息在通讯传输和存储的时候， 都需要支持序列化和反序列化
 
-```java
-// 账户划拨命令
-@Data
-@NoArgsConstructor
-@AllArgsConstructor  
-public class AccountAllocateCmd implements Serializable {
-  private String accountCode; *// 划拨账户*
-  private double amt; *// 划拨金额,允许正负*
-}
 
-// 账户划拨失败事件
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class AccountAllocateFailEvent implements Serializable {
-  private String accountCode; *// 划拨账户*
-  private double amt; *// 划拨金额*
-  private String result; *// 失败原因*
-}
-
-// 账户划拨成功事
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class AccountAllocateOkEvent implements Serializable {
-  private String accountCode; *// 划拨账户*
-  private double amt; *// 划拨金额*
-}
-
-// 账户转账请求
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class AccountTransferReq implements Serializable {
-	private String inAccountCode; // 转入账户
-	private String outAccountCode; // 转出账户
-	private double amt; // 转入金额(正)
-}
-```
 
 ## 业务代码编写
 
-**BankAccountAggregate代码实现：**
+**BankAcountAggregate（银行账户聚合）**
 
-```java
-@EntityAggregateAnnotation(aggregateRootType = "BankAccount")
-@Getter
-@Setter
-public class BankAccountAggregate implements Serializable {
-
-	// 核心业务数据
-	private String account; // 账户代码
-
-	private double balanceAmt; // 账户余额
-
-	// 辅助统计数据
-	private int successTransferOut; // 成功转出次数
-
-	private int failTransferOut; // 失败转出次数
-
-	private int successTransferIn; // 成功转入次数
-
-	public BankAccountAggregate() {
-		this.balanceAmt = 1000;
-	}
-
-	/**
-	 * 处理账户划拨命令
-	 * @param cmd
-	 * @return
-	 */
-	@AggregateIdAnnotation(aggregateId = "accountCode")
-	public ActReturn act(AccountAllocateCmd cmd) {
-		if (balanceAmt + cmd.getAmt() < 0) {
-			return ActReturn
-					.builder(RetCode.FAIL,
-							new AccountAllocateFailEvent(cmd.getAccountCode(), cmd.getAmt(),
-									String.format("账户划拨失败,账户余额不足: 账户余额:%f, 划拨金额：%f", balanceAmt, cmd.getAmt())))
-					.build();
-		}
-		else {
-			return ActReturn.builder(RetCode.SUCCESS, new AccountAllocateOkEvent(cmd.getAccountCode(), cmd.getAmt()))
-					.build();
-		}
-	}
-
-	/**
-	 * 处理账户划拨成功事件
-	 * @param event
-	 */
-	public void on(AccountAllocateOkEvent event) {
-		balanceAmt += event.getAmt();
-		if (event.getAmt() < 0) {
-			successTransferOut++;
-		}
-		else {
-			successTransferIn++;
-		}
-	}
-
-	/**
-	 * 处理账户划拨失败事件
-	 * @param event
-	 */
-	public void on(AccountAllocateFailEvent event) {
-		failTransferOut++;
-	}
-}
-```
+这部分代码在[Phoenix-lite](./phoenix-lite-2x)
 
 **BankTransferSaga代码实现：**
+
+Phoneix 引入了Saga的概念来解决分布式事务问题。
 
 ```java
 @TransactionAggregateAnnotation(aggregateRootType = "BankTransferSaga")
