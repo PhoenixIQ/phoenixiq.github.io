@@ -11,13 +11,11 @@ title: phoenix lite 银行账户划拨
 
 ## 业务场景
 
-实际银行业务还是比较复杂的，为方便理解，我们简化业务场景如下（无跨银行转账业务、只描述单个银行内部账户的转入或转出业务、转入账户一定成功的场景）
+实际银行业务还是比较复杂的，为方便理解，我们简化业务场景如下
 
 - 每个账户初始化1000元
 - 支持账户转入或转出指定金额
-- 支持查看系统内所有账户的金额汇总
-
-基于上述功能描述，不管系统运行多久，运行多少转账记录，一个永恒正确的公式： `sum(账户余额) = 账户数量 * 1000`
+- 支持查看系统内所有账户的金额
 
 ## 统一语言
 
@@ -25,7 +23,7 @@ title: phoenix lite 银行账户划拨
 
 - **银行账户：**此案例里面提到的具有转入或转出金额的账户， 下文中可简称账户
 - **账户余额：**账面上的钱
-- **银行总账：**银行里面所有账户的总额
+- **银行总账：**银行里面所有账户的总额汇总
 
 ## 业务逻辑
 
@@ -55,12 +53,6 @@ title: phoenix lite 银行账户划拨
 	<dependency>
 		<groupId>com.iquantex</groupId>
 		<artifactId>phoenix-server-starter</artifactId>
-	</dependency>
-
-	<!-- phoenix服务端依赖包 -->
-	<dependency>
-		<groupId>com.iquantex</groupId>
-		<artifactId>phoenix-server</artifactId>
 	</dependency>
 </dependencies>
 ```
