@@ -3,7 +3,7 @@ id: phoenix-cloud-2x
 title: phoenix cloud 银行账户转账
 ---
 
-[Demo 下载](https://gitlab.iquantex.com/phoenix-public/bank-account/repository/master/archive.zip)
+[Demo 下载](https://gitlab.iquantex.com/phoenix-public/bank-account.git)
 
 # 银行账户转账
 

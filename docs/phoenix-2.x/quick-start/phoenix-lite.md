@@ -3,7 +3,7 @@ id: phoenix-lite-2x
 title: phoenix lite 银行账户划拨
 ---
 
-[Demo 下载](https://gitlab.iquantex.com/phoenix-public/bank-account/repository/master/archive.zip)
+[Demo 下载](https://gitlab.iquantex.com/phoenix-public/bank-account.git)
 
 # 银行账户划拨案例介绍
 

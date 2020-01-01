@@ -67,102 +67,6 @@
       },
       "phoenix-2.x/quick-start/phoenix-lite-2x": {
         "title": "phoenix lite 银行账户划拨"
-      },
-      "version-0.0.1/phoenix-1.x/version-0.0.1-akka": {
-        "title": "akka 介绍"
-      },
-      "version-0.0.1/phoenix-1.x/version-0.0.1-cqrs": {
-        "title": "CQRS 介绍"
-      },
-      "version-0.0.1/phoenix-1.x/version-0.0.1-eventsourcing": {
-        "title": "eventsourcing 介绍"
-      },
-      "version-0.0.1/phoenix-1.x/version-0.0.1-eventstore": {
-        "title": "EventStore 介绍"
-      },
-      "version-0.0.1/phoenix-1.x/version-0.0.1-quick-start-1x": {
-        "title": "Phoenix 快速入门"
-      },
-      "version-0.0.1/phoenix-1.x/version-0.0.1-test": {
-        "title": "test 文档"
-      },
-      "version-0.0.1/phoenix-2.x/version-0.0.1-akka": {
-        "title": "akka 介绍"
-      },
-      "version-0.0.1/phoenix-2.x/version-0.0.1-cqrs": {
-        "title": "CQRS 介绍"
-      },
-      "version-0.0.1/phoenix-2.x/version-0.0.1-eventsourcing": {
-        "title": "eventsourcing 介绍"
-      },
-      "version-0.0.1/phoenix-2.x/version-0.0.1-eventstore": {
-        "title": "EventStore 介绍"
-      },
-      "version-0.0.1/phoenix-2.x/version-0.0.1-quick-start-2x": {
-        "title": "Phoenix 快速入门"
-      },
-      "version-0.0.1/phoenix-2.x/version-0.0.1-test": {
-        "title": "test文档"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-admin/version-0.0.2-admin-build-2x": {
-        "title": "服务搭建"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-admin/version-0.0.2-admin-function-2x": {
-        "title": "功能介绍"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-admin/version-0.0.2-admin-instructions-2x": {
-        "title": "使用说明"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-admin/version-0.0.2-admin-monitor-2x": {
-        "title": "监控指标"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-cloud/version-0.0.2-phoenix-cloud-api-2x": {
-        "title": "API"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-cloud/version-0.0.2-phoenix-cloud-config-2x": {
-        "title": "配置"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-cloud/version-0.0.2-phoenix-cloud-function-2x": {
-        "title": "功能介绍"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-cloud/version-0.0.2-phoenix-cloud-transaction-2x": {
-        "title": "分布式事务"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-lite/version-0.0.2-phoenix-lite-api-2x": {
-        "title": "API"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-lite/version-0.0.2-phoenix-lite-concept-2x": {
-        "title": "基本概念"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-lite/version-0.0.2-phoenix-lite-config-2x": {
-        "title": "配置"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-lite/version-0.0.2-phoenix-lite-data-table-2x": {
-        "title": "数据表"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-lite/version-0.0.2-phoenix-lite-feature-2x": {
-        "title": "特性介绍"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-lite/version-0.0.2-phoenix-lite-http-api-2x": {
-        "title": "HTTP API"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-test/version-0.0.2-available-test-2x": {
-        "title": "高可用测试"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-test/version-0.0.2-elasticity-test-2x": {
-        "title": "弹性伸缩测试"
-      },
-      "version-0.0.2/phoenix-2.x/phoenix-test/version-0.0.2-performance-test-2x": {
-        "title": "性能测试"
-      },
-      "version-0.0.2/phoenix-2.x/quick-start/version-0.0.2-phoenix-cloud-2x": {
-        "title": "quantex cloud 银行账户加减金额"
-      },
-      "version-0.0.2/phoenix-2.x/quick-start/version-0.0.2-phoenix-lite-2x": {
-        "title": "quantex lite 银行账户加减金额"
-      },
-      "version-0.0.2/phoenix-2.x/version-0.0.2-phoenix-roadmap-2x": {
-        "title": "Phoenix 路线图"
       }
     },
     "links": {
@@ -176,10 +80,7 @@
       "文档": "文档",
       "非功能性测试": "非功能性测试",
       "白皮书": "白皮书",
-      "Roadmap": "Roadmap",
-      "目录标题一": "目录标题一",
-      "目录标题二": "目录标题二",
-      "...": "..."
+      "Roadmap": "Roadmap"
     }
   },
   "pages-strings": {

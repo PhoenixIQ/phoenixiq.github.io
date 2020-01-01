@@ -5,6 +5,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = normalizeFile;
 
+function _fs() {
+  const data = _interopRequireDefault(require("fs"));
+
+  _fs = function () {
+    return data;
+  };
+
+  return data;
+}
+
 function _path() {
   const data = _interopRequireDefault(require("path"));
 
@@ -86,6 +96,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const debug = (0, _debug().default)("babel:transform:file");
+const LARGE_INPUT_SOURCEMAP_THRESHOLD = 1000000;
 
 function normalizeFile(pluginPasses, options, code, ast) {
   code = `${code || ""}`;
@@ -126,7 +137,15 @@ function normalizeFile(pluginPasses, options, code, ast) {
 
       if (typeof options.filename === "string" && lastComment) {
         try {
-          inputMap = _convertSourceMap().default.fromMapFileComment(`//${lastComment}`, _path().default.dirname(options.filename));
+          const match = EXTERNAL_SOURCEMAP_REGEX.exec(lastComment);
+
+          const inputMapContent = _fs().default.readFileSync(_path().default.resolve(_path().default.dirname(options.filename), match[1]));
+
+          if (inputMapContent.length > LARGE_INPUT_SOURCEMAP_THRESHOLD) {
+            debug("skip merging input map > 1 MB");
+          } else {
+            inputMap = _convertSourceMap().default.fromJSON(inputMapContent);
+          }
         } catch (err) {
           debug("discarding unknown file input sourcemap", err);
         }
@@ -209,7 +228,7 @@ function parser(pluginPasses, {
 }
 
 const INLINE_SOURCEMAP_REGEX = /^[@#]\s+sourceMappingURL=data:(?:application|text)\/json;(?:charset[:=]\S+?;)?base64,(?:.*)$/;
-const EXTERNAL_SOURCEMAP_REGEX = /^[@#][ \t]+sourceMappingURL=(?:[^\s'"`]+?)[ \t]*$/;
+const EXTERNAL_SOURCEMAP_REGEX = /^[@#][ \t]+sourceMappingURL=([^\s'"`]+)[ \t]*$/;
 
 function extractCommentsFromList(regex, comments, lastComment) {
   if (comments) {

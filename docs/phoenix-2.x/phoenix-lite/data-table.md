@@ -42,28 +42,22 @@ title: 数据表
 
 ## Snapshot 表设计 （待更新）
 
-**表名：SNAPSHOT**
+**表名：PHOENIX_SNAPSHOT**
 
 | **字段名称**   | **字段描述** | **字段类型**  | **字段形式**     | **备注** |
 | :------------- | :----------- | :------------ | :--------------- | :------- |
-| AGGREGATE_TYPE | 聚合根类别   | VARCHAR2(255) | java的聚合根类名 |          |
 | AGGREGATE_ID   | 聚合根ID     | VARCHAR2(255) |                  |          |
-| VERSION        | 版本         | NUMBER(19)    |                  |          |
-| SNAPSHOT       | 快照内容     | BLOB          | 二进制内容       |          |
+| VERSION        | 版本         | BIGINT(19)    |                  |          |
+| SNAPSHOT_DATA       | 快照内容     | BLOB          | 二进制内容       |          |
 | CREATE_TIME    | 创建时间     | DATE          | 日期时分秒       |          |
 
 **索引**
 
 | **类别**         | **变量名**                  | **字段**              |
 | :--------------- | :-------------------------- | :-------------------- |
-| 主键             | SNAPSHOT_PK                 | AGGREGATE_ID、VERSION |
-| 普通索引（可选） | SNAPSHOT_AGGREGATE_TYPE_IDX | AGGREGATE_TYPE        |
+| 主键             | SNAPSHOT_STORE_PK                 | AGGREGATE_ID、VERSION |
 
 
 **快照处理逻辑**
 
-- 由于快照是用于加速EventSourcing，不属于正常业务处理一部分，因此设计上将采用异步线程来处理打快照
-- 采用EventSourcing恢复一个新的聚合根来进行快照处理，避免阻塞业务处理线程
-- 快照触发机制
-  - 支持聚合根每产生N个事件进行一次快照，N值可配，默认值：100。
-  - 直接http调用触发指定聚合根打快照
+ - 待添加
