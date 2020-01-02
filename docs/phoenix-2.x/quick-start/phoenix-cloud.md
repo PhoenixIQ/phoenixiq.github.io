@@ -5,11 +5,11 @@ title: phoenix cloud 银行账户转账
 
 [Demo 下载](https://gitlab.iquantex.com/phoenix-public/bank-account.git)
 
-# 银行账户转账
+## 银行账户转账
 
 在 [银行账户划拨案例](./phoenix-lite-2x) 中介绍了一个简单的案例：单个账户的划拨操作。 下面我们在[Phoenix-lite](./phoenix-lite-2x)的基础上实现多个账户之间的划拨操作。多个账户之间的划拨操作涉及分布式事务问题，Phoenix 引入了事务协调器的概念来解决分布式事务问题。
 
-## 业务场景
+### 业务场景
 
 实际银行业务还是比较复杂的，为方便理解，我们简化业务场景如下（无跨银行转账业务、只描述单个银行内部账户转账业务、转入账户一定成功的场景）
 
@@ -19,7 +19,7 @@ title: phoenix cloud 银行账户转账
 
 基于上述功能描述，不管系统运行多久，运行多少转账记录，一个永恒正确的公式： sum(账户余额) = 账户数量 * 1000
 
-## 统一语言
+### 统一语言
 
 基于上述业务场景，在本案例里面，我们得出如下统一术语
 
@@ -27,7 +27,7 @@ title: phoenix cloud 银行账户转账
 - **账户余额：**账面上的钱
 - **银行总账：**银行里面所有账户的总额
 
-## 业务逻辑
+### 业务逻辑
 
 针对案例的核心转账功能，基于Saga模式事务设计
 
@@ -46,18 +46,18 @@ title: phoenix cloud 银行账户转账
 
 ![](assets/phoenix2.x/phoenix-lite/trans.png)
 
-## 聚合定义
+### 聚合定义
 
 - **BankAcountAggregate（银行账户聚合）**：负责单个账户的账户余额数值计算
 - **BankTransferSaga（银行转账事务**）：负责定义银行转账事务
 
 ---
 
-# 具体实现
+## 具体实现
 
 针对以上案例下面展示具体的代码实现
 
-## 依赖 & 配置
+### 依赖 & 配置
 
 引入 phoenix 的 maven 依赖
 
@@ -113,7 +113,7 @@ quantex:
           password:
 ```
 
-## API 定义
+### API 定义
 
 phoenix 支持的API定义支持 `google protocol-buffers` 和 `java bean` ， 这里为了快速实现选用 `java bean` 来定义
 
@@ -121,7 +121,7 @@ phoenix 支持的API定义支持 `google protocol-buffers` 和 `java bean` ， �
 
 
 
-## 业务代码编写
+### 业务代码编写
 
 **BankAcountAggregate（银行账户聚合）**
 
