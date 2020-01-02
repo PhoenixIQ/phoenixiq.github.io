@@ -11,7 +11,7 @@ title: phoenix lite 银行账户划拨
 
 ## 业务场景
 
-实际银行业务还是比较复杂的，为方便理解，我们简化业务场景如下
+业务场景如下:
 
 - 每个账户初始化1000元
 - 支持账户转入或转出指定金额
@@ -27,21 +27,22 @@ title: phoenix lite 银行账户划拨
 
 ## 业务逻辑
 
-转入金额：划拨金额大于0
+资金划入：划拨金额大于0
 
-转出金额：划拨金额小于0
+资金划出：划拨金额小于0
 
-账户余额 + 划拨金额 小于0，返回账户划拨失败,账户余额不足
+如果账户余额 + 划拨金额 小于0，返回账户划拨失败，账户余额不足。
 
 ## 聚合定义
 
 - **BankAccountAggregate（银行账户聚合）**：负责单个账户的账户余额数值计算
 
+
 ---
 
 # 具体实现
 
-针对以上案例下面展示具体的代码实现
+针对以上案例下面展示具体的代码实现。
 
 ## 依赖 & 配置
 
@@ -117,8 +118,8 @@ phoenix 的API定义支持 `google protocol-buffers` 和 `java bean` ， 这里�
 @NoArgsConstructor
 @AllArgsConstructor  
 public class AccountAllocateCmd implements Serializable {
-  private String accountCode; *// 划拨账户*
-  private double amt; *// 划拨金额,允许正负*
+  private String accountCode; // 划拨账户
+  private double amt; // 划拨金额,允许正负
 }
 
 // 账户划拨失败事件
@@ -126,9 +127,9 @@ public class AccountAllocateCmd implements Serializable {
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountAllocateFailEvent implements Serializable {
-  private String accountCode; *// 划拨账户*
-  private double amt; *// 划拨金额*
-  private String result; *// 失败原因*
+  private String accountCode; // 划拨账户
+  private double amt; // 划拨金额
+  private String result; // 失败原因
 }
 
 // 账户划拨成功事
@@ -136,19 +137,10 @@ public class AccountAllocateFailEvent implements Serializable {
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountAllocateOkEvent implements Serializable {
-  private String accountCode; *// 划拨账户*
-  private double amt; *// 划拨金额*
+  private String accountCode; // 划拨账户
+  private double amt; // 划拨金额
 }
 
-// 账户转账请求
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class AccountTransferReq implements Serializable {
-	private String inAccountCode; // 转入账户
-	private String outAccountCode; // 转出账户
-	private double amt; // 转入金额(正)
-}
 ```
 
 ## 业务代码编写
@@ -158,8 +150,7 @@ public class AccountTransferReq implements Serializable {
 编程有如下约定：
 
 - 类需要添加 EntityAggregateAnnotation 注解并添加aggregateRootType（聚合根类别）， 标明这是一个聚合根类，用于框架扫描发现
-- 聚合根类需要继承Serializable
-- 需要给成员变量添加Get、Set方法（对象转JSON用）
+- 聚合根类需要继承Serializable并给成员变量添加Get、Set方法（对象转JSON用）
 - 对于Command消息，约定用act方法进行处理，且act方法中不进行任何聚合根内状态数据的修改，只负责逻辑处理，并产生Event
 - act函数需要添加的注解 AggregateIdAnnotation， 并且注解中的变量值含义为：Command入参中属于聚合根ID的字段名
 - act返回的Event对象，会先进行持久化到事件库后， 然后由框架自动回调对应的on方法
@@ -196,15 +187,14 @@ public class BankAccountAggregate implements Serializable {
 	@AggregateIdAnnotation(aggregateId = "accountCode")
 	public ActReturn act(AccountAllocateCmd cmd) {
 		if (balanceAmt + cmd.getAmt() < 0) {
-			return ActReturn
-					.builder(RetCode.FAIL,
-							new AccountAllocateFailEvent(cmd.getAccountCode(), cmd.getAmt(),
-									String.format("账户划拨失败,账户余额不足: 账户余额:%f, 划拨金额：%f", balanceAmt, cmd.getAmt())))
-					.build();
+			String retMessage = String.format("账户划拨失败,账户余额不足: 账户余额:%f, 划拨金额：%f", balanceAmt, cmd.getAmt());
+			return ActReturn.builder(RetCode.FAIL, retMessage,
+					new AccountAllocateFailEvent(cmd.getAccountCode(), cmd.getAmt(), retMessage)).build();
 		}
 		else {
-			return ActReturn.builder(RetCode.SUCCESS, new AccountAllocateOkEvent(cmd.getAccountCode(), cmd.getAmt()))
-					.build();
+			String retMessage = String.format("账户划拨成功：划拨金额：%.2f，账户余额：%.2f", cmd.getAmt(), balanceAmt + cmd.getAmt());
+			return ActReturn.builder(RetCode.SUCCESS, retMessage,
+					new AccountAllocateOkEvent(cmd.getAccountCode(), cmd.getAmt())).build();
 		}
 	}
 
