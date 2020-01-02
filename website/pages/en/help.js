@@ -26,7 +26,7 @@ function Help(props) {
     },
     {
       content: '深圳项目组成员：<br/><br/> 蓝文昌 、 郭超学 、 孙心原 、 高彦良 <br/><br/> 上海项目组成员：<br/><br/>石宝迪 、 申政杰',
-      title: '联系项目组成员',
+      title: '项目组成员',
     },
     {
       content: "了解此项目的新功能",
