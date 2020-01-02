@@ -34,7 +34,7 @@ const siteConfig = {
 
   // Used for publishing and more
   projectName: 'phoenix-website',
-  organizationName: 'phoenix group',
+  organizationName: 'quantex',
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
   //   organizationName: 'JoelMarcey'
@@ -42,7 +42,7 @@ const siteConfig = {
   // For no header links in the top nav bar -> headerLinks: [], 导航栏
   headerLinks: [
     // {href: "http://phoenix-website.sz.iquantex.com/docs/next/phoenix-1.x/about/introduction-1x", label: "Phoenix1.x"},
-    {href: "../docs/phoenix-2.x/quick-start/phoenix-lite-2x", label: "文档"},
+    {href: 'phoenix-lite-2x', label: '文档'},
     {blog: true, label: '博客'},
     {page: 'users', label: '用户'},
     {page: 'help', label: '关于我们'},

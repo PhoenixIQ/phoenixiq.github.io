@@ -5,11 +5,11 @@ title: phoenix lite 银行账户划拨
 
 [Demo 下载](https://gitlab.iquantex.com/phoenix-public/bank-account.git)
 
-# 银行账户划拨案例介绍
+## 银行账户划拨案例介绍
 
 本文将展示如何使用 `Phoenix` 构建一个银行账户划拨的应用程序。
 
-## 业务场景
+### 业务场景
 
 业务场景如下:
 
@@ -17,7 +17,7 @@ title: phoenix lite 银行账户划拨
 - 支持账户转入或转出指定金额
 - 支持查看系统内所有账户的金额
 
-## 统一语言
+### 统一语言
 
 基于上述业务场景，在本案例里面，我们得出如下统一术语
 
@@ -25,7 +25,7 @@ title: phoenix lite 银行账户划拨
 - **账户余额：**账面上的钱
 - **银行总账：**银行里面所有账户的总额汇总
 
-## 业务逻辑
+### 业务逻辑
 
 资金划入：划拨金额大于0
 
@@ -33,18 +33,18 @@ title: phoenix lite 银行账户划拨
 
 如果账户余额 + 划拨金额 小于0，返回账户划拨失败，账户余额不足。
 
-## 聚合定义
+### 聚合定义
 
 - **BankAccountAggregate（银行账户聚合）**：负责单个账户的账户余额数值计算
 
 
 ---
 
-# 具体实现
+## 具体实现
 
 针对以上案例下面展示具体的代码实现。
 
-## 依赖 & 配置
+### 依赖 & 配置
 
 引入 phoenix 的 maven 依赖
 
@@ -106,7 +106,7 @@ quantex:
         subscribe-topic: ${spring.application.name}-client
 ```
 
-## API 定义
+### API 定义
 
 phoenix 的API定义支持 `google protocol-buffers` 和 `java bean` ， 这里为了快速实现选用 `java bean` 来定义
 
@@ -143,7 +143,7 @@ public class AccountAllocateOkEvent implements Serializable {
 
 ```
 
-## 业务代码编写
+### 业务代码编写
 
 **账户聚合根类**
 
@@ -262,7 +262,7 @@ public class BankAccountApplication {
 }
 ```
 
-## 运行
+### 运行
 
 程序运行之后，可访问 [http://localhost:8080/](http://localhost:8080/) 进行下单测试。
 
