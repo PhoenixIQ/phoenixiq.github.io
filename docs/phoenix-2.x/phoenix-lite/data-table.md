@@ -9,7 +9,7 @@ title: 数据表
 
 | **字段名称**       | **字段描述**   | **字段类型**  | **字段形式**     | **备注** |
 | :----------------- | :------------- | :------------ | :--------------- | :------- |
-| BIZ_AGGREGATE_TYPE | 业务聚合根类别 | VARCHAR2(255) | java的聚合根类名 |          |
+| AGGREGATE_ROOT_TYPE | 聚合根类别 | VARCHAR2(255) | java的聚合根类名 |          |
 | AGGREGATE_ID       | 聚合根ID       | VARCHAR2(255) |                  |          |
 | VERSION            | 事件版本       | NUMBER(19)    | 数值递增         |          |
 | IDEMPOTENT_ID      | 幂等ID         | VARCHAR2(64)  | UUID             |          |
