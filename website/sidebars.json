@@ -38,7 +38,8 @@
         ]
       }
     ],
-    "非功能性测试": [
+    "Phoenix 测试报告": [
+      "phoenix-2.x/phoenix-test/features-test-2x",
       "phoenix-2.x/phoenix-test/performance-test-2x",
       "phoenix-2.x/phoenix-test/available-test-2x",
       "phoenix-2.x/phoenix-test/elasticity-test-2x"
