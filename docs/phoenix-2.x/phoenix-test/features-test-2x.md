@@ -18,7 +18,7 @@ title: 功能性测试
 
 ### 概述
 
-验证 phoenix-lite 账户转账功能。
+验证 phoenix-lite 账户划拨功能是否可以正常使用。
 
 ### 原理介绍
 
@@ -42,10 +42,20 @@ phoenix-lite 提供了随机划拨和定向划拨两个功能：
 
 ### 测试步骤
 
- 1. 使用 account-server 的下单页面以每秒 100 笔的速率下单，同时限制账户个数为 10 个，划拨总次数为 1000
- 2. 待下单完毕后，进行校验
-    使用 account-server 的内存查询接口查询内存数据
+ 1. 使用 phoenix-lite 的下单页面以每秒 100 笔的速率下单，同时限制账户个数为 10 个，划拨总次数为 1000
+ 2. 待下单完毕后，进行校验.
+   使用 phoenix-lite 的内存查询接口查询内存数据 (转入次数 + 转出次数 + 错误转出 = 转账次数)
 
+   ![show](assets/phoenix2.x/phoenix-test/features/2.png)
+
+ 3. 使用定向转账功能，从 A00000000 账户中转出 100 元（通过以上图片发现经过随机转账之后 A00000000 账户中余额为 1379 元）
+    转账之后，通过内存查询接口查看账户余额（余额为 1279 元）
+
+    ![show](assets/phoenix2.x/phoenix-test/features/3.png)
+
+### 测试结果
+
+符合预期，phoenix-lite 账户划拨功能可以正常使用。
 
 ## Grafana 功能
 
@@ -61,22 +71,35 @@ Phoenix 提供了一套默认的 Grafana 监控面板，用于监控 Phoenix 应
 
 ### 原理介绍
 
-可以直观的监控到 Phoenix 应用每次下单之后的运行情况。
+通过在 phoenix-lite 服务中进行埋点，并将相应的数据上传至 Elasticsearch 最终通过 Grafana 友好的展示出来。不仅可以实时的监控 Phoenix 应用每次下单之后的运行情况，还可以分析上面的指标判断服务的性能。
 
 ### 测试方案
 
 #### 场景描述
 
-使用 Phoenix-lite 提供的随机转账功能进行下单测试，然后在grafana面板上观看监测数据。
+使用 Phoenix-lite 提供的随机划拨功能以固定的速率进行下单测试，然后打开 Grafana 监控面板监测数据。
 
 #### 校验方法
 
-使用 Phoenix-lite 进行 1000 笔随机转账测试，然后在 grafana 面板上验证转账次数是否符合预期   ******** TODO  ******** 
+观察 Grafana 中展示出来的各个指标是否符合预期
 
-关于 Grafana 各个监控指标的说明请参考：。。。
+Grafana的入口在 Phoenix-admin 中，关于 Phoenix-admin 的使用请参考：[Phoenix-admin 使用说明](../phoenix-admin/admin-instructions-2x)
+
+关于 Grafana 各个监控指标的说明请参考：[Grafana 监控指标说明](../phoenix-admin/grafana)
 
 ### 测试步骤
 
+ 1. 使用 phoenix-lite 的下单页面以每秒 100 笔的速率下单，同时限制账户个数为 10 个，划拨总次数为 1000
+ 2. 待下单完毕后，进行校验。
+    通过 Grafana 监测服务运行情况。
+
+    ![show](assets/phoenix2.x/phoenix-test/features/4.png)
+
+    通过 Grafana 监控面板可以观察到一共发送了 1000 条消息（CLIENT_SEND_MSG = 1000）,并全部处理完成。整个处理过程耗时平均在 10 ms左右。
+
+### 测试结果
+
+符合预期，可以证明 Phoenix 提供的 Grafana 监控功能够可以正常使用
 
 ## EventSourcing 功能
 
