@@ -33,31 +33,29 @@ title: 功能介绍
 
   - 默认dashboard
 
-    面板说明：
+    * 筛选栏：可选定正规系统中，不同的服务集群，和服务集群下面不同的节点的数据
 
-    - 消息个数统计
+      ![image-20200115111102393](assets/phoenix2.x/phoenix-admin/image-20200115111102393.png)
 
-      选定时间内的消息总数
+    * 消息个数统计面板：统计系统内各个消息的个数
 
-    - 指标个数统计
+      ![image-20200115111030625](assets/phoenix2.x/phoenix-admin/image-20200115111030625.png)
 
-      各个指标的个数
+    * 指标个数统计面板：统计系统内具体埋点的数量
 
-    - 耗时统计
+      ![image-20200115110949004](assets/phoenix2.x/phoenix-admin/image-20200115110949004.png)
 
-      系统内的各个耗时点的统计
+    * 耗时统计面板：统计系统内各种耗时
 
-    - 速率统计
+      ![image-20200115111135147](assets/phoenix2.x/phoenix-admin/image-20200115111135147.png)
 
-      系统内各种速率的统计
+    * 速率统计面板：统计系统内各种速率
 
-    - 数据总览
+      ![image-20200115111155570](assets/phoenix2.x/phoenix-admin/image-20200115111155570.png)
 
-      具体消息内容
+    * 数据总览面板：展示数据的详细信息
 
-    指标说明：
-
-    - 
+      ![image-20200115111217069](assets/phoenix2.x/phoenix-admin/image-20200115111217069.png)
 
   - 自定义dashboard
 
