@@ -48,8 +48,8 @@ phoenix-lite 提供了随机划拨和定向划拨两个功能：
 
    ![show](assets/phoenix2.x/phoenix-test/features/2.png)
 
- 3. 使用定向转账功能，从 A00000000 账户中转出 100 元（通过以上图片发现经过随机转账之后 A00000000 账户中余额为 1379 元）
-    转账之后，通过内存查询接口查看账户余额（余额为 1279 元）
+ 3. 使用定向转账功能，从 A00000000 账户中转出 100 元（通过以上图片发现经过随机转账之后 A00000000 账户中余额为 411 元）
+    转账之后，通过内存查询接口查看账户余额（余额为 311 元）
 
     ![show](assets/phoenix2.x/phoenix-test/features/3.png)
 
@@ -151,17 +151,6 @@ Phoenix是EDA架构的框架，可以基于事件重塑内存，Phoenix会对所
 符合预期，可以证明 Phoenix 提供的 EventSourcing 功能够可以正常使用
 
 
-测试图片清晰度
-
-![show](assets/phoenix2.x/phoenix-test/features/test.png)
-
-![show](assets/phoenix2.x/phoenix-test/features/test1.png)
-
-![show](assets/phoenix2.x/phoenix-test/features/test2.jpg)
-
-![show](assets/phoenix2.x/phoenix-test/features/test3.bmp)
-
-<a href="assets/phoenix2.x/phoenix-test/features/test.png">Image #1</a>
 
 
 
@@ -173,20 +162,90 @@ Phoenix 应用可以通过EventSourcing功能进行内存数据恢复，使用Sn
 
 ### 原理介绍
 
-Snapshot是对某一瞬间Phoenix应用内存的一次存储。Phoenix提供了两种大快照的方式。
+Snapshot是对某一瞬间Phoenix应用内存的一次存储。Phoenix 提供的快照功能提供了如下操作：
 
  1. 每处理1000笔消息自动打一次快照
  2. 手动触发打快照
+ 3. 查询快照列表
+ 4. 查询指定聚合根最新状态
+ 5. 删除指定聚合根指定版本的快照
 
 ### 测试方案
 
+phoenix-lite 服务引入了 Swagger 服务，一下测试借助 swagger 提供的页面进行测试。
+
 #### 场景描述
 
-使用 Phoenix-lite 提供的随机转账功能，首先构造 1000 笔下单请求，处理完成之后观察是否打快照，然后重启节点观察EventSourcing过程中是否使用快照。
+使用 Phoenix-lite 提供的随机划拨功能，首先构造一定数量的划拨请求，待处理完成之后执行手打打快照的请求。同时借助swagger提供的能进行快照列表的查询和删除指定版本快照的操作。
 
 #### 校验方法
 
-
+每次操作之后，校验效果是否符合预期。
 
 ### 测试步骤
 
+ 1. 使用 phoenix-lite 的下单页面以每秒 100 笔的速率下单，同时限制账户个数为 10 个，划拨总次数为 1000
+ 2. 使用 swagger 提供的功能给账户 A00000009 打一个快照
+    ![show](assets/phoenix2.x/phoenix-test/features/10.png)
+ 3. 接着使用 swagger 查询快照列表
+    ![show](assets/phoenix2.x/phoenix-test/features/11.png)
+ 4. 此时内存中各个账户的余额如下
+    ![show](assets/phoenix2.x/phoenix-test/features/12.png)
+ 5. 从 A00000009 账户中转出 100 元，然后使用 swagger 查询 A00000009 的最新状态
+
+    TODO 这个查询最新状态还有点问题，超哥正在修复，修复完成之后再次测试。
+ 6. 删除 A00000009 的快照
+    ![show](assets/phoenix2.x/phoenix-test/features/13.png)
+    查询快照列表，观察是否成功删除
+    ![show](assets/phoenix2.x/phoenix-test/features/14.png)
+ 7. 使用 phoenix-lite 的下单页面以每秒 100 笔的速率下单，同时限制账户个数为 10 个，划拨总次数为 10000
+ 8. 查询快照列表，观察是否自动触发快照
+    ![show](assets/phoenix2.x/phoenix-test/features/15.png)
+
+### 测试结果
+
+符合预期，可以证明 Phoenix 提供的 Snapshot 功能够可以正常使用
+
+
+
+
+
+
+## 事务功能
+
+### 概述
+
+Phoenix提供了一套分布式事务的解决方案，引入 phoenix-transaction 模块即可使用。
+
+### 原理介绍
+
+phoenix-lite 提供了随机转账和定向转账两个功能：
+
+ 1. 定向转账：指定转出账户和转入账户，以及转账金额
+ 2. 随机转账：指定账户范围和转账次数，多个账户两两之间随机进行转账操作。
+
+### 测试方案
+
+phoenix-lite 构造了账户转账的案例，模拟了两个账户之间的转账操作。
+
+#### 场景描述
+
+分别使用 Phoenix-lite 提供的两个转账接口进行下单测试。
+
+#### 校验方法
+
+ - 定向转账：每次转账之后校验余额
+ - 随机转账：转入次数 = 转出次数 && 转出次数 + 错误转出 = 转账次数
+
+### 测试步骤
+
+ 1. 使用 phoenix-lite 的下单页面以每秒 100 笔的速率下单，同时限制账户个数为 10 个，转账总次数为 1000
+ 2. 待下单完毕后，进行校验。使用 phoenix-lite 的内存查询接口查询内存数据
+    ![show](assets/phoenix2.x/phoenix-test/features/16.png)
+ 3. 使用定向转账功能，从 A00000000 账户向 A00000001 账户转入 100 元（通过以上图片发现经过随机转账之后 A00000000 账户中余额为 763 元，A00000001 账户中余额为 1240 元）
+    转账之后，通过内存查询接口查看账户余额
+    ![show](assets/phoenix2.x/phoenix-test/features/17.png)
+
+### 测试结果
+
+符合预期，可以证明 Phoenix 提供的事务功能够可以正常使用

@@ -37,8 +37,17 @@ title: phoenix lite 银行账户划拨
 
 - **BankAccountAggregate（银行账户聚合）**：负责单个账户的账户余额数值计算
 
+### 业务分析 & 架构图
+
+![show](assets/phoenix2.x/phoenix-lite/yewu.png)
+
+![show](assets/phoenix2.x/phoenix-lite/jiagou.png)
+
+
 
 ---
+
+### 
 
 ## 具体实现
 
