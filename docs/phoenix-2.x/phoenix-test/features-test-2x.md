@@ -14,7 +14,7 @@ title: 功能性测试
   - EventSourcing 使用正常
   - Snapshot 使用正常
 
-## Phoenix-lite 转账功能
+## Phoenix-lite 划拨功能
 
 ### 概述
 
@@ -57,6 +57,10 @@ phoenix-lite 提供了随机划拨和定向划拨两个功能：
 
 符合预期，phoenix-lite 账户划拨功能可以正常使用。
 
+
+
+
+
 ## Grafana 功能
 
 ### 概述
@@ -68,6 +72,7 @@ Phoenix 提供了一套默认的 Grafana 监控面板，用于监控 Phoenix 应
  - 耗时统计
  - 速率统计
  - 数据总览
+ - 根据服务节点或者服务路径进行筛选过滤
 
 ### 原理介绍
 
@@ -85,7 +90,7 @@ Phoenix 提供了一套默认的 Grafana 监控面板，用于监控 Phoenix 应
 
 Grafana的入口在 Phoenix-admin 中，关于 Phoenix-admin 的使用请参考：[Phoenix-admin 使用说明](../phoenix-admin/admin-instructions-2x)
 
-关于 Grafana 各个监控指标的说明请参考：[Grafana 监控指标说明](../phoenix-admin/grafana)
+关于 Grafana 各个监控指标的说明请参考：[Grafana 监控指标说明](../phoenix-admin/grafana-2x)
 
 ### 测试步骤
 
@@ -96,10 +101,19 @@ Grafana的入口在 Phoenix-admin 中，关于 Phoenix-admin 的使用请参考�
     ![show](assets/phoenix2.x/phoenix-test/features/4.png)
 
     通过 Grafana 监控面板可以观察到一共发送了 1000 条消息（CLIENT_SEND_MSG = 1000）,并全部处理完成。整个处理过程耗时平均在 10 ms左右。
+ 3. 根据服务路径进行筛选过滤（只观察其中一个服务的情况）
+    ![show](assets/phoenix2.x/phoenix-test/features/8.png)
+ 4. 根据服务节点进行筛选过滤（Server端服务支持多活，可以启动多个节点，但是我们可以只观察其中一个节点的情况）
+    ![show](assets/phoenix2.x/phoenix-test/features/9.png)
+    通过上图我们还可以看出来，该节点一共处理了 500 笔请求（一个 1000 笔请求，共两个处理节点），说明了多个节点之间是可以做到负载均衡的。
 
 ### 测试结果
 
 符合预期，可以证明 Phoenix 提供的 Grafana 监控功能够可以正常使用
+
+
+
+
 
 ## EventSourcing 功能
 
@@ -115,13 +129,29 @@ Phoenix是EDA架构的框架，可以基于事件重塑内存，Phoenix会对所
 
 #### 场景描述
 
-使用 Phoenix-lite 提供的随机转账功能，首先构造固定数量的请求，处理完成之后观察内存数据情况，然后重启节点并进行定向转账并查看内存数据是否符合预期。
+使用 Phoenix-lite 提供的随机划拨功能，首先构造固定数量的请求，处理完成之后观察内存数据情况，然后重启节点后再次观察内存状态是否和之前保持一致，重启之后再进行定向划拨观察服务时候能够正常运作。
 
 #### 校验方法
 
 在 Phoenix-lite 页面通过内存查询功能，观察最终的结果是否正确。
 
 ### 测试步骤
+
+ 1. 使用 phoenix-lite 的下单页面以每秒 100 笔的速率下单，同时限制账户个数为 10 个，划拨总次数为 1000
+ 2. 待所有请求处理完成之后，查询内存数据
+    ![show](assets/phoenix2.x/phoenix-test/features/5.png)
+ 3. 重启服务之后，再次查询内存数据
+    重启过程中发现各个聚合根确实存在Eventsourcing的过程
+    ![show](assets/phoenix2.x/phoenix-test/features/7.png)
+    并且重启前后内存数据没有变化
+    ![show](assets/phoenix2.x/phoenix-test/features/6.png)
+
+### 测试结果
+
+符合预期，可以证明 Phoenix 提供的 EventSourcing 功能够可以正常使用
+
+
+
 
 
 ## Snapshot 功能
