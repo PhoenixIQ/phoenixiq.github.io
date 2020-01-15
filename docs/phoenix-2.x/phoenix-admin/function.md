@@ -3,60 +3,94 @@ id: admin-function-2x
 title: 功能介绍
 ---
 
-​	phoniex-admin是配合phoenix框架使用的服务监控平台，主要有如下监控功能：
+## phoenix-admin功能介绍
 
-- 服务监控大屏  （缺前端）
+phoniex-admin是配合phoenix框架使用的服务监控平台，主要有如下监控功能：
 
-  - 运行总览
+* 服务监控大屏
+* grafana监控
+* 待补充...
 
-    - 服务个数/健康度
-    - 实例个数/健康度
+下面分别详细介绍每个功能的详细功能点
 
-  - 运行详情
 
-    - 实例健康状态
-    - url
-    - 运行时间
-    - 补充ing...
 
-  - 实例内存管理
+### 服务监控大屏  
 
-    - 聚合根列表查询
-    - 聚合根ID历史快照版本查询
-    - 打快照
-    - 删除快照
-    - 聚合根内存查询
+备注：ui待开发，开发完毕后补图。
 
-    
+- 运行总览
 
-- grafana监控
+  - 服务个数/健康度
+  - 实例个数/健康度
 
-  - 默认dashboard
+- 运行详情
 
-    * 筛选栏：可选定正规系统中，不同的服务集群，和服务集群下面不同的节点的数据
+  - 实例健康状态
+  - url
+  - 运行时间
+  - 补充ing...
 
-      ![image-20200115111102393](assets/phoenix2.x/phoenix-admin/image-20200115111102393.png)
+- 实例内存管理
 
-    * 消息个数统计面板：统计系统内各个消息的个数
+  - 聚合根列表查询
+  - 聚合根ID历史快照版本查询
+  - 打快照
+  - 删除快照
+  - 聚合根内存查询
 
-      ![image-20200115111030625](assets/phoenix2.x/phoenix-admin/image-20200115111030625.png)
 
-    * 指标个数统计面板：统计系统内具体埋点的数量
+### grafana监控
 
-      ![image-20200115110949004](assets/phoenix2.x/phoenix-admin/image-20200115110949004.png)
+- 默认dashboard
 
-    * 耗时统计面板：统计系统内各种耗时
+  phoenix-admin在部署上，集成了grafana，提供了默认的监控dashboard，便于用户查看phoenix系统相关信息。
 
-      ![image-20200115111135147](assets/phoenix2.x/phoenix-admin/image-20200115111135147.png)
+- 自定义dashboard
 
-    * 速率统计面板：统计系统内各种速率
+  同时，phoenix-admin集成的grafana，也支持用户根据自己的需求，配置所需要的dashboard。
+  
+  
 
-      ![image-20200115111155570](assets/phoenix2.x/phoenix-admin/image-20200115111155570.png)
+## grafana面板解析
 
-    * 数据总览面板：展示数据的详细信息
+##### 总览
 
-      ![image-20200115111217069](assets/phoenix2.x/phoenix-admin/image-20200115111217069.png)
+![image-20200115192350535](assets\phoenix2.x\phoenix-admin\image-20200115192350535.png)
 
-  - 自定义dashboard
 
-    提供用户配置自定义的dashboard。
+
+##### 筛选栏：可选定系统中，不同的服务集群，和服务集群下面不同的节点的数据
+
+![image-20200115111102393](assets/phoenix2.x/phoenix-admin/image-20200115111102393.png)
+
+
+
+##### 消息个数统计面板：统计系统内各个消息的个数
+
+![image-20200115111030625](assets/phoenix2.x/phoenix-admin/image-20200115111030625.png)
+
+
+
+##### 指标个数统计面板：统计系统内具体埋点的数量
+
+![image-20200115110949004](assets/phoenix2.x/phoenix-admin/image-20200115110949004.png)
+
+
+
+##### 耗时统计面板：统计系统内各种耗时
+
+![image-20200115111135147](assets/phoenix2.x/phoenix-admin/image-20200115111135147.png)
+
+
+
+##### 速率统计面板：统计系统内各种速率
+
+![image-20200115111155570](assets/phoenix2.x/phoenix-admin/image-20200115111155570.png)
+
+
+
+##### 数据总览面板：展示数据的详细信息
+
+![image-20200115111217069](assets/phoenix2.x/phoenix-admin/image-20200115111217069.png)
+
