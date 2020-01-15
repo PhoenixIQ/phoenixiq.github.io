@@ -56,7 +56,7 @@ phoniex-admin是配合phoenix框架使用的服务监控平台，主要有如下
 
 ##### 总览
 
-![image-20200115192350535](assets\phoenix2.x\phoenix-admin\image-20200115192350535.png)
+![image-20200115192350535](assets/phoenix2.x/phoenix-admin/image-20200115192350535.png)
 
 
 
