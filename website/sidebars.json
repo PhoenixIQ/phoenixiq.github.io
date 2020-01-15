@@ -33,9 +33,7 @@
         "ids": [
           "phoenix-2.x/phoenix-admin/admin-function-2x",
           "phoenix-2.x/phoenix-admin/admin-build-2x",
-          "phoenix-2.x/phoenix-admin/admin-instructions-2x",
-          "phoenix-2.x/phoenix-admin/admin-monitor-2x",
-          "phoenix-2.x/phoenix-admin/grafana-2x" 
+          "phoenix-2.x/phoenix-admin/admin-instructions-2x"
         ]
       }
     ],

@@ -161,7 +161,7 @@ Phoenix是EDA架构的框架，可以基于事件重塑内存，Phoenix会对所
 
 ![show](assets/phoenix2.x/phoenix-test/features/test3.bmp)
 
-
+<a href="assets/phoenix2.x/phoenix-test/features/test.png">Image #1</a>
 
 
 
