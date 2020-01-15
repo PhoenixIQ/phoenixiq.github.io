@@ -151,6 +151,17 @@ Phoenix是EDA架构的框架，可以基于事件重塑内存，Phoenix会对所
 符合预期，可以证明 Phoenix 提供的 EventSourcing 功能够可以正常使用
 
 
+测试图片清晰度
+
+![show](assets/phoenix2.x/phoenix-test/features/test.png)
+
+![show](assets/phoenix2.x/phoenix-test/features/test1.png)
+
+![show](assets/phoenix2.x/phoenix-test/features/test2.jpg)
+
+![show](assets/phoenix2.x/phoenix-test/features/test3.bmp)
+
+
 
 
 
