@@ -20,7 +20,9 @@
       {
         "type": "subcategory",
         "label": "phoenix-cloud 待发布",
-        "ids": [ ]
+        "ids": [
+          "phoenix-2.x/phoenix-cloud/phoenix-cloud-api-2x"
+        ]
       },
       {
         "type": "subcategory",
