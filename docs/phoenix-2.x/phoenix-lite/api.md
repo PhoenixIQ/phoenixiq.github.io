@@ -1,6 +1,6 @@
 ---
 id: phoenix-lite-api-2x
-title: API
+title: JAVA API
 ---
 
 ## 消息定义
