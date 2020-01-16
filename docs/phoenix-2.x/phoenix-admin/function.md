@@ -11,14 +11,6 @@ phoniex-admin是配合phoenix框架使用的服务监控平台，能够实现对
 
 ### 架构部署
 
-<SVG src="/img/phoenix.png" />
-
-<SVG src="/img/phoenix.png" />
-
-<img src="/img/phoenix.png" />
-
-<img src="../../assets/phoenix2.x/phoenix-admin/image-20200115105007488.png" />
-
 ![image-20200116113222807](../../assets/phoenix2.x/phoenix-admin/image-20200115105007488.png)
 
 <br/>
@@ -78,7 +70,7 @@ phoenix-admin为每个项目内置了一个通用的监控面板，提供基本�
 
 1. 总览
 
-![image-20200115192350535](assets/phoenix2.x/phoenix-admin/image-20200115192350535.png)
+![image-20200115192350535](../../assets/phoenix2.x/phoenix-admin/image-20200115192350535.png)
 
  <br/>
 
@@ -86,7 +78,7 @@ phoenix-admin为每个项目内置了一个通用的监控面板，提供基本�
 
 可选定系统中，不同的服务集群，和服务集群下面不同的节点的数据
 
-![image-20200115111102393](assets/phoenix2.x/phoenix-admin/image-20200115111102393.png)
+![image-20200115111102393](../../assets/phoenix2.x/phoenix-admin/image-20200115111102393.png)
 
 <br/>
 
@@ -94,7 +86,7 @@ phoenix-admin为每个项目内置了一个通用的监控面板，提供基本�
 
 统计系统内各个消息的个数
 
-![image-20200115111030625](assets/phoenix2.x/phoenix-admin/image-20200115111030625.png)
+![image-20200115111030625](../../assets/phoenix2.x/phoenix-admin/image-20200115111030625.png)
 
 <br/>
 
@@ -102,7 +94,7 @@ phoenix-admin为每个项目内置了一个通用的监控面板，提供基本�
 
 统计系统内具体埋点的数量
 
-![image-20200115110949004](assets/phoenix2.x/phoenix-admin/image-20200115110949004.png)
+![image-20200115110949004](../../assets/phoenix2.x/phoenix-admin/image-20200115110949004.png)
 
 <br/>
 
@@ -110,7 +102,7 @@ phoenix-admin为每个项目内置了一个通用的监控面板，提供基本�
 
 统计系统内各种耗时
 
-![image-20200115111135147](assets/phoenix2.x/phoenix-admin/image-20200115111135147.png)
+![image-20200115111135147](../../assets/phoenix2.x/phoenix-admin/image-20200115111135147.png)
 
 <br/>
 
@@ -118,7 +110,7 @@ phoenix-admin为每个项目内置了一个通用的监控面板，提供基本�
 
 统计系统内各种速率
 
-![image-20200115111155570](assets/phoenix2.x/phoenix-admin/image-20200115111155570.png)
+![image-20200115111155570](../../assets/phoenix2.x/phoenix-admin/image-20200115111155570.png)
 
  <br/>
 
@@ -126,7 +118,7 @@ phoenix-admin为每个项目内置了一个通用的监控面板，提供基本�
 
 展示数据的详细信息
 
-![image-20200115111217069](assets/phoenix2.x/phoenix-admin/image-20200115111217069.png)
+![image-20200115111217069](../../assets/phoenix2.x/phoenix-admin/image-20200115111217069.png)
 
 <br/>
 
