@@ -3,11 +3,17 @@ id: admin-instructions-2x
 title: 使用说明
 ---
 
-## phoenix-admin使用说明
+## 部署
 
-该文档将会详细介绍如何利用phoenix-admin来进行相关的phoenix服务监控。
+phoenix-admin提供了便捷的helm部署方式。可以使用helm命令在kubernates环境一键拉起整套phoenix-admin的集群。
+
+```shell
+helm upgrade --kubeconfig devops/.kube/config-demo ${name} --install --namespace=phoenix-admin-demo  --set phoenix_admin.version=$CI_COMMIT_REF_NAME  devops/helm/phoenix-admin/
+```
 
 
+
+## 配置
 
 ### 一. 项目配置
 
@@ -35,7 +41,7 @@ title: 使用说明
 
      phoenix-admin能实现多项目的管理，借住了eureka来实现各个项目内的服务发现。这里需要填写在部署phoenix项目的时候，eureka的地址。
 
-     
+     <br/>
 
 ### 二. 系统配置
 
@@ -54,8 +60,8 @@ title: 使用说明
    * Namespace
 
      填写利用kubernates部署项目的时候，kubernates的命名空间。
-
-
+     
+     <br/>
 
 ### 三. 效果展示
 
