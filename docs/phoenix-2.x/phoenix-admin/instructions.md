@@ -19,11 +19,11 @@ helm upgrade --kubeconfig devops/.kube/config-demo ${name} --install --namespace
 
 1. 新建项目
 
-![image-20200115193059777](assets/phoenix2.x/phoenix-admin/image-20200115193059777.png)
+![image-20200115193059777](../../assets/phoenix2.x/phoenix-admin/image-20200115193059777.png)
 
 2. 配置项说明
 
-   ![image-20200115200309243](assets/phoenix2.x/phoenix-admin/image-20200115200309243.png)
+   ![image-20200115200309243](../../assets/phoenix2.x/phoenix-admin/image-20200115200309243.png)
 
    * 项目ID：
 
@@ -47,11 +47,11 @@ helm upgrade --kubeconfig devops/.kube/config-demo ${name} --install --namespace
 
 1. 添加数据源
 
-   ![image-20200115200504478](assets/phoenix2.x/phoenix-admin/image-20200115200504478.png)
+   ![image-20200115200504478](../../assets/phoenix2.x/phoenix-admin/image-20200115200504478.png)
 
 2. 配置项说明：
 
-   ![image-20200115200709499](assets/phoenix2.x/phoenix-admin/image-20200115200709499.png)
+   ![image-20200115200709499](../../assets/phoenix2.x/phoenix-admin/image-20200115200709499.png)
 
    * Url
 
@@ -67,13 +67,13 @@ helm upgrade --kubeconfig devops/.kube/config-demo ${name} --install --namespace
 
 配置完毕后，点击右侧菜单栏的【Grafana】按钮，即可实现免密跳转到grafana的默认dashboard中。
 
-![image-20200115201142587](assets/phoenix2.x/phoenix-admin/image-20200115201142587.png)
+![image-20200115201142587](../../assets/phoenix2.x/phoenix-admin/image-20200115201142587.png)
 
 
 
 效果如下：
 
-![image-20200115201222406](assets/phoenix2.x/phoenix-admin/image-20200115201222406.png)
+![image-20200115201222406](../../assets/phoenix2.x/phoenix-admin/image-20200115201222406.png)
 
 
 
