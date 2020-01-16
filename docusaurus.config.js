@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Phoenix',
-  tagline: 'phoenix是一个事件驱动的有状态微服务框架',
+  tagline: 'phoenix是一个消息驱动的有状态微服务框架',
   url: 'http://phoenix-website.sz.iquantex.com/',
   baseUrl: '/',
   favicon: 'img/phoenix.png',

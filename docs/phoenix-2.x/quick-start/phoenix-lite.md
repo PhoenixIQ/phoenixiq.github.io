@@ -39,9 +39,9 @@ title: phoenix lite 银行账户划拨
 
 ### 业务分析 & 架构图
 
-![show](assets/phoenix2.x/phoenix-lite/yewu.png)
+![show](../../assets/phoenix2.x/phoenix-lite/yewu.png)
 
-![show](assets/phoenix2.x/phoenix-lite/jiagou.png)
+![show](../../assets/phoenix2.x/phoenix-lite/jiagou.png)
 
 
 
@@ -275,7 +275,7 @@ public class BankAccountApplication {
 
 程序运行之后，可访问 [http://localhost:8080/](http://localhost:8080/) 进行下单测试。
 
-![Colin](assets/phoenix2.x/phoenix-lite/show.png)
+![Colin](../../assets/phoenix2.x/phoenix-lite/show.png)
 
 phoenix-lite 提供两种下单方式
 
@@ -286,8 +286,8 @@ phoenix-lite 提供两种下单方式
 
 1. 模拟10个账户之间随机划拨100次，每秒划拨10笔
 
-![Colin](assets/phoenix2.x/phoenix-lite/show2.png)
+![Colin](../../assets/phoenix2.x/phoenix-lite/show2.png)
 
 2. 向账户 `Colin` 转入 100 元
 
-![Colin](assets/phoenix2.x/phoenix-lite/show1.png)
+![Colin](../../assets/phoenix2.x/phoenix-lite/show1.png)
