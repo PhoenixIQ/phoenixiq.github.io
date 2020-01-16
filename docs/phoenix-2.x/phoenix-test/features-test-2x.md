@@ -27,7 +27,7 @@ phoenix-lite 提供了随机划拨和定向划拨两个功能：
  1. 定向划拨：指定账户进行转入转出操作（每个账户默认初始有1000元，划拨金额大于0为转入操作，划拨金额小于0为转出操作）
  2. 随机划拨：指定账户范围和转账次数，多个账户同时进行划拨操作。
 
-![show](assets/phoenix2.x/phoenix-test/features/1.png)
+![show](../../assets/phoenix2.x/phoenix-test/features/1.png)
 
 ### 测试方案
 
@@ -46,12 +46,12 @@ phoenix-lite 提供了随机划拨和定向划拨两个功能：
  2. 待下单完毕后，进行校验.
    使用 phoenix-lite 的内存查询接口查询内存数据 (转入次数 + 转出次数 + 错误转出 = 转账次数)
 
-   ![show](assets/phoenix2.x/phoenix-test/features/2.png)
+   ![show](../../assets/phoenix2.x/phoenix-test/features/2.png)
 
  3. 使用定向转账功能，从 A00000000 账户中转出 100 元（通过以上图片发现经过随机转账之后 A00000000 账户中余额为 411 元）
     转账之后，通过内存查询接口查看账户余额（余额为 311 元）
 
-    ![show](assets/phoenix2.x/phoenix-test/features/3.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/features/3.png)
 
 ### 测试结果
 
@@ -98,13 +98,13 @@ Grafana的入口在 Phoenix-admin 中，关于 Phoenix-admin 的使用请参考�
  2. 待下单完毕后，进行校验。
     通过 Grafana 监测服务运行情况。
 
-    ![show](assets/phoenix2.x/phoenix-test/features/4.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/features/4.png)
 
     通过 Grafana 监控面板可以观察到一共发送了 1000 条消息（CLIENT_SEND_MSG = 1000）,并全部处理完成。整个处理过程耗时平均在 10 ms左右。
  3. 根据服务路径进行筛选过滤（只观察其中一个服务的情况）
-    ![show](assets/phoenix2.x/phoenix-test/features/8.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/features/8.png)
  4. 根据服务节点进行筛选过滤（Server端服务支持多活，可以启动多个节点，但是我们可以只观察其中一个节点的情况）
-    ![show](assets/phoenix2.x/phoenix-test/features/9.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/features/9.png)
     通过上图我们还可以看出来，该节点一共处理了 500 笔请求（一个 1000 笔请求，共两个处理节点），说明了多个节点之间是可以做到负载均衡的。
 
 ### 测试结果
@@ -139,12 +139,12 @@ Phoenix是EDA架构的框架，可以基于事件重塑内存，Phoenix会对所
 
  1. 使用 phoenix-lite 的下单页面以每秒 100 笔的速率下单，同时限制账户个数为 10 个，划拨总次数为 1000
  2. 待所有请求处理完成之后，查询内存数据
-    ![show](assets/phoenix2.x/phoenix-test/features/5.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/features/5.png)
  3. 重启服务之后，再次查询内存数据
     重启过程中发现各个聚合根确实存在Eventsourcing的过程
-    ![show](assets/phoenix2.x/phoenix-test/features/7.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/features/7.png)
     并且重启前后内存数据没有变化
-    ![show](assets/phoenix2.x/phoenix-test/features/6.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/features/6.png)
 
 ### 测试结果
 
@@ -186,21 +186,21 @@ phoenix-lite 服务引入了 Swagger 服务，一下测试借助 swagger 提供�
 
  1. 使用 phoenix-lite 的下单页面以每秒 100 笔的速率下单，同时限制账户个数为 10 个，划拨总次数为 1000
  2. 使用 swagger 提供的功能给账户 A00000009 打一个快照
-    ![show](assets/phoenix2.x/phoenix-test/features/10.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/features/10.png)
  3. 接着使用 swagger 查询快照列表
-    ![show](assets/phoenix2.x/phoenix-test/features/11.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/features/11.png)
  4. 此时内存中各个账户的余额如下
-    ![show](assets/phoenix2.x/phoenix-test/features/12.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/features/12.png)
  5. 从 A00000009 账户中转出 100 元，然后使用 swagger 查询 A00000009 的最新状态
 
     TODO 这个查询最新状态还有点问题，超哥正在修复，修复完成之后再次测试。
  6. 删除 A00000009 的快照
-    ![show](assets/phoenix2.x/phoenix-test/features/13.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/features/13.png)
     查询快照列表，观察是否成功删除
-    ![show](assets/phoenix2.x/phoenix-test/features/14.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/features/14.png)
  7. 使用 phoenix-lite 的下单页面以每秒 100 笔的速率下单，同时限制账户个数为 10 个，划拨总次数为 10000
  8. 查询快照列表，观察是否自动触发快照
-    ![show](assets/phoenix2.x/phoenix-test/features/15.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/features/15.png)
 
 ### 测试结果
 
@@ -241,10 +241,10 @@ phoenix-lite 构造了账户转账的案例，模拟了两个账户之间的转�
 
  1. 使用 phoenix-lite 的下单页面以每秒 100 笔的速率下单，同时限制账户个数为 10 个，转账总次数为 1000
  2. 待下单完毕后，进行校验。使用 phoenix-lite 的内存查询接口查询内存数据
-    ![show](assets/phoenix2.x/phoenix-test/features/16.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/features/16.png)
  3. 使用定向转账功能，从 A00000000 账户向 A00000001 账户转入 100 元（通过以上图片发现经过随机转账之后 A00000000 账户中余额为 763 元，A00000001 账户中余额为 1240 元）
     转账之后，通过内存查询接口查看账户余额
-    ![show](assets/phoenix2.x/phoenix-test/features/17.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/features/17.png)
 
 ### 测试结果
 

@@ -40,11 +40,11 @@ title: phoenix cloud 银行账户转账
 
 **转账事务编排如下：**
 
-![](assets/phoenix2.x/phoenix-lite/trans-bianpai.png)
+![](../../assets/phoenix2.x/phoenix-lite/trans-bianpai.png)
 
 **消息流转图**
 
-![](assets/phoenix2.x/phoenix-lite/trans.png)
+![](../../assets/phoenix2.x/phoenix-lite/trans.png)
 
 ### 聚合定义
 
