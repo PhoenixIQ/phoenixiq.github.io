@@ -36,7 +36,6 @@ module.exports = {
           label: 'Phoenix-admin',
           items: [
             "phoenix-2.x/phoenix-admin/admin-function-2x",
-            "phoenix-2.x/phoenix-admin/admin-build-2x",
             "phoenix-2.x/phoenix-admin/admin-instructions-2x",
           ],
         },
