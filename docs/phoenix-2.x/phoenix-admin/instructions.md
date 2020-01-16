@@ -3,7 +3,7 @@ id: admin-instructions-2x
 title: 使用说明
 ---
 
-## 部署
+## 应用部署
 
 phoenix-admin提供了便捷的helm部署方式。可以使用helm命令在kubernates环境一键拉起整套phoenix-admin的集群。
 
@@ -15,7 +15,7 @@ helm upgrade --kubeconfig devops/.kube/config-demo ${name} --install --namespace
 
 ## 配置
 
-### 一. 项目配置
+###  项目配置
 
 1. 新建项目
 
@@ -43,7 +43,7 @@ helm upgrade --kubeconfig devops/.kube/config-demo ${name} --install --namespace
 
      <br/>
 
-### 二. 系统配置
+### 系统配置
 
 1. 添加数据源
 
@@ -63,7 +63,7 @@ helm upgrade --kubeconfig devops/.kube/config-demo ${name} --install --namespace
      
      <br/>
 
-### 三. 效果展示
+### 效果展示
 
 配置完毕后，点击右侧菜单栏的【Grafana】按钮，即可实现免密跳转到grafana的默认dashboard中。
 
