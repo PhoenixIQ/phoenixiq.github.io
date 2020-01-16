@@ -11,7 +11,15 @@ phoniex-admin是配合phoenix框架使用的服务监控平台，能够实现对
 
 ### 架构部署
 
-![image-20200116113222807](assets/phoenix2.x/phoenix-admin/image-20200116113222807.png)
+<SVG src="/img/phoenix.png" />
+
+<SVG src="/img/phoenix.png" />
+
+<img src="/img/phoenix.png" />
+
+<img src="../../assets/phoenix2.x/phoenix-admin/image-20200115105007488.png" />
+
+![image-20200116113222807](../../assets/phoenix2.x/phoenix-admin/image-20200115105007488.png)
 
 <br/>
 
