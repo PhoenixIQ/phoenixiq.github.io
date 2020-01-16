@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Easy to Use</>,
+    title: <>内存计算</>,
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
@@ -18,7 +18,7 @@ const features = [
     ),
   },
   {
-    title: <>Focus on What Matters</>,
+    title: <>消息驱动</>,
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
@@ -28,7 +28,7 @@ const features = [
     ),
   },
   {
-    title: <>Powered by React</>,
+    title: <>微服务</>,
     imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
@@ -71,7 +71,7 @@ function Home() {
                 'button button--outline button--secondary button--lg',
                 styles.getStarted,
               )}
-              to={useBaseUrl('docs/phoenix-2.x/quick-start/phoenix-lite-2x')}>
+              to={useBaseUrl('phoenix-2.x/quick-start/phoenix-lite-2x')}>
               Get Started
             </Link>
           </div>

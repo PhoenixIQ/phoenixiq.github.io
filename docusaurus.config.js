@@ -14,7 +14,7 @@ module.exports = {
         src: 'img/phoenix.png',
       },
       links: [
-        {to: 'docs/phoenix-2.x/quick-start/phoenix-lite-2x', label: 'Docs', position: 'left'},
+        {to: 'phoenix-2.x/quick-start/phoenix-lite-2x', label: 'Docs', position: 'left'},
         {to: 'blog', label: 'Blog', position: 'left'},
         // {
         //   href: 'https://github.com/facebook/docusaurus',
@@ -31,7 +31,7 @@ module.exports = {
           items: [
             {
               label: 'Getting Started',
-              to: 'docs/phoenix-2.x/quick-start/phoenix-lite-2x',
+              to: 'phoenix-2.x/quick-start/phoenix-lite-2x',
             },
             {
               label: '待添加',
