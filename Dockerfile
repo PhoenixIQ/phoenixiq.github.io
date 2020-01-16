@@ -11,6 +11,5 @@ COPY ./static /app/website
 COPY ./docusaurus.config.js /app/website
 COPY ./README.md /app/website
 COPY ./sidebars.js /app/website
-COPY ./yarn.lock /app/website
 
 CMD ["npx", "docusaurus", "start", "--host", "0.0.0.0"]
