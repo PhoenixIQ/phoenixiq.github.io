@@ -16,20 +16,20 @@
 module.exports = {
   docs: {
     '快速入门': [
-      'docs/phoenix-2.x/quick-start/phoenix-lite-2x', 
-      'docs/phoenix-2.x/quick-start/phoenix-cloud-2x'
+      'phoenix-2.x/quick-start/phoenix-lite-2x', 
+      'phoenix-2.x/quick-start/phoenix-cloud-2x'
     ],
     '使用文档': [
       {
         type: 'category',
         label: 'Phoenix-lite',
         items: [
-          'docs/phoenix-2.x/phoenix-lite/phoenix-lite-concept-2x',
-          'docs/phoenix-2.x/phoenix-lite/phoenix-lite-feature-2x',
-          'docs/phoenix-2.x/phoenix-lite/phoenix-lite-config-2x',
-          'docs/phoenix-2.x/phoenix-lite/phoenix-lite-data-table-2x',
-          'docs/phoenix-2.x/phoenix-lite/phoenix-lite-api-2x',
-          'docs/phoenix-2.x/phoenix-lite/phoenix-lite-http-api-2x'
+          'phoenix-2.x/phoenix-lite/phoenix-lite-concept-2x',
+          'phoenix-2.x/phoenix-lite/phoenix-lite-feature-2x',
+          'phoenix-2.x/phoenix-lite/phoenix-lite-config-2x',
+          'phoenix-2.x/phoenix-lite/phoenix-lite-data-table-2x',
+          'phoenix-2.x/phoenix-lite/phoenix-lite-api-2x',
+          'phoenix-2.x/phoenix-lite/phoenix-lite-http-api-2x'
         ],
       },
       {

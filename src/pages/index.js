@@ -71,7 +71,7 @@ function Home() {
                 'button button--outline button--secondary button--lg',
                 styles.getStarted,
               )}
-              to={useBaseUrl('docs/doc1')}>
+              to={useBaseUrl('docs/phoenix-2.x/quick-start/phoenix-lite-2x')}>
               Get Started
             </Link>
           </div>
