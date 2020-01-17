@@ -33,19 +33,19 @@ module.exports = {
               label: 'Getting Started',
               to: 'phoenix-2.x/quick-start/phoenix-lite-2x',
             },
-            {
-              label: '待添加',
-              to: '',
-            },
+            // {
+            //   label: '待添加',
+            //   to: '',
+            // },
           ],
         },
         {
           title: 'Community',
           items: [
-            {
-              label: '待添加',
-              href: '',
-            },
+            // {
+            //   label: '待添加',
+            //   href: '',
+            // },
             // {
             //   label: 'Discord',
             //   href: 'https://discordapp.com/invite/docusaurus',
@@ -59,10 +59,10 @@ module.exports = {
               label: 'Blog',
               to: 'blog',
             },
-            {
-              label: '待添加',
-              href: '',
-            },
+            // {
+            //   label: '待添加',
+            //   href: '',
+            // },
             // {
             //   label: 'Twitter',
             //   href: 'https://twitter.com/docusaurus',

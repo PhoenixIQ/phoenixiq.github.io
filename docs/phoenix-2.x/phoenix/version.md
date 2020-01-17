@@ -1,6 +1,6 @@
 ---
 id: phoenix-version-2x
-title: Version
+title: Phoenix Version
 ---
 
 ## Phoenix 2.x
