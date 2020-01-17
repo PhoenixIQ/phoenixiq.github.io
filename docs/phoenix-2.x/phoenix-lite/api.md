@@ -38,7 +38,6 @@ public enum RetCode {
 }
 ```
 
-
 **Client端 rpc 调用返回值** `RpcResult`
 
 ```java
@@ -72,8 +71,6 @@ public enum RpcResultCode {
 
 }
 ```
-
-
 ## 客户端 API
 
 ```
@@ -102,11 +99,8 @@ public enum RpcResultCode {
 | requestId | string | 必填     |  请求ID  （预留字段） |
 | timeoutMs   | long   | 必填     | 超时时间            |
 
-
 ## 服务端 API
-
 ### 注解
-
 #### @EntityAggregateAnnotation
 
 这个注释是为了找到聚合根类，为spring ioc注入存储库。 使用 `aggregateRootType` 标识该聚合根的类型
@@ -131,7 +125,6 @@ public class BankAccountAggregate implements Serializable {
 #### @AggregateIdAnnotation
 
 该注解一般用于 `act` 方法，aggregateId用于标识事件中的属性，该属性将提供查找Saga实例的值。通常，此值是特定saga监视的聚合的聚合标识符。  
-
 
 ```java
 @AggregateIdAnnotation(aggregateId = "accountCode")

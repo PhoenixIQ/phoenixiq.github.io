@@ -31,7 +31,7 @@ module.exports = {
           items: [
             {
               label: 'Getting Started',
-              to: 'phoenix-2.x/quick-start/phoenix-lite-2x',
+              to: 'docs/phoenix-2.x/quick-start/phoenix-lite-2x',
             },
             // {
             //   label: '待添加',

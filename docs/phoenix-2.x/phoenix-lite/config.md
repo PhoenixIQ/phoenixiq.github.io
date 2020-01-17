@@ -15,11 +15,9 @@ title: 配置
 | quantex.phoenix.akka.service-name             | 服务名                                                     | String  | 服务名 | 
 | quantex.phoenix.akka.discovery-method         | 集群发现的方式                                             | String  | config | 
 | quantex.phoenix.akka.cinnamon-application     |                                                            | String  | 服务名 | 
-|      |       |       |        | 
 | 路由表（routers）配置                         |                                                            |         |        | 
 | quantex.phoenix.routers.message               | msgName                                                    | String  | 无     | 
 | quantex.phoenix.routers.dst                   | 目标地址   地址定义： 服务名/聚合类别/聚合根类别           | String  | 无     | 
-|      |       |       |        | 
 | ServerWorker配置                              |                                                            |         |        | 
 | quantex.phoenix.server.name                   | Server端服务名                                             | String  | 无     | 
 | quantex.phoenix.server.mq.type                | MQ 类型                                                    | String  | kafka     | 
@@ -41,7 +39,6 @@ title: 配置
 | quantex.phoenix.performance.retry-by-nofinished | AtLeastOneDeliveryAggregate 根据未完成事务个数判断是否继续重试 | Int | 10000|
 | quantex.phoenix.performance.batch-retry       | AtLeastOneDeliveryAggregate 批量持久化                           | Int | 1000 |
 | quantex.phoenix.performance.batch-persist     | event-store 批量持久化 批次大小                                  | Int | 200  |
-|      |       |       |        | 
 | client相关配置                                |                                                            |         |        | 
 | quantex.phoenix.client.name                   | Client 端服务名                                            | String  | 无     | 
 | quantex.phoenix.client.mq.type                | MQ 类型                                                    | String  | kafka     | 
@@ -52,7 +49,6 @@ title: 配置
 | quantex.phoenix.client.jaas-conf-path         | jaas配置文件路径                                           | String  | 无     | 
 | quantex.phoenix.client.krb5-conf-path         | krb5配置文件路径                                           | String  | 无     | 
 | quantex.phoenix.client.krb-service-name       | krb服务名                                                  | String  | 无     | 
-|      |       |       |        | 
 
 
 

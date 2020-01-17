@@ -12,7 +12,6 @@ title: phoenix lite 银行账户划拨
 ### 业务场景
 
 业务场景如下:
-
 - 每个账户初始化1000元
 - 支持账户转入或转出指定金额
 - 支持查看系统内所有账户的金额
@@ -20,7 +19,6 @@ title: phoenix lite 银行账户划拨
 ### 统一语言
 
 基于上述业务场景，在本案例里面，我们得出如下统一术语
-
 - **银行账户：**此案例里面提到的具有转入或转出金额的账户， 下文中可简称账户
 - **账户余额：**账面上的钱
 - **银行总账：**银行里面所有账户的总额汇总
@@ -28,9 +26,7 @@ title: phoenix lite 银行账户划拨
 ### 业务逻辑
 
 资金划入：划拨金额大于0
-
 资金划出：划拨金额小于0
-
 如果账户余额 + 划拨金额 小于0，返回账户划拨失败，账户余额不足。
 
 ### 聚合定义
@@ -43,12 +39,6 @@ title: phoenix lite 银行账户划拨
 
 ![show](../../assets/phoenix2.x/phoenix-lite/jiagou.png)
 
-
-
----
-
-### 
-
 ## 具体实现
 
 针对以上案例下面展示具体的代码实现。
@@ -56,7 +46,6 @@ title: phoenix lite 银行账户划拨
 ### 依赖 & 配置
 
 引入 phoenix 的 maven 依赖
-
 ```xml        
 <dependencies>
 	<!-- phoenix服务端自动配置依赖包 -->
@@ -68,7 +57,6 @@ title: phoenix lite 银行账户划拨
 ```
 
 Phoenix  采用全 Spring 配置方式，透明化接入应用，对应用没有任何 API 侵入，只需用 Spring 加载 Phoenix 的配置即可。
-
 ```yaml
 # app info config
 spring:
@@ -114,7 +102,6 @@ quantex:
         address: embedded
         subscribe-topic: ${spring.application.name}-client
 ```
-
 ### API 定义
 
 phoenix 的API定义支持 `google protocol-buffers` 和 `java bean` ， 这里为了快速实现选用 `java bean` 来定义
@@ -155,9 +142,7 @@ public class AccountAllocateOkEvent implements Serializable {
 ### 业务代码编写
 
 **账户聚合根类**
-
 编程有如下约定：
-
 - 类需要添加 EntityAggregateAnnotation 注解并添加aggregateRootType（聚合根类别）， 标明这是一个聚合根类，用于框架扫描发现
 - 聚合根类需要继承Serializable并给成员变量添加Get、Set方法（对象转JSON用）
 - 对于Command消息，约定用act方法进行处理，且act方法中不进行任何聚合根内状态数据的修改，只负责逻辑处理，并产生Event
@@ -274,7 +259,6 @@ public class BankAccountApplication {
 ### 运行
 
 程序运行之后，可访问 [http://localhost:8080/](http://localhost:8080/) 进行下单测试。
-
 ![Colin](../../assets/phoenix2.x/phoenix-lite/show.png)
 
 phoenix-lite 提供两种下单方式
