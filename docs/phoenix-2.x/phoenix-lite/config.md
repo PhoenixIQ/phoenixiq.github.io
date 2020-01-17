@@ -1,6 +1,6 @@
 ---
 id: phoenix-lite-config-2x
-title: 配置
+title: 配置详情
 ---
 
 ## Phoenix 配置列表

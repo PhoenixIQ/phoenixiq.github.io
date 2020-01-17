@@ -267,11 +267,12 @@ Phoenix使用jdbc操作数据库，所以支持所有jdbc的数据库，同时Ph
     ![show](../../assets/phoenix2.x/phoenix-test/features/21.png)
  4. 划拨功能测试，这里设置划拨总数:1000，每秒次数:100，账户范围:10，等待交易完成后刷新页面：
     ![show](../../assets/phoenix2.x/phoenix-test/features/19.png)
- 5. 访问另外一个bank-account页面`localhost:8081`，点击刷新：
+ 5. 然后访问Grafana监控页面可以查看两个bank-account服务的处理信息
+    ![show](../../assets/phoenix2.x/phoenix-test/features/22.png)
     ![show](../../assets/phoenix2.x/phoenix-test/features/20.png)
  6. 更换jdbc重启服务测试下单，查看内存数据。
 
 ### 测试结果
  1. 计算划拨总数1000为之前设定值，功能正常 (划拨总数 = 成功转出汇总 + 失败转出汇总 + 成功转入汇总) 
- 2. 通过访问两个服务页面比对数据信息可以证明akka集群组件成功
+ 2. 通过Grafana监控页面的处理信息可以证明akka集群组件成功
  3. 根据更换数据源下单后的内存数据可以证明phoenix支持多数据源。
