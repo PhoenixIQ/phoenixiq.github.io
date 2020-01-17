@@ -69,16 +69,8 @@ server:
 
 quantex:
   phoenix:
-    akka:
-      akka-conf: application.conf      # 这里指定akka的配置文件
-      akka-parallelism-min: 1
-      akka-parallelism-factor: 3
-      akka-parallelism-max: 128
-      service-name: ${spring.application.name}
-      discovery-method: config
-      cinnamon-application: ${spring.application.name}
     routers:
-      - message: com.iquantex.phoenix.bankaccount.api.AccountAllocateCmd  
+      - message: com.iquantex.phoenix.bankaccount.api.AccountAllocateCmd
         dst: account-server/EA/BankAccount
       - message: com.iquantex.phoenix.bankaccount.api.AccountTransferReq
         dst: account-tn/TA/BankTransferSaga
@@ -87,20 +79,19 @@ quantex:
       mq:
         type: kafka
         address: embedded
-        group: ${spring.application.name}
-        subscribe-topic: ${spring.application.name}
-      driver-class-name: org.h2.Driver
-      event-stores:
-        - url: jdbc:h2:file:./data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
-          username: sa
-          password:
+      event-store:
+        driver-class-name: org.h2.Driver
+        snapshot:
+          enabled: true
+        data-sources:
+          - url: jdbc:h2:file:./data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
+            username: sa
+            password:
     client:
       name: ${spring.application.name}-client
       mq:
         type: kafka
-        group: ${spring.application.name}-client
         address: embedded
-        subscribe-topic: ${spring.application.name}-client
 ```
 ### API 定义
 
