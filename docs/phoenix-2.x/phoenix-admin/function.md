@@ -23,12 +23,16 @@ phoniex-admin是配合phoenix框架使用的服务监控平台，能够实现对
 - 打快照
 - 删除快照
 - 聚合根内存查询
+
 ## grafana监控
+
 ### 概述
 grafana是一款美观、强大的可视化监控指标展示工具，phoenix借住了grafana+elasticsearch来实现监控功能。
 phoenix服务在消息内部埋有诸多监控指标，通过phoenix自带的phoenix-persist，将这些消息写入到elasticsearch中，通过配置elasticsearch作为数据源，并进行相关配置，我们可以就在grafana中看到我们关心的各种指标。
+
 ### 默认面板
-phoenix-admin为每个项目内置了一个通用的监控面板，提供基本的监控功能，详情如下：
+phoenix-admin为每个项目内置了一个通用的监控面板，提供基本的监控功能，详情如下:
+
 1. 总览
 ![image-20200115192350535](../../assets/phoenix2.x/phoenix-admin/image-20200115192350535.png)
 2. 筛选栏
