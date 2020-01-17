@@ -3,12 +3,12 @@ id: admin-function-2x
 title: 整体介绍
 ---
 
-## 前言
+## 概述
 
 phoniex-admin是配合phoenix框架使用的服务监控平台，能够实现对多个项目，多服务，多实例层级的监控和内存管理的功能。
 
 **架构部署**
-![image-20200116113222807](../../assets/phoenix2.x/phoenix-admin/image-20200115105007488.png)
+![image-20200117095357795](../../assets/image-20200117095357795.png)
 
 
 
