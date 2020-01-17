@@ -29,7 +29,11 @@ phoenix的性能和运行的业务形态有密切关系，本次测试采用`银
 ![show](../../assets/phoenix2.x/phoenix-test/performance/001.png)
 
 2. 使用压测程序控制压测参数发起压测
+
+<img src="../../assets/phoenix2.x/phoenix-test/performance/002.png" />
+ 
 ![show](../../assets/phoenix2.x/phoenix-test/performance/002.png)
+
 
 3. 待程序压测完毕后, 通过grafana观察记录时延和吞吐量
 ![show](../../assets/phoenix2.x/phoenix-test/performance/003.png)
