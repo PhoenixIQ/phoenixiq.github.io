@@ -40,12 +40,12 @@ module.exports = {
           ],
         },
         {
-          title: 'Community',
+          title: 'Demo',
           items: [
-            // {
-            //   label: '待添加',
-            //   href: '',
-            // },
+            {
+              label: 'Bank-account',
+              href: 'https://gitlab.iquantex.com/phoenix-public/bank-account.git',
+            },
             // {
             //   label: 'Discord',
             //   href: 'https://discordapp.com/invite/docusaurus',

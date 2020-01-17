@@ -2,6 +2,15 @@ module.exports = {
   docs: [
     {
       type: 'category',
+      label: '整体介绍',
+      items: [
+        "phoenix-2.x/phoenix/phoenix-white-page-2x",
+        "phoenix-2.x/phoenix/phoenix-roadmap-2x",
+        "phoenix-2.x/phoenix/phoenix-version-2x",
+      ],
+    },
+    {
+      type: 'category',
       label: '快速入门',
       items: [
         "phoenix-2.x/quick-start/phoenix-lite-2x",
@@ -49,27 +58,6 @@ module.exports = {
           "phoenix-2.x/phoenix-test/performance-test-2x",
           "phoenix-2.x/phoenix-test/available-test-2x",
           "phoenix-2.x/phoenix-test/elasticity-test-2x",
-      ],
-    },
-    {
-      type: 'category',
-      label: '白皮书',
-      items: [
-        "phoenix-2.x/phoenix/phoenix-white-page-2x",
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Roadmap',
-      items: [
-        "phoenix-2.x/phoenix/phoenix-roadmap-2x",
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Version',
-      items: [
-        "phoenix-2.x/phoenix/phoenix-version-2x",
       ],
     },
   ]

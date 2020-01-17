@@ -27,7 +27,7 @@ Phoenix是对CQRS + EventSouring理念落地的JAVA开发框架，围绕Phoenix�
 
 ### 架构图
 
-![image-phoenix](./img/jiagou.jpg)
+![image-phoenix](./images/jiagou.jpg)
 
 ### 概念术语
 
@@ -77,7 +77,7 @@ Phoenix是对CQRS + EventSouring理念落地的JAVA开发框架，围绕Phoenix�
 2. 路由Command到具体的聚合根对象，调用处理函数act，产生领域Event，Event驱动内存数据状态改变。
 3. 将Event序列化后publish到RocketMQ。
 
-![image-phoenix-handle](./img/phoenix-handle.jpg)
+![image-phoenix-handle](./images/phoenix-handle.jpg)
 
 ​以上3个步骤，采用disruptor，以流水线方式处理。处理过程，是采用先修改内存状态，再持久化Event到RocketMQ。之所以可以这样设计，是因为Event的发布和存储是在一个事务中完成的。
 
