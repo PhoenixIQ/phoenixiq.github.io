@@ -13,8 +13,8 @@ module.exports = {
       type: 'category',
       label: '快速入门',
       items: [
-        "phoenix-2.x/quick-start/phoenix-lite-2x",
-        "phoenix-2.x/quick-start/phoenix-cloud-2x",
+        "phoenix-2.x/quick-start/phoenix-lite-2x"
+        // "phoenix-2.x/quick-start/phoenix-cloud-2x",
       ],
     },
     {
@@ -33,13 +33,13 @@ module.exports = {
             "phoenix-2.x/phoenix-lite/phoenix-lite-http-api-2x",
           ],
         },
-        {
-          type: 'category',
-          label: 'Phoenix-cloud',
-          items: [
-            "phoenix-2.x/phoenix-cloud/phoenix-cloud-api-2x",
-          ],
-        },
+        // {
+        //   type: 'category',
+        //   label: 'Phoenix-cloud',
+        //   items: [
+        //     // "phoenix-2.x/phoenix-cloud/phoenix-cloud-api-2x",
+        //   ],
+        // },
         {
           type: 'category',
           label: 'Phoenix-admin',
