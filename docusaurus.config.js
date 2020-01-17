@@ -7,6 +7,7 @@ module.exports = {
   organizationName: 'quantex', // Usually your GitHub org/user name.
   projectName: 'phoenix', // Usually your repo name.
   themeConfig: {
+    sidebarCollapsible: false,
     navbar: {
       title: 'Phoenix',
       logo: {
