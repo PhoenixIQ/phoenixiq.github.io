@@ -58,6 +58,7 @@ module.exports = {
           "phoenix-2.x/phoenix-test/performance-test-2x",
           "phoenix-2.x/phoenix-test/available-test-2x",
           "phoenix-2.x/phoenix-test/elasticity-test-2x",
+          "phoenix-2.x/phoenix-test/reliability-test-2x",
       ],
     },
   ]
