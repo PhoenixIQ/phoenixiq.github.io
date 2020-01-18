@@ -44,7 +44,7 @@ module.exports = {
           title: 'Demo',
           items: [
             {
-              label: 'Bank-account',
+              label: 'bank-account',
               href: 'https://gitlab.iquantex.com/phoenix-public/bank-account.git',
             },
             // {
