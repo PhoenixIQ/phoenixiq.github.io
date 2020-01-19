@@ -16,6 +16,7 @@ build:
   only:
     - dev
     - release
+    - /(feat\-)+.*$/
     - master
 
 build_demo:
@@ -35,8 +36,8 @@ deploy:
     - helm upgrade --kubeconfig devops/phoenix-website/.kube/config phoenix-website-${CI_BUILD_REF_NAME} --install --namespace=phoenix-websit-${CI_BUILD_REF_NAME} --set phoenix_website.image.tag=$CI_COMMIT_SHA devops/phoenix-website/
   only:
     - dev
+    - /(test\-)+.*$/
     - release
-    - master
 
 deploy_demo:
   stage: deploy
