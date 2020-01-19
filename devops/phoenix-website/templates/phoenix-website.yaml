@@ -58,8 +58,8 @@ spec:
   type: {{ .Values.phoenix_website.service.type }}
   ports:
     - name: {{ .Values.phoenix_website.name | quote }}
-      port: 8080
-      targetPort: 8080
+      port: 80
+      targetPort: 3000
       protocol: TCP
   selector:
     app.kubernetes.io/name: {{ include "phoenix.name" . }}
