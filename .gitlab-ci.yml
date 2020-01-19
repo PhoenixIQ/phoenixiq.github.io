@@ -22,6 +22,9 @@ build_demo:
   stage: build
   script:
     - docker build -t harbor.iquantex.com/phoenix/phoenix-website:${CI_BUILD_REF_NAME} . && docker push harbor.iquantex.com/phoenix/phoenix-website:${CI_BUILD_REF_NAME}
+    - helm init --client-only
+    - helm repo add quantex http://chart.iquantex.com
+    - helm push --version="${CI_BUILD_REF_NAME}"  devops/phoenix-websit/ quantex
   only:
     - tags
 

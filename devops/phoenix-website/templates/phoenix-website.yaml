@@ -25,7 +25,7 @@ spec:
     {{- end }}
       containers:
         - name: {{ .Values.phoenix_website.name | quote }}
-          image: "{{ .Values.phoenix_website.image.repository }}:{{ .Values.phoenix_website.image.tag }}"
+          image: "{{ .Values.phoenix_website.image.repository }}:{{ include "phoenix_websit.tag" . }}"
           imagePullPolicy: {{ .Values.phoenix_website.image.pullPolicy }}
           ports:
             - name: {{ .Values.phoenix_website.name | quote }}
