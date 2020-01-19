@@ -29,17 +29,23 @@ Phoenix框架高伸缩性测试（实例数量伸缩）基于bank-account示例�
 
 ### 测试步骤
 
-1. 在kubernates环境中，使用bank-account服务，给定每个pod 1c的cpu，不断调试前端的压测请求数量，观察Grafana，测出单个服务实例的极限tps和latency，观察pod负载。（描述下根据性能测试，1c的cpu下的服务实例的极限tps和latency是多少多少，这里就不截图了）。
+ 1. 在kubernates环境中，使用bank-account服务，两个pod，给定每个pod 1c的cpu，不断调试前端的压测请求数量，观察Grafana，测出单个服务实例的极限tps和latency，观察pod负载。（描述下根据性能测试，1c的cpu下的服务实例的极限tps和latency是多少多少，这里就不截图了）。
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/010.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/011.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/012.png)
 
-2. 前端保证流量不变，扩容pod数量为2。观察Grafana，测出两个服务实例的tps和latency，并观察pod负载。
-
-   （截图：rancher节点图，grafana上的latency和tps图）
-
-3. 前端流量保证不变，减少pod数量为1。观察Grafana，测出单个服务实例的tps和latency，观察pod负载。
-
-   （截图：rancher节点图，grafana上的latency和tps图）
-
-4. 经过观察，我们可以看出来系统的负载能力，和节点数量大致呈现正相关。
+ 2. 前端保证流量不变，扩容pod数量为3。观察Grafana，测出两个服务实例的tps和latency，并观察pod负载。
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/020.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/021.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/022.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/023.png)
+ 
+ 3. 前端流量保证不变，减少pod数量为2。观察Grafana，测出单个服务实例的tps和latency，观察pod负载。
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/030.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/031.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/032.png)
+ 
+ 4. 经过观察，我们可以看出来系统的负载能力，和节点数量大致呈现正相关。
 
 ## 测试方案（cpu资源伸缩）
 
@@ -53,19 +59,22 @@ Phoenix框架高伸缩性测试（cpu资源伸缩）基于bank-account示例应�
 
 ### 测试步骤
 
-1. 在kubernates环境中，使用bank-account服务，给定每个pod 1c的cpu，不断调试前端的压测请求数量，观察Grafana，测出单个服务实例的极限tps和latency，观察pod负载。
+ 1. 在kubernates环境中，使用bank-account服务，创建两个pod，给定每个pod 1c的cpu，不断调试前端的压测请求数量，观察Grafana，测出单个服务实例的极限tps和latency，观察pod负载。
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/030.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/031.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/032.png)
 
-   （描述下根据性能测试，1c的cpu下的服务实例的极限tps和latency是多少多少，这里就不截图了）。
+ 2. 前端保证流量不变，改变pod的cpu限制为2c。观察Grafana，测出服务实例的tps和latency，并观察pod负载。
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/040.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/041.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/042.png)
 
-2. 前端保证流量不变，改变pod的cpu限制为2c。观察Grafana，测出服务实例的tps和latency，并观察pod负载。
+ 3. 前端流量保证不变，改变pod的cpu限制为1c。观察Grafana，测出服务实例的tps和latency，观察pod负载。
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/050.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/051.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/052.png)
 
-   （截图：rancher cpu限制图，grafana上的latency和tps图）
-
-3. 前端流量保证不变，改变pod的cpu限制为1c。观察Grafana，测出服务实例的tps和latency，观察pod负载。
-
-   （截图：rancher cpu限制图，grafana上的latency和tps图）
-
-4. 经过观察，我们可以看出来系统的负载能力，和cpu资源大致呈现正相关。
+ 4. 经过观察，我们可以看出来系统的负载能力，和cpu资源大致呈现正相关。
 
 ## 结论
 
