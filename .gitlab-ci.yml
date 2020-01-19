@@ -33,7 +33,7 @@ build_demo:
 deploy:
   stage: deploy
   script:
-    - helm upgrade --kubeconfig devops/phoenix-website/.kube/config phoenix-website-${CI_BUILD_REF_NAME} --install --namespace=phoenix-websit-${CI_BUILD_REF_NAME} --set project.version=$CI_COMMIT_SHA devops/phoenix-website/
+    - helm upgrade --kubeconfig devops/phoenix-website/.kube/config phoenix-website-${CI_BUILD_REF_NAME} --install --namespace=phoenix-website-${CI_BUILD_REF_NAME} --set project.version=$CI_COMMIT_SHA devops/phoenix-website/
   only:
     - dev
     - /(test\-)+.*$/
@@ -42,7 +42,7 @@ deploy:
 deploy_demo:
   stage: deploy
   script:
-    - helm upgrade --kubeconfig devops/phoenix-website/.kube/config-demo phoenix-website-${CI_BUILD_REF_NAME} --install --namespace=phoenix-websit-${CI_BUILD_REF_NAME} --set project.version=${CI_BUILD_REF_NAME} devops/phoenix-website/
+    - helm upgrade --kubeconfig devops/phoenix-website/.kube/config-demo phoenix-website-demo --install --namespace=phoenix-website-demo --set project.version=${CI_BUILD_REF_NAME} devops/phoenix-website/
   only:
     - tags
 
