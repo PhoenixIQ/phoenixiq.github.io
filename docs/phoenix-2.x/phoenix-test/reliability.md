@@ -79,4 +79,3 @@ Phoenix框架高可用性测试（投递可靠性）基于bank-account示例应�
 
 ## 结论
 
-经验值，Phoenix具有可靠性。
