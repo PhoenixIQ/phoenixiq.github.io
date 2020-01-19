@@ -4,6 +4,10 @@
 nameOverride: ""
 fullnameOverride: ""
 
+
+project:
+  version: master-SNAPSHOT
+
 ## phoenix-website
 phoenix_website:
   replicaCount: 1
