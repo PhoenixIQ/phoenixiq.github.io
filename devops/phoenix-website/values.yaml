@@ -4,7 +4,9 @@
 nameOverride: ""
 fullnameOverride: ""
 
-version: master-SNAPSHOT
+
+project:
+  version: master-SNAPSHOT
 
 ## phoenix-website
 phoenix_website:

@@ -52,7 +52,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 */}}
 {{- define "phoenix_websit.tag" -}}
 {{- if eq .Chart.Version "0.0.0" }}
-{{- .Values.version -}}
+{{- .Values.project.version -}}
 {{- else -}}
 {{- .Chart.Version -}}
 {{- end }}
