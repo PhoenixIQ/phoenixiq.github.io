@@ -11,7 +11,7 @@ Phoenix是一个消息驱动的有状态微服务框架，其可靠性我们重�
 
 1. 可靠的处理：使用案例发起一笔同步调用，如果调用成功，必定能查询到调用处理的结果。
 2. 可靠的重启：phoniex为了保证内存状态，会在重启后做eventsouring，需要测试重启后，eventsouring是否正常。
-3. 可靠的投递：phoenix底层使用akka-cluster调度，akaa官方是不承诺跨网络的actor之间通信是可靠的。
+3. 可靠的投递：phoenix可以保障所有到达kafka的消息可靠的消费，并且可以保证后续每一个actor的最少一次投递，并且phoenix内置消息幂等可以保障消息可靠处理。
 
 下面分别对上述维度的可靠性进行测试。
 
@@ -20,7 +20,7 @@ Phoenix是一个消息驱动的有状态微服务框架，其可靠性我们重�
 
 ### 测试场景
 
-Phoenix框架高可用性测试（处理可靠性）基于bank-account示例应用进行。通过模拟一笔资金划拨指令，观察系统处理结果后的前端页面，证明Phoenix可以正确处理请求。
+Phoenix框架处理可靠性基于bank-account示例应用进行。通过模拟一笔资金划拨指令，观察系统处理结果后的前端页面，证明Phoenix可以正确处理请求。
 
 ### 校验方法
 
@@ -40,7 +40,7 @@ Phoenix框架高可用性测试（处理可靠性）基于bank-account示例应�
 
 ### 测试场景
 
-Phoenix框架高可用性测试（重启可靠性）基于bank-account示例应用进行。通过模拟应用处理完毕批量请求后，进行服务重启。证明重启完毕后，应用数据能恢复到重启前的状态。
+Phoenix框架重启可靠性基于bank-account示例应用进行。通过模拟应用处理完毕批量请求后，进行服务重启。证明重启完毕后，应用数据能恢复到重启前的状态。
 
 ### 校验方法
 
@@ -63,23 +63,35 @@ Phoenix框架高可用性测试（重启可靠性）基于bank-account示例应�
 
 ### 测试场景
 
-Phoenix框架高可用性测试（投递可靠性）基于bank-account示例应用进行。通过模拟集群内节点网络通信的断开和恢复，证明消息依然能够保证有效流转。
+Phoenix目前会对所有投递到kafka中的消息做可靠性消费，并且保证可靠的投递给下游并产出结果，phoenix可以检测事务超时未结束时发起重试来达到可靠性投递。
+在bank-account应用中对特定账户`monitor_retry`的划拨模拟了网络堵塞。具体测试场景如下：
+
+1. 压测前关闭phoenix服务端，待压测结束后再启动服务端，观察压测的消息都可以正确无误的处理。
+2. 然后通过下单页面使用固定账户`monitor_retry`发起划拨请求，期望触发系统重试投递。
+
 
 ### 校验方法
 
-观察bank-account-server工程在经历过数次集群节点之间网络通信的故障和恢复之后，前端页面上展示的处理结果依然准确无误，则证明Phoenix具有投递可靠性。
+1. bank-account-server服务启动后，通过grafna页面kafka的消息被正确处理，通过账户页面查询到处理结果正确。
+2. 发起`monitor_retry`账户划拨请求后，前端会报rpc超时，查看grafna和账户详情，证明中间发生了重试最终达到消息正确处理。
 
 ### 测试步骤
 
-1. 在测试环境部署多活bank-account服务，实例数量为3个。在服务启动正常后以固定流量发送批量划拨请求并持续一定时间。（截图：前端下单图）
+1. 压测前停掉bank-account-server应用，使用压测页面下单100笔
+ ![show](../../assets/phoenix2.x/phoenix-test/reliability/006.png)
 
-2. 在前端的持续过程流量中，使用工具阻断3个实例之间的网络，并恢复。这个操作持续多次。
+2. 请求结束后，启动bank-account-server，观察grafana发现所有消息都正确处理，账户详情结果正确。
+ ![show](../../assets/phoenix2.x/phoenix-test/reliability/007.png)
 
-   （截图：使用工具切割网络的图）
+3. 使用固定账户发起划拨请求`monitor_retry`。
+ ![show](../../assets/phoenix2.x/phoenix-test/reliability/008.png)
 
-3. 停止流量，待所有请求处理完毕。对比前端页面中转入和转出次数之和，与和步骤1中的划拨总次数，完全一致。Phoenix具有投递可靠性。
+4. 观察grafana处理情况，一段时间后会可以看到有`RETRY_MESSAGE`指标产生，证明系统产生了重试。
+ ![show](../../assets/phoenix2.x/phoenix-test/reliability/009.png)
 
-   （截图：框出来转入转出次数）
+5. 查看账户详情页面，步骤4因为超时发起重试的消息也被正确处理了。
+ ![show](../../assets/phoenix2.x/phoenix-test/reliability/010.png)
+
 
 ## 结论
-
+通过上面三个维度的可靠性测试，证明Phoenix作为内存的消息驱动框架，可以在框架层面保证状态正确修改，消息的可靠性投递，状态的正确恢复。
