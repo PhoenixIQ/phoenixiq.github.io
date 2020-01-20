@@ -29,7 +29,7 @@ Phoenix框架高伸缩性测试（实例数量伸缩）基于bank-account示例�
 
 ### 测试步骤
 
- 1. 在kubernates环境中，使用bank-account服务，两个pod，给定每个pod 1c的cpu，不断调试前端的压测请求数量，观察Grafana，测出单个服务实例的极限tps和latency，观察pod负载。（描述下根据性能测试，1c的cpu下的服务实例的极限tps和latency是多少多少，这里就不截图了）。
+ 1. 在kubernates环境中，使用bank-account服务，两个pod，给定每个pod 1c的cpu，不断调试前端的压测请求数量，观察Grafana，测出单个服务实例的极限tps和latency，观察pod负载。
     ![show](../../assets/phoenix2.x/phoenix-test/elasticity/010.png)
     ![show](../../assets/phoenix2.x/phoenix-test/elasticity/011.png)
     ![show](../../assets/phoenix2.x/phoenix-test/elasticity/012.png)
@@ -39,12 +39,12 @@ Phoenix框架高伸缩性测试（实例数量伸缩）基于bank-account示例�
     ![show](../../assets/phoenix2.x/phoenix-test/elasticity/021.png)
     ![show](../../assets/phoenix2.x/phoenix-test/elasticity/022.png)
     ![show](../../assets/phoenix2.x/phoenix-test/elasticity/023.png)
- 
+
  3. 前端流量保证不变，减少pod数量为2。观察Grafana，测出单个服务实例的tps和latency，观察pod负载。
     ![show](../../assets/phoenix2.x/phoenix-test/elasticity/030.png)
     ![show](../../assets/phoenix2.x/phoenix-test/elasticity/031.png)
     ![show](../../assets/phoenix2.x/phoenix-test/elasticity/032.png)
- 
+
  4. 经过观察，我们可以看出来系统的负载能力，和节点数量大致呈现正相关。
 
 ## 测试方案（cpu资源伸缩）

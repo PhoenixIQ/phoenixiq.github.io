@@ -27,17 +27,19 @@ Phoenix中的均衡性测试将通过以下几个维度展开：
 
 ### 测试步骤
 
-1. 在kubernates环境中，使用bank-account服务，部署3个节点。
+1. 在kubernates环境中，使用bank-account服务，部署2个节点。
 
-   (截图：rancher节点图)
+   ![image-20200120174528867](../../assets/phoenix2.x/phoenix-test/balance/image-20200120174528867.png)
 
 2. 发起随机划拨请求，划拨总数为1000。
 
-   （截图，前端下单图）
+   ![image-20200120174628062](../../assets/phoenix2.x/phoenix-test/balance/image-20200120174628062.png)
 
-3. 处理完毕所有请求后，观察Grafana。（截图，phoenix监控图，lightbend console akka cluster sharding图）
+3. 处理完毕所有请求后，观察Grafana。
 
-4. 观察可得，在Phoenix集群中，每个集群节点内的actor分布是均匀的。
+   ![image-20200120174922292](../../assets/phoenix2.x/phoenix-test/balance/image-20200120174922292.png)
+
+4. 观察可得在虚拟IP为10.42.27.55和10.42.29.141的两个节点内，分别有10个聚合根，因此actor分布均匀。
 
 ## 测试方案（kafka消息分布）
 
@@ -47,21 +49,17 @@ Phoenix中的均衡性测试将通过以下几个维度展开：
 
 ### 校验方法
 
-通过`kafka manage tool`工具，连接集群使用的kafka，观察每个partition的消息分布是否均匀。
+通过`kafka tool`工具，连接集群使用的kafka，观察每个partition的消息分布是否均匀。
 
 ### 测试步骤
 
-1. 在kubernates环境中，使用bank-account服务，部署3个节点。
-
-   (截图：rancher节点图)
+1. 在kubernates环境中，使用bank-account服务，部署2个节点。
 
 2. 发起随机划拨请求，划拨总数为1000。
 
-   （截图，前端下单图）
-
 3. 处理完毕所有请求后，观察`kafka manage tool`中每个partition的消息数量。
 
-   （截图，kafka manage tool图，每个partition的消息数量）
+   ![image-20200120175124202](../../assets/phoenix2.x/phoenix-test/balance/image-20200120175124202.png)
 
 4. 观察可得，消息在kafka的多partition内是分布均匀的。
 
@@ -79,17 +77,15 @@ Phoenix中的均衡性测试将通过以下几个维度展开：
 
 1. 在kubernates环境中，使用bank-account服务，部署3个节点。
 
-   (截图：rancher节点图)
-
 2. 发起随机划拨请求，划拨总数为1000。
-
-   （截图，前端下单图）
 
 3. 观察db中`eventstore`表的数据量。
 
-   （截图，select count语句结果）
+   ![image-20200120175749878](../../assets/phoenix2.x/phoenix-test/balance/image-20200120175749878.png)
 
-4. 观察可得，在多个db中持久化的记录是分布均匀的。
+   ![image-20200120175817190](../../assets/phoenix2.x/phoenix-test/balance/image-20200120175817190.png)
+
+4. bank-account服务所采用的的event_store表分布于两个db中，观察可得，在每个db里分布的记录也是均匀的。
 
 ## 测试方案（整体流量分布）
 
@@ -103,19 +99,23 @@ Phoenix中的均衡性测试将通过以下几个维度展开：
 
 ### 测试步骤
 
-1. 在kubernates环境中，使用bank-account服务，部署3个节点。
+1. 在kubernates环境中，使用bank-account服务，部署2个节点。
 
-   (截图：rancher节点图)
+2. 发起随机划拨请求，划拨总数为200000，每秒发起800次。
 
-2. 发起随机划拨请求，划拨总数为1000。
-
-   （截图，前端下单图）
+   ![image-20200120185249602](../../assets/phoenix2.x/phoenix-test/balance/image-20200120185249602.png)
 
 3. 观察Grafana。
 
-   （截图，phoenix监控图）
+   IP为10.42.27.56的节点处理速率图：
 
-4. 观察可得，每个节点处理的消息数量是均匀的。
+   ![image-20200120184945179](../../assets/phoenix2.x/phoenix-test/balance/image-20200120184945179.png)
+
+   IP为10.42.30.27的节点处理速率图：
+
+   ![image-20200120185022354](../../assets/phoenix2.x/phoenix-test/balance/image-20200120185022354.png)
+
+4. 观察可得，每个节点处理的流量是相当均匀的。
 
 ## 测试方案（cpu使用分布）
 
@@ -129,18 +129,16 @@ Phoenix中的均衡性测试将通过以下几个维度展开：
 
 ### 测试步骤
 
-1. 在kubernates环境中，使用bank-account服务，部署3个节点。
+1. 在kubernates环境中，使用bank-account服务，部署2个节点。
 
-   (截图：rancher节点图)
+2. 发起随机划拨请求，划拨总数为200000，每秒发起800次。
 
-2. 发起随机划拨请求，划拨总数为1000。
+3. 查看rancher的cpu使用图。
 
-   （截图，前端下单图）
+   ![image-20200120185732276](../../assets/phoenix2.x/phoenix-test/balance/image-20200120185732276.png)
 
-3. 观察rancher的cpu使用图。
-
-   （截图，rancher的cpu使用图）
+4. 观察可得，处理过程中，两个节点的cpu占用率也是非常均匀的。
 
 ## 结论
 
-经验证，Phoenix能保证每一个负载均衡点都具有较好的均衡性。
+经验证，Phoenix能保证每一个负载均衡点都具有非常好均衡性，因而整体上来说，Phoenix具有非常高的均衡性。
