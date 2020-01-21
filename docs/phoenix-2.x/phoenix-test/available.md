@@ -15,56 +15,33 @@ title: 可用性测试
 
 Phoenix框架致力于构建高可用的应用服务系统，可通过部署多活服务集群来消除服务的单点故障，以满足应用服务的高可用性的要求。所以，我们需要对Phoenix框架构建的服务进行高可用性测试。
 
-## 测试方案
+## 测试场景
 
-### 测试场景
+Phoenix框架高可用性测试基于bank-account服务进行。部署多个服务实例构建多活服务集群作为测试的目标系统，通过手动关闭一个或若干服务实例模拟系统发生故障。
 
-Phoenix框架高可用性测试基于bank-account示例应用进行。部署多个服务实例构建多活服务集群作为测试的目标系统，通过手动关闭一个或若干服务实例模拟系统发生故障。
-
-### 校验方法
+## 校验方法
 
 测试过程中使用Grafana监控请求的处理情况，通过Grafana可得到在系统发生故障时，系统响应请求的中断时间长短，统计该时间作为系统可达到的故障恢复时间，即作为系统的RTO指标；在故障恢复后，通过bank-account提供的业务数据校验功能，确认故障恢复后，所有业务数据状态没有出错和丢失。若故障恢复后，所有业务数据状态均正常，则可认为系统可达到的RPO指标为0。
 
-### 测试步骤
+## 测试步骤
 
  1. 在测试环境部署多活bank-account服务，实例数量为3个。在服务启动正常后以固定流量发起批量划拨请求并持续一定时间。
- 
-    rancher页面
-    ![show](../../assets/phoenix2.x/phoenix-test/available/001.png)
-    下单页面
-    ![show](../../assets/phoenix2.x/phoenix-test/available/002.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/available/012.png)
 
  2. 期间手动关闭1个服务实例以模拟故障。使用Grafana监控工具监控请求的处理情况和业务状态，统计服务在测试过程中中断请求响应的时间长短，确定故障恢复后的数据状态正确性，计算本次测试中系统可达到的RTO和RPO指标。
- 
-    期间关掉的服务
+    ![show](../../assets/phoenix2.x/phoenix-test/available/014.png)
     
-    ![show](../../assets/phoenix2.x/phoenix-test/available/003.png)
-    
-    **交易全部完成后截图**
-    ranchar页面
-    ![show](../../assets/phoenix2.x/phoenix-test/available/009.png)
-    
-    期间手动关掉的服务监控页面
+    期间手动关掉的服务，可以查看监控页面，服务在关闭之后不再进行消息处理了
     ![show](../../assets/phoenix2.x/phoenix-test/available/004.png)
     
-    剩下两个正常服务的监控页面
-    ![show](../../assets/phoenix2.x/phoenix-test/available/005.png)
-    ![show](../../assets/phoenix2.x/phoenix-test/available/006.png)
+    根据Grafana监控页面可以明显观察到删掉一个节点之后其余两个节点处理消息数量有明显提升，即剩下的节点分摊了删除节点的流量。
+    ![show](../../assets/phoenix2.x/phoenix-test/available/013.png)
     
-    根据grafana监控页面可知
- 
-    期间关掉的服务`10.42.28.162`处理了791条数据,服务`10.42.30.243`处理了2473条数据，服务`10.42.29.98`处理了2736条数据
-    
-    计算总和为6000，符合预期结果。
-   
     交易完成后的下单页面
-    ![show](../../assets/phoenix2.x/phoenix-test/available/007.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/available/010.png)
     
-    可计算实际划拨总数：3031(成功转出汇总) + 10(失败转出汇总) + 3059(成功转入汇总) - 100(初始化残留) = 6000 = 下单数量
+    可计算实际划拨总数：2976(成功转出汇总) + 105(失败转出汇总) + 2919(成功转入汇总) = 6000 = 下单数量
     
-    服务总的监控页面
-    ![show](../../assets/phoenix2.x/phoenix-test/available/008.png)
-
 3. 经过观察，Grafana的处理速率图，无间断，因此RTO为0；前端页面的转入和转出次数之和，与下单请求的转账次数完全一致。因此RPO为0；
 
 ## 结论
