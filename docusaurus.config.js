@@ -28,21 +28,30 @@ module.exports = {
                     title: '文档',
                     items: [
                         {
+                            label: '白皮书',
+                            to: 'docs/phoenix-2.x/phoenix/phoenix-white-page-2x',
+                        },
+                        {
                             label: '快速入门',
                             to: 'docs/phoenix-2.x/quick-start/phoenix-lite-2x',
+                        },
+                        {
+                            label: 'FAQ',
+                            to: 'docs/phoenix-2.x/phoenix/phoenix-faq-2x',
                         },
                     ],
                 },
                 {
-                    title: '社区',
+                    title: '     ', // 格式占位
+                    items: [
+                    ],
+                },
+                {
+                    title: '资源',
                     items: [
                         {
                             label: '博客',
                             to: 'blog',
-                        },
-                        {
-                            label: '公开仓库',
-                            href: 'https://gitlab.iquantex.com/phoenix-public/bank-account.git',
                         },
                     ],
                 },
