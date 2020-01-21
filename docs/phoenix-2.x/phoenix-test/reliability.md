@@ -27,10 +27,10 @@ Phoenix框架处理可靠性基于bank-account服务进行。我们通过模拟�
 ### 测试步骤
 
  1. 使用bank-account服务，在前端发起一笔资金划拨。给账户[account_1]划拨100元等待请求返回。
-    ![show](../../assets/Phoenix2.x/Phoenix-test/reliability/001.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/reliability/001.png)
 
  2. 请求返回结果为划拨成功后，刷新前端页面数据，查看所有账户的资金数据。
-    ![show](../../assets/Phoenix2.x/Phoenix-test/reliability/002.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/reliability/002.png)
 
  3. 由查询结果可知，账户[account_1]的最终金额为1100元（每个账户默认有1000元的初始资金）。Phoenix正确处理了前端请求，具有处理可靠性。
 
@@ -47,12 +47,12 @@ Phoenix框架重启可靠性基于bank-account示例应用进行。通过模拟�
 ### 测试步骤
 
  1. 使用bank-account服务，在前端发起批量资金划拨。全部处理完毕后，刷新页面数据，查看所有账户的资金数据。
- ![show](../../assets/Phoenix2.x/Phoenix-test/reliability/003.png)
+ ![show](../../assets/phoenix2.x/phoenix-test/reliability/003.png)
 
  2. 待请求全部处理完毕后，重启服务节点。
 
  3. 重启完毕后，刷新页面数据，查看所有账户的资金数据。
- ![show](../../assets/Phoenix2.x/Phoenix-test/reliability/005.png)
+ ![show](../../assets/phoenix2.x/phoenix-test/reliability/005.png)
 
  4. 对比重启前后的账户表格，发现完全一致。Phoenix具有重启可靠性。
 
@@ -75,19 +75,19 @@ Phoenix目前会对所有投递到Kafka中的消息做可靠性消费，并且�
 ### 测试步骤
 
 1. 压测前停掉bank-account-server应用，使用压测页面下单100笔
- ![show](../../assets/Phoenix2.x/Phoenix-test/reliability/006.png)
+ ![show](../../assets/phoenix2.x/phoenix-test/reliability/006.png)
 
 2. 请求结束后，启动bank-account-server，观察Grafana发现所有消息都正确处理，账户详情结果正确。
- ![show](../../assets/Phoenix2.x/Phoenix-test/reliability/007.png)
+ ![show](../../assets/phoenix2.x/phoenix-test/reliability/007.png)
 
 3. 使用固定账户发起划拨请求`monitor_retry`。
- ![show](../../assets/Phoenix2.x/Phoenix-test/reliability/008.png)
+ ![show](../../assets/phoenix2.x/phoenix-test/reliability/008.png)
 
 4. 观察Grafana处理情况，一段时间后会可以看到有`RETRY_MESSAGE`指标产生，证明系统产生了重试。
- ![show](../../assets/Phoenix2.x/Phoenix-test/reliability/009.png)
+ ![show](../../assets/phoenix2.x/phoenix-test/reliability/009.png)
 
 5. 查看账户详情页面，步骤4因为超时发起重试的消息也被正确处理了。
- ![show](../../assets/Phoenix2.x/Phoenix-test/reliability/010.png)
+ ![show](../../assets/phoenix2.x/phoenix-test/reliability/010.png)
 
 
 ## 结论
