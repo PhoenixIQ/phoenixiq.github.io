@@ -42,6 +42,18 @@ module.exports = {
                     ],
                 },
                 {
+                    title: '案例',
+                    items: [
+                        {
+                            label: '银行转账',
+                            href: 'https://gitlab.iquantex.com/phoenix-public/bank-account.git',
+                        },
+                        {
+                            label: '炒股大赛',
+                        },
+                    ],
+                },
+                {
                     title: '资源',
                     items: [
                         {
