@@ -15,10 +15,10 @@ module.exports = {
                 src: 'img/phoenix.png',
             },
             links: [
-                {to: 'docs/phoenix-2.x/quick-start/phoenix-lite-2x', label: '文档', position: 'right'},
+                {to: 'docs/phoenix-2.x/phoenix/phoenix-white-page-2x', label: '文档', position: 'right'},
                 {to: 'blog', label: '博客', position: 'right'},
                 {to: 'docs/phoenix-2.x/phoenix/phoenix-faq-2x', label: '社区', position: 'right'},
-                {to: 'docs/phoenix-2.x/phoenix/phoenix-version-2x', label: '下载', position: 'right'},
+                {to: 'docs/phoenix-2.x/phoenix/phoenix-download-2x', label: '下载', position: 'right'},
             ],
         },
         footer: {
