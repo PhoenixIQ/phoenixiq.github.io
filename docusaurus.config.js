@@ -42,11 +42,6 @@ module.exports = {
                     ],
                 },
                 {
-                    title: '     ', // 格式占位
-                    items: [
-                    ],
-                },
-                {
                     title: '资源',
                     items: [
                         {
