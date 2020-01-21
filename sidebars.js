@@ -6,6 +6,7 @@ module.exports = {
             items: [
                 "phoenix-2.x/phoenix/phoenix-white-page-2x",
                 "phoenix-2.x/phoenix/phoenix-faq-2x",
+                "phoenix-2.x/phoenix/phoenix-roadmap-2x",
             ],
         },
         {
@@ -40,14 +41,6 @@ module.exports = {
                 "phoenix-2.x/phoenix-test/reliability-test-2x",
                 "phoenix-2.x/phoenix-test/pressure-test-2x",
                 "phoenix-2.x/phoenix-test/balance-test-2x",
-            ],
-        },
-        {
-            type: 'category',
-            label: '版本信息',
-            items: [
-                "phoenix-2.x/phoenix/phoenix-roadmap-2x",
-                "phoenix-2.x/phoenix/phoenix-version-2x",
             ],
         },
     ]
