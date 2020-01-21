@@ -48,11 +48,10 @@ Phoenix框架重启可靠性基于bank-account示例应用进行。通过模拟�
 
 ### 测试步骤
 
- 1. 使用bank-account服务，在前端发起批量资金划拨。全部处理完毕后，刷新页面数据，查看所有账户的资金数据。（截图：前端下单图，处理完的结果表格）
+ 1. 使用bank-account服务，在前端发起批量资金划拨。全部处理完毕后，刷新页面数据，查看所有账户的资金数据。
  ![show](../../assets/phoenix2.x/phoenix-test/reliability/003.png)
  
  2. 待请求全部处理完毕后，重启服务节点。
- ![show](../../assets/phoenix2.x/phoenix-test/reliability/004.png)
  
  3. 重启完毕后，刷新页面数据，查看所有账户的资金数据。
  ![show](../../assets/phoenix2.x/phoenix-test/reliability/005.png)

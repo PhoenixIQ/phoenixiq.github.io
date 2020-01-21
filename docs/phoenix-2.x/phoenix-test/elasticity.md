@@ -17,7 +17,7 @@ Phoenix重点关心线性的横向伸缩能力，Phoenix的处理单元是聚合
 下面分别通过实例的伸缩和CPU核心的伸缩来证明Phoenix的横向伸缩能力。
 
 
-## 测试方案（实例数量伸缩）
+## 实例数量伸缩
 
 ### 测试场景
 
@@ -29,25 +29,18 @@ Phoenix框架高伸缩性测试（实例数量伸缩）基于bank-account示例�
 
 ### 测试步骤
 
- 1. 在kubernates环境中，使用bank-account服务，两个pod，给定每个pod 1c的cpu，不断调试前端的压测请求数量，观察Grafana，测出单个服务实例的极限tps和latency，观察pod负载。
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/010.png)
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/011.png)
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/012.png)
+ 1. 在kubernates环境中，使用bank-account服务，两个pod，给定每个pod 1c的cpu，不断调试前端的压测请求数量，观察Grafana，测出单个服务实例的极限tps(这里测试为2k tps)和latency，观察pod负载。
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/003.png)
 
- 2. 前端保证流量不变，扩容pod数量为3。观察Grafana，测出两个服务实例的tps和latency，并观察pod负载。
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/020.png)
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/021.png)
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/022.png)
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/023.png)
+ 2. 保证每个pod的cpu资源不变，pod数量增加到3，tps增加到2800tps。观察Grafana和pod负载。
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/004.png)
 
- 3. 前端流量保证不变，减少pod数量为2。观察Grafana，测出单个服务实例的tps和latency，观察pod负载。
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/030.png)
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/031.png)
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/032.png)
+ 3. 保证每个pod的cpu资源不变，前端流量和pod数量恢复到第一次测试的值，观察Grafana和pod负载。
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/005.png)
 
  4. 经过观察，我们可以看出来系统的负载能力，和节点数量大致呈现正相关。
 
-## 测试方案（cpu资源伸缩）
+## cpu资源伸缩
 
 ### 测试场景
 
@@ -59,20 +52,14 @@ Phoenix框架高伸缩性测试（cpu资源伸缩）基于bank-account示例应�
 
 ### 测试步骤
 
- 1. 在kubernates环境中，使用bank-account服务，创建两个pod，给定每个pod 1c的cpu，不断调试前端的压测请求数量，观察Grafana，测出单个服务实例的极限tps和latency，观察pod负载。
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/030.png)
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/031.png)
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/032.png)
+ 1. 在kubernates环境中，使用bank-account服务，创建两个pod，给定每个pod 1c的cpu，不断调试前端的压测请求数量，观察Grafana，测出单个服务实例的极限tps(这里测试为2k tps)和latency，观察pod负载。
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/002.png)
 
- 2. 前端保证流量不变，改变pod的cpu限制为2c。观察Grafana，测出服务实例的tps和latency，并观察pod负载。
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/040.png)
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/041.png)
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/042.png)
+ 2. 保证pod数量不变，前端流量和pod的cpu资源翻倍。观察Grafana和pod负载。
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/001.png)
 
- 3. 前端流量保证不变，改变pod的cpu限制为1c。观察Grafana，测出服务实例的tps和latency，观察pod负载。
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/050.png)
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/051.png)
-    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/052.png)
+ 3. 保证pod数量不变，前端流量和pod的cpu资源恢复到第一次测试值。观察Grafana和pod负载。
+    ![show](../../assets/phoenix2.x/phoenix-test/elasticity/003.png)
 
  4. 经过观察，我们可以看出来系统的负载能力，和cpu资源大致呈现正相关。
 
