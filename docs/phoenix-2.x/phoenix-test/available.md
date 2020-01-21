@@ -28,43 +28,22 @@ Phoenix框架高可用性测试基于bank-account示例应用进行。部署多�
 ### 测试步骤
 
  1. 在测试环境部署多活bank-account服务，实例数量为3个。在服务启动正常后以固定流量发起批量划拨请求并持续一定时间。
- 
-    rancher页面
-    ![show](../../assets/phoenix2.x/phoenix-test/available/001.png)
-    下单页面
-    ![show](../../assets/phoenix2.x/phoenix-test/available/002.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/available/012.png)
 
  2. 期间手动关闭1个服务实例以模拟故障。使用Grafana监控工具监控请求的处理情况和业务状态，统计服务在测试过程中中断请求响应的时间长短，确定故障恢复后的数据状态正确性，计算本次测试中系统可达到的RTO和RPO指标。
- 
-    期间关掉的服务
+    ![show](../../assets/phoenix2.x/phoenix-test/available/014.png)
     
-    ![show](../../assets/phoenix2.x/phoenix-test/available/003.png)
-    
-    **交易全部完成后截图**
-    ranchar页面
-    ![show](../../assets/phoenix2.x/phoenix-test/available/009.png)
-    
-    期间手动关掉的服务监控页面
+    期间手动关掉的服务，可以查看监控页面，服务在关闭之后不再进行消息处理了
     ![show](../../assets/phoenix2.x/phoenix-test/available/004.png)
     
-    剩下两个正常服务的监控页面
-    ![show](../../assets/phoenix2.x/phoenix-test/available/005.png)
-    ![show](../../assets/phoenix2.x/phoenix-test/available/006.png)
+    根据Grafana监控页面可以明显观察到删掉一个pod之后其余两个pod处理消息数量有明显提升，即剩下的节点分摊了删除节点的流量。
+    ![show](../../assets/phoenix2.x/phoenix-test/available/013.png)
     
-    根据grafana监控页面可知
- 
-    期间关掉的服务`10.42.28.162`处理了791条数据,服务`10.42.30.243`处理了2473条数据，服务`10.42.29.98`处理了2736条数据
-    
-    计算总和为6000，符合预期结果。
-   
     交易完成后的下单页面
-    ![show](../../assets/phoenix2.x/phoenix-test/available/007.png)
+    ![show](../../assets/phoenix2.x/phoenix-test/available/010.png)
     
-    可计算实际划拨总数：3031(成功转出汇总) + 10(失败转出汇总) + 3059(成功转入汇总) - 100(初始化残留) = 6000 = 下单数量
+    可计算实际划拨总数：2976(成功转出汇总) + 105(失败转出汇总) + 2919(成功转入汇总) = 6000 = 下单数量
     
-    服务总的监控页面
-    ![show](../../assets/phoenix2.x/phoenix-test/available/008.png)
-
 3. 经过观察，Grafana的处理速率图，无间断，因此RTO为0；前端页面的转入和转出次数之和，与下单请求的转账次数完全一致。因此RPO为0；
 
 ## 结论
