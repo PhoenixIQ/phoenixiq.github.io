@@ -1,6 +1,6 @@
 ---
 id: phoenix-white-page-2x
-title: 技术白皮书
+title: 白皮书
 ---
 
 ## 背景
