@@ -1,6 +1,6 @@
 ---
 id: phoenix-version-2x
-title: Phoenix Version
+title: 版本管理
 ---
 
 ## 2.1.0-beta

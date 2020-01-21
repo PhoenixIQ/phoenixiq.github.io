@@ -1,6 +1,6 @@
 ---
 id: admin-function-2x
-title: 整体介绍
+title: 平台介绍
 ---
 
 ## 前言
