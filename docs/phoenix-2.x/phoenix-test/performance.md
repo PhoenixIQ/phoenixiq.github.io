@@ -26,27 +26,27 @@ Phoenix的性能和运行的业务形态有密切关系，本次测试采用`银
 
 1. 使用Rancher控制Kubernates中pod资源
 
-![show](../../assets/Phoenix2.x/Phoenix-test/performance/001.png)
+![show](../../assets/phoenix2.x/phoenix-test/performance/001.png)
 
 2. 使用压测程序控制压测参数发起压测
 
-![show](../../assets/Phoenix2.x/Phoenix-test/performance/002.png)
+![show](../../assets/phoenix2.x/phoenix-test/performance/002.png)
 
 3. 待程序压测完毕后, 通过Grafana观察记录时延和吞吐量
 
-![show](../../assets/Phoenix2.x/Phoenix-test/performance/003.png)
+![show](../../assets/phoenix2.x/phoenix-test/performance/003.png)
 
 4. 待程序压测完毕后，通过Rancher观察记录Cpu使用情况
 
-![show](../../assets/Phoenix2.x/Phoenix-test/performance/004.png)
+![show](../../assets/phoenix2.x/phoenix-test/performance/004.png)
 
 5. 待程序压测完毕后，通过Grafana观察记录内存GC情况
 
-![show](../../assets/Phoenix2.x/Phoenix-test/performance/005.png)
+![show](../../assets/phoenix2.x/phoenix-test/performance/005.png)
 
 6. 待程序压测完毕后，通过Grafana观察记录线程使用情况
 
-![show](../../assets/Phoenix2.x/Phoenix-test/performance/006.png)
+![show](../../assets/phoenix2.x/phoenix-test/performance/006.png)
 
 7. 记录上述结果, 增倍系统资源，重新调优使用系统在性能上翻倍。重复上述1~6步骤
 
