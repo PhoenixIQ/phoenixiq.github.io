@@ -15,8 +15,10 @@ module.exports = {
         src: 'img/phoenix.png',
       },
       links: [
-        {to: 'docs/phoenix-2.x/quick-start/phoenix-lite-2x', label: 'Docs', position: 'left'},
-        {to: 'blog', label: 'Blog', position: 'left'},
+        {to: 'docs/phoenix-2.x/quick-start/phoenix-lite-2x', label: '文档', position: 'left'},
+        {to: 'blog', label: '博客', position: 'left'},
+        {to: 'blog', label: '建议', position: 'left'},
+        {to: 'blog', label: '下载', position: 'left'},
         // {
         //   href: 'https://github.com/facebook/docusaurus',
         //   label: 'GitHub',
