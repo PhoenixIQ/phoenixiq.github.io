@@ -50,7 +50,7 @@ title: Roadmap
 * [x] 官网整理（交付物）
 
 ### phoenix-admin
-* [x] phoneix-admin集成grafna
+* [x] phoneix-admin集成grafana
 
 
 
