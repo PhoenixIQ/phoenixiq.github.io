@@ -30,7 +30,7 @@ const features = [
     imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
-        Phoenix框架同时也是可伸缩，可拆分聚合的微服务框架。根据领域划分构建服务，可以对服务进行独立的开发、测试和部署。
+        Phoenix框架同时也是可伸缩，可拆分聚合的微服务框架。根据DDD思想划分领域构建服务，对服务进行独立的开发、测试和部署。
       </>
     ),
   },
