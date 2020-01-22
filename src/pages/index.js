@@ -12,8 +12,7 @@ const features = [
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+         Phoenix使系统业务数据的修改完全在内存中进行，业务数据模型和算法面向内存构建，使业务代码高度聚合，并且简化计算层和存储层的交互提升性能。
       </>
     ),
   },
@@ -22,8 +21,7 @@ const features = [
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+         Phoenix使用消息进行服务间通信，各服务自定义消息和发布消息。消息驱动是异步的交互方式，基于Fire-and-Forget原则，不必阻塞式地等待相关的处理结果。
       </>
     ),
   },
@@ -32,8 +30,7 @@ const features = [
     imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Phoenix框架同时也是可伸缩，可拆分聚合的微服务框架。根据领域划分构建服务，可以对服务进行独立的开发、测试和部署。
       </>
     ),
   },
