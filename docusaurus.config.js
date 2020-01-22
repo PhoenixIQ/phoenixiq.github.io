@@ -51,6 +51,9 @@ module.exports = {
                         {
                             label: '炒股大赛',
                         },
+                        {
+                            label: '富国交易风控',
+                        },
                     ],
                 },
                 {
