@@ -165,7 +165,7 @@ Snapshot是对某一瞬间Phoenix应用内存的一次存储。Phoenix 提供的
 
 ### 测试方案
 
-bank-account 服务引入了 Swagger 服务，一下测试借助 swagger 提供的页面进行测试。
+bank-account 服务引入了 Swagger 服务，以下测试借助 swagger 提供的页面进行测试。
 
 #### 场景描述
 
@@ -239,7 +239,6 @@ bank-account 构造了账户转账的案例，模拟了两个账户之间的转�
 ### 测试结果
 
 符合预期，可以证明 Phoenix 提供的事务功能够可以正常使用
-
 
 -----------------
 

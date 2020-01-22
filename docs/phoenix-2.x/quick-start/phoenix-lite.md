@@ -1,6 +1,6 @@
 ---
 id: phoenix-lite-2x 
-title: phoenix lite 银行账户划拨
+title: 快速入门
 ---
 
 [Demo 下载](https://gitlab.iquantex.com/phoenix-public/bank-account.git)
