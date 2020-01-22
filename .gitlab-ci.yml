@@ -39,11 +39,12 @@ deploy:
     - /(test\-)+.*$/
     - release
 
-deploy_demo:
-  stage: deploy
-  script:
-    - helm upgrade --kubeconfig devops/phoenix-website/.kube/config-demo phoenix-website-demo --install --namespace=phoenix-website-demo --set project.version=${CI_BUILD_REF_NAME} devops/phoenix-website/
-  only:
-    - tags
+# 关闭自动deploy到demo环境
+#deploy_demo:
+#  stage: deploy
+#  script:
+#    - helm upgrade --kubeconfig devops/phoenix-website/.kube/config-demo phoenix-website-demo --install --namespace=phoenix-website-demo --set project.version=${CI_BUILD_REF_NAME} devops/phoenix-website/
+#  only:
+#    - tags
 
 
