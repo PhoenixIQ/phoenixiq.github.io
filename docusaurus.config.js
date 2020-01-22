@@ -16,7 +16,7 @@ module.exports = {
             },
             links: [
                 {to: 'docs/phoenix-2.x/phoenix/phoenix-white-page-2x', label: '文档', position: 'right'},
-                {to: 'blog', label: '博客', position: 'right'},
+                {to: 'blog/rocketmq-in-phoenix', label: '博客', position: 'right'},
                 {to: 'docs/phoenix-2.x/phoenix/phoenix-faq-2x', label: '社区', position: 'right'},
                 {to: 'docs/phoenix-2.x/phoenix/phoenix-download-2x', label: '下载', position: 'right'},
             ],

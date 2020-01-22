@@ -1,7 +1,7 @@
 ---
 id: rocketmq-in-phoenix
 title: RocketMQ在Phoenix框架中的应用与实践
-author: Phoenix
+author: 包子&文昌
 author_title: Phoenix
 author_image_url: https://images.unsplash.com/photo-1554341794-2963aea0966e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80
 tags: [Phoenix, Rocketmq]
