@@ -4,7 +4,7 @@ title: 平台介绍
 ---
 
 ## 前言
-phoniex-admin是配合phoenix框架使用的服务监控平台，能够实现对多个项目，多服务，多实例层级的监控和内存管理的功能。
+phoniex-admin是配合Phoenix框架使用的服务监控平台，能够实现对多个项目，多服务，多实例层级的监控和内存管理的功能。
 
 **架构图**
 ![image-20200117101147857](../../assets/phoenix2.x/phoenix-admin/image-20200117101147857.png)
