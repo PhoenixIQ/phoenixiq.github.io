@@ -49,10 +49,11 @@ module.exports = {
                             href: 'https://gitlab.iquantex.com/phoenix-public/bank-account.git',
                         },
                         {
-                            label: '炒股大赛',
+                            label: '交易风控',
+                            href: 'https://gitlab.iquantex.com/phoenix-public/phoenix-risk',
                         },
                         {
-                            label: '交易风控',
+                            label: '炒股大赛',
                         },
                     ],
                 },
