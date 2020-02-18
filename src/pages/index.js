@@ -36,6 +36,65 @@ const features = [
   },
 ];
 
+const steps = [
+  {
+    title: <>金融领域复杂业务场景解决之道</>,
+    imageUrl: 'img/what-problems-phoenix-solves.png',
+    description: (
+      <>
+        <div style={{whiteSpace: 'pre-wrap'}}>降低成本</div>
+        <ul>
+          <li>降低了系统复杂度</li>
+          <li>降低了开发人员门槛</li>
+          <li>节省了系统建设时间</li>
+        </ul>
+        增强效率
+        <ul>
+          <li>提升了系统的运行性能</li>
+          <li>实现了系统的实时监控</li>
+          <li>让系统面向开放，拥抱集成</li>
+        </ul>
+      </>
+    ),
+    position: 'right'
+  },
+];
+
+function Step({imageUrl, title, description, position}) {
+  const imgUrl = useBaseUrl(imageUrl);
+  return (
+      <>
+        {position === 'left' && (
+          <div className="row">
+            <div className="col col--7">
+              <div className="text--center">
+                <img src={imgUrl} alt={title} />
+              </div>
+            </div>
+            <div className="col col--4 col--offset-1 padding-vert--xl">
+              <h2>{title}</h2>
+              <p>{description}</p>
+            </div>
+          </div>
+        )}
+        {position === 'right' && (
+          <div className={classnames('row', styles.stepBackground)}>
+            <div className="col col--4 padding-vert--xl">
+              <h2>{title}</h2>
+              <p>{description}</p>
+            </div>
+            <div className="col col--7 col--offset-1">
+              <div className="text--center">
+                <img src={imgUrl} alt={title} />
+              </div>
+            </div>
+          </div>
+        )}
+      </>
+  );
+}
+ 
+
 function Feature({imageUrl, title, description}) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
@@ -83,6 +142,15 @@ function Home() {
                   <Feature key={idx} {...props} />
                 ))}
               </div>
+            </div>
+          </section>
+        )}
+        {steps && steps.length && (
+          <section className={styles.steps}>
+            <div className="container">
+              {steps.map((props, idx) => (
+                <Step key={idx} {...props} />
+              ))}
             </div>
           </section>
         )}
