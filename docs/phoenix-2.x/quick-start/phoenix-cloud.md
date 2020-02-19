@@ -183,3 +183,85 @@ public class BankTransferSaga implements Serializable {
 }
 ```
 
+
+
+### 事务单元测试
+
+Phoenix为事务聚合根的单元测试也提供了工具类，极大地降低了编写事务单元测试的难度。
+
+**测试工具类AggregateFixture简介**
+
+`AggregateFixture`类可以为我们模拟聚合根处理消息和返回的完整流程，并提供了一系列的断言方法，方便我们进行结果断言。我们重点关注以下几个方法。
+
+- `when(Object msg)`：给定工具类一个入参请求，模拟真实环境下，我们的完整事务的处理场景。
+
+- `expectMessage(Class respons)`：判断使用when()接收请求并处理事务后，返回对象的类型是否符合预期。
+- `expectRetCode(RetCode retCode)`：判断使用when()接收请求并处理事务后的返回码是否符合预期。
+- `expectRetSuccessCode()`：判断使用when()接收请求并处理事务的过程是否成功。
+- `expectRetFailCode()`：判断使用when()接收并请求并处理事务的过程是否失败。
+
+**业务单元测试代码**
+
+```java
+public class BankTransferSagaTest {
+
+   private final static String inAccountCode = "test_in";
+
+   private final static String outAccountCode = "test_out";
+
+   private AggregateFixture testFixture;
+
+   @Before
+   public void init() {
+      testFixture = new AggregateFixture();
+   }
+
+   /**
+    * 转账成功
+    */
+   @Test
+   public void test_trans_ok() {
+      AccountTransferReq req = new AccountTransferReq(inAccountCode, outAccountCode, 100);
+      testFixture.when(req).expectRetCode(RetCode.SUCCESS);
+   }
+
+
+   /**
+    * 转账失败
+    * 说明：在事务聚合根内，Saga事务的ci操作为null，因为ti是扣减金额，假如不成功，不会有后续操作，因此也不需要ci。
+    *        但是在框架层面判断了没有ci会视为异常，这里我们assert exception，实际上是一个失败的事务，而不是异常事务。
+    */
+   @Test
+   public void test_trans_fail() {
+      AccountTransferReq req = new AccountTransferReq(inAccountCode, outAccountCode, 1100);
+      testFixture.when(req).expectRetCode(RetCode.EXCEPTION);
+   }
+}
+```
+
+**说明**
+
+在使用`AggregateFixture`的时候，我们需要在事务聚合根类的事务起始方法上，加上`    @TransactionStart`注解。拿该工程举例，就是`BankTransferSaga`类下面的方法。
+
+```java
+/**
+	 * 处理转账请求,先发起转出
+	 * @param request
+	 * @return
+	 */
+    @TransactionStart
+	public TransactionReturn on(AccountTransferReq request) {
+		this.request = request;
+		return TransactionReturn.builder().addAction(
+				// saga事务
+				new SagaAction(
+						// 转出账户扣钱
+						new AccountAllocateCmd(request.getOutAccountCode(), -request.getAmt()),
+						// 转出账户失败回滚(加钱)
+						null))
+				.build();
+	}
+```
+
+
+

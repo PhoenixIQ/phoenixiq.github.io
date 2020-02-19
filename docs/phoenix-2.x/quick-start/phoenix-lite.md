@@ -266,3 +266,65 @@ phoenix-lite 提供两种下单方式
 2. 向账户 `Colin` 转入 100 元
 
 ![Colin](../../assets/phoenix2.x/phoenix-lite/show1.png)
+
+
+
+### 业务单元测试
+
+Phoenix提供了优秀的测试工具类，极大地降低了编写业务单元测试的难度。
+
+**测试工具类EntityAggregateFixture简介**
+
+`EntityAggregateFixture`类可以为我们模拟聚合根处理消息和返回的完整流程，并提供了一系列的断言方法，方便我们进行结果断言。我们重点关注以下几个方法。
+
+- `when(Object msg)`：给定工具类一个入参消息，模拟真实环境下，我们的业务聚合根处理消息的场景。
+
+* `expectMessage(Class respons)`：判断使用when()接收并处理消息后，返回对象的类型是否符合预期。
+* ``expectRetCode(RetCode retCode)``：判断使用when()接收并处理消息后的返回码是否符合预期。
+* `expectRetSuccessCode()`：判断使用when()接收并处理消息的过程是否成功。
+* `expectRetFailCode()`：判断使用when()接收并处理消息的过程是否失败。
+
+**业务单元测试代码**
+
+```java
+@Slf4j
+public class BankAccountAggregateTest {
+
+   private final static String accountCode = "test";
+	 // 单元测试工具类
+   private EntityAggregateFixture testFixture;
+
+   @Before
+   public void init() {
+      testFixture = new EntityAggregateFixture();
+   }
+
+   /**
+    * 转入测试，只会成功不会失败
+    */
+   @Test
+   public void test_trans_in_ok() {
+      AccountAllocateCmd cmd = new AccountAllocateCmd(accountCode, 100);
+      		      testFixture.when(cmd).expectMessage(AccountAllocateOkEvent.class).expectRetSuccessCode().printIdentify();
+   }
+
+   /**
+    * 转出测试，成功
+    */
+   @Test
+   public void test_trans_out_ok() {
+      AccountAllocateCmd cmd = new AccountAllocateCmd(accountCode, -100);
+      testFixture.when(cmd).expectMessage(AccountAllocateOkEvent.class).expectRetSuccessCode().printIdentify();
+   }
+
+   /**
+    * 转出测试，失败
+    */
+   @Test
+   public void test_trans_out_fail() {
+      AccountAllocateCmd cmd = new AccountAllocateCmd(accountCode, -1100);
+      testFixture.when(cmd).expectMessage(AccountAllocateFailEvent.class).expectRetFailCode().printIdentify();
+   }
+
+}
+```
