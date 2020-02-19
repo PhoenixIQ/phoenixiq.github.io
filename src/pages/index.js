@@ -68,7 +68,7 @@ function Step({imageUrl, title, description, position}) {
           <div className="row">
             <div className="col col--7">
               <div className="text--center">
-                <img src={imgUrl} alt={title} />
+                <img className={styles.stepsImage} src={imgUrl} alt={title} />
               </div>
             </div>
             <div className="col col--4 col--offset-1 padding-vert--xl">
@@ -78,14 +78,14 @@ function Step({imageUrl, title, description, position}) {
           </div>
         )}
         {position === 'right' && (
-          <div className={classnames('row', styles.stepBackground)}>
+          <div className="row">
             <div className="col col--4 padding-vert--xl">
               <h2>{title}</h2>
               <p>{description}</p>
             </div>
             <div className="col col--7 col--offset-1">
               <div className="text--center">
-                <img src={imgUrl} alt={title} />
+                <img className={styles.stepsImage} src={imgUrl} alt={title} />
               </div>
             </div>
           </div>
@@ -148,9 +148,11 @@ function Home() {
         {steps && steps.length && (
           <section className={styles.steps}>
             <div className="container">
-              {steps.map((props, idx) => (
-                <Step key={idx} {...props} />
-              ))}
+              <div className="row">
+                 {steps.map((props, idx) => (
+                     <Step key={idx} {...props} />
+                 ))}
+              </div>
             </div>
           </section>
         )}
