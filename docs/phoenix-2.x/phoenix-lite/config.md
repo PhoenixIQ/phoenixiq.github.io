@@ -120,13 +120,15 @@ quantex:
         subscribe-topic: ${spring.application.name}-client
 ```
 
-### 本地环境运行
+### 环境配置参考
 
-#### 本地单实例运行
+phoenix服务在不同的环境中运行需要对akka进行相应的配置。下面分别介绍下phoenix服务在本地环境和K8s环境运行时 akka的配置项需要如何配置。
+
+#### 本地单点运行
 
 不用在 `application.yaml` 或者 `application.properties` 中显示配置akka相关配置，直接启动即可。
 
-#### 本地多实例运行
+#### 本地集群运行
 
 添加或修改以下两项配置，保证多个实例的端口不能冲突。
 
@@ -140,7 +142,7 @@ quantex:
       artery-canonical-port: 2551
 ```
 
-### k8s 环境运行
+### k8s集群运行
 
 使用 phoenix 的 helm charts 直接发布即可
 
