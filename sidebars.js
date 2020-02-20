@@ -17,6 +17,7 @@ module.exports = {
                 "phoenix-2.x/phoenix-lite/phoenix-lite-concept-2x",
                 "phoenix-2.x/phoenix-lite/phoenix-lite-feature-2x",
                 "phoenix-2.x/phoenix-lite/phoenix-lite-config-2x",
+                "phoenix-2.x/phoenix-lite/phoenix-lite-dependency-2x",
                 "phoenix-2.x/phoenix-lite/phoenix-lite-data-table-2x",
                 "phoenix-2.x/phoenix-lite/phoenix-lite-api-2x",
                 "phoenix-2.x/phoenix-lite/phoenix-lite-http-api-2x",
