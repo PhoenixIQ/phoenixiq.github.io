@@ -144,7 +144,16 @@ quantex:
 
 ### k8s集群运行
 
-使用 phoenix 的 helm charts 直接发布即可
+在 k8s 环境上运行需要对一下配置进行修改
+
+```yaml
+quantex:
+  phoenix:
+    akka:
+      discovery-method: kubernetes-api
+      artery-enabled: off
+```
+
 
 ### 自定义akka配置
 
