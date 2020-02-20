@@ -65,7 +65,7 @@ CPU规格: Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz
 | 120W/6000/20    | 2       | 4Core 2048MB    |ForkJoin64| 2实例  |1实例4parttion |  100MS    | 50%      |6S    | 正常 |
 | 160W/8000/20    | 2       | 4Core 2048MB    |ForkJoin64| 2实例  |1实例4parttion |  100MS    | 70%      |8S    | 正常 |
 | 320W/16000/40   | 4       | 6Core 2048MB    |ForkJoin64| 2实例  |1实例4parttion |  100MS    | 70%      |9S    | 关闭可靠性投递处理逻辑|
-| 20.4W/3400/1    | 2       | 4Core 2048MB    |ForkJoin64| 2实例  |1实例4parttion |  100MS    | 20%\+   |2S   | 单聚合根场景|
+| 20.4W/3400/1    | 2       | 4Core 2048MB    |ForkJoin64| 2实例  |1实例4parttion |  100MS    | 20%\+   |2S   | 单聚合根场景(批处理：`PerformanceConfig.BATCH_PROCESS=500` ) |
 
 
 ## 结论
