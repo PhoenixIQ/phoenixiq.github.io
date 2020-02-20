@@ -15,6 +15,7 @@ title: 依赖介绍
 |protobuf|3.4.0|序列化|是|
 |guava|27.1-jre|工具包|是|
 |fastjson(待移除)|1.2.47|序列化|是|
+|reflections|0.9.10|反射工具包|是|
 |ojdbc|11.2.0.3|oracle客户端|可选|
 |mysql-connector|5.1.46|mysql客户端|可选|
 
