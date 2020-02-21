@@ -7,15 +7,26 @@ title: 配置详情
 
 Akka相关配置 
 
-| 配置项                                        | 描述                                                       | 类型    | 默认值 | 
-| :-------------------------------------------- | :--------------------------------------------------------- | :------ | :----- | 
-| quantex.phoenix.akka.akka-conf                | actorSystem的配置文件路径                                  | String  | application.conf      | 
-| quantex.phoenix.akka.parallelism-min          | actorSystem的线程池配置最小并发数                          | Int     | 1      | 
-| quantex.phoenix.akka.parallelism-factor       | actorSystem的线程池配置线程比，即一个核配多少个线程；      | Double  | 3      | 
-| quantex.phoenix.akka.parallelism-max          | actorSystem的线程池配置最大并发数                          | Int     | 128    | 
-| quantex.phoenix.akka.service-name             | 服务名                                                     | String  | 服务名 | 
-| quantex.phoenix.akka.discovery-method         | 集群发现的方式                                             | String  | config | 
-| quantex.phoenix.akka.cinnamon-application     |                                                            | String  | 服务名 | 
+| 配置项                                              | 描述                                                      | 类型    | 默认值    | 
+| :---------------------------------------------------| :---------------------------------------------------------| :------ | :-------- | 
+| quantex.phoenix.akka.akka-conf                      | actorSystem的配置文件路径                                 | String  | 无        | 
+| quantex.phoenix.akka.akka-parallelism-min           | actorSystem的线程池配置最小并发数                         | Int     | 1         | 
+| quantex.phoenix.akka.akka-parallelism-factor        | actorSystem的线程池配置线程比，即一个核配多少个线程；     | Double  | 3         | 
+| quantex.phoenix.akka.akka-parallelism-max           | actorSystem的线程池配置最大并发数                         | Int     | 128       | 
+| quantex.phoenix.akka.service-name                   | 服务名                                                    | String  | 服务名    | 
+| quantex.phoenix.akka.discovery-method               | 集群发现的方式                                            | String  | config    | 
+| quantex.phoenix.akka.cinnamon-application           | 服务名                                                    | String  | 服务名    | 
+| quantex.phoenix.akka.provider                       | 运行模式                                                  | String  | cluster   |
+| quantex.phoenix.akka.artery-enable                  | remote.artery 开关                                        | String  | on        |
+| quantex.phoenix.akka.artery-transport               | 传输方式                                                  | String  | tcp       |
+| quantex.phoenix.akka.artery-canonical-port          | 远程服务器端口                                            | Int     | 2551      |
+| quantex.phoenix.akka.artery-canoniacal-hostname     | 远程服务器地址                                            | String  | 127.0.0.1 |
+| quantex.phoenix.akka.seed-node                      | 集群的初始接触点                                          | List    | akka:// + 服务名 + @127.0.0.1:2551 |
+| quantex.phoenix.akka.method                         | 服务发现的方式                                            | String  | akka-dns  |
+| quantex.phoenix.akka.pod-label-selector             | 服务发现的pod标签                                         | String  | app=%s    |
+| quantex.phoenix.akka.management-http-port           | 用于集群管理的端口                                        | Int     | 8558      |
+| quantex.phoenix.akka.management-http-bind-hostname  | 绑定内部（0.0.0.0:8558）                                  | String  | 0.0.0.0   |
+
 
 路由表（routers）配置 
 
@@ -79,14 +90,6 @@ quantex:
       retry-by-nofinished: 10000
       batch-retry: 1000
       batch-persist: 200
-    akka:
-      akka-conf: application.conf                     # 这里指定akka的配置文件
-      akka-parallelism-min: 1
-      akka-parallelism-factor: 3
-      akka-parallelism-max: 128
-      service-name: ${spring.application.name}
-      discovery-method: config
-      cinnamon-application: ${spring.application.name}
     routers:
       - message: com.iquantex.phoenix.bankaccount.api.AccountAllocateCmd
         dst: account-server/EA/BankAccount
@@ -117,3 +120,48 @@ quantex:
         subscribe-topic: ${spring.application.name}-client
 ```
 
+### 环境配置参考
+
+phoenix服务在不同的环境中运行需要对akka进行相应的配置。下面分别介绍下phoenix服务在本地环境和K8s环境运行时 akka的配置项需要如何配置。
+
+#### 本地单点运行
+
+不用在 `application.yaml` 或者 `application.properties` 中显示配置akka相关配置，直接启动即可。
+
+#### 本地集群运行
+
+添加或修改以下两项配置，保证多个实例的端口不能冲突。
+
+```yaml
+server:
+  port: 8080
+
+quantex:
+  phoenix:
+    akka:
+      artery-canonical-port: 2551
+```
+
+### k8s集群运行
+
+在 k8s 环境上运行需要对以下配置进行修改
+
+```yaml
+quantex:
+  phoenix:
+    akka:
+      discovery-method: kubernetes-api
+      artery-enabled: off
+```
+
+
+### 自定义akka配置
+
+如果想要深入自定义akka相关配置，可在项目classpath目录下创建akka.conf文件进行配置。然后修改一下配置。
+
+```yaml
+quantex:
+  phoenix:
+    akka:
+      akka-conf: akka.conf
+```
