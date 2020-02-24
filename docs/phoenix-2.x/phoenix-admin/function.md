@@ -1,7 +1,5 @@
----
 id: admin-function-2x
 title: 平台介绍
----
 
 ## 前言
 phoniex-admin是配合Phoenix框架使用的服务监控平台，能够实现对多个项目，多服务，多实例层级的监控和内存管理的功能。
@@ -10,7 +8,7 @@ phoniex-admin是配合Phoenix框架使用的服务监控平台，能够实现对
 ![image-20200117101147857](../../assets/phoenix2.x/phoenix-admin/image-20200117101147857.png)
 
 ## 服务监控
-备注：ui待开发，开发完毕后补图。
+![image-20200224140248323](../../assets/phoenix2.x/phoenix-admin/image-20200224140248323.png)
 ### 运行总览
 - 服务个数/健康度
 - 实例个数/健康度
@@ -20,6 +18,11 @@ phoniex-admin是配合Phoenix框架使用的服务监控平台，能够实现对
 - 运行时间
 - 补充ing...
 ### 实例内存管理
+
+通过该界面，我们可以对phoenix服务的聚合根信息进行管理。
+
+![image-20200224142540836](../../assets/phoenix2.x/phoenix-admin/image-20200224142540836.png)
+
 - 聚合根列表查询
 - 聚合根ID历史快照版本查询
 - 打快照
