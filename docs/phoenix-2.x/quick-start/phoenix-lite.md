@@ -54,23 +54,18 @@ mvn archetype:generate \
 
 ```shell
 └── phoenix-lite
-    |
-    ├── application
-	|
+    ├──application
     ├──coreapi 
-    │   
     ├──domain  
-    │       
-    ├── tools 
-	|
-	├── pom.xml
-
+    ├──tools 
+	├──pom.xml
 ```
 
 ### 模块介绍
 
 Phoenix开发工程奔着模块自治的思想，把分为了三个子Module，依赖关系如下:
 ```shell
+
                    +----------------+
                    |   application  |
                    +-----+----+-----+
