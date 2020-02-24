@@ -65,8 +65,8 @@ mvn archetype:generate \
 
 Phoenix开发工程奔着模块自治的思想，把分为了三个子Module，依赖关系如下:
 ```shell
-
-                   +----------------+
+.
+.                  +----------------+
                    |   application  |
                    +-----+----+-----+
                          |    |
