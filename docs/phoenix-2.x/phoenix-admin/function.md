@@ -1,7 +1,7 @@
-```
+---
 id: admin-function-2x
 title: 平台介绍
-```
+---
 
 ## 前言
 
