@@ -21,7 +21,8 @@ module.exports = {
                 "phoenix-2.x/phoenix-lite/phoenix-lite-data-table-2x",
                 "phoenix-2.x/phoenix-lite/phoenix-lite-api-2x",
                 "phoenix-2.x/phoenix-lite/phoenix-lite-http-api-2x",
-                "phoenix-2.x/phoenix-lite/phoenix-lite-upgrade(1.6)-2x",
+                "phoenix-2.x/phoenix-lite/phoenix-lite-upgrade-2x",
+
             ],
         },
         {

@@ -1,5 +1,5 @@
 ---
-id: phoenix-lite-upgrade(1.6)-2x
+id: phoenix-lite-upgrade-2x
 title: 升级指南
 ---
 
@@ -10,7 +10,6 @@ title: 升级指南
 ![show](../../assets/phoenix2.x/phoenix-lite/upgrade-1.png)
 
 1.6的版本和2.x的版本的架构不太相同，对第三方组件的依赖定位也有所不同。
-
 <table>     
 	<tr>                  
 		<td>依赖组件</td>    
@@ -31,6 +30,8 @@ title: 升级指南
 		<td>关系型数据库存储事件更可靠</td> 	
 	</tr> 
 </table> 
+
+
 
 ## 配置对比
 
