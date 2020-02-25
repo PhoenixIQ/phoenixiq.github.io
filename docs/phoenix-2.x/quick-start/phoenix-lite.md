@@ -19,14 +19,16 @@ title: 快速入门
 ### 统一语言
 
 基于上述业务场景，在本案例里面，我们得出如下统一术语
-- **银行账户：**此案例里面提到的具有转入或转出金额的账户， 下文中可简称为账户
+- **银行账户：**此案例里面提到的可以进行转入或转出金额的账户， 下文中可简称为账户
 - **账户余额：**账面上的钱
 - **银行总账：**银行里面所有账户的总额汇总
 
 ### 业务逻辑
 
 资金划入：划拨金额大于0
+
 资金划出：划拨金额小于0
+
 如果账户余额 + 划拨金额 小于0，返回账户划拨失败，账户余额不足。
 
 ### 业务分析 & 架构图
@@ -37,7 +39,7 @@ title: 快速入门
 
 ## Phoenix工程搭建
 
-下面将从pheonix服务搭建开始，一步一步完善银行划拨案例的开发。搭建Phoenix工程十分容易，可以使用下述命令即可生成一个完整的phoenix的maven工程。其中 `DarchetypeVersion` 为phoenix的版本，`groupId`、`artifactId`、`version`为生成工程的定义。
+下面将从phoenix服务搭建开始，一步一步完善银行划拨案例的开发。搭建phoenix工程十分容易，可以使用下述命令即可生成一个完整的phoenix的maven工程。其中 `DarchetypeVersion` 为phoenix的版本，`groupId`、`artifactId`、`version`为生成工程的定义。
 
 ```
 mvn archetype:generate \
@@ -306,7 +308,7 @@ quantex:
 
 ### 客户端编写
 
-Phoenix是消息驱动框架，一切都是消息通信。为了与前端交互方便，可以再application模块中增加发送消息的Controller。Controller可以接受页面请求，转换为命令发送给phoenix服务端。
+Phoenix是消息驱动框架，一切都是消息通信。为了与前端交互方便，可以再application模块中增加发送消息的Controller。Controller可以接受页面请求，转换为命令发送给phoenix服务端，PhoenixClient提供了这样的消息发送接口。
 
 ```java
     /**
