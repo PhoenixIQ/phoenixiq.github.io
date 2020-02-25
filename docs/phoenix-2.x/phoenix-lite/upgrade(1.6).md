@@ -11,12 +11,26 @@ title: 升级指南
 
 1.6的版本和2.x的版本的架构不太相同，对第三方组件的依赖定位也有所不同。
 
-|依赖组件|1.6版本|2.X版本|备注|
-|-------|------|------|----|
-|消息中间件|1.支持RocketMQ或Kafka<br>2.整个系统使用两个topic(command和event)<br>3.每个topic只能支持一个partition要有序不丢|1.目前只支持kafka<br>2.每个服务一个topic(默认服务名)<br>3.每个服务的topic支持多个partition<br>4.topic内消息不用有序且不用持久化<br>|1.对比1.6版本减轻和对MQ的依赖<br>2.支持MQ的横向扩容
-|EventStore|不依赖，Event存在MQ里面|依赖，可选用关系型数据库|关系型数据库存储事件更可靠
-
-
+<table>     
+	<tr>                  
+		<td>依赖组件</td>    
+		<td>1.6版本</td>   
+		<td>2.X版本</td>    
+		<td>备注</td> 
+	</tr>     
+	<tr>         
+		<td>消息中间件</td>    
+		<td>1.支持RocketMQ或Kafka<br />2.整个系统使用两个topic(command和event)<br />3.每个topic只能支持一个partition要有序不丢</td>   
+		<td>1.目前只支持kafka<br />2.每个服务一个topic(默认服务名)<br />3.每个服务的topic支持多个partition<br />4.topic内消息不用有序且不用持久化<br /></td>    
+		<td>1.对比1.6版本减轻和对MQ的依赖<br />2.支持MQ的横向扩容</td>      
+	</tr>     
+	<tr>         
+		<td>EventStore</td>  
+		<td>不依赖，Event存在MQ里面</td>   
+		<td>依赖，可选用关系型数据库</td>    
+		<td>关系型数据库存储事件更可靠</td> 	
+	</tr> 
+</table> 
 
 ## 配置对比
 
