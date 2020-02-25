@@ -205,43 +205,110 @@ Phoenix为事务聚合根的单元测试也提供了工具类，极大地降低�
 ```java
 public class BankTransferSagaTest {
 
-   private final static String inAccountCode = "test_in";
+	private final static String inAccountCode = "test_in";
 
-   private final static String outAccountCode = "test_out";
+	private final static String outAccountCode = "test_out";
 
-   private AggregateFixture testFixture;
+	private TransactionAggregateFixture testFixture;
 
-   @Before
-   public void init() {
-      testFixture = new AggregateFixture();
-   }
+	Message reqMsg;
 
-   /**
-    * 转账成功
-    */
-   @Test
-   public void test_trans_ok() {
-      AccountTransferReq req = new AccountTransferReq(inAccountCode, outAccountCode, 100);
-      testFixture.when(req).expectRetCode(RetCode.SUCCESS);
-   }
+	@Before
+	public void init() {
+		testFixture = new TransactionAggregateFixture();
 
+		Map<String /* msgName */, String /* dst */> routerTable = new HashMap<>();
+		routerTable.put("com.iquantex.phoenix.bankaccount.api.AccountAllocateCmd", "loca/TA/BankTransferSaga");
+		routerTable.put("com.iquantex.phoenix.bankaccount.api.AccountAllocateFailEvent", "local/TA/BankTransferSaga");
+		routerTable.put("com.iquantex.phoenix.bankaccount.api.AccountAllocateOkEvent", "local/TA/BankTransferSaga");
 
-   /**
-    * 转账失败
-    * 说明：在事务聚合根内，Saga事务的ci操作为null，因为ti是扣减金额，假如不成功，不会有后续操作，因此也不需要ci。
-    *        但是在框架层面判断了没有ci会视为异常，这里我们assert exception，实际上是一个失败的事务，而不是异常事务。
-    */
-   @Test
-   public void test_trans_fail() {
-      AccountTransferReq req = new AccountTransferReq(inAccountCode, outAccountCode, 1100);
-      testFixture.when(req).expectRetCode(RetCode.EXCEPTION);
-   }
+		Router.getInstance().init(routerTable);
+	}
+
+	/**
+	 * 事务start，收到转账请求会发出cmd
+	 */
+	@Test
+	public void trans_start_transaction() {
+		int tranAmt = 100;
+		AccountTransferReq req = new AccountTransferReq(inAccountCode, outAccountCode, tranAmt);
+		reqMsg = MessageFactory.getRequestMsg(req);
+		testFixture.when(reqMsg).expectMessage(AccountAllocateCmd.class);
+	}
+
+	/**
+	 * 处理转出ok
+	 */
+	@Test
+	public void trans_out_ok() {
+		int tranAmt = 100;
+		AccountTransferReq req = new AccountTransferReq(inAccountCode, outAccountCode, tranAmt);
+		reqMsg = MessageFactory.getRequestMsg(req);
+
+		// 待发出去给c端的转账cmd
+		Message transOutCmdMsg = testFixture.when(reqMsg).getLastOutMsg();
+
+		// 手工模拟构建从c端发出来的event
+		AccountAllocateOkEvent transOutOkEvent = new AccountAllocateOkEvent(outAccountCode, -tranAmt);
+		Message transOutOkEventMsg = MessageFactory.getEventMsg(RetCode.SUCCESS, "", transOutOkEvent, transOutCmdMsg);
+
+		// 根据上述"从c端发出来的"event,经过saga的处理，再产生一个cmd，发给c端。
+		testFixture.when(transOutOkEventMsg).expectMessage(AccountAllocateCmd.class);
+	}
+
+	/**
+	 * 处理转入ok 该方法也是事务完成的测试
+	 */
+	@Test
+	public void trans_in_ok() {
+		int tranAmt = 100;
+		AccountTransferReq req = new AccountTransferReq(inAccountCode, outAccountCode, tranAmt);
+		reqMsg = MessageFactory.getRequestMsg(req);
+
+		testFixture.when(reqMsg).getLastOutMsg();
+
+		AccountAllocateCmd transInCmd = new AccountAllocateCmd(inAccountCode, tranAmt);
+		Message transInCmdMsg = MessageFactory.getCmdMsg(transInCmd);
+
+		// 手工模拟构建从c端发出来的转入成功event
+		AccountAllocateOkEvent transInOkEvent = new AccountAllocateOkEvent(inAccountCode, tranAmt);
+		Message transInOkEventMsg = MessageFactory.getEventMsg(RetCode.SUCCESS, "", transInOkEvent, transInCmdMsg);
+
+		// 赋值，方便找聚合根
+		transInOkEventMsg.toBuilder().setTransId(reqMsg.getTransId());
+		transInOkEventMsg.toBuilder().setDst(reqMsg.getDst());
+
+		// 根据上述"从c端发出来的"event,经过saga的处理，此时事务结束，不会再产生cmd.
+		testFixture.when(transInOkEventMsg).expectNull();
+	}
+
+	/**
+	 * 测试转出失败
+	 */
+	@Test
+	public void trans_out_fail() {
+		int tranAmt = 1100;
+		AccountTransferReq req = new AccountTransferReq(inAccountCode, outAccountCode, tranAmt);
+		reqMsg = MessageFactory.getRequestMsg(req);
+
+		// 待发出去给c端的转账cmd
+		Message transOutCmdMsg = testFixture.when(reqMsg).getLastOutMsg();
+
+		// 手工模拟构建从c端发出来的event
+		AccountAllocateFailEvent transOutFailEvent = new AccountAllocateFailEvent();
+		Message transOutFailEventMsg = MessageFactory.getEventMsg(RetCode.FAIL, "", transOutFailEvent, transOutCmdMsg);
+
+		// 根据上述"从c端发出来的"event,经过saga的处理，因为传出失败，不会再产生cmd。
+		testFixture.when(transOutFailEventMsg).expectNull();
+	}
+
 }
+
 ```
 
 **说明**
 
-在使用`AggregateFixture`的时候，我们需要在事务聚合根类的事务起始方法上，加上`    @TransactionStart`注解。拿该工程举例，就是`BankTransferSaga`类下面的方法。
+在使用`TransactionAggregateFixture`的时候，我们需要在事务聚合根类的事务起始方法上，加上`    @TransactionStart`注解。拿该工程举例，就是`BankTransferSaga`类下面的方法。
 
 ```java
 /**
