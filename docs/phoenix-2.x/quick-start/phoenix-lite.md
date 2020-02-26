@@ -46,16 +46,16 @@ mvn archetype:generate \
  -DarchetypeGroupId=com.iquantex \
  -DarchetypeArtifactId=phoenix-archetype \
  -DarchetypeVersion=dev-SNAPSHOT \
+ -DgroupId=com.example \
+ -DartifactId=helloworld \ 
  -Dversion=1.0-SNAPSHOT \
- -DgroupId=com.iquantex.phoenix.lite \
- -DartifactId=phoenix-lite \
  -DinteractiveMode=false
 ```
 
 生成成功之后，将会得到如下结构的maven项目。
 
 ```shell
-└── phoenix-lite
+└── helloworld
     ├──application
     ├──coreapi 
     ├──domain  
@@ -90,8 +90,8 @@ Phoenix开发工程奔着模块自治的思想，把分为了三个子Module，�
 └── src
     ├── main
     │   ├── java
-    │   │   └── com.iquantex.phoenix.risk
-    │   │       ├── PhoenixriskApplication.java   # spring启动类
+    │   │   └── com.example
+    │   │       ├── HelloworldApplication.java   # spring启动类
     │   │       ├── controller
     │   │       │   ├── HelloController.java      # 交互层类 
     │   │       └── runner
@@ -111,7 +111,7 @@ Phoenix开发工程奔着模块自治的思想，把分为了三个子Module，�
 └── src
     ├── main
     │   ├── java
-    │   │   └── com.iquantex.phoenix.risk.coreapi
+    │   │   └── com.example
     │   │       ├── Hello.java     # 消息定义(命令和事件)
     │   │       └── description.md
     │   └── resources
@@ -130,7 +130,7 @@ phoenix业务领域核心模块，包括：
 └── src
     ├── main
     │   ├── java
-    │   │   └── com.iquantex.phoenix.risk
+    │   │   └── com.example
     │   │     └── domain
     │   │         ├── entity                       # 聚合实体定义包
     │   │         │   ├── HelloAggregate.java      # 聚合根定义(特殊的实体)
@@ -139,7 +139,7 @@ phoenix业务领域核心模块，包括：
     │   │             └── description.md
     │   └── resources
     └── test
-        ├── java.com.iquantex.phoenix.risk
+        ├── java.com.example
         │    └── domain
         │        └── HelloAggregateTest.java       # 聚合根测试
 ```
@@ -153,6 +153,16 @@ phoenix业务领域核心模块，包括：
 ├── gen_proto      # protobuf生成脚本
 └── maven-deploy   # 便捷发布coreapi脚本
 ```
+
+### 运行测试
+
+使用mvn archetype生成示例工程后可直接启动application模块下的HelloworldApplication，通过以下步骤验证工程是否正常构建：
+1. 启动HelloworldApplication，服务正常启动。
+2. 打开swagger http://127.0.0.1:8080/swagger-ui.html
+3. 调用接口测试，进行连通性测试：
+![show](../../assets/phoenix2.x/phoenix-lite/example-hello-test.png)
+4. 观察启动日志：
+![show](../../assets/phoenix2.x/phoenix-lite/example-hello-log.png)
 
 ## 消息和聚合根定义
 
