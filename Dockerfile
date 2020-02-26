@@ -1,4 +1,4 @@
-FROM harbor.iquantex.com/phoenix/phoenix-website:website
+FROM harbor.iquantex.com/phoenix/phoenix-website:2.0
 
 WORKDIR /app/website
 
