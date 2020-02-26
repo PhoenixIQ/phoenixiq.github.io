@@ -19,14 +19,16 @@ title: 快速入门
 ### 统一语言
 
 基于上述业务场景，在本案例里面，我们得出如下统一术语
-- **银行账户：**此案例里面提到的具有转入或转出金额的账户， 下文中可简称为账户
+- **银行账户：**此案例里面提到的可以进行转入或转出金额的账户， 下文中可简称为账户
 - **账户余额：**账面上的钱
 - **银行总账：**银行里面所有账户的总额汇总
 
 ### 业务逻辑
 
 资金划入：划拨金额大于0
+
 资金划出：划拨金额小于0
+
 如果账户余额 + 划拨金额 小于0，返回账户划拨失败，账户余额不足。
 
 ### 业务分析 & 架构图
@@ -37,23 +39,23 @@ title: 快速入门
 
 ## Phoenix工程搭建
 
-下面将从pheonix服务搭建开始，一步一步完善银行划拨案例的开发。搭建Phoenix工程十分容易，可以使用下述命令即可生成一个完整的phoenix的maven工程。其中 `DarchetypeVersion` 为phoenix的版本，`groupId`、`artifactId`、`version`为生成工程的定义。
+下面将从phoenix服务搭建开始，一步一步完善银行划拨案例的开发。搭建phoenix工程十分容易，可以使用下述命令即可生成一个完整的phoenix的maven工程。其中 `DarchetypeVersion` 为phoenix的版本，`groupId`、`artifactId`、`version`为生成工程的定义。
 
 ```
 mvn archetype:generate \
  -DarchetypeGroupId=com.iquantex \
  -DarchetypeArtifactId=phoenix-archetype \
  -DarchetypeVersion=dev-SNAPSHOT \
+ -DgroupId=com.example \
+ -DartifactId=helloworld \ 
  -Dversion=1.0-SNAPSHOT \
- -DgroupId=com.iquantex.phoenix.lite \
- -DartifactId=phoenix-lite \
  -DinteractiveMode=false
 ```
 
 生成成功之后，将会得到如下结构的maven项目。
 
 ```shell
-└── phoenix-lite
+└── helloworld
     ├──application
     ├──coreapi 
     ├──domain  
@@ -88,8 +90,8 @@ Phoenix开发工程奔着模块自治的思想，把分为了三个子Module，�
 └── src
     ├── main
     │   ├── java
-    │   │   └── com.iquantex.phoenix.risk
-    │   │       ├── PhoenixriskApplication.java   # spring启动类
+    │   │   └── com.example
+    │   │       ├── HelloworldApplication.java   # spring启动类
     │   │       ├── controller
     │   │       │   ├── HelloController.java      # 交互层类 
     │   │       └── runner
@@ -109,7 +111,7 @@ Phoenix开发工程奔着模块自治的思想，把分为了三个子Module，�
 └── src
     ├── main
     │   ├── java
-    │   │   └── com.iquantex.phoenix.risk.coreapi
+    │   │   └── com.example
     │   │       ├── Hello.java     # 消息定义(命令和事件)
     │   │       └── description.md
     │   └── resources
@@ -128,7 +130,7 @@ phoenix业务领域核心模块，包括：
 └── src
     ├── main
     │   ├── java
-    │   │   └── com.iquantex.phoenix.risk
+    │   │   └── com.example
     │   │     └── domain
     │   │         ├── entity                       # 聚合实体定义包
     │   │         │   ├── HelloAggregate.java      # 聚合根定义(特殊的实体)
@@ -137,7 +139,7 @@ phoenix业务领域核心模块，包括：
     │   │             └── description.md
     │   └── resources
     └── test
-        ├── java.com.iquantex.phoenix.risk
+        ├── java.com.example
         │    └── domain
         │        └── HelloAggregateTest.java       # 聚合根测试
 ```
@@ -151,6 +153,16 @@ phoenix业务领域核心模块，包括：
 ├── gen_proto      # protobuf生成脚本
 └── maven-deploy   # 便捷发布coreapi脚本
 ```
+
+### 运行测试
+
+使用mvn archetype生成示例工程后可直接启动application模块下的HelloworldApplication，通过以下步骤验证工程是否正常构建：
+1. 启动HelloworldApplication，服务正常启动。
+2. 打开swagger http://127.0.0.1:8080/swagger-ui.html
+3. 调用接口测试，进行连通性测试：
+![show](../../assets/phoenix2.x/phoenix-lite/example-hello-test.png)
+4. 观察启动日志：
+![show](../../assets/phoenix2.x/phoenix-lite/example-hello-log.png)
 
 ## 消息和聚合根定义
 
@@ -335,7 +347,7 @@ quantex:
 
 ### 客户端编写
 
-Phoenix是消息驱动框架，一切都是消息通信。为了与前端交互方便，可以再application模块中增加发送消息的Controller。Controller可以接受页面请求，转换为命令发送给phoenix服务端。
+Phoenix是消息驱动框架，一切都是消息通信。为了与前端交互方便，可以再application模块中增加发送消息的Controller。Controller可以接受页面请求，转换为命令发送给phoenix服务端，PhoenixClient提供了这样的消息发送接口。
 
 ```java
     /**
