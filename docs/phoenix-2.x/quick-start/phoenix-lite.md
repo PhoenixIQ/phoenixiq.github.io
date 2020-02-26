@@ -157,11 +157,17 @@ phoenix业务领域核心模块，包括：
 ### 运行测试
 
 使用mvn archetype生成示例工程后可直接启动application模块下的HelloworldApplication，通过以下步骤验证工程是否正常构建：
+
 1. 启动HelloworldApplication，服务正常启动。
+
 2. 打开swagger http://127.0.0.1:8080/swagger-ui.html
+
 3. 调用接口测试，进行连通性测试：
+
 ![show](../../assets/phoenix2.x/phoenix-lite/example-hello-test.png)
+
 4. 观察启动日志：
+
 ![show](../../assets/phoenix2.x/phoenix-lite/example-hello-log.png)
 
 ## 消息和聚合根定义

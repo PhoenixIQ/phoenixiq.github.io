@@ -169,7 +169,7 @@ title: HTTP API
 **example out**
 
 ```DELETE /phoenix/snapshot/EA@BankAccount@ACC1/12```
-```
+```json
 {     
     code:  200,     
     msg:     
@@ -207,7 +207,7 @@ title: HTTP API
 **example out**
 
 ```GET /phoenix/data/EA@BankAccount@sun/2```
-```
+```json
 {
     "code"
     "codeDetail": null,
@@ -246,7 +246,7 @@ title: HTTP API
 **example out**
 
 ```GET /phoenix/instance/info```
-```
+```json
 {
     "msg": "",
     "code": 200,
