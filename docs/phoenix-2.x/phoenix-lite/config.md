@@ -44,10 +44,10 @@ ServerWorker配置
 | quantex.phoenix.server.mq.group                               | Server端服务消费组名，对应kafka和rocketmq中的consumergroup | String   | Server端服务名 | 
 | quantex.phoenix.server.mq.address                             | MQ 服务端地址                                              | String  | 无     | 
 | quantex.phoenix.server.mq.subscribe-topic                     | Server端订阅的 topic                                       | String  | Server端服务名 | 
-| quantex.phoenix.server.use-kerberos                           | 是否开启 kerberos 认证                                     | Boolean | false  | 
-| quantex.phoenix.server.jaas-conf-path                         | jaas配置文件路径                                           | String  | 无     | 
-| quantex.phoenix.server.krb5-conf-path                         | krb5配置文件路径                                           | String  | 无     | 
-| quantex.phoenix.server.krb-service-name                       | krb服务名                                                  | String  | 无     | 
+| quantex.phoenix.server.mq.use-kerberos                           | 是否开启 kerberos 认证                                     | Boolean | false  | 
+| quantex.phoenix.server.mq.jaas-conf-path                         | jaas配置文件路径                                           | String  | 无     | 
+| quantex.phoenix.server.mq.krb5-conf-path                         | krb5配置文件路径                                           | String  | 无     | 
+| quantex.phoenix.server.mq.krb-service-name                       | krb服务名                                                  | String  | 无     | 
 | quantex.phoenix.server.event-stores.driver-class-name         | 数据库驱动                                                 | String  | 无     | 
 | quantex.phoenix.server.event-stores.data-sources[].url        | 数据库 连接url                                             | String  | 无     | 
 | quantex.phoenix.server.event-stores.data-sources[].username   | 数据库账户                                                 | String  | 无     | 
