@@ -47,7 +47,7 @@ mvn archetype:generate \
  -DarchetypeArtifactId=phoenix-archetype \
  -DarchetypeVersion=dev-SNAPSHOT \
  -DgroupId=com.example \
- -DartifactId=helloworld \ 
+ -DartifactId=helloworld \
  -Dversion=1.0-SNAPSHOT \
  -DinteractiveMode=false
 ```
