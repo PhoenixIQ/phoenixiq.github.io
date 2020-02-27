@@ -26,7 +26,7 @@ title: 数据表
 **事件表设计**
 
 - 存储聚合根事件
-  -  确保Event有序不丢，用于EventSoucing
+  - 确保Event有序不丢，用于EventSourcing恢复聚合根状态
   - 采用聚合根ID+事件版本作为唯一键
   - 支持按聚合根ID查找所有事件，并按事件版本进行排序
   - 存储事件内容：Event对应的二进制数据， 注意这里需要存储整个Message定义，因为幂等需要返回一样的Message消息到上游调用系统
@@ -40,14 +40,14 @@ title: 数据表
 
 ---
 
-## Snapshot 表设计 （待更新）
+## Snapshot 表设计
 
 **表名：PHOENIX_SNAPSHOT**
 
 | **字段名称**   | **字段描述** | **字段类型**  | **字段形式**     | **备注** |
 | :------------- | :----------- | :------------ | :--------------- | :------- |
-| AGGREGATE_ID   | 聚合根ID     | VARCHAR2(255) |                  |          |
-| VERSION        | 版本         | BIGINT(19)    |                  |          |
+| AGGREGATE_ID   | 聚合根ID     | VARCHAR2(255) |  |  |
+| VERSION        | 版本         | BIGINT(19)    | 整数，由0开始递增 |  |
 | SNAPSHOT_DATA       | 快照内容     | BLOB          | 二进制内容       |          |
 | CREATE_TIME    | 创建时间     | DATE          | 日期时分秒       |          |
 
