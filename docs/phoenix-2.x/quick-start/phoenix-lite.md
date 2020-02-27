@@ -211,12 +211,15 @@ public class AccountAllocateOkEvent implements Serializable {
 
 通过上面的 `银行账户划拨案例介绍` 我们可以在domain模块中清晰的定义出银行账户聚合根实体 `BankAccountAggregate`。银行账户聚合根是整个账户的所有消息的统一入口，银行账户聚合根拥有 `账户` 和 `余额` 等核心业务数据，以及 `成功转出次数` 、 `失败转出次数` 和 `成功转入次数` 等辅助统计数据。聚合根是phoenix的对象定义，开发时需要遵循phoenix规范。具体代码如下。
 
+***注意聚合根类需要实现Serializable接口并定义`serialVersionUID`，如以下所示***
 
 ```java
 @EntityAggregateAnnotation(aggregateRootType = "BankAccount")
 @Getter
 @Setter
 public class BankAccountAggregate implements Serializable {
+
+    private static final long serialVersionUID = -1L;
 
 	// 核心业务数据
 	private String account; // 账户代码
