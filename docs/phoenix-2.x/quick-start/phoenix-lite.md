@@ -31,7 +31,7 @@ title: 快速入门
 
 如果账户余额 + 划拨金额 小于0，返回账户划拨失败，账户余额不足。
 
-### 业务分析 & 架构图
+### 业务分析
 
 ![show](../../assets/phoenix2.x/phoenix-lite/yewu.png)
 
@@ -79,7 +79,7 @@ Phoenix开发工程奔着模块自治的思想，把分为了三个子Module，�
           +------+-----+     +-------+-------+
 ```
 
-### application - 启动模块
+### application
 应用的顶层模块，启动模块，入口模块，包括：
 
 - SpringBoot启动类，启动配置等
@@ -101,7 +101,7 @@ Phoenix开发工程奔着模块自治的思想，把分为了三个子Module，�
     │       ├── logback.xml                       # 日志配置
 ```
 
-### coreapi - 消息定义模块
+### coreapi
 应用的消息定义模块，包括：
 - cmd:   聚合根入口命令
 - event: 聚合根处理后事件
@@ -119,7 +119,7 @@ Phoenix开发工程奔着模块自治的思想，把分为了三个子Module，�
 
 ```
 
-### domain - 领域模块
+### domain
 phoenix业务领域核心模块，包括：
 - 聚合根： 核心业务领域聚合根，处理core中的命令并返回事件
 - 聚合根测试：针对聚合根的完整测试
@@ -144,7 +144,7 @@ phoenix业务领域核心模块，包括：
         │        └── HelloAggregateTest.java       # 聚合根测试
 ```
 
-### tools - 工具包
+### tools
 包含常用的工具脚本
 
 ```shell 
@@ -170,7 +170,7 @@ phoenix业务领域核心模块，包括：
 
 ![show](../../assets/phoenix2.x/phoenix-lite/example-hello-log.png)
 
-## 消息和聚合根定义
+## 领域对象定义
 
 ### 消息定义
 
@@ -207,16 +207,19 @@ public class AccountAllocateOkEvent implements Serializable {
 
 ```
 
-### 聚合根实体 - BankAccountAggregate
+### 聚合根定义
 
 通过上面的 `银行账户划拨案例介绍` 我们可以在domain模块中清晰的定义出银行账户聚合根实体 `BankAccountAggregate`。银行账户聚合根是整个账户的所有消息的统一入口，银行账户聚合根拥有 `账户` 和 `余额` 等核心业务数据，以及 `成功转出次数` 、 `失败转出次数` 和 `成功转入次数` 等辅助统计数据。聚合根是phoenix的对象定义，开发时需要遵循phoenix规范。具体代码如下。
 
+***注意聚合根类需要实现Serializable接口并定义`serialVersionUID`，如以下所示***
 
 ```java
 @EntityAggregateAnnotation(aggregateRootType = "BankAccount")
 @Getter
 @Setter
 public class BankAccountAggregate implements Serializable {
+
+    private static final long serialVersionUID = -1L;
 
 	// 核心业务数据
 	private String account; // 账户代码
@@ -337,7 +340,7 @@ public class BankAccountAggregateTest {
 }
 ```
 
-## 客户端代码编写
+## 客户端实现
 
 ### 增加路由
 
