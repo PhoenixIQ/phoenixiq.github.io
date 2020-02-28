@@ -54,13 +54,13 @@ ServerWorker配置
 | quantex.phoenix.server.event-stores.data-sources[].password   | 数据库密码                                                 | String  | 无     | 
 | quantex.phoenix.server.event-stores.snapshot.enable                   | 是否开启快照                                       |Boolean  | false      |
 | quantex.phoenix.server.event-stores.snapshot.entity-snapshot-interval | 聚合根快照版本间隔                                  |Long     |1000|
-| quantex.phoenix.performance.batch-process                     | EntityAggregateActor 批量向子Actor发送消息进行处理               | Int | 100  |
-| quantex.phoenix.performance.idempotent-size                   | EntityAggregate 幂等集合大小                                     | Int | 1000 |
-| quantex.phoenix.performance.recv-by-nofinished                | AtLeastOneDeliveryActor 根据未完成事务个数判断是否继续接收消息   | Int | 5000 |
-| quantex.phoenix.performance.batch-finished                    | AtLeastOneDeliveryActor 批量处理结束的事务                       | Int | 1000 |
-| quantex.phoenix.performance.retry-by-nofinished               | AtLeastOneDeliveryAggregate 根据未完成事务个数判断是否继续重试 | Int | 10000|
-| quantex.phoenix.performance.batch-retry                       | AtLeastOneDeliveryAggregate 批量持久化                           | Int | 1000 |
-| quantex.phoenix.performance.batch-persist                     | event-store 批量持久化 批次大小                                  | Int | 200  |
+| quantex.phoenix.server.performance.batch-process                     | EntityAggregateActor 批量向子Actor发送消息进行处理               | Int | 100  |
+| quantex.phoenix.server.performance.idempotent-size                   | EntityAggregate 幂等集合大小                                     | Int | 1000 |
+| quantex.phoenix.server.performance.recv-by-nofinished                | AtLeastOneDeliveryActor 根据未完成事务个数判断是否继续接收消息   | Int | 5000 |
+| quantex.phoenix.server.performance.batch-finished                    | AtLeastOneDeliveryActor 批量处理结束的事务                       | Int | 1000 |
+| quantex.phoenix.server.performance.retry-by-nofinished               | AtLeastOneDeliveryAggregate 根据未完成事务个数判断是否继续重试 | Int | 10000|
+| quantex.phoenix.server.performance.batch-retry                       | AtLeastOneDeliveryAggregate 批量持久化                           | Int | 1000 |
+| quantex.phoenix.server.performance.batch-persist                     | event-store 批量持久化 批次大小                                  | Int | 200  |
 
 
 client相关配置
@@ -82,20 +82,20 @@ client相关配置
 ```yaml
 quantex:
   phoenix:
-    performance:
-      batch-process: 100
-      idempotent-size: 1000
-      recv-by-nofinished: 5000
-      batch-finished: 1000
-      retry-by-nofinished: 10000
-      batch-retry: 1000
-      batch-persist: 200
     routers:
       - message: com.iquantex.phoenix.bankaccount.api.AccountAllocateCmd
         dst: account-server/EA/BankAccount
       - message: com.iquantex.phoenix.bankaccount.api.AccountTransferReq
         dst: account-tn/TA/BankTransferSaga
     server:
+      performance:
+        batch-process: 100
+        idempotent-size: 1000
+        recv-by-nofinished: 5000
+        batch-finished: 1000
+        retry-by-nofinished: 10000
+        batch-retry: 1000
+        batch-persist: 200
       name: ${spring.application.name}
       mq:
         type: kafka
