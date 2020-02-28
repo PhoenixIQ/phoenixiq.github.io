@@ -29,11 +29,11 @@ title: 配置详情
 | quantex.phoenix.akka.akka-parallelism-factor        | actorSystem的线程池配置线程比，即一个核配多少个线程；     | Double  | 3         | 
 | quantex.phoenix.akka.akka-parallelism-max           | actorSystem的线程池配置最大并发数                         | Int     | 128       | 
 | quantex.phoenix.akka.service-name                   | 服务名                                                    | String  | 服务名    | 
-| quantex.phoenix.akka.discovery-method               | 集群发现的方式                                            | String  | config（可选值：config/kubernetes-api）    | 
+| quantex.phoenix.akka.discovery-method               | 集群发现的方式                                            | String  | config <br /> 可选值：config /  kubernetes-api    | 
 | quantex.phoenix.akka.cinnamon-application           | 服务名                                                    | String  | 服务名    | 
-| quantex.phoenix.akka.provider                       | 运行模式                                                  | String  | cluster（可选值：local/cluster/remote）   |
-| quantex.phoenix.akka.artery-enable                  | remote.artery 开关                                        | String  | on （可选值：on/off）        |
-| quantex.phoenix.akka.artery-transport               | 传输方式                                                  | String  | tcp（可选值：tcp/tls-tcp/aeron-udp）       |
+| quantex.phoenix.akka.provider                       | 运行模式                                                  | String  | cluster <br /> 可选值：local / cluster / remote   |
+| quantex.phoenix.akka.artery-enable                  | remote.artery 开关                                        | String  | on <br />可选值：on / off        |
+| quantex.phoenix.akka.artery-transport               | 传输方式                                                  | String  | tcp <br /> 可选值：tcp / tls-tcp /  aeron-udp       |
 | quantex.phoenix.akka.artery-canonical-port          | 远程服务器端口                                            | Int     | 2551      |
 | quantex.phoenix.akka.artery-canoniacal-hostname     | 远程服务器地址                                            | String  | 127.0.0.1 |
 | quantex.phoenix.akka.seed-node                      | 集群的初始接触点                                          | List    | akka:// + 服务名 + @127.0.0.1:2551 |
@@ -60,7 +60,7 @@ title: 配置详情
 | quantex.phoenix.server.event-stores.data-sources[].url        | 数据库 连接url                                             | String  | 无     | 
 | quantex.phoenix.server.event-stores.data-sources[].username   | 数据库账户                                                 | String  | 无     | 
 | quantex.phoenix.server.event-stores.data-sources[].password   | 数据库密码                                                 | String  | 无     | 
-| quantex.phoenix.server.event-stores.snapshot.enable                   | 是否开启快照功能                                       |Boolean  | false (可选值：true/false)     |
+| quantex.phoenix.server.event-stores.snapshot.enable                   | 是否开启快照功能                                       |Boolean  | false <br /> 可选值：true / false     |
 | quantex.phoenix.server.event-stores.snapshot.entity-snapshot-interval | 自动打快照的触发条件，聚合根每处理 ‘interval’ 个消息打一个快照   |Long     |1000|
 
 
