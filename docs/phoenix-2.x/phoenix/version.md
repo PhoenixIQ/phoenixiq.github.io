@@ -5,6 +5,59 @@ title: 下载中心
 
 > 维护phoenix具体版本内容，包括release node，以及和各个组件匹配的版本信息。下面每个标题内的表格代表了版本匹配关系。
 
+
+
+## 2.1.1(2020-02-28)
+
+### 版本下载列表
+| 项目名              | 发版时间      | 版本号         | 下载地址  |
+| ------------------ | --------     | ------        | -------- |
+| phoenix            |  2020/02/28  | 2.1.1 |[helm-chart](http://10.116.18.93:8848/charts/phoenix-2.1.1.tgz)         |
+| phoenix-admin      |  2020/02/28  | 2.1.1| [helm-chart](http://10.116.18.93:8848/charts/phoenix-admin-2.1.1.tgz)        |
+| phoenix-website    |  2020/02/28  | 2.1.1| [helm-chart](http://10.116.18.93:8848/charts/phoenix-website-2.1.1.tgz)    |
+
+### release notes
+
+#### phoenix(2.1.1)
+
+**Enhancement**
+- 银行转账页面增加清理数据按钮 #225
+- 聚合根分隔符进行调整 #316
+- phoenix-server端kafka接口重构 #230
+- 添加接口获取服务的路由表 #248
+- 提高测试覆盖率80%&覆盖率加入CI #286
+- 维护phoenix开发模板 #288
+- 业务代码单元测试支持 #287,#293
+- phoenix服务启动的时候支持在日志中输出phoenix配置信息 #335
+- 全环境回归测试 #331 
+- 按照新的项目结构重构bank-account项目 #323
+- 事中风控培训demo开发教程制作 #284,#305
+
+**BugFixes**
+- 客户端和服务端写在一块会出现rpc失败 #278
+- Client模块代码Sonar扫描覆盖率为0 #285
+- akka配置默认不设置应该能跑起来 #289
+- 账户总览查询接口报ArrayIndexOutOfBoundsException #317
+- 整体review问题解决 #327 
+
+#### phoenix-admin(2.1.1)
+- 增加可以查看phoenix的扇子功能 #264
+- phoenix-admin调用grafana datasource api失败 #332
+- 完善phoenix-admin服务详情前端页面 #299
+- phoenix grafna dashboard添加filter功能 #314
+- 整体review问题解决 #327 
+
+#### phoenix-website(2.1.1)
+- 测试文档: 对比1.6升级报告 #300
+- 伸缩性测试需要完善证明动态伸缩 #302 
+- 文档: 单聚合根处理的性能测试 #303
+- Phoenix官网快速入门重写 #319
+- Phoenix官网配置详情内容更新 #320
+- 使用文档：整理phoenix的依赖列表(服务,核心jar包,版本) #301
+- 整体review问题解决 #327 
+
+
+
 ## 2.1.0-beta(2020-01-22)
 
 ### 版本下载列表
@@ -38,3 +91,6 @@ title: 下载中心
 * [X] phoenix功能性测试报告 #267
 * [X] phoenix非功能测试报告 #239 
 * [X] phoenix-admin完善介绍文档 #263
+
+
+
