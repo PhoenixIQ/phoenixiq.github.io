@@ -89,8 +89,7 @@ quantex:
         dst: account-server/EA/BankAccount
       - message: com.iquantex.phoenix.bankaccount.api.AccountTransferReq
         dst: account-tn/TA/BankTransferSaga
-    server:
-      performance:
+    performance:
         batch-process: 100
         idempotent-size: 1000
         recv-by-nofinished: 5000
@@ -98,6 +97,7 @@ quantex:
         retry-by-nofinished: 10000
         batch-retry: 1000
         batch-persist: 200
+    server:
       name: ${spring.application.name}
       mq:
         type: kafka
