@@ -85,19 +85,7 @@ public enum RpcResultCode {
 | msg         | Object | 必填     | 待发送的消息        |
 | requestId | string | 必填     |  请求ID （预留字段） |
 
-
-```
-/**  
- * rpc 发送  
- */ 
- RpcResult rpc(Object msg, String requestId, long timeoutMs)
-```
-
-| 字段        | 类型   | 是否必填 | 描述                |
-| :---------- | :----- | :------- | :------------------ |
-| msg         | Object | 必填     | 待发送的消息        |
-| requestId | string | 必填     |  请求ID  （预留字段） |
-| timeoutMs   | long   | 必填     | 超时时间            |
+如需要同步等待send结果，则使用返回的future调用get方法等待处理结果。
 
 ## 服务端 API
 ### 注解

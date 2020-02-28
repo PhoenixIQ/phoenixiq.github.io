@@ -35,6 +35,7 @@ title: HTTP API
 
 **example out**
 
+```GET /phoenix/aggregate_root/all/20/1```
 ```json
 {
     "code": 200,
@@ -87,6 +88,7 @@ title: HTTP API
 
 **example out**
 
+```GET /phoenix/snapshot/EA@BankAccount@ACC1/2/1```
 ```json
 {     
     code:  200,     
@@ -96,7 +98,7 @@ title: HTTP API
            0,               
            2,           
        ]           
-       totalRecord: 100     
+       totalRecord: 100
     }
 }
 ```
@@ -130,6 +132,7 @@ title: HTTP API
 
 **example out**
 
+```POST /phoenix/snapshot/EA@BankAccount@ACC1```
 ```json
 {     
     code:  200,     
@@ -165,7 +168,8 @@ title: HTTP API
 
 **example out**
 
-```
+```DELETE /phoenix/snapshot/EA@BankAccount@ACC1/12```
+```json
 {     
     code:  200,     
     msg:     
@@ -202,7 +206,8 @@ title: HTTP API
 
 **example out**
 
-```
+```GET /phoenix/data/EA@BankAccount@sun/2```
+```json
 {
     "code"
     "codeDetail": null,
@@ -240,7 +245,8 @@ title: HTTP API
 
 **example out**
 
-```
+```GET /phoenix/instance/info```
+```json
 {
     "msg": "",
     "code": 200,

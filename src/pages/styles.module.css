@@ -33,3 +33,18 @@
   height: 200px;
   width: 200px;
 }
+
+.steps {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+  background-color: #f7f7f7;
+}
+
+.stepsImage {
+  margin:15px 5px 20px 20px;
+  height: 500px;
+  width: 900px;
+}
+ 
