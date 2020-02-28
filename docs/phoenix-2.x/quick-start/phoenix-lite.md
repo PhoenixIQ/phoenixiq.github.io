@@ -45,7 +45,7 @@ title: 快速入门
 mvn archetype:generate \
  -DarchetypeGroupId=com.iquantex \
  -DarchetypeArtifactId=phoenix-archetype \
- -DarchetypeVersion=dev-SNAPSHOT \
+ -DarchetypeVersion=2.1.1 \
  -DgroupId=com.example \
  -DartifactId=helloworld \
  -Dversion=1.0-SNAPSHOT \
