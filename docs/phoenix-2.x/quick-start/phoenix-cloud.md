@@ -183,3 +183,152 @@ public class BankTransferSaga implements Serializable {
 }
 ```
 
+
+
+### 事务单元测试
+
+Phoenix为事务聚合根的单元测试也提供了工具类，极大地降低了编写事务单元测试的难度。
+
+**测试工具类AggregateFixture简介**
+
+`AggregateFixture`类可以为我们模拟聚合根处理消息和返回的完整流程，并提供了一系列的断言方法，方便我们进行结果断言。我们重点关注以下几个方法。
+
+- `when(Object msg)`：给定工具类一个入参请求，模拟真实环境下，我们的完整事务的处理场景。
+
+- `expectMessage(Class respons)`：判断使用when()接收请求并处理事务后，返回对象的类型是否符合预期。
+- `expectRetCode(RetCode retCode)`：判断使用when()接收请求并处理事务后的返回码是否符合预期。
+- `expectRetSuccessCode()`：判断使用when()接收请求并处理事务的过程是否成功。
+- `expectRetFailCode()`：判断使用when()接收并请求并处理事务的过程是否失败。
+
+**业务单元测试代码**
+
+```java
+public class BankTransferSagaTest {
+
+	private final static String inAccountCode = "test_in";
+
+	private final static String outAccountCode = "test_out";
+
+	private TransactionAggregateFixture testFixture;
+
+	Message reqMsg;
+
+	@Before
+	public void init() {
+		testFixture = new TransactionAggregateFixture();
+
+		Map<String /* msgName */, String /* dst */> routerTable = new HashMap<>();
+		routerTable.put("com.iquantex.phoenix.bankaccount.api.AccountAllocateCmd", "loca/TA/BankTransferSaga");
+		routerTable.put("com.iquantex.phoenix.bankaccount.api.AccountAllocateFailEvent", "local/TA/BankTransferSaga");
+		routerTable.put("com.iquantex.phoenix.bankaccount.api.AccountAllocateOkEvent", "local/TA/BankTransferSaga");
+
+		Router.getInstance().init(routerTable);
+	}
+
+	/**
+	 * 事务start，收到转账请求会发出cmd
+	 */
+	@Test
+	public void trans_start_transaction() {
+		int tranAmt = 100;
+		AccountTransferReq req = new AccountTransferReq(inAccountCode, outAccountCode, tranAmt);
+		reqMsg = MessageFactory.getRequestMsg(req);
+		testFixture.when(reqMsg).expectMessage(AccountAllocateCmd.class);
+	}
+
+	/**
+	 * 处理转出ok
+	 */
+	@Test
+	public void trans_out_ok() {
+		int tranAmt = 100;
+		AccountTransferReq req = new AccountTransferReq(inAccountCode, outAccountCode, tranAmt);
+		reqMsg = MessageFactory.getRequestMsg(req);
+
+		// 待发出去给c端的转账cmd
+		Message transOutCmdMsg = testFixture.when(reqMsg).getLastOutMsg();
+
+		// 手工模拟构建从c端发出来的event
+		AccountAllocateOkEvent transOutOkEvent = new AccountAllocateOkEvent(outAccountCode, -tranAmt);
+		Message transOutOkEventMsg = MessageFactory.getEventMsg(RetCode.SUCCESS, "", transOutOkEvent, transOutCmdMsg);
+
+		// 根据上述"从c端发出来的"event,经过saga的处理，再产生一个cmd，发给c端。
+		testFixture.when(transOutOkEventMsg).expectMessage(AccountAllocateCmd.class);
+	}
+
+	/**
+	 * 处理转入ok 该方法也是事务完成的测试
+	 */
+	@Test
+	public void trans_in_ok() {
+		int tranAmt = 100;
+		AccountTransferReq req = new AccountTransferReq(inAccountCode, outAccountCode, tranAmt);
+		reqMsg = MessageFactory.getRequestMsg(req);
+
+		testFixture.when(reqMsg).getLastOutMsg();
+
+		AccountAllocateCmd transInCmd = new AccountAllocateCmd(inAccountCode, tranAmt);
+		Message transInCmdMsg = MessageFactory.getCmdMsg(transInCmd);
+
+		// 手工模拟构建从c端发出来的转入成功event
+		AccountAllocateOkEvent transInOkEvent = new AccountAllocateOkEvent(inAccountCode, tranAmt);
+		Message transInOkEventMsg = MessageFactory.getEventMsg(RetCode.SUCCESS, "", transInOkEvent, transInCmdMsg);
+
+		// 赋值，方便找聚合根
+		transInOkEventMsg.toBuilder().setTransId(reqMsg.getTransId());
+		transInOkEventMsg.toBuilder().setDst(reqMsg.getDst());
+
+		// 根据上述"从c端发出来的"event,经过saga的处理，此时事务结束，不会再产生cmd.
+		testFixture.when(transInOkEventMsg).expectNull();
+	}
+
+	/**
+	 * 测试转出失败
+	 */
+	@Test
+	public void trans_out_fail() {
+		int tranAmt = 1100;
+		AccountTransferReq req = new AccountTransferReq(inAccountCode, outAccountCode, tranAmt);
+		reqMsg = MessageFactory.getRequestMsg(req);
+
+		// 待发出去给c端的转账cmd
+		Message transOutCmdMsg = testFixture.when(reqMsg).getLastOutMsg();
+
+		// 手工模拟构建从c端发出来的event
+		AccountAllocateFailEvent transOutFailEvent = new AccountAllocateFailEvent();
+		Message transOutFailEventMsg = MessageFactory.getEventMsg(RetCode.FAIL, "", transOutFailEvent, transOutCmdMsg);
+
+		// 根据上述"从c端发出来的"event,经过saga的处理，因为传出失败，不会再产生cmd。
+		testFixture.when(transOutFailEventMsg).expectNull();
+	}
+
+}
+
+```
+
+**说明**
+
+在使用`TransactionAggregateFixture`的时候，我们需要在事务聚合根类的事务起始方法上，加上`    @TransactionStart`注解。拿该工程举例，就是`BankTransferSaga`类下面的方法。
+
+```java
+/**
+	 * 处理转账请求,先发起转出
+	 * @param request
+	 * @return
+	 */
+    @TransactionStart
+	public TransactionReturn on(AccountTransferReq request) {
+		this.request = request;
+		return TransactionReturn.builder().addAction(
+				// saga事务
+				new SagaAction(
+						// 转出账户扣钱
+						new AccountAllocateCmd(request.getOutAccountCode(), -request.getAmt()),
+						// 转出账户失败回滚(加钱)
+						null))
+				.build();
+	}
+```
+
+
+
