@@ -14,7 +14,7 @@ helm upgrade --kubeconfig devops/.kube/config-demo ${name} --install --namespace
 1. 新建项目
 ![image-20200115193059777](../../assets/phoenix2.x/phoenix-admin/image-20200115193059777.png)
 2. 配置项说明
-   ![image-20200115200309243](../../assets/phoenix2.x/phoenix-admin/image-20200115200309243.png)
+   ![image-20200115200309243](../../assets/phoenix2.x/phoenix-admin/002.png)
    * 项目ID：
      Phoenix项目的ID，全局唯一，建议使用英文+字母的简短组合。
    * 项目名称：
@@ -26,9 +26,9 @@ helm upgrade --kubeconfig devops/.kube/config-demo ${name} --install --namespace
 
 ## 系统配置
 1. 添加数据源
-   ![image-20200115200504478](../../assets/phoenix2.x/phoenix-admin/image-20200115200504478.png)
+   ![image-20200115200504478](../../assets/phoenix2.x/phoenix-admin/004.png)
 2. 配置项说明：
-   ![image-20200115200709499](../../assets/phoenix2.x/phoenix-admin/image-20200115200709499.png)
+   ![image-20200115200709499](../../assets/phoenix2.x/phoenix-admin/002.png)
    * Url
      因为Phoenix项目内的Phoenix服务，是把监控点上报到elasticsearch的，这里我们填写该项目下的elasticsearch的url。
    * Namespace

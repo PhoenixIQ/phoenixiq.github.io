@@ -35,8 +35,6 @@ title: 快速入门
 
 ![show](../../assets/phoenix2.x/phoenix-lite/yewu.png)
 
-![show](../../assets/phoenix2.x/phoenix-lite/jiagou.png)
-
 ## Phoenix工程搭建
 
 下面将从phoenix服务搭建开始，一步一步完善银行划拨案例的开发。搭建phoenix工程十分容易，可以使用下述命令即可生成一个完整的phoenix的maven工程。其中 `DarchetypeVersion` 为phoenix的版本，`groupId`、`artifactId`、`version`为生成工程的定义。
