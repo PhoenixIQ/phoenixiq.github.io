@@ -1,11 +1,11 @@
 module.exports = {
     title: 'Phoenix',
     tagline: 'phoenix是一个消息驱动的有状态微服务框架',
-    url: 'http://phoenix-website.sz.iquantex.com/',
+    url: 'https://github.com/PhoenixIQ/PhoenixIQ.github.io',
     baseUrl: '/',
     favicon: 'img/phoenix.png',
-    organizationName: 'quantex', // Usually your GitHub org/user name.
-    projectName: 'phoenix', // Usually your repo name.
+    organizationName: 'PhoenixIQ', // Usually your GitHub org/user name.
+    projectName: 'PhoenixIQ.github.io', // Usually your repo name.
     themeConfig: {
         sidebarCollapsible: false,
         navbar: {
