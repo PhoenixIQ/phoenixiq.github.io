@@ -1,4 +1,4 @@
-# phoenix 官网&文档
+# phoenix官网&文档
 
 - 首页（phoenix是什么、特性简介）
 - 快速入门
