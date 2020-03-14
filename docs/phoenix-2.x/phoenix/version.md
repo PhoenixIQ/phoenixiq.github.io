@@ -5,6 +5,49 @@ title: 下载中心
 
 > 维护phoenix具体版本内容，包括release node，以及和各个组件匹配的版本信息。下面每个标题内的表格代表了版本匹配关系。
 
+## 2.1.2(2020-03-13)
+
+### 版本下载列表
+| 项目名              | 发版时间      | 版本号         | 下载地址  |
+| ------------------ | --------     | ------        | -------- |
+| phoenix            |  2020/03/13  | 2.1.2 |[helm-chart](http://10.116.18.93:8848/charts/phoenix-2.1.2.tgz)         |
+| phoenix-admin      |  2020/03/13  | 2.1.2| [helm-chart](http://10.116.18.93:8848/charts/phoenix-admin-2.1.2.tgz)        |
+| phoenix-website    |  2020/03/13  | 2.1.9| [helm-chart](http://10.116.18.93:8848/charts/phoenix-website-2.1.9.tgz)    |
+
+#### phoenix(2.1.2)
+
+**Enhancement**
+- phoenix包里面嵌入license功能 #349
+- phoenix做简单的代码混淆 #328
+- 解决编译过程的Warning问题,引入mvnw #343
+- 研究Snonar的其他指标用于增加代码质量 #342
+- 事中风控视频教程录制 #347
+
+**Test**
+- 测试昆仑外仓使用&梳理交付方式 #348
+- 服务实例JVM OOM下服务高可用验证 #310
+- 统一Phoenix对外发布项目的编程风格&完善注释 #351
+- 调整sonar执行的位置 #352
+- 2.1.2发版回归测试 #372 
+
+**BugFixes**
+- eventstore建立连接失败的情况下无法打印server端配置 #345
+- 实体聚合根没有实现Serializable导致不断重试的问题 #337
+- AggregateRootIdAnnotation中聚合根ID填写错误客户端rpc调用超时 #339
+- phoenix官网下载中helm-chart的链接放到官网里面 #346
+- Saga服务扫描EntityAggregate导致的bug #366
+- demo环境下单eventStore报错 #371
+
+**Other**
+- phoenix-license需兼容只校验过期时间 #358
+
+#### phoenix-website(2.1.9)
+- 更新官网文档的配图 #354
+- Phoenix 官网首页开发 #350
+
+#### phoenix-admin(2.1.2)
+- 测试昆仑外仓使用&梳理交付方式 #348
+
 
 
 ## 2.1.1(2020-02-28)
@@ -12,9 +55,9 @@ title: 下载中心
 ### 版本下载列表
 | 项目名              | 发版时间      | 版本号         | 下载地址  |
 | ------------------ | --------     | ------        | -------- |
-| phoenix            |  2020/02/28  | 2.1.1 |[helm-chart](http://10.116.18.93:8848/charts/phoenix-2.1.1.tgz)         |
-| phoenix-admin      |  2020/02/28  | 2.1.1| [helm-chart](http://10.116.18.93:8848/charts/phoenix-admin-2.1.1.tgz)        |
-| phoenix-website    |  2020/02/28  | 2.1.1| [helm-chart](http://10.116.18.93:8848/charts/phoenix-website-2.1.1.tgz)    |
+| phoenix            |  2020/02/28  | 2.1.1 |[helm-chart](../../assets/download/helm-chart/2.1.1/phoenix-2.1.1.tgz)         |
+| phoenix-admin      |  2020/02/28  | 2.1.1| [helm-chart](../../assets/download/helm-chart/2.1.1/phoenix-admin-2.1.1.tgz)        |
+| phoenix-website    |  2020/02/28  | 2.1.1| [helm-chart](../../assets/download/helm-chart/2.1.1/phoenix-website-2.1.1.tgz)    |
 
 ### release notes
 
@@ -63,9 +106,9 @@ title: 下载中心
 ### 版本下载列表
 | 项目名              | 发版时间      | 版本号         | 下载地址  |
 | ------------------ | --------     | ------        | -------- |
-| phoenix            |  2020/01/21  | 2.1.0-beta    | [helm-chart](http://10.116.18.93:8848/charts/phoenix-2.1.0-beta.tgz)         |
-| phoenix-admin      |  2020/01/21  | 2.0.7-alpha   | [helm-chart](http://10.116.18.93:8848/charts/phoenix-admin-2.0.7-alpha.tgz)        |
-| phoenix-website    |  2020/01/21  | 2.1.0-alpha   | [helm-chart](http://10.116.18.93:8848/charts/phoenix-website-2.1.0-alpha.tgz)    |
+| phoenix            |  2020/01/21  | 2.1.0-beta    | [helm-chart](../../assets/download/helm-chart/2.1.0/phoenix-2.1.0-beta.tgz)         |
+| phoenix-admin      |  2020/01/21  | 2.0.7-alpha   | [helm-chart](../../assets/download/helm-chart/2.1.0/phoenix-admin-2.0.7-alpha.tgz)        |
+| phoenix-website    |  2020/01/21  | 2.1.0-alpha   | [helm-chart](../../assets/download/helm-chart/2.1.0/phoenix-website-2.1.0-alpha.tgz)    |
 
 ### release notes
 #### phoenix(2.1.0-beta)

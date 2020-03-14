@@ -3,8 +3,6 @@ id: phoenix-lite-2x
 title: 快速入门
 ---
 
-[Demo 下载](https://gitlab.iquantex.com/phoenix-public/bank-account.git)
-
 ## 银行账户划拨案例介绍
 
 本文将展示如何使用 `Phoenix` 构建一个银行账户划拨的应用程序。
@@ -43,7 +41,7 @@ title: 快速入门
 mvn archetype:generate \
  -DarchetypeGroupId=com.iquantex \
  -DarchetypeArtifactId=phoenix-archetype \
- -DarchetypeVersion=2.1.1 \
+ -DarchetypeVersion=2.1.2 \
  -DgroupId=com.example \
  -DartifactId=helloworld \
  -Dversion=1.0-SNAPSHOT \
@@ -412,9 +410,11 @@ Phoenix是消息驱动框架，一切都是消息通信。为了与前端交互�
 
 > 运行启动前，还需要增加一些简单的html方便查看效果，请看源代码中resources/static。
 
-1. 执行脚本: sh tools/build-restart
-2. 打开浏览器: [http://localhost:8080/](http://localhost:8080/)
-3. 查看效果
+0. 认证license，需要向Phoenix官方申请,[申请链接]()
+1. 填入application.yml的quantex.phoenix.license上 
+2. 执行脚本: sh tools/build-restart
+3. 打开浏览器: [http://localhost:8080/](http://localhost:8080/)
+4. 查看效果
 
 phoenix-lite 提供两种下单方式
 

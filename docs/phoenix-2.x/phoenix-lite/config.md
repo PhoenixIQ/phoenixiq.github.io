@@ -7,10 +7,10 @@ title: 配置详情
 
 ### Phoenix配置
 
-| 配置项                                        | 描述                                                       | 类型    | 默认值 | 
-| :-------------------------------------------- | :--------------------------------------------------------- | :------ | :----- | 
-| quantex.phoenix.routers[].message               | msgName                                                    | String  | 无     | 
-| quantex.phoenix.routers[].dst                   | 目标地址   地址定义： 服务名/聚合类别/聚合根类别           | String  | 无     | 
+| 配置项                                        | 描述                                                       | 类型    | 默认值 |
+| :-------------------------------------------- | :--------------------------------------------------------- | :------ | :----- |
+| quantex.phoenix.routers[].message               | msgName                                                    | String  | 无     |
+| quantex.phoenix.routers[].dst                   | 目标地址   地址定义： 服务名/聚合类别/聚合根类别           | String  | 无     |
 | quantex.phoenix.performance.batch-process       | 聚合根同一批次可以处理的消息个数               | Int | 100  |
 | quantex.phoenix.performance.idempotent-size     | 聚合根幂等集合大小（处理消息时进行幂等）                                       | Int | 1000 |
 | quantex.phoenix.performance.recv-by-nofinished  | 接收消息限流（当未完成事务个数大于该值时，服务暂时不再接收新消息）   | Int | 5000 |
@@ -22,15 +22,15 @@ title: 配置详情
 
 ### phoenix-akka配置 
 
-| 配置项                                              | 描述                                                      | 类型    | 默认值    | 
-| :---------------------------------------------------| :---------------------------------------------------------| :------ | :-------- | 
-| quantex.phoenix.akka.akka-conf                      | actorSystem的配置文件路径                                 | String  | 无        | 
-| quantex.phoenix.akka.akka-parallelism-min           | actorSystem的线程池配置最小并发数                         | Int     | 1         | 
-| quantex.phoenix.akka.akka-parallelism-factor        | actorSystem的线程池配置线程比，即一个核配多少个线程；     | Double  | 3         | 
-| quantex.phoenix.akka.akka-parallelism-max           | actorSystem的线程池配置最大并发数                         | Int     | 128       | 
-| quantex.phoenix.akka.service-name                   | 服务名                                                    | String  | 服务名    | 
-| quantex.phoenix.akka.discovery-method               | 集群发现的方式                                            | String  | config <br /> 可选值：config /  kubernetes-api    | 
-| quantex.phoenix.akka.cinnamon-application           | 服务名                                                    | String  | 服务名    | 
+| 配置项                                              | 描述                                                      | 类型    | 默认值    |
+| :---------------------------------------------------| :---------------------------------------------------------| :------ | :-------- |
+| quantex.phoenix.akka.akka-conf                      | actorSystem的配置文件路径                                 | String  | 无        |
+| quantex.phoenix.akka.akka-parallelism-min           | actorSystem的线程池配置最小并发数                         | Int     | 1         |
+| quantex.phoenix.akka.akka-parallelism-factor        | actorSystem的线程池配置线程比，即一个核配多少个线程；     | Double  | 3         |
+| quantex.phoenix.akka.akka-parallelism-max           | actorSystem的线程池配置最大并发数                         | Int     | 128       |
+| quantex.phoenix.akka.service-name                   | 服务名                                                    | String  | 服务名    |
+| quantex.phoenix.akka.discovery-method               | 集群发现的方式                                            | String  | config <br /> 可选值：config /  kubernetes-api    |
+| quantex.phoenix.akka.cinnamon-application           | 服务名                                                    | String  | 服务名    |
 | quantex.phoenix.akka.provider                       | 运行模式                                                  | String  | cluster <br /> 可选值：local / cluster / remote   |
 | quantex.phoenix.akka.artery-enable                  | remote.artery 开关                                        | String  | on <br />可选值：on / off        |
 | quantex.phoenix.akka.artery-transport               | 传输方式                                                  | String  | tcp <br /> 可选值：tcp / tls-tcp /  aeron-udp       |
@@ -45,38 +45,39 @@ title: 配置详情
 
 ### Phoenix-server配置  
 
-| 配置项                                                         | 描述                                                       | 类型    | 默认值 | 
-| :-------------------------------------------------------------| :--------------------------------------------------------- | :------ | :----- | 
-| quantex.phoenix.server.name                                   | Server端服务名                                             | String  | 无     | 
-| quantex.phoenix.server.mq.type                                | MQ 类型                                                    | String  | kafka     | 
-| quantex.phoenix.server.mq.group                               | Server端服务消费组名，对应kafka和rocketmq中的consumergroup | String   | Server端服务名 | 
-| quantex.phoenix.server.mq.address                             | MQ 服务端地址                                              | String  | 无     | 
-| quantex.phoenix.server.mq.subscribe-topic                     | Server端订阅的 topic                                       | String  | Server端服务名 | 
-| quantex.phoenix.server.mq.use-kerberos                        | 是否开启 kerberos 认证                                     | Boolean | false  | 
-| quantex.phoenix.server.mq.jaas-conf-path                      | jaas配置文件路径                                           | String  | 无     | 
-| quantex.phoenix.server.mq.krb5-conf-path                      | krb5配置文件路径                                           | String  | 无     | 
-| quantex.phoenix.server.mq.krb-service-name                    | krb服务名                                                  | String  | 无     | 
-| quantex.phoenix.server.event-stores.driver-class-name         | 数据库驱动                                                 | String  | 可选值：<br /> org.h2.Driver <br /> com.mysql.jdbc.Driver <br /> oracle.jdbc.OracleDriver <br />   | 
-| quantex.phoenix.server.event-stores.data-sources[].url        | 数据库 连接url                                             | String  | 无     | 
-| quantex.phoenix.server.event-stores.data-sources[].username   | 数据库账户                                                 | String  | 无     | 
-| quantex.phoenix.server.event-stores.data-sources[].password   | 数据库密码                                                 | String  | 无     | 
-| quantex.phoenix.server.event-stores.snapshot.enable                   | 是否开启快照功能                                       |Boolean  | false <br /> 可选值：true / false     |
+| 配置项                                                         | 描述                                                       | 类型    | 默认值 |
+| :-------------------------------------------------------------| :--------------------------------------------------------- | :------ | :----- |
+| quantex.phoenix.server.name                                   | Server端服务名                                             | String  | 无     |
+| quantex.phoenix.server.mq.type                                | MQ 类型                                                    | String  | kafka     |
+| quantex.phoenix.server.mq.group                               | Server端服务消费组名，对应kafka和rocketmq中的consumergroup | String   | Server端服务名 |
+| quantex.phoenix.server.mq.address                             | MQ 服务端地址                                              | String  | 无     |
+| quantex.phoenix.server.mq.subscribe-topic                     | Server端订阅的 topic                                       | String  | Server端服务名 |
+| quantex.phoenix.server.mq.use-kerberos                        | 是否开启 kerberos 认证                                     | Boolean | false  |
+| quantex.phoenix.server.mq.jaas-conf-path                      | jaas配置文件路径                                           | String  | 无     |
+| quantex.phoenix.server.mq.krb5-conf-path                      | krb5配置文件路径                                           | String  | 无     |
+| quantex.phoenix.server.mq.krb-service-name                    | krb服务名                                                  | String  | 无     |
+| quantex.phoenix.server.event-stores.driver-class-name         | 数据库驱动                                                 | String  | 可选值：<br /> org.h2.Driver <br /> com.mysql.jdbc.Driver <br /> oracle.jdbc.OracleDriver <br />   |
+| quantex.phoenix.server.event-stores.data-sources[].url        | 数据库 连接url                                             | String  | 无     |
+| quantex.phoenix.server.event-stores.data-sources[].username   | 数据库账户                                                 | String  | 无     |
+| quantex.phoenix.server.event-stores.data-sources[].password   | 数据库密码                                                 | String  | 无     |
+| quantex.phoenix.server.event-stores.snapshot.enable                  | 是否开启快照功能                                       |Boolean  | false <br /> 可选值：true / false     |
 | quantex.phoenix.server.event-stores.snapshot.entity-snapshot-interval | 自动打快照的触发条件，聚合根每处理 ‘interval’ 个消息打一个快照   |Long     |1000|
+| quantex.phoenix.server.license | 认证license，需要向Phoenix官方申请 | String  | 无     |
 
 
 ### Phoenix-client配置
 
-| 配置项                                        | 描述                                                       | 类型    | 默认值 | 
-| :-------------------------------------------- | :--------------------------------------------------------- | :------ | :----- | 
-| quantex.phoenix.client.name                   | Client 端服务名                                            | String  | 无     | 
-| quantex.phoenix.client.mq.type                | MQ 类型                                                    | String  | kafka     | 
-| quantex.phoenix.client.mq.group               | client端服务消费组名，对应kafka和rocketmq中的consumergroup | String  | Client端服务名     | 
-| quantex.phoenix.client.mq.address             | MQ 服务端地址                                              | String  | 无     | 
-| quantex.phoenix.client.mq.subscribe-topic     | Server端订阅的 topic                                       | String  | Client端服务名    | 
-| quantex.phoenix.client.use-kerberos           | 是否开启 kerberos 认证                                     | Boolean | false  | 
-| quantex.phoenix.client.jaas-conf-path         | jaas配置文件路径                                           | String  | 无     | 
-| quantex.phoenix.client.krb5-conf-path         | krb5配置文件路径                                           | String  | 无     | 
-| quantex.phoenix.client.krb-service-name       | krb服务名                                                  | String  | 无     | 
+| 配置项                                        | 描述                                                       | 类型    | 默认值 |
+| :-------------------------------------------- | :--------------------------------------------------------- | :------ | :----- |
+| quantex.phoenix.client.name                   | Client 端服务名                                            | String  | 无     |
+| quantex.phoenix.client.mq.type                | MQ 类型                                                    | String  | kafka     |
+| quantex.phoenix.client.mq.group               | client端服务消费组名，对应kafka和rocketmq中的consumergroup | String  | Client端服务名     |
+| quantex.phoenix.client.mq.address             | MQ 服务端地址                                              | String  | 无     |
+| quantex.phoenix.client.mq.subscribe-topic     | Server端订阅的 topic                                       | String  | Client端服务名    |
+| quantex.phoenix.client.use-kerberos           | 是否开启 kerberos 认证                                     | Boolean | false  |
+| quantex.phoenix.client.jaas-conf-path         | jaas配置文件路径                                           | String  | 无     |
+| quantex.phoenix.client.krb5-conf-path         | krb5配置文件路径                                           | String  | 无     |
+| quantex.phoenix.client.krb-service-name       | krb服务名                                                  | String  | 无     |
 
 
 ### 配置样例
@@ -98,6 +99,7 @@ quantex:
         batch-retry: 1000
         batch-persist: 200
     server:
+      token: ${token}
       name: ${spring.application.name}
       mq:
         type: kafka
