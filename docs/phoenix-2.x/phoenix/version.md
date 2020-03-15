@@ -12,7 +12,7 @@ title: 下载中心
 | ------------------ | --------     | ------        | -------- |
 | phoenix            |  2020/03/13  | 2.1.2 |[helm-chart](http://10.116.18.93:8848/charts/phoenix-2.1.2.tgz)         |
 | phoenix-admin      |  2020/03/13  | 2.1.2| [helm-chart](http://10.116.18.93:8848/charts/phoenix-admin-2.1.2.tgz)        |
-| phoenix-website    |  2020/03/13  | 2.1.9| [helm-chart](http://10.116.18.93:8848/charts/phoenix-website-2.1.9.tgz)    |
+| phoenix-website    |  2020/03/13  | 2.1.15| [helm-chart](http://10.116.18.93:8848/charts/phoenix-website-2.1.15.tgz)    |
 
 #### phoenix(2.1.2)
 
