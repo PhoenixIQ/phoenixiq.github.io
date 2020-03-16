@@ -4,7 +4,7 @@ module.exports = {
             type: 'category',
             label: '概述',
             items: [
-                "phoenix-2.x/phoenix/phoenix-white-page-2x",
+                "phoenix-2.x/phoenix/phoenix-2x",
                 "phoenix-2.x/phoenix/phoenix-faq-2x",
                 "phoenix-2.x/phoenix/phoenix-roadmap-2x",
             ],
@@ -46,5 +46,6 @@ module.exports = {
                 "phoenix-2.x/phoenix-test/balance-test-2x",
             ],
         },
+
     ]
 };
