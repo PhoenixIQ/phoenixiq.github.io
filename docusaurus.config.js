@@ -15,7 +15,7 @@ module.exports = {
                 src: 'img/phoenix.png',
             },
             links: [
-                {to: 'docs/phoenix-2.x/quick-start/phoenix-lite-2x', label: '文档', position: 'left'},
+                {to: 'docs/phoenix-2.x/phoenix/phoenix-2x', label: '文档', position: 'left'},
                 {to: 'blog/rocketmq-in-phoenix', label: '博客', position: 'left'},
                 {to: 'docs/phoenix-2.x/phoenix/phoenix-download-2x', label: '版本', position: 'left'},
                 {to: 'https://github.com/PhoenixIQ', label: 'GitHub', position: 'right'},
@@ -27,6 +27,10 @@ module.exports = {
                 {
                     title: '文档',
                     items: [
+                        {
+                            label: 'Phoenix是什么?',
+                            to: 'docs/phoenix-2.x/phoenix/phoenix-2x',
+                        },
                         {
                             label: '快速入门',
                             to: 'docs/phoenix-2.x/quick-start/phoenix-lite-2x',

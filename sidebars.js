@@ -2,6 +2,15 @@ module.exports = {
     docs: [
         {
             type: 'category',
+            label: '概述',
+            items: [
+                "phoenix-2.x/phoenix/phoenix-2x",
+                "phoenix-2.x/phoenix/phoenix-faq-2x",
+                "phoenix-2.x/phoenix/phoenix-roadmap-2x",
+            ],
+        },
+        {
+            type: 'category',
             label: '用户文档',
             items: [
                 "phoenix-2.x/quick-start/phoenix-lite-2x",
@@ -37,13 +46,6 @@ module.exports = {
                 "phoenix-2.x/phoenix-test/balance-test-2x",
             ],
         },
-        {
-            type: 'category',
-            label: '社区',
-            items: [
-                "phoenix-2.x/phoenix/phoenix-faq-2x",
-                "phoenix-2.x/phoenix/phoenix-roadmap-2x",
-            ],
-        },
+
     ]
 };
