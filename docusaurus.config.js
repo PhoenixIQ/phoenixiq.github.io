@@ -15,10 +15,10 @@ module.exports = {
                 src: 'img/phoenix.png',
             },
             links: [
-                {to: 'docs/phoenix-2.x/phoenix/phoenix-white-page-2x', label: '文档', position: 'right'},
-                {to: 'blog/rocketmq-in-phoenix', label: '博客', position: 'right'},
-                {to: 'docs/phoenix-2.x/phoenix/phoenix-faq-2x', label: '社区', position: 'right'},
-                {to: 'docs/phoenix-2.x/phoenix/phoenix-download-2x', label: '下载', position: 'right'},
+                {to: 'docs/phoenix-2.x/quick-start/phoenix-lite-2x', label: '文档', position: 'left'},
+                {to: 'blog/rocketmq-in-phoenix', label: '博客', position: 'left'},
+                {to: 'docs/phoenix-2.x/phoenix/phoenix-download-2x', label: '版本', position: 'left'},
+                {to: 'https://github.com/PhoenixIQ', label: 'GitHub', position: 'right'},
             ],
         },
         footer: {
@@ -27,10 +27,6 @@ module.exports = {
                 {
                     title: '文档',
                     items: [
-                        {
-                            label: '白皮书',
-                            to: 'docs/phoenix-2.x/phoenix/phoenix-white-page-2x',
-                        },
                         {
                             label: '快速入门',
                             to: 'docs/phoenix-2.x/quick-start/phoenix-lite-2x',
@@ -42,18 +38,11 @@ module.exports = {
                     ],
                 },
                 {
-                    title: '案例',
+                    title: 'Example',
                     items: [
                         {
-                            label: '银行转账',
-                            href: 'https://gitlab.iquantex.com/phoenix-public/bank-account.git',
-                        },
-                        {
-                            label: '交易风控',
-                            href: 'https://gitlab.iquantex.com/phoenix-public/phoenix-risk',
-                        },
-                        {
-                            label: '炒股大赛',
+                            label: '账户管理',
+                            href: 'https://github.com/PhoenixIQ/bank-account',
                         },
                     ],
                 },
