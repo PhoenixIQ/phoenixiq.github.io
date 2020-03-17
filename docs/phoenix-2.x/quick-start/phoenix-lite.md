@@ -5,15 +5,46 @@ title: 快速入门
 
 ## 环境准备
 
-设置maven服务拉取权限：在`settings.xml`文件中增加quantex的server(一般在`用户目录/.m2`文件夹下)，内容如下:
+## 设置maven仓库
+
+在用户目录下`.m2`设置`settings.xml`文件，内容如下:
 
 ```shell
-<server>
-    <id>quantex</id>
-    <username>deployment</username>
-    <password>deployment123</password>
-</server
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <servers>
+        <server>
+            <id>public</id>
+            <username>phoenix</username>
+            <password>phoenix123</password>
+        </server>
+    </servers>
+
+    <profiles>
+        <profile>
+            <id>kunlun</id>
+            <repositories>
+                <repository>
+                    <id>public</id>
+                    <url>https://artifact.iquantex.com/repository/public</url>
+                    <releases> <enabled>true</enabled><updatePolicy>always</updatePolicy></releases> 
+                    <snapshots> <enabled>true</enabled><updatePolicy>always</updatePolicy></snapshots>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>kunlun</activeProfile>
+    </activeProfiles>
+
+</settings>
+
 ```
+
 
 ## 工程搭建
 
@@ -27,8 +58,7 @@ mvn archetype:generate \
  -DgroupId=com.example \
  -DartifactId=helloworld \
  -Dversion=1.0-SNAPSHOT \
- -DinteractiveMode=false \
- -DarchetypeRepository=https://artifact.iquantex.com/repository/public
+ -DinteractiveMode=false 
 ```
 
 生成成功之后，将会得到如下结构的maven项目。
