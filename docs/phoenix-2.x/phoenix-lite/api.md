@@ -91,13 +91,21 @@ public enum RpcResultCode {
 ### 注解
 #### @EntityAggregateAnnotation
 
-这个注释是为了找到聚合根类，为spring ioc注入存储库。 使用 `aggregateRootType` 标识该聚合根的类型
+这个注释是为了找到聚合根类，为spring ioc注入存储库。 使用 `aggregateRootType` 标识该聚合根的类型。同时可以在聚合根类中选择性增加一个接收`aggregateId`的构造方法，phoenix在构建聚合根对象时会自动识别并传入`aggregateId`。
 
 ```java
 @Getter
 @Setter
 @EntityAggregateAnnotation(aggregateRootType = "BankAccount")
 public class BankAccountAggregate implements Serializable {
+
+	/** 聚合根Id */
+	private String aggregateId;
+
+	/** 传入聚合根Id的构造方法 */
+	public BankAccountAggregate(String aggregateId) {
+		this.aggregateId = aggregateId;
+	}
 
 	// 核心业务数据
 	...
