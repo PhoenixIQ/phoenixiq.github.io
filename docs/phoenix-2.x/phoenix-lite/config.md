@@ -9,15 +9,8 @@ title: 配置详情
 
 | 配置项                                        | 描述                                                       | 类型    | 默认值 |
 | :-------------------------------------------- | :--------------------------------------------------------- | :------ | :----- |
-| quantex.phoenix.routers[].message               | msgName                                                    | String  | 无     |
+| quantex.phoenix.routers[].message               | 消息类名称                                                    | String  | 无     |
 | quantex.phoenix.routers[].dst                   | 目标地址   地址定义： 服务名/聚合类别/聚合根类别           | String  | 无     |
-| quantex.phoenix.performance.batch-process       | 聚合根同一批次可以处理的消息个数               | Int | 100  |
-| quantex.phoenix.performance.idempotent-size     | 聚合根幂等集合大小（处理消息时进行幂等）                                       | Int | 1000 |
-| quantex.phoenix.performance.recv-by-nofinished  | 接收消息限流（当未完成事务个数大于该值时，服务暂时不再接收新消息）   | Int | 5000 |
-| quantex.phoenix.performance.batch-finished      | 批量处理结束的事务                       | Int | 1000 |
-| quantex.phoenix.performance.retry-by-nofinished | phoenix支持消息重试，（当未完成事务个数大于该值时，未完成消息暂时停止重试） | Int | 10000|
-| quantex.phoenix.performance.batch-retry         | 同一批次可以重试的消息个数                           | Int | 1000 |
-| quantex.phoenix.performance.batch-persist       | 消息持久化 批次大小                                  | Int | 200  |
 
 
 ### phoenix-akka配置 
@@ -63,6 +56,14 @@ title: 配置详情
 | quantex.phoenix.server.event-stores.snapshot.enable                  | 是否开启快照功能                                       |Boolean  | false <br /> 可选值：true / false     |
 | quantex.phoenix.server.event-stores.snapshot.entity-snapshot-interval | 自动打快照的触发条件，聚合根每处理 ‘interval’ 个消息打一个快照   |Long     |1000|
 | quantex.phoenix.server.license | 认证license，需要向Phoenix官方申请 | String  | 无     |
+| quantex.phoenix.server.performance.batch-process       | 聚合根同一批次可以处理的消息个数               | Int | 100  |
+| quantex.phoenix.server.performance.idempotent-size     | 聚合根幂等集合大小（处理消息时进行幂等）                                       | Int | 1000 |
+| quantex.phoenix.server.performance.recv-by-nofinished  | 接收消息限流（当未完成事务个数大于该值时，服务暂时不再接收新消息）   | Int | 5000 |
+| quantex.phoenix.server.performance.batch-finished      | 批量处理结束的事务                       | Int | 1000 |
+| quantex.phoenix.server.performance.retry-by-nofinished | phoenix支持消息重试，（当未完成事务个数大于该值时，未完成消息暂时停止重试） | Int | 10000|
+| quantex.phoenix.server.performance.batch-retry         | 同一批次可以重试的消息个数                           | Int | 1000 |
+| quantex.phoenix.server.performance.batch-persist       | 消息持久化 批次大小                                  | Int | 200  |
+| quantex.phoenix.server.performance.actor-survive-time       | 聚合根淘汰策略-不活跃时间(毫秒)                                  | Long | 86400000 (1天)  |
 
 
 ### Phoenix-client配置
