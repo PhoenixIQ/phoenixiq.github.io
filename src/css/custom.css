@@ -5,20 +5,122 @@
  */
 
 /* You can override the default Infima variables here. */
-:root {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: rgb(33, 175, 144);
-  --ifm-color-primary-darker: rgb(31, 165, 136);
-  --ifm-color-primary-darkest: rgb(26, 136, 112);
-  --ifm-color-primary-light: rgb(70, 203, 174);
-  --ifm-color-primary-lighter: rgb(102, 212, 189);
-  --ifm-color-primary-lightest: rgb(146, 224, 208);
-  --ifm-code-font-size: 95%;
+
+.navbar {
+  min-width: 1200px !important;
+  height: 80px !important;
+  padding: 0 148px 0 169px;
+  align-items: center;
+  background: #fff;
+  color: #000;
 }
 
-.docusaurus-highlight-code-line {
-  background-color: rgb(72, 77, 91);
-  display: block;
-  margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
+.navbar.navbar--fixed-top {
+  position: relative !important;
+}
+
+.navbar__items.navbar__items--right {
+  flex: none;
+}
+
+
+.navbar .navbar__link:hover,
+.navbar .navbar__link.navbar__link--active
+{
+  font-weight: 600;
+  color: #000;
+}
+
+.main-wrapper {
+  min-width: 1200px !important;
+  margin: 0  auto!important;
+}
+
+.footer {
+  padding-top: 96px;
+  min-width: 1200px !important;
+}
+
+.footer .container {
+  position: relative;
+  width: 1200px;
+  min-height: 400px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.row.footer__links {
+  position: absolute;
+  right: 0;
+  min-width: 660px;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.col.footer__col {
+  max-width: auto !important;
+  min-width: 72px !important;
+  width: auto !important;
+  margin: 0 50px;
+  padding: 0;
+  flex: none !important;
+}
+
+.footer .text--center {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  min-width: 1200px;
+  color: #999;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.margin-bottom--sm {
+  position: absolute;
+  width: 249px;
+  top: -410px;
+  left: 40px;
+}
+
+.margin-bottom--sm img.footer__logo {
+  width: 249px;
+}
+
+.footer .footer__logo {
+  max-width: 249px !important;
+}
+
+h4.footer__title {
+  min-width: 72px;
+  margin-bottom: 60px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+li.footer__item {
+  font-size: 13px;
+  line-height: 40px;
+}
+
+.footer .footer__link-item:hover {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+.footer.footer--dark {
+  background-color: #131B41 !important;
+}
+
+/* markdown样式 */
+.menu {
+  padding-top: 40px !important;
+}
+
+.padding-vert--lg {
+  padding-top: 100px !important;
 }
