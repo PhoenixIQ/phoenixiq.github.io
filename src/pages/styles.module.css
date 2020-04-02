@@ -70,7 +70,7 @@ ul {
 .containerBanner .content {
   width: 350px;
   font: 18px/25px PingFangSC-Regular, PingFang SC;
-  padding: 10px 0 66px;
+  padding: 10px 0 30px;
   margin: 0;
 }
 
@@ -84,7 +84,7 @@ ul {
 }
 
 .link {
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .getStarted {
