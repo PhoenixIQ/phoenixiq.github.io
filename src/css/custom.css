@@ -7,33 +7,28 @@
 /* You can override the default Infima variables here. */
 
 .navbar {
-  min-width: 1200px !important;
-  height: 80px !important;
-  padding: 0 148px 0 169px;
+  min-width: 1000px !important;
+  height: 60px !important;
   align-items: center;
-  background: #fff;
-  color: #000;
-}
-
-.navbar.navbar--fixed-top {
-  position: relative !important;
+  background: #2239d5;
 }
 
 .navbar__items.navbar__items--right {
   flex: none;
 }
 
-
-.navbar .navbar__link:hover,
-.navbar .navbar__link.navbar__link--active
-{
-  font-weight: 600;
-  color: #000;
+.navbar .navbar__link {
+  color: #fff;
 }
 
-.main-wrapper {
-  min-width: 1200px !important;
-  margin: 0  auto!important;
+.navbar .navbar__link:hover,
+.navbar .navbar__link.navbar__link--active {
+  font-weight: 600;
+  color: #fff;
+}
+
+.navbar .navbar__logo {
+  height: 72% !important;
 }
 
 .footer {
@@ -113,7 +108,7 @@ li.footer__item {
 }
 
 .footer.footer--dark {
-  background-color: #131B41 !important;
+  background-color: #131b41 !important;
 }
 
 /* markdown样式 */

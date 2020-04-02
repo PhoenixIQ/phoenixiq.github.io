@@ -29,7 +29,7 @@ ul {
 .heroBanner {
   position: relative;
   width: 100%;
-  height: 710px;
+  height: 627px;
   text-align: left;
   font: 300 38px/53px PingFangSC-Light, PingFang SC;
   text-shadow: 0px 2px 150px rgba(0, 0, 0, 0.29);
@@ -45,10 +45,20 @@ ul {
   background-size: 100% 100%;
 }
 
+@media screen and (max-width: 1600px) {
+  .containerBanner {
+    width: 1400px;
+    height: 100%;
+    margin: 0 auto;
+    background: url("/img/banner.png") center no-repeat;
+    background-size: 100% 100%;
+  }
+}
+
 .containerBanner .container {
   margin: 0 auto;
-  width: 1200px;
-  height: 710px;
+  width: 1000px;
+  height: 627px;
   padding-top: 98px;
   color: #fff;
 }
@@ -140,7 +150,7 @@ ul {
 
 .introduct {
   display: flex;
-  width: 1200px;
+  width: 1000px;
   margin: 0 auto;
   height: 550px;
   justify-content: space-between;
@@ -182,7 +192,7 @@ ul {
 }
 
 .features {
-  width: 1200px;
+  width: 1000px;
   height: 796px;
   margin: 0 auto;
   padding: 67px 0 120px;
