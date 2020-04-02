@@ -18,13 +18,13 @@
 }
 
 .navbar .navbar__link {
-  color: #fff;
+  color: #666 ;
 }
 
 .navbar .navbar__link:hover,
 .navbar .navbar__link.navbar__link--active {
   font-weight: 600;
-  color: #fff;
+  color: #000;
 }
 
 .navbar .navbar__logo {

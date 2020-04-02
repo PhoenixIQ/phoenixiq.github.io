@@ -17,7 +17,7 @@ module.exports = {
         src: 'img/logo.png',
       },
       links: [
-        { to: '/', label: '首页', position: 'left' },
+        // { to: '/', label: '首页', position: 'left' },
         { to: 'docs/phoenix-2.x/phoenix/phoenix-2x', label: '文档', position: 'left' },
         { to: 'blog/rocketmq-in-phoenix', label: '博客', position: 'left' },
         { to: 'docs/phoenix-2.x/phoenix/phoenix-download-2x', label: '版本', position: 'left' },
