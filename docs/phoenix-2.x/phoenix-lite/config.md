@@ -80,6 +80,20 @@ title: 配置详情
 | quantex.phoenix.client.krb5-conf-path         | krb5配置文件路径                                           | String  | 无     |
 | quantex.phoenix.client.krb-service-name       | krb服务名                                                  | String  | 无     |
 
+### Phoenix-admin配置
+
+**该配置表示Phoenix应用接入Phoenix-admin所需要的配置**
+
+| 配置项                                      | 描述                        | 类型    | 默认值  |
+| :------------------------------------------ | :-------------------------- | :------ | :------ |
+| eureka.client.enabled                       | 是否启用eureka客户端        | Boolean | true    |
+| eureka.client.serviceUrl.defaultZone        | eureka server地址           | String  | 无      |
+| eureka.client.fetch-registry                | 从eureka server同步注册信息 | Boolean | true    |
+| eureka.client.register-with-eureka          | 注册自身信息到eureka server | Boolean | true    |
+| eureka.instance.prefer-ip-address           | 是否优先使用ip注册          | Boolean | false   |
+| eureka.instance.appname                     | 注册的服务名                | String  | UNKNOWN |
+| eureka.instance.metadata-map.phoenixEnabled | 是否接入Phoenix-admin监控   | String  | 无      |
+| eureka.instance.metadata-map.servletPath    | 服务的http请求路径          | String  | 无      |
 
 ### 配置样例
 
@@ -123,6 +137,21 @@ quantex:
         group: ${spring.application.name}-client
         address: embedded
         subscribe-topic: ${spring.application.name}-client
+        
+service-center:
+  url: localhost:7070
+eureka:
+  client:
+    enabled: false
+    serviceUrl:
+      defaultZone: http://${service-center.url}/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+    appname: ${spring.application.name}
+    metadata-map:
+      phoenixEnabled: true
 ```
 
 ## 环境配置参考
