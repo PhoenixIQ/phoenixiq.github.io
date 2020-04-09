@@ -18,7 +18,7 @@
 }
 
 .navbar .navbar__link {
-  color: #666 ;
+  color: #666;
 }
 
 .navbar .navbar__link:hover,
@@ -73,14 +73,14 @@
   transform: translateX(-50%);
 }
 
-.margin-bottom--sm {
+.footer__logo {
   position: absolute;
   width: 249px;
   top: -410px;
   left: 40px;
 }
 
-.margin-bottom--sm img.footer__logo {
+.row.footer__links .margin-bottom--sm img.footer__logo {
   width: 249px;
 }
 

@@ -73,17 +73,17 @@ function Home() {
                 to={useBaseUrl('docs/phoenix-2.x/quick-start/phoenix-lite-2x')}>
                 开始使用
               </Link>
-              <Link className={classnames(styles.getStarted)}
+              {/* <Link className={classnames(styles.getStarted)}
                 to="https://github.com/PhoenixIQ/bank-account">
                 用户登记
-              </Link>
+              </Link> */}
               <Link className={classnames(styles.getStarted)}
                 to="https://github.com/PhoenixIQ">
                 GitHub
               </Link>
             </div>
             <div>
-              <iframe className={classnames(styles.indexCtasGitHubButton)} src="https://ghbtns.com/github-btn.html?user=phoenixiq&repo=phoenix-website&type=star&count=true&size=large">
+              <iframe className={classnames(styles.indexCtasGitHubButton, styles.mr)} src="https://ghbtns.com/github-btn.html?user=phoenixiq&repo=phoenix-website&type=star&count=true&size=large">
                 <p>Your browser does not support iframes.</p>
               </iframe>
               <iframe className={classnames(styles.indexCtasGitHubButton)} src="https://ghbtns.com/github-btn.html?user=phoenixiq&repo=phoenix-website&type=fork&count=true&size=large">
