@@ -17,11 +17,11 @@ module.exports = {
         src: 'img/logo.png',
       },
       links: [
-        // { to: '/', label: '首页', position: 'left' },
-        { to: 'docs/phoenix-2.x/phoenix/phoenix-2x', label: '文档', position: 'left' },
-        { to: 'blog/rocketmq-in-phoenix', label: '博客', position: 'left' },
-        { to: 'docs/phoenix-2.x/phoenix/phoenix-download-2x', label: '版本', position: 'left' },
-        { to: '', label: '联系我们', position: 'right' },
+        { to: '/', label: '首页', position: 'right' },
+        { to: 'docs/phoenix-2.x/phoenix/phoenix-2x', label: '文档', position: 'right' },
+        { to: 'blog/rocketmq-in-phoenix', label: '博客', position: 'right' },
+        { to: 'docs/phoenix-2.x/phoenix/phoenix-download-2x', label: '版本', position: 'right' },
+        { to: 'https://github.com/PhoenixIQ', label: '社区', position: 'right' },
       ],
     },
     footer: {
