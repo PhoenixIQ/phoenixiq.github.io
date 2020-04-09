@@ -9,7 +9,7 @@ Phoenix目前暂未开源，但提供免费试用，试用过程中任何问题�
 
 
 - issue: https://github.com/PhoenixIQ/phoenix-website/issues
-- 邮件  : baodi.shi@iquantex.com  
+- 邮件  : phoenix@iquantex.com  
 
 
 ## 问题列表
