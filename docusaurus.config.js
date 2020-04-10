@@ -19,7 +19,7 @@ module.exports = {
       links: [
         { to: '/', label: '首页', position: 'right' },
         { to: 'docs/phoenix-2.x/phoenix/phoenix-2x', label: '文档', position: 'right' },
-        { to: 'blog/rocketmq-in-phoenix', label: '博客', position: 'right' },
+        { to: 'blog/', label: '博客', position: 'right' },
         { to: 'docs/phoenix-2.x/phoenix/phoenix-download-2x', label: '版本', position: 'right' },
         { to: 'https://github.com/PhoenixIQ', label: '社区', position: 'right' },
       ],
@@ -85,6 +85,12 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
             'http://phoenix-website.sz.iquantex.com/',
+        },
+        blog: {
+          feedOptions: {
+            type: 'all',
+            copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`,
+          },
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

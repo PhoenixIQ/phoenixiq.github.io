@@ -11,6 +11,8 @@ tags: [Phoenix, Rocketmq]
 
 > 摘要：Phoenix是宽拓科技架构团队研发的内存计算框架，借鉴了LMAX的架构思路，采用CQRS和EventSouring理念打造。本文简单介绍Phoenix，以及RocketMQ在Phoenix中的应用与实践。 注：该Phoenix不是Apache开源的那个Phoenix。
 
+<!--truncate-->
+
 ## 行业背景
 在金融资管投资交易领域，业务场景复杂，如在交易处理场景中，存在事前的风控头寸控制需求，导致交易事件必须串行处理，无法并发，且单次交易事件处理中，存在高密度的复杂业务逻辑计算且依赖数据范围广，所以系统的性能问题非常突出。
 
