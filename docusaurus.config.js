@@ -26,9 +26,6 @@ module.exports = {
     },
     footer: {
       style: 'dark',
-      logo: {
-        src: 'img/footer.png',
-      },
       links: [
         {
           title: '文档',
