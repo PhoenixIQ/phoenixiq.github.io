@@ -34,7 +34,7 @@ module.exports = {
           title: '文档',
           items: [
             {
-              label: '白皮书',
+              label: 'Phoenix介绍',
               to: 'docs/phoenix-2.x/phoenix/phoenix-2x',
             },
             {
@@ -51,16 +51,16 @@ module.exports = {
           title: '案例',
           items: [
             {
-              label: '银行转账',
-              href: 'https://github.com/PhoenixIQ/bank-account',
+              label: '账户管理',
+              href: 'https://github.com/PhoenixIQ/phoenix-samples/tree/master/bank-account',
             },
             {
               label: '交易风控',
-              href: 'https://github.com/PhoenixIQ/bank-account',
+              href: 'https://github.com/PhoenixIQ/phoenix-sample-risk',
             },
             {
-              label: '炒股大赛',
-              href: 'https://github.com/PhoenixIQ/bank-account',
+              label: '购物车',
+              href: 'https://github.com/PhoenixIQ/phoenix-samples/tree/master/shopping-cart',
             },
           ],
         },
