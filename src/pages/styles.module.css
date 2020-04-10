@@ -8,24 +8,6 @@ body > div {
   background-color: #fff !important;
 }
 
-h2 {
-  margin: 0;
-  font-size: 38px;
-  font-family: PingFangSC-Semibold, PingFang SC;
-  font-weight: 600;
-  color: rgba(0, 0, 0, 1);
-}
-
-li {
-  list-style: none;
-}
-
-h4,
-ul {
-  margin: 0;
-  padding: 0 !important;
-}
-
 .heroBanner {
   position: relative;
   width: 100%;
@@ -97,7 +79,7 @@ ul {
 }
 
 .indexCtasGitHubButton.mr {
-  margin-right: -36px;
+  margin-right: -16px;
 }
 
 .link {
@@ -240,4 +222,113 @@ ul {
 .features p {
   padding: 0;
   margin: 0;
+}
+ 
+@media screen and (max-width: 2560px) and (min-width: 1980px) {
+  .heroBanner {
+    height: 814px;
+  }
+
+  .containerBanner {
+    min-width: 2560px;
+    height: 100%;
+    margin: 0 auto;
+    background: url("/img/banner.png") center no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .containerBanner .container {
+    padding-top: 198px;
+    width: 1200px;
+  }
+
+  .containerBanner .content {
+    width: 408px;
+    font: 24px/25px PingFangSC-Regular, PingFang SC;
+    text-align: justify;
+    line-height: 40px;
+  }
+
+  .link {
+    margin-bottom: 20px;
+  }
+
+  .getStarted {
+    padding: 6px 12px;
+    font: 600 22px/25px PingFangSC-Semibold, PingFang SC;
+  }
+
+  .release {
+    color: #fff;
+    font: 500 18px/20px PingFangSC-Medium, PingFang SC;
+  }
+
+  .release .version {
+    margin-top: 12px;
+    padding: 6px 0;
+    width: 204px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .release .date {
+    padding-top: 18px;
+  }
+
+  /* Phoenix架构图 */
+
+  .introduct {
+    width: 1200px;
+    margin: 0 auto;
+    height: 600px;
+    padding: 54px 0 96px;
+  }
+
+  .introduct .article {
+    width: 400px;
+    text-align: justify;
+    margin-top: 110px;
+  }
+
+  .introduct h2 {
+    font-size: 30px;
+  }
+
+  .introduct p {
+    font-size: 22px;
+  }
+
+  .conception img {
+    width: 600px;
+    height: 480px;
+  }
+
+  /* Phoenix的特性 */
+
+  .featuresWrap {
+    width: 100%;
+    background: #fff;
+  }
+
+  .features {
+    width: 1200px;
+    height: 820px;
+  }
+
+  .featuresCon {
+    margin-bottom: 75px !important;
+  }
+
+  .features h1 {
+    font-size: 30px;
+  }
+
+  .features h3 {
+    font-size: 20px;
+  }
+
+  .features p {
+    line-height: 26px;
+    font-size: 16px;
+  }
 }
