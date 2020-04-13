@@ -20,34 +20,11 @@ body > div {
 }
 
 .containerBanner {
-  width: 1980px;
   height: 100%;
   margin: 0 auto;
+  min-width: 1366px;
   background: url("/img/banner.png") center no-repeat;
   background-size: 100% 100%;
-}
-
-@media screen and (max-width: 1600px) {
-  .containerBanner {
-    width: 1400px;
-    height: 100%;
-    margin: 0 auto;
-    background: url("/img/banner.png") center no-repeat;
-    background-size: 100% 100%;
-  }
-}
-
-@media screen and (max-width: 2560px) and (min-width: 1980px) {
-  .heroBanner {
-    height: 814px;
-  }
-  .containerBanner {
-    min-width: 2560px;
-    height: 100%;
-    margin: 0 auto;
-    background: url("/img/banner.png") center no-repeat;
-    background-size: 100% 100%;
-  }
 }
 
 .containerBanner .container {
@@ -143,7 +120,7 @@ body > div {
 /* Phoenix架构图 */
 
 .introductWrap {
-  width: 100%;
+  min-width: 1366px;
   background-color: #fcfcfc;
 }
 
@@ -186,7 +163,7 @@ body > div {
 }
 
 .featuresWrap {
-  width: 100%;
+  min-width: 1366px;
   background: #fff;
 }
 
@@ -229,17 +206,9 @@ body > div {
     height: 814px;
   }
 
-  .containerBanner {
-    min-width: 2560px;
-    height: 100%;
-    margin: 0 auto;
-    background: url("/img/banner.png") center no-repeat;
-    background-size: 100% 100%;
-  }
-
   .containerBanner .container {
     padding-top: 198px;
-    width: 1200px;
+    min-width: 1366px;
   }
 
   .containerBanner .content {
@@ -278,7 +247,7 @@ body > div {
   /* Phoenix架构图 */
 
   .introduct {
-    width: 1200px;
+    width: 1366px;
     margin: 0 auto;
     height: 600px;
     padding: 54px 0 96px;
@@ -306,12 +275,12 @@ body > div {
   /* Phoenix的特性 */
 
   .featuresWrap {
-    width: 100%;
+    min-width: 1366px;
     background: #fff;
   }
 
   .features {
-    width: 1200px;
+    min-width: 1366px;
     height: 820px;
   }
 
