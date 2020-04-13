@@ -1,6 +1,6 @@
 ---
-id: admin-function-2x
-title: 平台介绍
+id: phoenix-admin-readme-2x
+title: 功能介绍
 ---
 
 ## 前言

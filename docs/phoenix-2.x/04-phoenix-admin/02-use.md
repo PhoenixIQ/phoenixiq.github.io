@@ -1,12 +1,7 @@
 ---
+id: phoenix-admin-use-2x
+title: 使用说明
 ---
-
-## 应用部署
-
-phoenix-admin提供了便捷的helm部署方式。可以使用helm命令在Kubernetes环境一键拉起整套phoenix-admin的集群。
-```shell
-helm upgrade --kubeconfig devops/.kube/config-demo ${name} --install --namespace=phoenix-admin-demo  --set phoenix_admin.version=$CI_COMMIT_REF_NAME  devops/helm/phoenix-admin/
-```
 
 ##  项目配置
 1. 新建项目

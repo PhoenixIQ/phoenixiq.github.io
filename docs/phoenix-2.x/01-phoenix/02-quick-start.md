@@ -1,5 +1,5 @@
 ---
-id: phoenix-lite-2x 
+id: phoenix-quick-start-2x 
 title: 快速入门
 ---
 

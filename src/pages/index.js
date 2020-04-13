@@ -70,7 +70,7 @@ function Home() {
             </p>
             <div className={classnames(styles.link)}>
               <Link className={classnames(styles.getStarted)}
-                to={useBaseUrl('docs/phoenix-2.x/quick-start/phoenix-lite-2x')}>
+                to={useBaseUrl('docs/phoenix-2.x/01-phoenix/phoenix-quick-start-2x')}>
                 开始使用
               </Link>
               {/* <Link className={classnames(styles.getStarted)}

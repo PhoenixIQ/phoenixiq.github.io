@@ -1,5 +1,5 @@
 ---
-id: phoenix-download-2x
+id: phoenix-version-2x
 title: ReleaseNote
 ---
 
