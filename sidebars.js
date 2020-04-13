@@ -14,6 +14,7 @@ module.exports = {
             type: 'category',
             label: 'Phoenix Core',
             items: [
+                "phoenix-2.x/02-phoenix-core/phoenix-core-2x",
                 "phoenix-2.x/02-phoenix-core/phoenix-core-client-2x",
                 "phoenix-2.x/02-phoenix-core/phoenix-core-entity-aggregate-2x",
                 "phoenix-2.x/02-phoenix-core/phoenix-core-transaction-aggregate-2x",
