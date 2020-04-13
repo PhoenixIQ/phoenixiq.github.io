@@ -18,9 +18,9 @@ module.exports = {
       },
       links: [
         { to: '/', label: '首页', position: 'right' },
-        { to: 'docs/phoenix-2.x/phoenix/phoenix-2x', label: '文档', position: 'right' },
+        { to: 'docs/phoenix-2.x/01-phoenix/phoenix-2x', label: '文档', position: 'right' },
         { to: 'blog/', label: '博客', position: 'right' },
-        { to: 'docs/phoenix-2.x/phoenix/phoenix-download-2x', label: '版本', position: 'right' },
+        { to: 'docs/page-header/phoenix-version-2x', label: '版本', position: 'right' },
         { to: 'https://github.com/PhoenixIQ', label: '社区', position: 'right' },
       ],
     },
@@ -32,15 +32,15 @@ module.exports = {
           items: [
             {
               label: 'Phoenix介绍',
-              to: 'docs/phoenix-2.x/phoenix/phoenix-2x',
+              to: 'docs/phoenix-2.x/01-phoenix/phoenix-2x',
             },
             {
               label: '快速入门',
-              to: 'docs/phoenix-2.x/quick-start/phoenix-lite-2x',
+              to: 'docs/phoenix-2.x/01-phoenix/phoenix-quick-start-2x',
             },
             {
               label: 'FAQ',
-              to: 'docs/phoenix-2.x/phoenix/phoenix-faq-2x',
+              to: 'docs/phoenix-2.x/01-phoenix/phoenix-faq-2x',
             },
           ],
         },
