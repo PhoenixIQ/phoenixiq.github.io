@@ -128,10 +128,10 @@ body > div {
   display: flex;
   width: 1000px;
   margin: 0 auto;
-  height: 550px;
+  height: 496px;
   justify-content: space-between;
   background-color: #fcfcfc;
-  padding: 54px 0 96px;
+  padding: 54px 0 56px;
 }
 
 .introduct .article {
@@ -249,8 +249,8 @@ body > div {
   .introduct {
     width: 1366px;
     margin: 0 auto;
-    height: 600px;
-    padding: 54px 0 96px;
+    height: 520px;
+    padding: 54px 0 55px;
   }
 
   .introduct .article {
