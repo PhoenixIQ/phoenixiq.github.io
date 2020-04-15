@@ -3,169 +3,162 @@ id: phoenix-quick-start-2x
 title: 快速入门
 ---
 
-## 环境准备
+**Phoenix**集成了**spring boot**，在开发过程中可以很方便的使用**phoenix**框架来构建应用
 
-## 设置maven仓库
+## 快速入门
 
-在用户目录下`.m2`设置`settings.xml`文件，内容如下:
+Phoenix提供了完善的sample工程,请参见：[PhoenixIQ/phoenix-samples](https://github.com/PhoenixIQ/phoenix-samples)
 
-```shell
-<?xml version="1.0" encoding="UTF-8"?>
+### 消息定义
 
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+Phoenix是一个消息驱动框架，聚合根接收cmd产生event
 
-    <servers>
-        <server>
-            <id>public</id>
-            <username>phoenix</username>
-            <password>phoenix123</password>
-        </server>
-    </servers>
+#### command定义
 
-    <profiles>
-        <profile>
-            <id>kunlun</id>
-            <repositories>
-                <repository>
-                    <id>public</id>
-                    <url>https://artifact.iquantex.com/repository/public</url>
-                    <releases> <enabled>true</enabled><updatePolicy>always</updatePolicy></releases> 
-                    <snapshots> <enabled>true</enabled><updatePolicy>always</updatePolicy></snapshots>
-                </repository>
-            </repositories>
-        </profile>
-    </profiles>
-    <activeProfiles>
-        <activeProfile>kunlun</activeProfile>
-    </activeProfiles>
+coreapi/helloCmd.java
 
-</settings>
+*Phoenix支持`protobuf`协议和`javaBean`协议进行序列化，这里使用`javaBean`进行示范*
 
+```java
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class HelloCmd implements Serializable {
+
+	/** hello 指令id */
+    private String helloId;
+
+}
 ```
 
+#### event定义
 
-## 工程搭建
+coreapi/helloEvent.java
 
-搭建phoenix工程十分容易，可以使用下述命令即可生成一个完整的phoenix的maven工程。其中 `DarchetypeVersion` 为phoenix的版本，`groupId`、`artifactId`、`version`为生成工程的定义。
+```java
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class HelloEvent implements Serializable {
 
-```
-mvn archetype:generate \
- -DarchetypeGroupId=com.iquantex \
- -DarchetypeArtifactId=phoenix-archetype \
- -DarchetypeVersion=2.1.2 \
- -DgroupId=com.example \
- -DartifactId=helloworld \
- -Dversion=1.0-SNAPSHOT \
- -DinteractiveMode=false 
-```
+	/** hello 指令id */
+    private String helloId;
 
-生成成功之后，将会得到如下结构的maven项目。
-
-```shell
-└── helloworld
-    ├──application
-    ├──coreapi 
-    ├──domain  
-    ├──tools 
-	├──pom.xml
+}
 ```
 
-## 模块介绍
+### 定义聚合根
 
-Phoenix开发工程奔着模块自治的思想，把分为了三个子Module，依赖关系如下:
-```shell
-                   +----------------+
-                   |   application  |
-                   +-----+----+-----+
-                         |    |
-                 +-------+    +------+
-                 |                   |
-          +------v-----+     +-------v-------+
-          |    domain  <-----+  coreapi      |
-          +------+-----+     +-------+-------+
+domain/HelloAggregate.java
+
+**聚合根类定义规则：**
+
+1. 聚合根类需要使用`@EntityAggregateAnnotation`进行标记
+1. 聚合根类需要实现序列化类`Serializable`
+1. 接收**command**方法只能包含一个**cmd**参数且方法名必须为`act`返回值为`ActReturn`
+1. `act`方法前需要增加`@CommandHandler`或`@QueryHandler`,其中`aggregateRootId`为聚合根id
+1. 接收**event**方法只能包含一个**event**参数，方法名称必须为`on`返回值为`void`
+
+```java
+/**
+ * hello 聚合根
+ */
+@Slf4j
+@Data
+@EntityAggregateAnnotation(aggregateRootType = "Hello")
+public class HelloAggregate implements Serializable {
+
+	private static final long serialVersionUID = -1L;
+
+	/** 状态: 计数器 */
+	private long num;
+
+	/**
+	 * 处理hello指令，产生HelloEvent
+	 * @param cmd hello 指令
+	 * @return 处理结果
+	 */
+	@CommandHandler(aggregateRootId = "helloId")
+	public ActReturn act(Hello.HelloCmd cmd) {
+		return ActReturn.builder().retCode(RetCode.SUCCESS).retMessage("Hello World Phoenix...")
+				.event(Hello.HelloEvent.newBuilder().setHelloId(cmd.getHelloId()).build()).build();
+	}
+
+	/**
+	 * 处理helloEvent
+	 * @param event hello事件
+	 */
+	public void on(Hello.HelloEvent event) {
+		num++;
+		log.info("Phoenix State: {}", num);
+	}
+
+}
 ```
 
-### application
-应用的顶层模块，启动模块，入口模块，包括：
+### 发布接口
 
-- SpringBoot启动类，启动配置等
-- 用户交互层（Web、RESTFul API）
+接口的发布,可以直接发布消息，在这里包装为http请求发布。
 
-``` shell
-├── pom.xml
-└── src
-    ├── main
-    │   ├── java
-    │   │   └── com.example
-    │   │       ├── HelloworldApplication.java    # spring启动类
-    │   │       ├── controller
-    │   │       │   ├── HelloController.java      # 交互层类 
-    │   │       └── runner
-    │   │           └── Runner.java               # phoenix启动类
-    │   └── resources
-    │       ├── application.yaml                  # 配置文件
-    │       ├── logback.xml                       # 日志配置
+application/HelloController.java
+
+```java
+@Slf4j
+@RestController
+@RequestMapping("/hello")
+public class HelloController {
+
+	/** phoenix 客户端 */
+	@Autowired
+	private PhoenixClient client;
+
+	/**
+	 * 处理 hello Http请求
+	 * @return 指令返回结果
+	 */
+	@PutMapping("/{helloId}")
+	public String allocate(@PathVariable String helloId) {
+		Hello.HelloCmd helloCmd = Hello.HelloCmd.newBuilder().setHelloId(helloId).build();
+		// 发送指令信息
+		Future<RpcResult> future = client.send(helloCmd, "");
+		try {
+			// 接收指令返回结果
+			RpcResult result = future.get(10, TimeUnit.SECONDS);
+			return result.getMessage();
+		}
+		catch (InterruptedException | ExecutionException | TimeoutException e) {
+			return "rpc error: " + e.getMessage();
+		}
+	}
+}
 ```
 
-### coreapi
-应用的消息定义模块，包括：
-- command: 聚合根入口命令
-- event: 聚合根处理后事件
+### Phoenix配置
 
-```shell
-├── pom.xml
-└── src
-    ├── main
-    │   ├── java
-    │   │   └── com.example
-    │   │       ├── Hello.java     # 消息定义(命令和事件)
-    │   │       └── description.md
-    │   └── resources
-    │   │       └── Hello.proto    # protobuf定义
+application/application.yaml
 
+```yaml
+quantex:
+  phoenix:
+    routers:
+      - message: com.iquantex.samples.helloworld.coreapi.Hello$HelloCmd
+        dst: helloworld/EA/Hello
+    server:
+      name: ${spring.application.name}
+      mq:
+        type: kafka
+        address: embedded
+      event-store:
+        driver-class-name: org.h2.Driver
+        snapshot:
+          enabled: true
+        data-sources:
+          - url: jdbc:h2:file:./data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
+            username: sa
+            password:
+    client:
+      name: ${spring.application.name}-client
+      mq:
+        type: kafka
+        address: embedded
 ```
-
-### domain
-phoenix业务领域核心模块，包括：
-- 聚合根： 核心业务领域聚合根，处理`coreapi`中的命令并返回事件
-- 聚合根测试：针对聚合根的完整测试
-- 依赖服务： 聚合根计算过程中依赖的服务逻辑
-
-``` shell
-├── pom.xml
-└── src
-    ├── main
-    │   ├── java
-    │   │   └── com.example
-    │   │     └── domain
-    │   │         ├── entity                       # 聚合实体定义包
-    │   │         │   ├── HelloAggregate.java      # 聚合根定义(特殊的实体)
-    │   │         │   └── description.md          
-    │   │         └── service
-    │   │             └── description.md
-    │   └── resources
-    └── test
-        ├── java.com.example
-        │    └── domain
-        │        └── HelloAggregateTest.java       # 聚合根测试类
-```
-
-## 运行测试
-
-使用`mvn archetype`生成示例工程后可直接启动application模块下的`HelloworldApplication`验证工程是否正常构建
-
-0. 需要向Phoenix[官方申请]()license，填入`application/src/main/resources/application.yml`的`quantex.phoenix.server.license`
-
-1. 启动HelloworldApplication，服务正常启动
-
-2. 调用接口测试，进行连通性测试
-```shell
-curl -X PUT http://127.0.0.1:8080/hello/h001
-> success
-```
-
-3. 同时查看日志打印`Hello World Phoenix`
-
-![show](../../assets/phoenix2.x/phoenix-lite/example-hello-log.png)
