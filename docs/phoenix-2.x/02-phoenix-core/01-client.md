@@ -1,9 +1,9 @@
 ---
 id: phoenix-core-client-2x
-title: 客户端调用
+title: 客户端介绍
 ---
 
-> **PhoenixClient**主要用于向**PhoenixServer**发送**cmd**和接收**PhoenixServer**返回的**event**
+**PhoenixClient**主要用于向**PhoenixServer**发送**cmd**和接收**PhoenixServer**返回的**event**
 
 ## maven依赖
 
@@ -15,23 +15,23 @@ title: 客户端调用
 </dependency>
 ```
 
-## 配置
+## 客户端配置
 
 在**spring boot**配置文件中添加**phoenix**配置信息
 
 ```yaml
 quantex:
   phoenix:
-    routers:  # 路由配置
-      - message: com.iquantex.samples.account.coreapi.Hello$HelloCmd
-        dst: bank-account/EA/Hello
-      - message: com.iquantex.samples.account.coreapi.AccountAllocateCmd
-        dst: bank-account/EA/BankAccount
-    client:   # client端配置
-      name: ${spring.application.name}-client
+    routers:                                    # 路由配置
+      - message: com.iquantex.samples.account.coreapi.Hello$HelloCmd  # 消息类名称
+        dst: bank-account/EA/Hello              # 目标地址
+      - message: com.iquantex.samples.account.coreapi.AccountAllocateCmd  # 消息类名称
+        dst: bank-account/EA/BankAccount        # 目标地址
+    client:                                     # client端配置
+      name: ${spring.application.name}-client   # 服务名称
       mq:
-        type: kafka
-        address: embedded
+        type: kafka                             # mq类型
+        address: embedded                       # mq服务地址 embedded为内存kafka地址
 ```
 
 相关配置介绍 请参见: [配置详情](./05-config.md)
