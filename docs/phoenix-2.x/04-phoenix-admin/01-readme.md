@@ -32,6 +32,32 @@ phoniex-admin是配合Phoenix框架使用的服务监控平台，能够实现对
 - 删除快照
 - 聚合根内存查询
 
+### Actor tree查看
+
+#### 入口
+
+![image-20200414142901917](../../assets/phoenix2.x/phoenix-admin/image-20200414142901917.png?lastModify=1586845745)
+
+![image-20200414105825473](../../assets/phoenix2.x/phoenix-admin/image-20200414105825473.png)
+
+#### 简介
+
+Phoenix服务基于Akka框架实现了强大的集群分片（sharding）能力，以actor为聚合根调度的基本单元，actor tree通过监控Akka中的shard和actor，动态的展示了Phoenix服务的均衡分片，水平伸缩，故障恢复等功能。
+
+#### 图例介绍
+
+* 红点
+
+  当前Phoenix集群的集群名称
+
+* 橙点
+
+  当前Phoenix集群内的节点的IP和端口
+
+* 绿点
+
+  每一个Phoenix节点上存在的Akka shard的ID，后面的括号为该shard里存在的actor的数量
+
 ## grafana监控
 
 ### 概述
