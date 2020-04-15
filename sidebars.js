@@ -20,6 +20,7 @@ module.exports = {
                 "phoenix-2.x/02-phoenix-core/phoenix-core-transaction-aggregate-2x",
                 "phoenix-2.x/02-phoenix-core/phoenix-core-event-store-2x",
                 "phoenix-2.x/02-phoenix-core/phoenix-core-config-2x",
+                "phoenix-2.x/02-phoenix-core/phoenix-core-http-api-2x",
             ],
         },
         {
