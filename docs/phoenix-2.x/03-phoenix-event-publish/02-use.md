@@ -143,7 +143,3 @@ ResponseBody: json
     ]
 }
 ```
-
-## 设计文档
-
-[设计文档](./doc/Event Publish设计文档.md)

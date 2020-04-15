@@ -15,7 +15,7 @@ Phoenix Event Publish是为独立部署的phoenix配套服务，提供领域事�
 * Event-Publish服务会保存所有事件发布任务的定义信息和运行状态，保证任务重启后可以从上次状态恢复，并保证订阅的消息有序、不丢地发到消息队列中（有消息重复）。
 * Event-Publish服务支持高可用集群部署、多节点横向扩容。
 
-![show](doc/img/EventPublish.svg)
+![show](../../assets/phoenix2.x/phoenix-event-publish/EventPublish.svg)
 
 ## 名词定义
 
@@ -28,7 +28,3 @@ Phoenix Event Publish是为独立部署的phoenix配套服务，提供领域事�
 4. 事件发布任务状态：
     * 是否处于运行状态（isRunning）：任务是否正在运行
     * 上次已读取的时间戳（lastReadTimestamp）：任务对事件的读取基于时间戳区间，此值确定每次读取的左边界（开区间）
-
-## 设计文档
-
-[设计文档](./doc/Event Publish设计文档.md)
