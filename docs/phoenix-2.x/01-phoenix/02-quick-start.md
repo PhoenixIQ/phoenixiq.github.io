@@ -3,15 +3,27 @@ id: phoenix-quick-start-2x
 title: 快速入门
 ---
 
->  **Phoenix**集成了**spring boot**,在开发过程中可以很方便的使用**phoenix**框架来构建应用
+**Phoenix**是宽拓自主研发的一款消息驱动型的高性能**Java**开发框架，同时集成了**spring boot**,在开发过程中可以很方便的使用**phoenix**框架来构建应用。
 
-**Phoenix**提供了完善的**sample**工程,请参见：[PhoenixIQ/phoenix-samples](https://github.com/PhoenixIQ/phoenix-samples)
+## 服务提供者
 
-## 消息定义
+服务提供者案例,请参见：[PhoenixIQ/phoenix-samples/hello-world](https://github.com/PhoenixIQ/phoenix-samples/tree/master/hello-world)
+
+### maven依赖
+
+```xml
+<dependency>
+    <groupId>com.iquantex</groupId>
+    <artifactId>phoenix-server-starter</artifactId>
+    <version>2.1.3</version>
+</dependency>
+```
+
+### 消息定义
 
 **Phoenix**是一个消息驱动框架,聚合根接收**cmd**产生**event**
 
-### command定义
+#### command定义
 
 *Phoenix支持`protobuf`协议和`javaBean`协议进行序列化,这里使用`javaBean`协议进行示范*
 
@@ -25,7 +37,7 @@ public class HelloCmd implements Serializable {
 }
 ```
 
-### event定义
+#### event定义
 
 ```java
 @Data
@@ -37,7 +49,7 @@ public class HelloEvent implements Serializable {
 }
 ```
 
-## 定义聚合根
+### 定义聚合根
 
 **聚合根类定义规则：**
 
@@ -80,74 +92,80 @@ public class HelloAggregate implements Serializable {
 		num++;
 		log.info("Phoenix State: {}", num);
 	}
-
 }
 ```
 
-## 发布接口
-
-接口的发布,可以直接发布消息,在这里包装为http请求发布
-
-```java
-@Slf4j
-@RestController
-@RequestMapping("/hello")
-public class HelloController {
-
-	/** phoenix 客户端 */
-	@Autowired
-	private PhoenixClient client;
-
-	/**
-	 * 处理 hello Http请求
-	 * @return 指令返回结果
-	 */
-	@PutMapping("/{helloId}")
-	public String allocate(@PathVariable String helloId) {
-		Hello.HelloCmd helloCmd = Hello.HelloCmd.newBuilder().setHelloId(helloId).build();
-		// 发送指令信息
-		Future<RpcResult> future = client.send(helloCmd, "");
-		try {
-			// 接收指令返回结果
-			RpcResult result = future.get(10, TimeUnit.SECONDS);
-			return result.getMessage();
-		}
-		catch (InterruptedException | ExecutionException | TimeoutException e) {
-			return "rpc error: " + e.getMessage();
-		}
-	}
-}
-```
-
-## Phoenix配置
+### 配置文件
 
 在**springboot**配置文件中增加**phoenix**的相关配置
 
 ```yaml
 quantex:
   phoenix:
-    routers:
-      - message: com.iquantex.samples.helloworld.coreapi.Hello$HelloCmd
-        dst: helloworld/EA/Hello
+    routers:                              # 路由表配置
+      - message: com.iquantex.samples.helloworld.coreapi.Hello$HelloCmd # 消息类名称
+        dst: helloworld/EA/Hello          # 目标地址
     server:
-      name: ${spring.application.name}
+      name: ${spring.application.name}    # 服务名称
       mq:
-        type: kafka
-        address: embedded
+        type: kafka                       # mq类型
+        address: embedded                 # mq服务地址 embedded为内存kafka
       event-store:
-        driver-class-name: org.h2.Driver
+        driver-class-name: org.h2.Driver  # 数据库驱动
         snapshot:
-          enabled: true
+          enabled: true                   # 是否开启快照功能
         data-sources:
-          - url: jdbc:h2:file:./data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC
-            username: sa
-            password:
-    client:
-      name: ${spring.application.name}-client
-      mq:
-        type: kafka
-        address: embedded
+          - url: jdbc:h2:file:./data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC # 数据库链接url
+            username: sa                  # 数据库账户
+            password:                     # 数据库密码
 ```
 
-相关配置介绍 请参见:[配置详情](../02-phoenix-core/05-config.md)
+## 服务调用者
+
+### Maven依赖
+
+```xml
+<dependency>
+    <groupId>com.iquantex</groupId>
+    <artifactId>phoenix-client-starter</artifactId>
+    <version>2.1.3</version>
+</dependency>
+```
+
+### 调用服务
+
+增加`phoenix-client-starter`依赖启动服务后**phoenix**会自动注入**PhoenixClient**，可以通过调用**PhoenixClient**的**send**方法调用**phoenix**服务
+
+```java
+@Autowired
+private PhoenixClient client;
+
+public String send(tring helloId) {
+    Hello.HelloCmd helloCmd = Hello.HelloCmd.newBuilder().setHelloId(helloId).build();
+    client.send(helloCmd, "");
+}
+```
+
+### 配置文件
+
+```yaml
+quantex:
+  phoenix:
+    routers:                                    # 路由表配置
+      - message: com.iquantex.samples.helloworld.coreapi.Hello$HelloCmd # 消息类名称
+        dst: helloworld/EA/Hello	            # 目标地址
+    client:
+      name: ${spring.application.name}-client	# 服务名称
+      mq:
+        type: kafka	                            # mq类型
+        address: embedded                       # mq地址：embedded表示使用内存kafka
+```
+
+## 相关链接
+
+[服务提供者详情](../02-phoenix-core/00-phoenix-core.md)
+
+[服务调用者详情](../02-phoenix-core/01-client.md)
+
+[配置文件详情](../02-phoenix-core/05-config.md)
 
