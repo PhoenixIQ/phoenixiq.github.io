@@ -3,15 +3,15 @@ id: phoenix-core-entity-aggregate-2x
 title: 实体聚合根
 ---
 
-在使用 Phoenix 开发项目时，通常需要借助领域驱动（DDD）设计方法，提取领域对象和实体对象。Phoenix中的实体聚合根就对应DDD中的聚合对象，实体对象则为实体聚合根中的属性。
+在使用 Phoenix 开发项目时，通常需要借助领域驱动设计（DDD），提取领域实体，其中一个特殊的实体为聚合根（领域外对领域内其他实体的访问都需要通过该聚合根），而Phoenix中的实体聚合根概念就对应DDD中的聚合根。
 
 Phoenix 项目中的实体聚合根对象需要遵循如下规范：
 
 1. 聚合根类需要使用 `@EntityAggregateAnnotation` 注解进行标记
 
-2. 聚合根类需要实现 `Serializable` 接口
+2. 聚合根类以及聚合根类中的实体均需实现 `Serializable` 接口
 
-> 注意：在聚合根上添加 `@EntityAggregateAnnotation` 注解时，需要通过 `aggregateRootType` 指定一个聚合根的类别。用来区分不同的聚合根类，该聚合根类别是全局唯一的。
+> 注意：在聚合根上添加 `@EntityAggregateAnnotation` 注解时，需要通过 `aggregateRootType` 指定一个聚合根的类别。用来区分不同的聚合根类，该聚合根类别是全局唯一的。且聚合根ID的长度要小于64个字符。
 
 要使用实体聚合根所提供的的能力，请在您的项目中添加以下依赖：
 
@@ -123,7 +123,6 @@ Phoenix 提供了两种打快照的方式：
 ```yaml
 quantex.phoenix.server.event-store.snapshot.enabled      // 快照开关   默认：false
 quantex.phoenix.server.event-store.snapshot.entitySnapshotInterval             // 实体聚合根快照间隔   默认：50000
-quantex.phoenix.server.event-store.snapshot.atLeastOneDeliverySnapshotInterval   // 事务聚合根快照间隔   默认：50000
 ```
 
 ### 幂等操作
