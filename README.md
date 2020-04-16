@@ -1,7 +1,5 @@
 # Phoenix
 
-## Phoenix是什么
-
 Phoenix是一个有状态的响应式微服务框架。它提供了高可用、动态伸缩、分布式事务、内存管理、实时监控等关键能力。擅长解决金融领域中业务复杂，性能要求高的场景。
 
 ![show](docs/assets/phoenix2.x/phoenix/readme/phoenix.png)
