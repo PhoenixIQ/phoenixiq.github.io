@@ -2,15 +2,11 @@
 
 ## Phoenix是什么
 
-Phoenix是一个高性能的响应式微服务开发框架。使用Phoenix您可以快速便捷地构建复杂的响应式微服务系统，Phoenix提供了适合复杂业务系统的技术特性和解决方案，这可以为您的系统带来高性能、高解耦和横向扩展等强大能力。而您在构建业务系统时无需关心这些技术的实现细节，这让您在开发系统时更加关注于业务实现。
+Phoenix是一个有状态的响应式微服务框架。它提供了高可用、动态伸缩、分布式事务、内存管理、实时监控等关键能力。擅长解决金融领域中业务复杂，性能要求高的场景。
 
-Phoenix为响应式微服务系统开发抽象了一个服务构建的基本模型。Phoenix服务类型分为Command Side Service（C端服务）、Query Side Service（Q端服务）和Transaction Service（事务协调服务），他们之间基于消息队列进行消息通信。
+![show](docs/assets/phoenix2.x/phoenix/readme/phoenix.png)
 
-> 配图：服务间通讯
-
-服务的状态基于内存计算，以提高服务的响应性和吞吐量。结合EventSourcing技术，使用数据库存储服务状态，并在服务故障宕机后提供状态恢复能力，保证服务状态的可靠性和可用性。
-
-> 配图：Event-Sourcing示意图
+更多内容请访问 [Phoenix官网](https://developer.phoenix.iquantex.com/)
 
 ## 特性
 
@@ -57,12 +53,17 @@ Phoenix Transaction Starter
 
 ## 快速入门
 
-[快速入门](./docs/phoenix-2.x/01-phoenix/02-quick-start.md)
+[快速入门](https://developer.phoenix.iquantex.com/docs/phoenix-2.x/01-phoenix/phoenix-quick-start-2x)
 
 ## 文档
 
-完整文档可访问 [Phoenix文档](文档链接)
+完整文档可访问 [Phoenix文档](https://developer.phoenix.iquantex.com/docs/phoenix-2.x/01-phoenix/phoenix-2x)
 
-## Issues
+## 支持
 
-> 说明Issue的提出方法和流程，给一个链接。
+如有任何问题，欢迎发起Issue，或联系我们。
+
+* Github: https://github.com/PhoenixIQ
+* Email： phoenix@iquantex.com
+
+![show](docs/assets/phoenix2.x/phoenix/faq/QRCode.png)
