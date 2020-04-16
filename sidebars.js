@@ -7,14 +7,14 @@ module.exports = {
                 "phoenix-2.x/01-phoenix/phoenix-2x",
                 "phoenix-2.x/01-phoenix/phoenix-quick-start-2x",
                 "phoenix-2.x/01-phoenix/phoenix-faq-2x",
-                "phoenix-2.x/01-phoenix/phoenix-roadmap-2x",
+                // "phoenix-2.x/01-phoenix/phoenix-roadmap-2x",
             ],
         },
         {
             type: 'category',
             label: 'Phoenix Core',
             items: [
-                "phoenix-2.x/02-phoenix-core/phoenix-core-2x",
+                // "phoenix-2.x/02-phoenix-core/phoenix-core-2x",
                 "phoenix-2.x/02-phoenix-core/phoenix-core-client-2x",
                 "phoenix-2.x/02-phoenix-core/phoenix-core-entity-aggregate-2x",
                 "phoenix-2.x/02-phoenix-core/phoenix-core-transaction-aggregate-2x",
