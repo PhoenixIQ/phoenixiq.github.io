@@ -140,9 +140,52 @@ quantex.phoenix.server.performance.idempotentSize  // 默认值 1000
 
 ## 查询操作
 
-Phoenix 提供了查询聚合根状态的能力。通过在 **act** 方法上添加 @QueryHandler 注解用来标志该 **act** 方法将会执行一个查询操作。在该 **act** 方法中将需要查询的数据封装进 Event 事件中，通过ActReturn进行返回。
+Phoenix 提供了查询聚合根状态的能力。通过在 **act** 方法上添加 `@QueryHandler` 注解用来标志该 **act** 方法将会执行一个查询操作。在该 **act** 方法中将需要查询的数据封装进 Event 事件中，通过ActReturn进行返回。
 
 因查询操作不涉及内存状态的修改，只是对数据进行查询，所以查询操作所产生的的Event事件不会进行持久化操作。
+
+```java
+@EntityAggregateAnnotation(aggregateRootType = "BankAccount")
+@Getter
+@Setter
+@Slf4j
+public class BankAccountAggregate implements Serializable {
+
+	private static final long serialVersionUID = 6073238164083701075L;
+
+	/** 账户代码 */
+	private String account;
+
+	/** 账户余额 */
+	private double balanceAmt;
+
+	/** 成功转出次数 */
+	private int successTransferOut;
+
+	/** 失败转出次数 */
+	private int failTransferOut;
+
+	/** 成功转入次数 */
+	private int successTransferIn;
+
+	/** 是否允许请求通过 */
+	@Autowired
+	private transient BankAccountService service;
+
+	/**
+	 * 处理查询命令
+	 * @param cmd
+	 * @return
+	 */
+	@QueryHandler(aggregateRootId = "accountCode")
+	public ActReturn act(AccountQueryCmd cmd) {
+
+		return ActReturn.builder().retCode(RetCode.SUCCESS).retMessage("查询成功").event(
+				new AccountQueryEvent(account, balanceAmt, successTransferOut, failTransferOut, successTransferIn))
+				.build();
+	}
+}
+```
 
 ## 聚合根释放
 
