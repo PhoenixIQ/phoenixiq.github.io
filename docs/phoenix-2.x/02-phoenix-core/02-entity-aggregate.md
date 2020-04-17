@@ -167,13 +167,15 @@ public class BankAccountAggregate implements Serializable {
 
 ## 聚合根释放
 
-Phoenix针对聚合根提供了一种淘汰机制，对于长时间不活跃的聚合根（聚合根长时间不处理消息），在指定时间之后进行淘汰。
+Phoenix针对每个聚合根类型提供了一种淘汰机制，对于长时间不活跃的聚合根（聚合根长时间不处理消息），在指定时间之后进行淘汰。
 
-不活跃时间可进行配置，配置如下：
+可以在每个聚合根的 `@EntityAggregateAnnotation`中增加`surviveTime`不活跃时间可进行配置，配置如下：
 
 ```java
-// 聚合根淘汰策略-不活跃时间(毫秒)   默认值：86400000 (1天)
-quantex.phoenix.server.performance.actor-survive-time
+// surviveTime 聚合根淘汰策略-不活跃时间(毫秒)   默认值：Long.MAX_VALUE
+@EntityAggregateAnnotation(aggregateRootType = "BankAccount", surviveTime = 1000 * 60)
+public class BankAccountAggregate implements Serializable {
+}
 ```
 
 ## Spring 支持
