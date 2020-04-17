@@ -2,49 +2,56 @@ module.exports = {
     docs: [
         {
             type: 'category',
-            label: '概述',
+            label: '整体介绍',
             items: [
-                "phoenix-2.x/phoenix/phoenix-white-page-2x",
-                "phoenix-2.x/phoenix/phoenix-faq-2x",
-                "phoenix-2.x/phoenix/phoenix-roadmap-2x",
+                "phoenix-2.x/01-phoenix/phoenix-2x",
+                "phoenix-2.x/01-phoenix/phoenix-quick-start-2x",
+                "phoenix-2.x/01-phoenix/phoenix-faq-2x",
+                // "phoenix-2.x/01-phoenix/phoenix-roadmap-2x",
             ],
         },
         {
             type: 'category',
-            label: '用户文档',
+            label: 'Phoenix Core',
             items: [
-                "phoenix-2.x/quick-start/phoenix-lite-2x",
-                "phoenix-2.x/phoenix-lite/phoenix-lite-concept-2x",
-                "phoenix-2.x/phoenix-lite/phoenix-lite-feature-2x",
-                "phoenix-2.x/phoenix-lite/phoenix-lite-config-2x",
-                "phoenix-2.x/phoenix-lite/phoenix-lite-dependency-2x",
-                "phoenix-2.x/phoenix-lite/phoenix-lite-data-table-2x",
-                "phoenix-2.x/phoenix-lite/phoenix-lite-api-2x",
-                "phoenix-2.x/phoenix-lite/phoenix-lite-http-api-2x",
-                "phoenix-2.x/phoenix-lite/phoenix-lite-upgrade-2x",
-
+                // "phoenix-2.x/02-phoenix-core/phoenix-core-2x",
+                "phoenix-2.x/02-phoenix-core/phoenix-core-client-2x",
+                "phoenix-2.x/02-phoenix-core/phoenix-core-entity-aggregate-2x",
+                "phoenix-2.x/02-phoenix-core/phoenix-core-transaction-aggregate-2x",
+                // "phoenix-2.x/02-phoenix-core/phoenix-core-event-store-2x",
+                "phoenix-2.x/02-phoenix-core/phoenix-core-config-2x",
+                "phoenix-2.x/02-phoenix-core/phoenix-core-http-api-2x",
             ],
         },
         {
             type: 'category',
-            label: '运维监控',
+            label: 'Phoenix Event Publish',
             items: [
-                "phoenix-2.x/phoenix-admin/admin-function-2x",
-                "phoenix-2.x/phoenix-admin/admin-instructions-2x",
+                "phoenix-2.x/03-phoenix-event-publish/event-publish-readme-2x",
+                "phoenix-2.x/03-phoenix-event-publish/event-publish-use-2x",
+            ],
+        },
+        {
+            type: 'category',
+            label: 'Phoenix Admin',
+            items: [
+                "phoenix-2.x/04-phoenix-admin/phoenix-admin-readme-2x",
+                "phoenix-2.x/04-phoenix-admin/phoenix-admin-use-2x",
             ],
         },
         {
             type: 'category',
             label: '测试报告',
             items: [
-                "phoenix-2.x/phoenix-test/features-test-2x",
-                "phoenix-2.x/phoenix-test/performance-test-2x",
-                "phoenix-2.x/phoenix-test/available-test-2x",
-                "phoenix-2.x/phoenix-test/elasticity-test-2x",
-                "phoenix-2.x/phoenix-test/reliability-test-2x",
-                "phoenix-2.x/phoenix-test/pressure-test-2x",
-                "phoenix-2.x/phoenix-test/balance-test-2x",
+                "phoenix-2.x/05-phoenix-test/features-test-2x",
+                "phoenix-2.x/05-phoenix-test/performance-test-2x",
+                "phoenix-2.x/05-phoenix-test/available-test-2x",
+                "phoenix-2.x/05-phoenix-test/elasticity-test-2x",
+                "phoenix-2.x/05-phoenix-test/reliability-test-2x",
+                "phoenix-2.x/05-phoenix-test/pressure-test-2x",
+                "phoenix-2.x/05-phoenix-test/balance-test-2x",
             ],
         },
+
     ]
 };
