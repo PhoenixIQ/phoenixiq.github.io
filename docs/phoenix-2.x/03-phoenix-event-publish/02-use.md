@@ -3,8 +3,6 @@ id: event-publish-use-2x
 title: 使用说明
 ---
 
-# Phoenix Event Publish 使用说明
-
 ## 启动运行
 
 ### 本地启动

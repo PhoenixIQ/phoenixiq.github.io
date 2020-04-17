@@ -3,7 +3,7 @@ id: phoenix-quick-start-2x
 title: 快速入门
 ---
 
-**Phoenix**是宽拓自主研发的一款消息驱动型的高性能**Java**开发框架，同时集成了**spring boot**,在开发过程中可以很方便的使用**phoenix**框架来构建应用。
+**Phoenix**框架提供Spring Boot Starter可以很快速帮助用户构建应用。
 
 ## 服务提供者
 
@@ -21,7 +21,7 @@ title: 快速入门
 
 ### 消息定义
 
-**Phoenix**是一个消息驱动框架,聚合根接收**cmd**产生**event**
+聚合根接收**cmd**产生**event**
 
 #### command定义
 
