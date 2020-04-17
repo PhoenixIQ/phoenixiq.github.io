@@ -66,7 +66,7 @@ function Home() {
               PHOENIX
             </h1>
             <p className={classnames(styles.content)}>
-              Phoenix是一个高性能的响应式微服务框架，致力于打造有状态的微服务框架
+              Phoenix是一个高性能的响应式微服务框架，致力于打造有状态服务
             </p>
             <div className={classnames(styles.link)}>
               <Link className={classnames(styles.getStarted)}

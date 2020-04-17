@@ -8,7 +8,7 @@ module.exports = {
   projectName: 'phoenix', // Usually your repo name.
   themeConfig: {
     disableDarkMode: true,
-    sidebarCollapsible: true,
+    sidebarCollapsible: false,
     onPageNav: 'separate',
     navbar: {
       title: '',
