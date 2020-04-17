@@ -36,9 +36,12 @@ quantex:
 
 相关配置介绍 请参见: [配置详情](./05-config.md)
 
+
 ## 消息发送
 
 启动**phoenix**项目后，**Phoenix**会自动创建**PhoenixClient** **bean**,可以通过`@Autowired`进行依赖注入
+
+### 异步调用
 
 ```java
 @Autowired
@@ -49,7 +52,9 @@ public void send() {
 }
 ```
 
-通过调用**send**返回**Future**对象的**get**方法阻塞获取返回值
+### 同步调用
+
+通过调用**send**返回**Future**对象的**get**方法同步接收请求结果
 
 ```java
 @Autowired
