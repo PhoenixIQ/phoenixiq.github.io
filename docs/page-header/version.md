@@ -5,6 +5,70 @@ title: ReleaseNote
 
 > 维护phoenix具体版本内容，包括release node，以及和各个组件匹配的版本信息。下面每个标题内的表格代表了版本匹配关系。
 
+
+## 2.1.3(2020-04-17)
+
+### 版本下载列表
+| 项目名              | 发版时间      | 版本号         |
+| ------------------ | --------     | ------        |
+| phoenix            |  2020/04/17  | 2.1.3 |
+| phoenix-admin      |  2020/04/17  | 2.1.3|
+| phoenix-website    |  2020/04/17  | 2.1.17|
+
+### Release Note
+
+#### phoenix(2.1.3)
+
+**Enhancement**
+- Q端服务支持查询命令 #283
+- 聚合根实例被spring管理 #355
+- EventStore领域事件发布组件 #356
+- `CommandHandler`增加是否自动创建聚合根的判断 #374 #410
+- phoenix支持提供自动回收聚合根的策略 #396 #449
+- Phoenix相关应用的日志接入ELK #397
+- 银行转账使用queryCmd获取数据 #402
+- RpcResult.getData支持泛型 #429
+- 支持CMD中多个字段作为聚合跟ID #393
+- Phoenix对用户的INFO日志调整 #404
+- phoenix默认提供license降低使用门槛 #406
+
+**Test**
+- Phoenix在千万级消息量下的稳定性 #378
+- Phoenix模板适配新版本 #431
+- Phoenix整体回归测试(2.1.3版本) #432
+- 事件发布功能炒股大赛引入测试 #433 
+- GitHub上案例测试 #435 
+
+**BugFixes**
+- CmdMsgExtractor未能catch异常 #401
+- 修改SpringBeanUtil命名，避免和用户冲突 #437
+- 账户管理查询账户会有null的账户列表 #448
+- 所有子事务无ci的情况下ti失败，导致事务异常 #322
+- 打印两次on的日志问题 #392
+
+**Other**
+- 估值现在数据的维护改造demo开发 #417
+- 昆仑整合Showcase-Phoenxi相关开发 #418
+- GitHub phoenix-samples工程phoenix版本升级为dev-SNAPSHOT #425
+- GitHub phoenix-sample-risk工程phoenix版本升级为dev-SNAPSHOT #428
+- 公开helloworld，账户管理，事中风控案例到github #415
+
+#### phoenix-website(2.1.17)
+- Phoenix开发者社区建立 #361 
+- license的配置文档位置不对 #377
+- Phoenix快速入门重写 #379
+- Phoenix官网社区链接调整 #380
+- 编写phoenix gitlab issue使用教程文档 #420
+- Phoenix官网首页重新设计 #383
+- Phoenix开发者官网review所有 #430 
+
+#### phoenix-admin(2.1.3)
+- 写死phoenix-admin展示的用户名 #394
+- Phoenix-admin支持接入带有servlet-path的Phoenix应用 #400
+- phoenix-admin内存查询报错 #399
+
+
+
 ## 2.1.2(2020-03-13)
 
 ### 版本下载列表
