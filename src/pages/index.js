@@ -78,7 +78,7 @@ function Home() {
                 用户登记
               </Link> */}
               <Link className={classnames(styles.getStarted)}
-                to="https://github.com/PhoenixIQ">
+                to="https://github.com/PhoenixIQ/phoenix-website">
                 GitHub
               </Link>
             </div>

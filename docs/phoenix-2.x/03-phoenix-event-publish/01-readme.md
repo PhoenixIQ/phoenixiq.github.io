@@ -3,8 +3,6 @@ id: event-publish-readme-2x
 title: 功能介绍
 ---
 
-# Phoenix Event Publish 功能介绍
-
 Phoenix Event Publish是为独立部署的phoenix配套服务，提供领域事件发布服务。
 
 ## 功能
