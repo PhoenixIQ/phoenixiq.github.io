@@ -96,34 +96,13 @@ ActReturn中 Event 事件将会到达两个地方：调用方和on方法
 
 ### on 方法
 
-实体聚合根中需要定义 **on** 方法，订阅 **act** 方法中处理 Command 命令所产生的 Event 事件。同时 Event 事件会进行持久化处理（EventStore），当需要重建聚合根内存状态时，我们可以读取该聚合根的 Event 事件进行状态重塑。我们称这个聚合根重塑的过程为EventSourcing。
+实体聚合根中需要定义 **on** 方法，订阅 **act** 方法中处理 Command 命令所产生的 Event 事件。同时 Event 事件会进行持久化处理（EventStore），当需要重建聚合根内存状态时，通过EventSourcing进行状态重塑。在重塑时可以通过快照进行加速。快照相关配置请参考:[配置详情](./phoenix-core-config-2x)
 
 **on** 方法需要遵循如下两条规范：
 
 - on方法中不能有IO操作，例如：调用DB操作，调用外部接口
 - on方法中不能有随机函数，例如：获取系统当前时间，获取随机数
 
-### 快照功能
-
-为了加快 EventSourcing 的速度，Phoenix 提供了快照的功能（即将集合根某一时刻的内存状态进行存储）
-
-Phoenix 提供了两种打快照的方式：
-
-- 手动调用打快照的接口
-- 通过配置（每处理指定数量的Event之后自动打快照）
-
-接口：
-
-```undefined
-/phoenix/snapshot/{aggregateId}
-```
-
-配置：
-
-```yaml
-quantex.phoenix.server.event-store.snapshot.enabled      // 快照开关   默认：false
-quantex.phoenix.server.event-store.snapshot.entitySnapshotInterval             // 实体聚合根快照间隔   默认：50000
-```
 
 ### 幂等操作
 
