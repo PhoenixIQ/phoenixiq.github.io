@@ -3,35 +3,104 @@
  * and scoped locally.
  */
 
+body > div {
+  display: block !important;
+  background-color: #fff !important;
+}
+
 .heroBanner {
-  padding: 4rem 0;
-  text-align: center;
   position: relative;
+  width: 100%;
+  height: 627px;
+  text-align: left;
+  font: 300 38px/53px PingFangSC-Light, PingFang SC;
+  text-shadow: 0px 2px 150px rgba(0, 0, 0, 0.29);
+  overflow: hidden;
+  background-color: #fff !important;
+}
+
+.containerBanner {
+  height: 100%;
+  margin: 0 auto;
+  min-width: 1366px;
+  background: url("/img/banner.png") center no-repeat;
+  background-size: 100% 100%;
+}
+
+.containerBanner .container {
+  margin: 0 auto;
+  width: 1000px;
+  height: 627px;
+  padding-top: 98px;
+  color: #fff;
+}
+
+.containerBanner h1 {
+  font: 600 50px/70px PingFangSC-Semibold, PingFang SC;
+}
+
+.containerBanner .content {
+  width: 350px;
+  font: 18px/25px PingFangSC-Regular, PingFang SC;
+  padding: 10px 0 30px;
+  margin: 0;
+}
+
+.indexCtasGitHubButton {
+  margin-right: 0px;
+  width: 160px;
+  height: 30px;
+  color: #fff;
+  border: none;
   overflow: hidden;
 }
 
-@media screen and (max-width: 966px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.indexCtasGitHubButton.mr {
+  margin-right: -16px;
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.link {
+  margin-bottom: 20px;
 }
 
-.features {
-  display: flex;
-  align-items: center;
-  padding: 2rem 0;
-  width: 100%;
+.getStarted {
+  padding: 6px 19px;
+  margin-right: 30px;
+  width: 110px;
+  height: 36px;
+  color: #fff;
+  opacity: 0.6;
+  font: 600 18px/25px PingFangSC-Semibold, PingFang SC;
+  border: 1px solid rgba(255, 255, 255, 1);
 }
 
-.featureImage {
-  height: 200px;
-  width: 200px;
+.getStarted:hover {
+  color: rgba(38, 113, 250, 1);
+  background: #fff;
+  opacity: 1;
+  text-decoration: none;
+}
+
+.release {
+  color: #fff;
+  font: 500 14px/20px PingFangSC-Medium, PingFang SC;
+}
+
+.release p {
+  margin: 0;
+  padding: 0;
+}
+
+.release .version {
+  margin-top: 12px;
+  padding: 2px 0;
+  width: 172px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.release .date {
+  padding-top: 10px;
 }
 
 .steps {
@@ -43,8 +112,192 @@
 }
 
 .stepsImage {
-  margin:15px 5px 20px 20px;
+  margin: 15px 5px 20px 20px;
   height: 500px;
   width: 900px;
 }
+
+/* Phoenix架构图 */
+
+.introductWrap {
+  min-width: 1366px;
+  background-color: #fcfcfc;
+}
+
+.introduct {
+  display: flex;
+  width: 1000px;
+  margin: 0 auto;
+  height: 496px;
+  justify-content: space-between;
+  background-color: #fcfcfc;
+  padding: 54px 0 56px;
+}
+
+.introduct .article {
+  width: 344px;
+  text-align: justify;
+  margin-top: 89px;
+}
+
+.introduct h2 {
+  font-size: 28px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(38, 113, 250, 1);
+  line-height: 40px;
+  padding-bottom: 40px;
+}
+
+.introduct p {
+  font-size: 18px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  color: #000;
+  padding: 0;
+  margin: 0;
+}
+
+.conception img {
+  width: 568px;
+  height: 392px;
+}
+
+.featuresWrap {
+  min-width: 1366px;
+  background: #fff;
+}
+
+.features {
+  width: 1000px;
+  height: 796px;
+  margin: 0 auto;
+  padding: 67px 0 120px;
+  color: #000;
+}
+
+.featuresCon {
+  margin-bottom: 75px !important;
+}
+
+.features h1 {
+  padding-bottom: 96px;
+  font: 500 28px/40px PingFangSC-Medium, PingFang SC;
+  margin: 0;
+}
+
+.featureImage {
+  width: 53px;
+  height: 58px;
+  margin-bottom: 26px;
+}
+
+.features h3 {
+  font: 500 18px/25px PingFangSC-Medium, PingFang SC;
+  margin-bottom: 16px;
+}
+
+.features p {
+  padding: 0;
+  margin: 0;
+}
  
+@media screen and (max-width: 2560px) and (min-width: 1980px) {
+  .heroBanner {
+    height: 814px;
+  }
+
+  .containerBanner .container {
+    padding-top: 198px;
+    min-width: 1366px;
+  }
+
+  .containerBanner .content {
+    width: 408px;
+    font: 24px/25px PingFangSC-Regular, PingFang SC;
+    text-align: justify;
+    line-height: 40px;
+  }
+
+  .link {
+    margin-bottom: 20px;
+  }
+
+  .getStarted {
+    padding: 6px 12px;
+    font: 600 22px/25px PingFangSC-Semibold, PingFang SC;
+  }
+
+  .release {
+    color: #fff;
+    font: 500 18px/20px PingFangSC-Medium, PingFang SC;
+  }
+
+  .release .version {
+    margin-top: 12px;
+    padding: 6px 0;
+    width: 204px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .release .date {
+    padding-top: 18px;
+  }
+
+  /* Phoenix架构图 */
+
+  .introduct {
+    width: 1366px;
+    margin: 0 auto;
+    height: 520px;
+    padding: 54px 0 55px;
+  }
+
+  .introduct .article {
+    width: 400px;
+    text-align: justify;
+    margin-top: 110px;
+  }
+
+  .introduct h2 {
+    font-size: 30px;
+  }
+
+  .introduct p {
+    font-size: 22px;
+  }
+
+  .conception img {
+    width: 600px;
+    height: 414px;
+  }
+
+  /* Phoenix的特性 */
+
+  .featuresWrap {
+    min-width: 1366px;
+    background: #fff;
+  }
+
+  .features {
+    min-width: 1366px;
+    height: 820px;
+  }
+
+  .featuresCon {
+    margin-bottom: 75px !important;
+  }
+
+  .features h1 {
+    font-size: 30px;
+  }
+
+  .features h3 {
+    font-size: 20px;
+  }
+
+  .features p {
+    line-height: 26px;
+    font-size: 16px;
+  }
+}
