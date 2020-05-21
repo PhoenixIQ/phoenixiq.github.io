@@ -29,6 +29,7 @@ title: 配置详情
 | quantex.phoenix.akka.artery-transport               | 传输方式                                                  | String  | tcp <br /> 可选值：tcp / tls-tcp /  aeron-udp       |
 | quantex.phoenix.akka.artery-canonical-port          | 远程服务器端口                                            | Int     | 2551      |
 | quantex.phoenix.akka.artery-canoniacal-hostname     | 远程服务器地址                                            | String  | 127.0.0.1 |
+| quantex.phoenix.akka.artery-bind-hostname     | 可绑定的ip地址                                            | String  | 0.0.0.0 |
 | quantex.phoenix.akka.seed-node                      | 集群的初始接触点                                          | List    | akka:// + 服务名 + @127.0.0.1:2551 |
 | quantex.phoenix.akka.method                         | 服务发现的方式                                            | String  | akka-dns  |
 | quantex.phoenix.akka.pod-label-selector             | 服务发现的pod标签                                         | String  | app=%s    |
@@ -173,8 +174,10 @@ server:
 quantex:
   phoenix:
     akka:
-      artery-canonical-port: 2551
-      management-http-port: 8558
+      artery-canonical-port: 2552  # 集群端口
+      management-http-port: 8559 # 集群管理的http端口 
+      artery-canonical-hostname: 192.168.1.9   # 节点的ip地址
+      seed-node: akka://account-server@192.168.1.9:2551,akka://account-server@192.168.1.9:2552  # 集群中seed-node的节点地址,一般会把所有节点都设置, 另外`account-server`要和应用${spring.application.name}的名字相同
 ```
 
 ### k8s集群运行
