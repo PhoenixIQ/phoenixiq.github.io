@@ -53,6 +53,8 @@ public class BankAccountEventListener {
 
 @EnableKafka
 @Configuration
+// 复用phoenix-event-publish的配置开关，当event-publish开启时，才配置kafka-listener
+@ConditionalOnProperty(prefix = PhoenixEventPublishProperties.PREFIX, name = "enabled", havingValue = "true")
 public class KafkaConsumerConfiguration {
 
     @Value("${spring.kafka.bootstrap-servers}")
