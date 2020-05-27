@@ -1,6 +1,6 @@
 ---
-id: event-publish-client-usage
-title: Phoenix Event Client 使用说明
+id: event-publish-client-usage-2x
+title: 订阅事件
 ---
 
 ## 使用Spring Kafka实现事件订阅客户端
