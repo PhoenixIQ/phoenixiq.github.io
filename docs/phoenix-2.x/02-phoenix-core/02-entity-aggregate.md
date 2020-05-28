@@ -105,15 +105,20 @@ ActReturn中 Event 事件将会到达两个地方：调用方和on方法
 
 
 ### 幂等操作
+Phoenix是消息驱动的框架，消息在传输过程中会存在一笔消息重发的情况，同时上游系统也可能有重试策略(两笔消息,但是业务含义一样)
 
-目前 Phoenix 采用 MQ 进行通讯，我们假设基于MQ的消息通讯不可靠，会出现消息丢失、乱序、重发等情况，上游系统也可能会有重试策略，因此Phoenix服务有很大可能会接收到重复的消息。
-
-Phoenix 针对这种情况在框架内部实现了幂等处理。通过数据库的唯一索引和内存幂等集合等实现保证了同一个 Command 只会处理一次。
-
-内存幂等集合的大小支持可配，可以通过如下配置项自定义配置：
+Phoenix会默认对同一笔消息进行幂等处理，同时也提供功能支持用户自定义幂等主键来实现业务幂等，可以在`CommandHandler`注解上`idempotentIds`声明幂等主键
 
 ```java 
-quantex.phoenix.server.performance.idempotentSize  // 默认值 1000
+@CommandHandler(aggregateRootId = "accountCode", idempotentIds = {"account", "num"} )
+public ActReturn act(AccountCreateCmd createCmd) {}
+```
+
+Phoenix在处理幂等时，通过内存有限的幂等集合和EventStore中事件的唯一索引来保证。通常情况下，有限幂等集合可以保证最新处理消息的唯一性，如果是历史消息的重试会命中EventStore的唯一索引来保证。可以在`EntityAggregateAnnotation`注解上`idempotentSize`参数来调整幂等集合的大小。
+
+```java
+@EntityAggregateAnnotation(aggregateRootType = "BankAccount", idempotentSize = 1000)
+public class BankAccountAggregate implements Serializable {}
 ```
 
 ## 查询操作
@@ -124,9 +129,6 @@ Phoenix 提供了查询聚合根状态的能力。通过在 **act** 方法上添
 
 ```java
 @EntityAggregateAnnotation(aggregateRootType = "BankAccount")
-@Getter
-@Setter
-@Slf4j
 public class BankAccountAggregate implements Serializable {
 
 	private static final long serialVersionUID = 6073238164083701075L;
@@ -136,19 +138,6 @@ public class BankAccountAggregate implements Serializable {
 
 	/** 账户余额 */
 	private double balanceAmt;
-
-	/** 成功转出次数 */
-	private int successTransferOut;
-
-	/** 失败转出次数 */
-	private int failTransferOut;
-
-	/** 成功转入次数 */
-	private int successTransferIn;
-
-	/** 是否允许请求通过 */
-	@Autowired
-	private transient BankAccountService service;
 
 	/**
 	 * 处理查询命令
