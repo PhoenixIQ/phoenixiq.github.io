@@ -13,13 +13,21 @@ Phoenix 项目中的实体聚合根对象需要遵循如下规范：
 
 > 注意：在聚合根上添加 `@EntityAggregateAnnotation` 注解时，需要通过 `aggregateRootType` 指定一个聚合根的类别。用来区分不同的聚合根类，该聚合根类别是全局唯一的。且聚合根ID的长度要小于64个字符。
 
+| 配置项            | 描述                                                   | 类型      | 默认值 |
+| :----------------| :----------------------------------------------------  | :------   | :----- |
+|aggregateRootType | 聚合根类型                                              | String    | 必填项 |
+|surviveTime       | 聚合根生存时间,超过该事件聚合根将被销毁                    | long      | Long.MAX_VALUE |
+|snapshotInterval  | 快照间隔，每隔snapshotInterval条消息打印一次快照，0为关闭          | long       | 1000 |
+|idempotentSize    |  聚合根幂等集合大小。取值应大于零，否则可能会导致启动失败    | long      | 1000d |
+
+
 要使用实体聚合根所提供的的能力，请在您的项目中添加以下依赖：
 
 ```xml
 <dependency>
    <groupId>com.iquantex</groupId>
    <artifactId>phoenix-server-starter</artifactId>
-   <version>2.1.3</version> 
+   <version>2.1.5</version> 
 </dependency>
 ```
 
@@ -36,9 +44,13 @@ Phoenix 项目中的实体聚合根对象需要遵循如下规范：
 
 实体聚合根中的 **act** 方法上需要添加 @CommandHandler 注解进行标识。@CommandHandler 中提供两个属性
 
+| 配置项                | 描述                    | 类型      | 默认值 |
+| :---------------------| :----------------------| :------   | :----- |
+|AggregateRootId        | 聚合根id                | String[] | 必填项 |
+|enableCreateAggregate  | 是否允许自动创建聚合根   | boolean   | true |
+|idempotentIds          | 幂等id                  | String[] | 空：采用phoenix默认的幂等id |
+
 1. **AggregateRootId**
-   - 含义： 聚合根Id
-   - 类型：String[]
 
 Phoenix 支持通过拼装多个有意义的字段属性作为聚合根的ID。例如：
 
@@ -72,11 +84,12 @@ public ActReturn act(AddPositionCmd cmd) {
 在上面的例子中，我们用 证券代码 + 交易日期 共同组成聚合根ID。具体的项目可以根据设计选用具有合适意义的字段作为聚合根ID。
 
 2. **enableCreateAggregate**
-   - 含义：是否允许自动创建聚合根
-   - 类型：boolean
-   - 默认值：true
 
 该值用来判断接收到 Command 消息之后，当聚合根不存在时是否允许自动创建聚合根。
+
+3. **idempotentIds**
+
+可以防止消息重复处理。支持使用多个字段作为幂等id。
 
 ### ActReturn
 
@@ -201,4 +214,55 @@ public class BankAccountAggregate implements Serializable {
     @Autowired
     private transient BankAccountService service;
 }
+```
+
+
+## 消息订阅
+
+**Phoenix**支持订阅外部**topic**中的数据转化为指令信息来处理
+
+### 反序列化类
+
+用来反序列化执行topic中的数据，转化为phoenix的指令信息。
+
+原理：Phoenix会自动拉取指定topic的数据，得到数据后调用指定的反序列方式来获取指令信息，参数className为kafka消息中的key，bytes为value。
+
+- 范例:
+
+```java
+public List<DeserializationReturn> deserialize(String className, byte[] bytes) {
+    List<DeserializationReturn> deserializationReturns = new ArrayList<>();
+    try {
+        DeserializationReturn deserializationReturn = new DeserializationReturn(new Message(bytes), true);
+        deserializationReturns.add(deserializationReturn);
+        return deserializationReturns;
+    }
+    catch (InvalidProtocolBufferException e) {
+        throw new DeserializationException("deserialization exception.", e);
+    }
+}
+```
+
+### 配置
+
+如果消息是**Phoenix**创建的指令信息，则可以不设置反序列化类路径，Phoenix会使用默认的反序列化类来处理。
+
+| 配置项                | 描述                    | 类型      | 默认值 |
+| :---------------------| :----------------------| :------   | :----- |
+|quantex.phoenix.server.mq.subscribes.topic| 订阅的topic | String| 无|
+|quantex.phoenix.server.mq.subscribes.deserializer| 对应topic的反序列化类路径,为空表示使用默认反序列化方式 | String| 无|
+
+示例:
+
+其中**account-server**使用默认的反序列化方式获取消息
+
+```yaml
+quantex:
+  phoenix:
+    server:
+      mq:
+        subscribes:
+          - topic: account-server
+          - topic: account-web-event
+            deserializer: com.iquantex.phoenix.bankaccount.subscribes.WebEventTopicDeserializable
 ```
