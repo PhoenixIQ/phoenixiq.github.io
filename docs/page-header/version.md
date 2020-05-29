@@ -5,6 +5,66 @@ title: ReleaseNote
 
 > 维护phoenix具体版本内容，包括release node，以及和各个组件匹配的版本信息。下面每个标题内的表格代表了版本匹配关系。
 
+## 2.1.5(2020-05-29)
+
+### 版本下载列表
+| 项目名              | 发版时间      | 版本号         |
+| ------------------ | --------     | ------        |
+| phoenix            |  2020/05/29  | 2.1.5 |
+| phoenix-admin      |  2020/05/29  | 2.1.5|
+| phoenix-website    |  2020/05/29  | 2.1.18|
+
+### Release Note
+
+#### phoenix(2.1.5)
+
+##### Enhancement
+- 幂等集合和快照间隔在注解头上 #465
+- Phoenix支持多数据源订阅 #436 #500 #505 
+- 支持集成化使用event-publish #453 #492 #454
+- phoenix支持业务幂等 #466
+- 自动化测试方案设计&初步实现 #444 #471 
+- 事务支持延后指定补偿请求 #512
+
+##### Test
+- phoenix-event-publish严格测试 #487 
+- samples支持主动订阅topic案例 #505 
+- samples支持业务幂等案例测试 #509
+- samples支持非回复开关案例 #506
+- 2.1.5发版前功能测试&回归测试 #508
+
+##### BugFixes
+- Phoenix解决打印N次ON日志 #459 
+- mysql在append版本冲突的情况返回了幂等Id冲突 #484
+- producer发送失败的问题 #456
+- ActReturn不填retMessage报错NPE #469
+- phoenix-client会出现很多个消费group #481 
+- phoenix-admin的ActorTree信息的获取支持重试 #518
+- eventsouring重复递增进行 #519
+- phoenix-event-publish从event-store中读取的batch中有乱序 #515
+##### Other
+- 富国tsp二期部署admin2.x #497
+- Phoenix对比Axon梳理 #468
+
+
+
+#### phoenix-admin(2.1.5)
+- Phoenix-Admin架构重新设计 #364
+- Phoenix-admin集成Phoenix-persist #462 #472
+- phoenix-admin支持docker-compose交付 #482
+- phoenix-admin支持加载api #502 #501
+
+
+#### phoenix-website(2.1.18)
+- phoenix-admin文档完善 #510 
+- EventPublish客户端如何消费文档说明 #454 
+- 2.1.5文档相关完善 #489
+- event-publish集成文档配置 #511 
+- github快速入门调整&官网文档调整 #520 
+- 幂等相关文档博客编写
+
+
+
 
 ## 2.1.3(2020-04-17)
 
