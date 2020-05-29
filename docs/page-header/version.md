@@ -20,7 +20,8 @@ title: ReleaseNote
 
 ##### Enhancement
 - 幂等集合和快照间隔在注解头上 #465
-- Phoenix支持多数据源订阅 #436 #500 #505 
+- phoenix支持多数据源订阅 #436 #500 #505 
+- phoenix支持非回复开关
 - 支持集成化使用event-publish #453 #492 #454
 - phoenix支持业务幂等 #466
 - 自动化测试方案设计&初步实现 #444 #471 
@@ -36,15 +37,18 @@ title: ReleaseNote
 ##### BugFixes
 - Phoenix解决打印N次ON日志 #459 
 - mysql在append版本冲突的情况返回了幂等Id冲突 #484
+- phoenix默认不能非本地ip组集群 #496
 - producer发送失败的问题 #456
 - ActReturn不填retMessage报错NPE #469
 - phoenix-client会出现很多个消费group #481 
 - phoenix-admin的ActorTree信息的获取支持重试 #518
 - eventsouring重复递增进行 #519
 - phoenix-event-publish从event-store中读取的batch中有乱序 #515
+- event-publish开关有问题 #513
 ##### Other
 - 富国tsp二期部署admin2.x #497
 - Phoenix对比Axon梳理 #468
+- 富国TSP二期交付Phoenix2.1.4版本 #464
 
 
 
@@ -61,7 +65,8 @@ title: ReleaseNote
 - 2.1.5文档相关完善 #489
 - event-publish集成文档配置 #511 
 - github快速入门调整&官网文档调整 #520 
-- 幂等相关文档博客编写
+- 幂等相关文档博客编写 #489
+
 
 
 
