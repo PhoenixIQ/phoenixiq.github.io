@@ -21,7 +21,7 @@ title: ReleaseNote
 ##### Enhancement
 - 幂等集合和快照间隔在注解头上 #465
 - phoenix支持多数据源订阅 #436 #500 #505 
-- phoenix支持非回复开关
+- phoenix支持非回复开关 #275
 - 支持集成化使用event-publish #453 #492 #454
 - phoenix支持业务幂等 #466
 - 自动化测试方案设计&初步实现 #444 #471 
