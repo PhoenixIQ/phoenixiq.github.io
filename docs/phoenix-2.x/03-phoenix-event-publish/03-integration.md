@@ -1,6 +1,6 @@
 ---
-id: embedded-event-publish
-title: 集成EventPublish模块使用说明
+id: event-publish-integration-2x
+title: 集成使用
 ---
 
 Phoenix中提供了可集成于Phoenix Server服务中的EventPublish功能模块，启用该模块可直接在Phoenix服务中运行Event Publish任务，服务部署时可通过配置定义Event Publish任务。
