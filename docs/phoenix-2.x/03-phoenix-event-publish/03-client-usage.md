@@ -91,3 +91,43 @@ public class KafkaConsumerConfiguration {
 ```
 
 使用配置`spring.kafka.bootstrap-server`设置事件订阅的kafka地址。
+
+### 提供手动Consumer Ack机制的批量消费Listener
+
+以上Listener实现使用自动提交机制的Consumer，消息在被Consumer接收后，即向kafka broker提交消费进度，下次相同的consumer group将不再消费此消息；同时该listener提供的是单个消息处理接口。
+
+Spring Kafka提供了`BatchAcknowledgingMessageListener`，该listener实现提供批量消息消费和处理接口，同时提供手动Consumer Ack机制，可实现消息被listener成功处理后再向kafka broker提交该消费进度，保证应用在故障恢复后，可以再次消费未成功处理的消息。
+
+使用示例如下：
+
+```java
+public class BankAccountEventListener implements BatchAcknowledgingMessageListener<String, byte[]> {
+
+    @Override
+    @KafkaListener(topics = "bank-account-event-pub")
+    public void onMessage(List<ConsumerRecord<String, byte[]>> data, Acknowledgment acknowledgment) {
+        for (ConsumerRecord<String, byte[]> record : data) {
+            tryAddNewAccount(record.value());
+        }
+        acknowledgment.acknowledge(); // 手动提交消费进度
+    }
+
+```
+
+同时注意`ConsumerFactory`和`KafkaListenerContainerFactory`需要使用特定设置。
+
+* Consumer配置中关闭自动消费进度提交：`props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true")`
+* `KafkaListenerContainerFactory`设置手动提交模式和批量消息模式：
+
+```java
+@Bean
+public ConcurrentKafkaListenerContainerFactory<String, byte[]> kafkaListenerContainerFactory() {
+    ConcurrentKafkaListenerContainerFactory<String, byte[]> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    factory.setConsumerFactory(consumerFactory());
+    // 开启批量消息模式
+    factory.setBatchListener(true);
+    // 开启手动提交模式，用于提供BatchAcknowledgingMessageListener回调中的Acknowlegment对象
+    factory.getContainerProperties().setAckMode(AbstractMessageListenerContainer.AckMode.MANUAL_IMMEDIATE);
+    return factory;
+}
+```
