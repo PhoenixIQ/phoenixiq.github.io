@@ -219,33 +219,36 @@ public class BankAccountAggregate implements Serializable {
 
 ## 消息订阅
 
-**Phoenix**支持订阅外部**topic**中的数据转化为指令信息来处理
+**Phoenix**支持订阅外部**topic**中的数据转化为命令来处理
 
 ### 反序列化类
 
-用来反序列化执行topic中的数据，转化为phoenix的指令信息。
+用来反序列化执行topic中的数据，转化为phoenix的命令。
 
-原理：Phoenix会自动拉取指定topic的数据，得到数据后调用指定的反序列方式来获取指令信息，参数className为kafka消息中的key，bytes为value。
+原理：Phoenix会自动拉取指定topic的数据，得到数据后调用指定的反序列方式来获取命令，参数className为kafka消息中的key，bytes为value。
 
 - 范例:
 
 ```java
+@Override
 public List<DeserializationReturn> deserialize(String className, byte[] bytes) {
     List<DeserializationReturn> deserializationReturns = new ArrayList<>();
-    try {
-        DeserializationReturn deserializationReturn = new DeserializationReturn(new Message(bytes), true);
-        deserializationReturns.add(deserializationReturn);
-        return deserializationReturns;
+    // 外部批量聚合根事件转换为多个聚合根的创建cmd
+    if (OtherSystemBatchAccountCreateEvent.class.getName().equals(className)) {
+        OtherSystemBatchAccountCreateEvent batchAccountCreateEvent = JsonUtils.decode(new String(bytes), className);
+        batchAccountCreateEvent.getAccounts().forEach(account -> {
+            AccountCreateCmd accountCreateCmd = new AccountCreateCmd(account, batchAccountCreateEvent.getAmt());
+            deserializationReturns
+                    .add(new DeserializationReturn(accountCreateCmd, "account-server/EA/BankAccount", true));
+        });
     }
-    catch (InvalidProtocolBufferException e) {
-        throw new DeserializationException("deserialization exception.", e);
-    }
+    return deserializationReturns;
 }
 ```
 
 ### 配置
 
-如果消息是**Phoenix**创建的指令信息，则可以不设置反序列化类路径，Phoenix会使用默认的反序列化类来处理。
+如果消息是**Phoenix**创建的命令，则可以不设置反序列化类路径，Phoenix会使用默认的反序列化类来处理。
 
 | 配置项                | 描述                    | 类型      | 默认值 |
 | :---------------------| :----------------------| :------   | :----- |
