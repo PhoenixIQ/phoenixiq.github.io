@@ -29,6 +29,7 @@ title: 配置详情
 | quantex.phoenix.akka.artery-transport               | 传输方式                                                  | String  | tcp <br /> 可选值：tcp / tls-tcp /  aeron-udp       |
 | quantex.phoenix.akka.artery-canonical-port          | 远程服务器端口                                            | Int     | 2551      |
 | quantex.phoenix.akka.artery-canoniacal-hostname     | 远程服务器地址                                            | String  | 127.0.0.1 |
+| quantex.phoenix.akka.artery-bind-hostname     | 可绑定的ip地址                                            | String  | 0.0.0.0 |
 | quantex.phoenix.akka.seed-node                      | 集群的初始接触点                                          | List    | akka:// + 服务名 + @127.0.0.1:2551 |
 | quantex.phoenix.akka.method                         | 服务发现的方式                                            | String  | akka-dns  |
 | quantex.phoenix.akka.pod-label-selector             | 服务发现的pod标签                                         | String  | app=%s    |
@@ -44,7 +45,8 @@ title: 配置详情
 | quantex.phoenix.server.mq.type                                | MQ 类型                                                    | String  | kafka     |
 | quantex.phoenix.server.mq.group                               | Server端服务消费组名，对应kafka和rocketmq中的consumergroup | String   | Server端服务名 |
 | quantex.phoenix.server.mq.address                             | MQ 服务端地址                                              | String  | 无     |
-| quantex.phoenix.server.mq.subscribe-topic                     | Server端订阅的 topic                                       | String  | Server端服务名 |
+| quantex.phoenix.server.mq.subscribe[].topic                   | Server端订阅的 topic                                       | String  | 无 |
+| quantex.phoenix.server.mq.subscribe[].deserializer            | 消息反序列化类路径，通过Phoenix创建的消息可不填               | String  | 无 |
 | quantex.phoenix.server.mq.use-kerberos                        | 是否开启 kerberos 认证                                     | Boolean | false  |
 | quantex.phoenix.server.mq.jaas-conf-path                      | jaas配置文件路径                                           | String  | 无     |
 | quantex.phoenix.server.mq.krb5-conf-path                      | krb5配置文件路径                                           | String  | 无     |
@@ -53,17 +55,16 @@ title: 配置详情
 | quantex.phoenix.server.event-stores.data-sources[].url        | 数据库 连接url                                             | String  | 无     |
 | quantex.phoenix.server.event-stores.data-sources[].username   | 数据库账户                                                 | String  | 无     |
 | quantex.phoenix.server.event-stores.data-sources[].password   | 数据库密码                                                 | String  | 无     |
-| quantex.phoenix.server.event-stores.snapshot.enable                  | 是否开启快照功能                                       |Boolean  | false <br /> 可选值：true / false     |
-| quantex.phoenix.server.event-stores.snapshot.entity-snapshot-interval | 自动打快照的触发条件，聚合根每处理 ‘interval’ 个消息打一个快照   |Long     |1000|
-| quantex.phoenix.server.license | 认证license，需要向Phoenix官方申请 | String  | 无     |
+| quantex.phoenix.server.event-stores.data-sources[].initial-size | 初始连接池大小                                             | int  | 2     |
+| quantex.phoenix.server.event-stores.data-sources[].min-idle    | 最小连接池大小                                              | int  | 2     |
+| quantex.phoenix.server.event-stores.data-sources[].max-active  | 最大连接池大小                                              | int  | 8     |
+| quantex.phoenix.server.license                                | 认证license，需要向Phoenix官方申请 | String  | 无     |
 | quantex.phoenix.server.performance.batch-process       | 聚合根同一批次可以处理的消息个数               | Int | 100  |
-| quantex.phoenix.server.performance.idempotent-size     | 聚合根幂等集合大小（处理消息时进行幂等）                                       | Int | 1000 |
 | quantex.phoenix.server.performance.recv-by-nofinished  | 接收消息限流（当未完成事务个数大于该值时，服务暂时不再接收新消息）   | Int | 5000 |
 | quantex.phoenix.server.performance.batch-finished      | 批量处理结束的事务                       | Int | 1000 |
 | quantex.phoenix.server.performance.retry-by-nofinished | phoenix支持消息重试，（当未完成事务个数大于该值时，未完成消息暂时停止重试） | Int | 10000|
 | quantex.phoenix.server.performance.batch-retry         | 同一批次可以重试的消息个数                           | Int | 1000 |
 | quantex.phoenix.server.performance.batch-persist       | 消息持久化 批次大小                                  | Int | 200  |
-| quantex.phoenix.server.performance.actor-survive-time       | 聚合根淘汰策略-不活跃时间(毫秒)                                  | Long | 86400000 (1天)  |
 
 
 ### Phoenix-client配置
@@ -173,8 +174,10 @@ server:
 quantex:
   phoenix:
     akka:
-      artery-canonical-port: 2551
-      management-http-port: 8558
+      artery-canonical-port: 2552  # 集群端口
+      management-http-port: 8559 # 集群管理的http端口 
+      artery-canonical-hostname: 192.168.1.9   # 节点的ip地址
+      seed-node: akka://account-server@192.168.1.9:2551,akka://account-server@192.168.1.9:2552  # 集群中seed-node的节点地址,一般会把所有节点都设置, 另外`account-server`要和应用${spring.application.name}的名字相同
 ```
 
 ### k8s集群运行
