@@ -13,6 +13,7 @@ phoenix-event-publish模块在phoenix 2.1.5版本中提供，引用依赖如下�
 <dependency>
   <groupId>com.iquantex</groupId>
   <artifactId>phoenix-event-publish-starter</artifactId>
+  <version>2.1.5</version>
 </dependency>
 ```
 

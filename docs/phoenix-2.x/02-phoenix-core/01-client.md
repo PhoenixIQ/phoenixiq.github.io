@@ -11,7 +11,7 @@ title: 客户端介绍
 <dependency>
     <groupId>com.iquantex</groupId>
     <artifactId>phoenix-client-starter</artifactId>
-    <version>2.1.3</version>
+    <version>2.1.5</version>
 </dependency>
 ```
 
@@ -41,17 +41,6 @@ quantex:
 
 启动**phoenix**项目后，**Phoenix**会自动创建**PhoenixClient** **bean**,可以通过`@Autowired`进行依赖注入
 
-### 异步调用
-
-```java
-@Autowired
-private PhoenixClient client;
-
-public void send() {
-    client.send(new Command(), UUID.randomUUID());
-}
-```
-
 ### 同步调用
 
 通过调用**send**返回**Future**对象的**get**方法同步接收请求结果
@@ -65,3 +54,15 @@ public void send() {
     RpcResult rpcResult = future.get();
 }
 ```
+
+### 异步调用
+
+```java
+@Autowired
+private PhoenixClient client;
+
+public void send() {
+    client.sendNoReply(new Command(), UUID.randomUUID());
+}
+```
+
