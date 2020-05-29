@@ -29,6 +29,8 @@ module.exports = {
             items: [
                 "phoenix-2.x/03-phoenix-event-publish/event-publish-readme-2x",
                 "phoenix-2.x/03-phoenix-event-publish/event-publish-use-2x",
+                "phoenix-2.x/03-phoenix-event-publish/event-publish-integration-2x",
+                "phoenix-2.x/03-phoenix-event-publish/event-publish-client-usage-2x",
             ],
         },
         {
