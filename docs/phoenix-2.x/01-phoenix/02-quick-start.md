@@ -15,7 +15,7 @@ title: 快速入门
 <dependency>
     <groupId>com.iquantex</groupId>
     <artifactId>phoenix-server-starter</artifactId>
-    <version>2.1.3</version>
+    <version>2.1.5</version>
 </dependency>
 ```
 
@@ -110,10 +110,10 @@ quantex:
       mq:
         type: kafka                       # mq类型
         address: embedded                 # mq服务地址 embedded为内存kafka
+        subscribes:
+          - topic: helloworld
       event-store:
         driver-class-name: org.h2.Driver  # 数据库驱动
-        snapshot:
-          enabled: true                   # 是否开启快照功能
         data-sources:
           - url: jdbc:h2:file:./data/test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS PUBLIC # 数据库链接url
             username: sa                  # 数据库账户
@@ -128,7 +128,7 @@ quantex:
 <dependency>
     <groupId>com.iquantex</groupId>
     <artifactId>phoenix-client-starter</artifactId>
-    <version>2.1.3</version>
+    <version>2.1.5</version>
 </dependency>
 ```
 
