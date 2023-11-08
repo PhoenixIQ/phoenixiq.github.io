@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkphoenixiq_github_io=self.webpackChunkphoenixiq_github_io||[]).push([[81547],{50702:e=>{e.exports=JSON.parse('{"label":"Idempotent","permalink":"/blog/tags/idempotent","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

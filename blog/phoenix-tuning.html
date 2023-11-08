@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-cn" dir="ltr" class="blog-wrapper blog-post-page plugin-blog plugin-id-default" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.0.0">
+<title data-rh="true">Phoenix 性能调优 | Phoenix</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="http://phoenix-website.sz.iquantex.com/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="http://phoenix-website.sz.iquantex.com/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="http://phoenix-website.sz.iquantex.com/blog/phoenix-tuning"><meta data-rh="true" property="og:locale" content="zh_cn"><meta data-rh="true" name="docusaurus_locale" content="zh-cn"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-cn"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Phoenix 性能调优 | Phoenix"><meta data-rh="true" name="description" content="本文介绍了对 Phoenix 进行性能调优的必要条件，包括了了解 Phoenix 的内部主要流程图和利用监控指标进行性能瓶颈分析。"><meta data-rh="true" property="og:description" content="本文介绍了对 Phoenix 进行性能调优的必要条件，包括了了解 Phoenix 的内部主要流程图和利用监控指标进行性能瓶颈分析。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2023-07-22T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/roiocam"><meta data-rh="true" property="article:tag" content="Phoenix,Performance,Tuning"><link data-rh="true" rel="icon" href="/img/phoenix.png"><link data-rh="true" rel="canonical" href="http://phoenix-website.sz.iquantex.com/blog/phoenix-tuning"><link data-rh="true" rel="alternate" href="http://phoenix-website.sz.iquantex.com/blog/phoenix-tuning" hreflang="zh-cn"><link data-rh="true" rel="alternate" href="http://phoenix-website.sz.iquantex.com/blog/phoenix-tuning" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Phoenix RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Phoenix Atom Feed">
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css" integrity="sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM" crossorigin="anonymous"><link rel="stylesheet" href="/assets/css/styles.9b752ffb.css">
+<script src="/assets/js/runtime~main.81fe3275.js" defer="defer"></script>
+<script src="/assets/js/main.8458ada4.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.png" alt="Phoenix Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo_dark.png" alt="Phoenix Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/">首页</a><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">文档</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/docs/introduce">介绍</a></li><li><a class="dropdown__link" href="/docs/phoenix">快速入门</a></li><li><a class="dropdown__link" href="/docs/phoenix-core">Phoenix 框架</a></li><li><a class="dropdown__link" href="/docs/phoenix-transaction">Phoenix 事务</a></li><li><a class="dropdown__link" href="/docs/phoenix-observability">Phoenix 可观测性</a></li></ul></div><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/blog">博客</a></div><div class="navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a class="navbar__link" aria-haspopup="true" aria-expanded="false" role="button" href="/docs/introduce">latest</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/docs/introduce">latest</a></li><li><a class="dropdown__link" href="/docs/2.6.0/introduce">2.6.0</a></li><li><a class="dropdown__link" href="/docs/2.5.5/phoenix-2.x/phoenix/phoenix-introduce">2.5.5</a></li><li><a class="dropdown__link" href="/docs/2.5.4/phoenix-2.x/phoenix/phoenix-introduce">2.5.4</a></li><li><a class="dropdown__link" href="/docs/2.5.3/phoenix-2.x/phoenix/phoenix-introduce">2.5.3</a></li><li><a class="dropdown__link" href="/docs/2.5.2/phoenix-2.x/phoenix/phoenix-introduce">2.5.2</a></li><li><a class="dropdown__link" href="/docs/2.5.1/phoenix-2.x/phoenix/phoenix-introduce">2.5.1</a></li><li><a class="dropdown__link" href="/docs/2.5.0/phoenix-2.x/phoenix/phoenix-introduce">2.5.0</a></li><li><a class="dropdown__link" href="/docs/2.4.4/phoenix-2.x/phoenix/phoenix-introduce">2.4.4</a></li><li><a class="dropdown__link" href="/docs/2.4.3/phoenix-2.x/phoenix/phoenix-introduce">2.4.3</a></li><li><a class="dropdown__link" href="/docs/2.4.2/phoenix-2.x/phoenix/phoenix-introduce">2.4.2</a></li><li><a class="dropdown__link" href="/docs/2.4.1/phoenix-2.x/phoenix/phoenix-introduce">2.4.1</a></li><li><a class="dropdown__link" href="/docs/2.4.0/phoenix-2.x/phoenix/phoenix-introduce">2.4.0</a></li><li><a class="dropdown__link" href="/docs/2.2.4/phoenix-2.x/phoenix">2.2.4</a></li></ul></div><a href="https://github.com/PhoenixIQ" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="切换浅色/暗黑模式（当前为浅色模式）" aria-label="切换浅色/暗黑模式（当前为浅色模式）" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z"><input placeholder="搜索" aria-label="Search" class="navbar__search-input"><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="container margin-vert--lg"><div class="row"><aside class="col col--3"><nav class="sidebar_re4s thin-scrollbar" aria-label="最近博文导航"><div class="sidebarItemTitle_pO2u margin-bottom--md">Recent posts</div><ul class="sidebarItemList_Yudw clean-list"><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/2.6.x-release">Phoenix 2.6.x Release</a></li><li class="sidebarItem__DBe"><a aria-current="page" class="sidebarItemLink_mo7H sidebarItemLinkActive_I1ZP" href="/blog/phoenix-tuning">Phoenix 性能调优</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/phoenix-scene">Phoenix 使用场景介绍</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/phoenix-openchaos">Phoenix 混沌测试实践</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/features">Phoenix 特性解析</a></li></ul></nav></aside><main class="col col--7" itemscope="" itemtype="https://schema.org/Blog"><article itemprop="blogPost" itemscope="" itemtype="https://schema.org/BlogPosting"><meta itemprop="description" content="本文介绍了对 Phoenix 进行性能调优的必要条件，包括了了解 Phoenix 的内部主要流程图和利用监控指标进行性能瓶颈分析。"><header><h1 class="title_f1Hy" itemprop="headline">Phoenix 性能调优</h1><div class="container_mt6G margin-vert--md"><time datetime="2023-07-22T00:00:00.000Z" itemprop="datePublished">2023年7月22日</time> · <!-- -->阅读需 17 分钟</div><div class="margin-top--md margin-bottom--sm row"><div class="col col--6 authorCol_Hf19"><div class="avatar margin-bottom--sm"><a href="https://github.com/roiocam" target="_blank" rel="noopener noreferrer" class="avatar__photo-link"><img class="avatar__photo" src="https://avatars.githubusercontent.com/u/26020358?v=4" alt="jingzhang.chen" itemprop="image"></a><div class="avatar__intro" itemprop="author" itemscope="" itemtype="https://schema.org/Person"><div class="avatar__name"><a href="https://github.com/roiocam" target="_blank" rel="noopener noreferrer" itemprop="url"><span itemprop="name">jingzhang.chen</span></a></div><small class="avatar__subtitle" itemprop="description">Maintainer</small></div></div></div></div></header><div id="__blog-post-container" class="markdown" itemprop="articleBody"><p>本文介绍了对 Phoenix 进行性能调优的必要条件，包括了了解 Phoenix 的内部主要流程图和利用监控指标进行性能瓶颈分析。</p>
+<p>在做性能调优时，首先要保证能够给定足够的负载，如增加 Kafka Topic 的分区数量（避免流量因部分聚合根处理过慢而阻塞）、增加 buffer 大小（避免所有聚合根处理过慢）、调整事务完成结果批次大小等措施。</p>
+<p>同时，还介绍了 Phoenix 扩容措施。</p>
+<p>{/*\s<em>truncate\s</em>*/}/</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="requirement">0. 必要条件<a href="#requirement" class="hash-link" aria-label="0. 必要条件的直接链接" title="0. 必要条件的直接链接">​</a></h2>
+<p>如果需要对 Phoenix 的性能进行调优，以实现硬件性能下的最高利用率，则首先需要了解 Phoenix 的内部主要流程图:</p>
+<blockquote>
+<p>Phoenix 内部结构的简化版视图如下</p>
+</blockquote>
+<p><img loading="lazy" alt="image" src="/assets/images/architecture-cddb480b902a070a9400100a4b6f7665.png" width="1779" height="446" class="img_ev3q"></p>
+<p>其次，我们需要利用完善的监控指标，来帮助我们快速分析性能瓶颈点，目前我们总是推荐用户使用最新版本的 <code>phoenix-telemetry-otel</code>(详细文档请参考:<a href="/docs/phoenix-console/phoenix-console-system-monitor">Phoenix Metrics</a>)，
+基于 OpenTelemetry 的埋点实现增加了直方图的支持（JMX 实现上较困难），并且丰富了一些指标埋点。对于可视化指标，我们推荐 Grafana 版本是 8.5.6，过低的版本将会无法运行。</p>
+<p>此外，还需要 Phoenix 的 Akka Agent 以便与增加 akka-dispatcher（actor 运行线程池）的监控埋点（如需要请联系 Phoenix 团队）</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="source">1. 数据源调优<a href="#source" class="hash-link" aria-label="1. 数据源调优的直接链接" title="1. 数据源调优的直接链接">​</a></h2>
+<p>要实现 Phoenix 的性能优化，首先要保证给定了足够的负载，因为 Phoenix 的数据来源主要是 Kafka，所以本质上 Phoenix 在负载模型(workload model)中属于封闭模型(closed model)，也就是 Phoenix 会限制并发的数量（Phoenix 借助
+Kafka 将多余流量推入队列），如需了解更多负载模型的背景，请参考论文：<strong>《Open Versus Closed: A Cautionary Tale》</strong></p>
+<p>在头图的架构中，1、2、7 组成了 Phoenix 数据源流速的简化部分，详细的内部流程图如下：</p>
+<p><img loading="lazy" alt="image" src="/assets/images/perf-01-8358586b550efa882e4475817c63892f.png" width="925" height="355" class="img_ev3q"></p>
+<p>由上图可知，Phoenix 用一个 Buffer 控制  并发（或者说控制流量的流入速率），仅当消费者的消费速率（聚合根的处理速度）足够时，才会再次摄入消息，此外 EventStore 的负载或多或少也会影响到
+数据源的吞吐能力，因为：</p>
+<ol>
+<li>数据源（ReceiverActor）是独占单线程，同时负责 KafkaConsumer，可靠性投递，接收聚合根处理完成的结果</li>
+<li>可靠性投递和聚合根共享同一个 EventStore（默认配置下）</li>
+</ol>
+<p>因此，为了能让 Phoenix 数据源的给到聚合根的负载足够（聚合根支持批量操作），聚合根的并发能力才能上升，所以通常我们有以下措施：</p>
+<ol>
+<li>增加 Kafka Topic 的分区数量：增加分区意味着直接增加了并行度，此时 buffer 也会成倍增加，此外增加分区还可以利用 Key Hash，支持让不同聚合根的命令分散到不同的分区，避免单个聚合根阻塞了整个数据源</li>
+<li>增加 buffer 大小：<code>quantex.phoenix.server.mq.properties.limitMaxLiveThings</code>（增加 buffer 会导致缓存的消息数量增多，请注意内存开销）</li>
+<li>调整事务完成结果批次大小：<code>quantex.phoenix.server.mq.properties.finishThingsBatch</code>（更大的批次对于 EventStore 的压力更小，阻塞更少，但 buffer 窗口移动的速度更慢）</li>
+</ol>
+<p>数据源调优的目的是为了<strong>保证聚合根并发足够</strong>：消息摄入够快，够分散（多个聚合根能同时并发）</p>
+<p>对于聚合根的并发是否足够，可通过 Phoenix Metrics 中 Akka-Dispatcher 观察线程池的使用率：</p>
+<blockquote>
+<p>下图通过 活跃线程数量/线程池大小 来计算得出线程池的利用率，从而得出聚合根的并发是否足够</p>
+</blockquote>
+<p><img loading="lazy" alt="image" src="/assets/images/perf-02-e478ec6cc89578814f1fa0c7cb941c40.png" width="2496" height="352" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="handle">2. 聚合根处理调优<a href="#handle" class="hash-link" aria-label="2. 聚合根处理调优的直接链接" title="2. 聚合根处理调优的直接链接">​</a></h2>
+<p>当数据源能够提供足够的流速和消息分散度后，整个 Phoenix 的性能则完全取决于聚合根的处理速度。</p>
+<p>在聚合根层面，Phoenix 为用户新增了一个攒批的实现（当聚合根空闲时立即发送消息缓存 / 当消息满足一定批次大小后直接发送消息缓存），以此提高聚合根处理速度（避免每个 Command 都会发生一次持久化的网络 I/O，从而导致
+性能降低，网络 I/O 通常是最大的瓶颈点）</p>
+<blockquote>
+<p>下图展示了攒批的层次，攒批和实际处理的聚合根并不在一个线程池中，后者的任务更繁重，因此做了隔离以提高攒批线程池的运行效率（避免任务阻塞在任务队列）</p>
+</blockquote>
+<p><img loading="lazy" alt="image" src="/assets/images/perf-03-1b725a86584e9b0a76bfc53105010183.png" width="1105" height="436" class="img_ev3q"></p>
+<p>对于 Aggregate 而言，聚合根处理消息的响应时间主要由以下部分组成：</p>
+<ol>
+<li>Batch 等待调度耗时（默认情况下，总是微妙级别）</li>
+<li>Batch 攒批耗时（取决于 Child 的处理时间）</li>
+<li>聚合根等待调度耗时（聚合根线程池的负载通常更高，处理时间更长，因此发送给聚合根的消息，等待调度的时间是个重要的指标）</li>
+<li>聚合根处理耗时（取决于用户代码）</li>
+<li>聚合根持久化耗时（持久化数据的 I/O 耗时，在异步模式下，此耗时还包含数据库响应的调度时间）</li>
+</ol>
+<p>调度耗时可以在 Akka-Dispatcher 监控中找到，在同步模式下，聚合根线程池为 <code>aggregate-dispatcher</code>，Batch 的线程池为 <code>akka.actor.default-dispatcher</code></p>
+<p><img loading="lazy" alt="image" src="/assets/images/perf-04-dc7fb961bc6905042788245ab412f4ce.png" width="684" height="338" class="img_ev3q"></p>
+<p>聚合根的处理和持久化耗时，可以在 Phoenix Performance 监控面板中找到，也可以在 Phoenix Source Aggregate 中找到</p>
+<p><img loading="lazy" alt="image" src="/assets/images/perf-05-390181c68216aca9b9087c0fd96fd528.png" width="712" height="402" class="img_ev3q"></p>
+<p>对于聚合根处理的调优，可以从以下几个方面入手：</p>
+<ol>
+<li>聚合根等待调度耗时过高（观察处理和持久化，哪一个的耗时过高，从而影响了聚合根线程池的处理耗时 -&gt; 调度耗时）</li>
+<li>聚合根持久化耗时过高（可使用聚合根异步运行模式尝试优化，如无法提高，观察 EventStore 指标，是否数据库到达瓶颈）</li>
+<li>聚合根处理耗时过高（尝试优化代码，或者调低批量处理大小，调低批量处理后能让聚合根线程池的公平策略提高）</li>
+</ol>
+<p>通常在聚合根内，我们不建议内部包含阻塞，I/O 行为，从上面可得知，一旦聚合根线程池处理耗时提高，那么等待调度的耗时就会增加，继而影响聚合根响应时间 -&gt; 事务耗时</p>
+<p>聚合根运行在 Actor 模型中，而 Actor 模型通过事件驱动的方式，模拟出虚拟线程（纤程）的效果，而当聚合根阻塞越严重，则该效果越差。</p>
+<p>当然，用户也可以通过提高聚合根线程池大小的方式，让聚合根从事件驱动模型退化到线程池模型，但此时 EventStore 的攒批效果则大大降低。</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="event-publish">3. EventPublish 调优<a href="#event-publish" class="hash-link" aria-label="3. EventPublish 调优的直接链接" title="3. EventPublish 调优的直接链接">​</a></h2>
+<p>EventPublish 是一个相对独立的模块，可以不依赖于 Phoenix Server 而运行。</p>
+<p>EventPublish 的结构并不复杂，核心主要是一个 Reader 从 EventStore 中按顺序读取事件，并通过 Handler 处理之后发送到 Kafka，如下图所示：</p>
+<p><img loading="lazy" alt="image" src="/assets/images/perf-06-641b9e77c2d167be7a1550878f20b97f.png" width="662" height="505" class="img_ev3q"></p>
+<p>EventPublish 提供用于调优性能的配置如下：</p>
+<ul>
+<li><code>quantex.phoenix.event-publish.batch-size</code>：每次从 EventStore 读取的批次大小，默认是 128</li>
+<li><code>quantex.phoenix.event-publish.buffer-queue-size</code>：Reader 和 Handler 之间缓存事件的队列大小，默认是 64</li>
+</ul>
+<p>需要注意的是，EventPublish 在读取 EventStore 时使用了两个参数：已处理的 offset（时间戳）和（当前最大的事务时间戳 - 1）作为范围查询，该数据库列拥有一个索引用于加速查询。</p>
+<p>然而，当 EventPublish 的消费远远落后于聚合根持久化的事件生产速度时，索引范围查询太多，从而让数据库优化器放弃使用索引，转而使用全表扫描，这会导致查询的性能急剧下降。</p>
+<p>为了避免该问题，我们在 EventStore 的 Slice 模式中支持了两个特性：</p>
+<ol>
+<li>支持并发消费（通过一个 slice 字段切分被分片的行）</li>
+<li>智能化范围查询（当前 offset 向前的窗口查询依赖于上一次查询的结果，尽可能保证索引命中的行数低于数据库优化器放弃使用索引的阈值）</li>
+</ol>
+<p>除此之外，在 Timer 模式中（默认）也可以通过增加每次从 EventStore 读取的批次大小，也就是增加消费速度和队列大小，避免 EventPublish 远落后于事件生产速度（EventPublish 主要的瓶颈还是查库）</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="event-sourcing">4. 溯源时间过长<a href="#event-sourcing" class="hash-link" aria-label="4. 溯源时间过长的直接链接" title="4. 溯源时间过长的直接链接">​</a></h2>
+<p>在单个分区下，如果原始流量的分布不均匀（如前 1w 个事件都是某个聚合根），这会导致 Phoenix 出现单线程处理的情况（聚合根处理是单线程，符合 Actor 模型）这种情况可通过在 Phoenix Metrics 观察多个面板分析（主要是 akka dispatcher + aggregate）</p>
+<p>除了原始流量不均之外，当某个聚合根发生异常并进入溯源时，该聚合根会停止处理消息并等待溯源完毕，这种情况下，假设该聚合根流量较大（即使是每秒 100 t/S，也会在 10s 内将 ReceiverActor 的 Buffer 撑满）将会造成背压限流，从而影响 Phoenix 的吞吐能力。</p>
+<p><img loading="lazy" alt="image" src="/assets/images/perf-07-fcf1c0b710f8755e1028413f9c70b93f.png" width="1226" height="362" class="img_ev3q"></p>
+<p>解决方案有三种方式：</p>
+<ol>
+<li>为聚合根增加独立的背压 buffer（框架目前暂不支持，未来可能支持）</li>
+<li>减少聚合根 <code>on()</code> 处理耗时, 以此降低 EventSourcing 时间</li>
+<li>减少聚合根快照周期<code>snapshotInterval</code>（这种情况下聚合根可能会频繁快照，取决于聚合根的流量）</li>
+</ol>
+<p>目前我们更推荐第二种方式的调优，在 EventSourcing 的思想中，Event 是不可变的事实，而 <code>on()</code> 方法则是 <code>State -&gt; Event -&gt; State</code> 的表达，也就是事件改变状态。
+任何涉及到计算、外部依赖的操作都应该在 Command 阶段完成，最终通过不可变量的方式存储在 Event 中。</p>
+<p>这种情况和数据源的调优一样，都属于聚合根并发不足。</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="scale-up">5. 扩容<a href="#scale-up" class="hash-link" aria-label="5. 扩容的直接链接" title="5. 扩容的直接链接">​</a></h2>
+<p>通常，提升一个应用的性能最简单暴力的方法就是 Scale Up 和 Scale Out.</p>
+<ul>
+<li>ScaleUp：同节点数量下，增加部署 Phoenix 应用的 CPU 核心数量（线程池数量会随着 CPU 核心而增长）</li>
+<li>ScaleOut：在 CPU 核心数量保持不变下，增加 Phoenix 集群节点数量</li>
+</ul>
+<p>如果 ScaleUp 后性能没有提升，则通  过 Akka-Dispatcher 观察线程池利用率，观察是否聚合根并发不够。</p>
+<p>如果 ScaleOut 后性能没有提升，则观察数据源摄入速率是否足够，聚合根并发是否足够。</p>
+<p>此外，还有一种情况是聚合根拆分的粒度不够导致聚合根的并发不足，例如将所有应该拆分的聚合根放到一个大单体，此时无论如何扩容，那么性能都无法提升，因为此时 Phoenix 只会单线程池处理。</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="cpu-bound">6. CPU 密集型<a href="#cpu-bound" class="hash-link" aria-label="6. CPU 密集型的直接链接" title="6. CPU 密集型的直接链接">​</a></h2>
+<p>上述的调优显然更适合 I/O 密集型场景应用，当然部分也适用于 CPU 密集型应用。</p>
+<p>对于 CPU 密集型应用，其性能完全取决于给定的节点配置（CPU 核心数量）以及集群节点数量，都是可以通过利特尔法则计算得出：</p>
+<p>假设 CPU 密集型任务需要执行 30ms，硬件配置为 8 个核心和 3 个集群节点。在这种情况下，可以使用以下公式计算理论吞吐量：</p>
+<blockquote>
+<p>吞吐量 = 核心数 / 平均响应时间</p>
+</blockquote>
+<p>平均响应时间可以近似为计算任务的耗时，即 30ms。 因此根据硬件配置，理论上的吞吐量为：</p>
+<blockquote>
+<p>吞吐量 = 8 / 0.03s * 3 = 800 TPS（每秒事务数）</p>
+</blockquote>
+<p>当 CPU 密集任务不会占用全部的 CPU 算力时，如聚合根已处理完，进入持久化流程，此时聚合根的线程池能够突破该 TPS，直到再次进入 CPU 密集。</p>
+<p>目前对于 CPU 密集型任务，主要的瓶颈点还是硬件算力，只能通过增加算力来扩展，暂无调优手段。</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="event-store">7. EventStore 瓶颈<a href="#event-store" class="hash-link" aria-label="7. EventStore 瓶颈的直接链接" title="7. EventStore 瓶颈的直接链接">​</a></h2>
+<p>Phoenix 目前  提供了 EventStore-JDBC 作为 EventSourcing 的持久化存储，EventStore 基于 RDBMS 为提供了一些特性（唯一、幂等索引，Console 查询）
+但是目前单节点的 RDBMS 在大多数情况中都容易成为 Phoenix 应用的瓶颈点。</p>
+<p>对于因 EventStore 导致应用出现瓶颈的情况，请考虑如下方案：</p>
+<ol>
+<li>物理机部署数据库</li>
+<li>在固态硬盘之上运行数据库</li>
+<li>配置多数据源</li>
+<li>使用分布式SQL数据库（如 TiDB、YugabyteDB）</li>
+</ol></div><footer class="row docusaurus-mt-lg blogPostFooterDetailsFull_mRVl"><div class="col"><b>标签：</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/blog/tags/phoenix">Phoenix</a></li><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/blog/tags/performance">Performance</a></li><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/blog/tags/tuning">Tuning</a></li></ul></div><div class="col margin-top--sm"><a href="https://github.com/PhoenixIQ/blog/2023-07-22-tuning-guide.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="博文分页导航"><a class="pagination-nav__link pagination-nav__link--prev" href="/blog/2.6.x-release"><div class="pagination-nav__sublabel">较新一篇</div><div class="pagination-nav__label">Phoenix 2.6.x Release</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/blog/phoenix-scene"><div class="pagination-nav__sublabel">较旧一篇</div><div class="pagination-nav__label">Phoenix 使用场景介绍</div></a></nav></main><div class="col col--2"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#requirement" class="table-of-contents__link toc-highlight">0. 必要条件</a></li><li><a href="#source" class="table-of-contents__link toc-highlight">1. 数据源调优</a></li><li><a href="#handle" class="table-of-contents__link toc-highlight">2. 聚合根处理调优</a></li><li><a href="#event-publish" class="table-of-contents__link toc-highlight">3. EventPublish 调优</a></li><li><a href="#event-sourcing" class="table-of-contents__link toc-highlight">4. 溯源时间过长</a></li><li><a href="#scale-up" class="table-of-contents__link toc-highlight">5. 扩容</a></li><li><a href="#cpu-bound" class="table-of-contents__link toc-highlight">6. CPU 密集型</a></li><li><a href="#event-store" class="table-of-contents__link toc-highlight">7. EventStore 瓶颈</a></li></ul></div></div></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">文档</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/introduce">Phoenix介绍</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/phoenix/quick-start-example/bookings-architecture">快速入门</a></li></ul></div><div class="col footer__col"><div class="footer__title">案例</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/PhoenixIQ/phoenix-samples/tree/master/bank-account" target="_blank" rel="noopener noreferrer" class="footer__link-item">账户管理<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/PhoenixIQ/phoenix-sample-risk" target="_blank" rel="noopener noreferrer" class="footer__link-item">交易风控<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/PhoenixIQ/phoenix-samples/tree/master/shopping-cart" target="_blank" rel="noopener noreferrer" class="footer__link-item">购物车<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/PhoenixIQ/hotel-booking" target="_blank" rel="noopener noreferrer" class="footer__link-item">酒店预订<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">资源</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">博客</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">北京宽拓智融科技有限公司 Copyright @2013 - 2023 iQuantex.com All Rights Reserved. 宽拓公司 版权所有</div></div></div></footer></div>
+</body>
+</html>

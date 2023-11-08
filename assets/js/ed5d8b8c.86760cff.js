@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkphoenixiq_github_io=self.webpackChunkphoenixiq_github_io||[]).push([[8133],{81610:e=>{e.exports=JSON.parse('{"label":"Rocketmq","permalink":"/blog/tags/rocketmq","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
