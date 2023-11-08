@@ -8,7 +8,7 @@ const math = require('remark-math');
 const katex = require('rehype-katex');
 
 /** @type {import('@docusaurus/types').Config} */
-const config = {
+export default {
     title: 'Phoenix',
     tagline: 'Phoenix',
     favicon: 'img/phoenix.png',
@@ -227,11 +227,9 @@ const config = {
     ],
     markdown: {
         mdx1Compat: {
-            comments: false,
-            admonitions: false,
-            headingIds: false,
+            comments: true,
+            admonitions: true,
+            headingIds: true,
         },
     }
 };
-
-module.exports = config;
