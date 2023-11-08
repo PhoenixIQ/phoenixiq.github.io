@@ -7,7 +7,7 @@ tags: [phoenix, features]
 
 > 本文解析phoenix的特性
 
-\{\/\*\s*truncate\s*\*\/\}/
+{/* truncate */}
 
 ## 编程模型
 

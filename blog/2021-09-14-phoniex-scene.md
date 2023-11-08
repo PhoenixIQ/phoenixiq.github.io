@@ -9,7 +9,7 @@ tags: [phoenix, stateful]
 > 
 > 本章下面贫血模型和充血模型分析部分内容引用了王争在极客时间[设计模式之美](https://time.geekbang.org/column/intro/250)课程。
 
-\{\/\*\s*truncate\s*\*\/\}/
+{/* truncate */}
 
 ## 什么是贫血模型?
 

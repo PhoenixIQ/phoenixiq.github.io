@@ -7,7 +7,7 @@ tags: [Phoenix, GitLab]
 
 > 本篇文章介绍了宽拓科技Phoenix组如何使用GitLab进行高效的远程开发协作。
 
-\{\/\*\s*truncate\s*\*\/\}/
+{/* truncate */}
 
 ## 开发流程介绍
 总体流程分为Issue指定，开发，版本发布三个步骤。

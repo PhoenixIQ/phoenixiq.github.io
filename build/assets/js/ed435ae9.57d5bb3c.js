@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkphoenix_website_next=self.webpackChunkphoenix_website_next||[]).push([[31583],{79314:e=>{e.exports=JSON.parse('{"label":"Phoenix","permalink":"/blog/tags/phoenix","allTagsPath":"/blog/tags","count":7,"unlisted":false}')}}]);

@@ -7,7 +7,7 @@ tags: [phoenix, openchaos]
 
 > 本文将分享Phoenix在使用[openchaos](https://github.com/openmessaging/openchaos) 进行混沌测试的实践
 
-\{\/\*\s*truncate\s*\*\/\}/
+{/* truncate */}
 
 ## 一、为什么需要混沌测试？
 

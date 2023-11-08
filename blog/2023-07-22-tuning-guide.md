@@ -11,7 +11,7 @@ tags: [Phoenix, Performance, Tuning]
 
 同时，还介绍了 Phoenix 扩容措施。
 
-\{\/\*\s*truncate\s*\*\/\}/
+{/* truncate */}
 
 
 ## 0. 必要条件 \{#requirement\}

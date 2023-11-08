@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkphoenix_website_next=self.webpackChunkphoenix_website_next||[]).push([[79909],{94159:e=>{e.exports=JSON.parse('{"label":"features","permalink":"/blog/tags/features","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

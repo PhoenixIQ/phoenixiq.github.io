@@ -12,7 +12,7 @@ tags: [Idempotent, IdempotentId]
 
 **Phoenix**在执行**act**方法前都会对**command message**进行幂等判断，如果消息已处理则直接返回处理结果，不再执行**act**方法和**on**方法。
 
-\{\/\*\s*truncate\s*\*\/\}/
+{/* truncate */}
 
 ![总体流程图](images/idempotent/001-overall.png)
 
