@@ -16,7 +16,7 @@
         <content type="html"><![CDATA[<blockquote>
 <p>我们很高兴 Phoenix 2.6.0 即将进入发布流程，本次版本升级涉及到了非常多的变动，但也进一步提升了 Phoenix 的性能，因此处于旧版本的用户可以尽早联系 Phoenix 团队获得体验版本</p>
 </blockquote>
-<p>{/*\s<em>truncate\s</em>*/}/</p>
+<!-- -->
 <a class="link" href="http://phoenix-website.sz.iquantex.com/docs/phoenix/upgrade/2-6-x"><p>🎉&nbsp;<!-- -->完整发版日志 Release Notes <!-- -->&nbsp;🥳<!-- -->  &gt;&gt;</p></a>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="变动模块">变动模块<a href="http://phoenix-website.sz.iquantex.com/blog/2.6.x-release#%E5%8F%98%E5%8A%A8%E6%A8%A1%E5%9D%97" class="hash-link" aria-label="变动模块的直接链接" title="变动模块的直接链接">​</a></h2>
 <ul>
@@ -139,7 +139,7 @@
         <content type="html"><![CDATA[<p>本文介绍了对 Phoenix 进行性能调优的必要条件，包括了了解 Phoenix 的内部主要流程图和利用监控指标进行性能瓶颈分析。</p>
 <p>在做性能调优时，首先要保证能够给定足够的负载，如增加 Kafka Topic 的分区数量（避免流量因部分聚合根处理过慢而阻塞）、增加 buffer 大小（避免所有聚合根处理过慢）、调整事务完成结果批次大小等措施。</p>
 <p>同时，还介绍了 Phoenix 扩容措施。</p>
-<p>{/*\s<em>truncate\s</em>*/}/</p>
+<!-- -->
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="requirement">0. 必要条件<a href="http://phoenix-website.sz.iquantex.com/blog/phoenix-tuning#requirement" class="hash-link" aria-label="0. 必要条件的直接链接" title="0. 必要条件的直接链接">​</a></h2>
 <p>如果需要对 Phoenix 的性能进行调优，以实现硬件性能下的最高利用率，则首先需要了解 Phoenix 的内部主要流程图:</p>
 <blockquote>
@@ -281,7 +281,7 @@ Kafka 将多余流量推入队列），如需了解更多负载模型的背景�
 <p>本章分析了贫血模型和充血模型的优缺点以及使用场景，进而表明Phoenix的适用场景。</p>
 <p>本章下面贫血模型和充血模型分析部分内容引用了王争在极客时间<a href="https://time.geekbang.org/column/intro/250" target="_blank" rel="noopener noreferrer">设计模式之美</a>课程。</p>
 </blockquote>
-<p>{/*\s<em>truncate\s</em>*/}/</p>
+<!-- -->
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="什么是贫血模型">什么是贫血模型?<a href="http://phoenix-website.sz.iquantex.com/blog/phoenix-scene#%E4%BB%80%E4%B9%88%E6%98%AF%E8%B4%AB%E8%A1%80%E6%A8%A1%E5%9E%8B" class="hash-link" aria-label="什么是贫血模型?的直接链接" title="什么是贫血模型?的直接链接">​</a></h2>
 <p>贫血模型最早广泛应用是源自于EJB2，把<code>行为</code>（也称为方法、过程）和<code>状态</code>（可理解为数据，对应到语言就是对象成员变量）分离到不同的对象之中。 那个只有状态的对象就是所谓的“贫血对象”（PO/DTO），而那个只有行为的对象就是我们常见的三层结构中的Service/Manager层。</p>
 <p>实际上，你可能一直都在用贫血模型做开发，只是自己不知道而已。据了解，绝大多数的业务后端系统，都是基于贫血模型的。下面用一个银行账户的例子说明一下。</p>
@@ -382,7 +382,7 @@ Kafka 将多余流量推入队列），如需了解更多负载模型的背景�
         <content type="html"><![CDATA[<blockquote>
 <p>本文将分享Phoenix在使用<a href="https://github.com/openmessaging/openchaos" target="_blank" rel="noopener noreferrer">openchaos</a> 进行混沌测试的实践</p>
 </blockquote>
-<p>{/*\s<em>truncate\s</em>*/}/</p>
+<!-- -->
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="一为什么需要混沌测试">一、为什么需要混沌测试？<a href="http://phoenix-website.sz.iquantex.com/blog/phoenix-openchaos#%E4%B8%80%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B7%B7%E6%B2%8C%E6%B5%8B%E8%AF%95" class="hash-link" aria-label="一、为什么需要混沌测试？的直接链接" title="一、为什么需要混沌测试？的直接链接">​</a></h2>
 <p>随着计算机技术的发展，系统架构从集中式演进到分布式。分布式系统相对于单台机器来说提供了更好的可扩展性，容错性以及更低的延迟，但在单台计算机上运行软件和分布式系统上运行软件却有着根本的区别，其中一点便是单台计算机上运行软件，错误是可预测的。当硬件没有故障时，运行在单台计算机的软件总是产生同样的结果；而硬件如果出现问题，那么后果往往是整个系统的故障。因此，对于单体系统来说，要么功能完好且正确，要么完全失效，而不是介于两者之间。</p>
 <p>而分布式系统则复杂的多。分布式系统涉及到多个节点和网络，因而存在部分失效的问题。分布式系统中不可靠的网络会导致数据包可能会丢失或任意延迟，不可靠的时钟导致某节点可能会与其他节点不同步 ，甚至一个节点上的进程可能会在任意时候暂停一段相当长的时间（比如由于垃圾收集器导致）而被宣告死亡，这些都给分布式系统带来了不确定性和不可预测性。事实上，这些问题在分布式系统中是无法避免的，就像著名的 CAP 理论中提出的，P（网络分区）是永远存在的，而不是可选的。</p>
@@ -479,7 +479,7 @@ Kafka 将多余流量推入队列），如需了解更多负载模型的背景�
         <content type="html"><![CDATA[<blockquote>
 <p>本文解析phoenix的特性</p>
 </blockquote>
-<p>{/*\s<em>truncate\s</em>*/}/</p>
+<!-- -->
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="编程模型">编程模型<a href="http://phoenix-website.sz.iquantex.com/blog/features#%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B" class="hash-link" aria-label="编程模型的直接链接" title="编程模型的直接链接">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="actor模型">Actor模型<a href="http://phoenix-website.sz.iquantex.com/blog/features#actor%E6%A8%A1%E5%9E%8B" class="hash-link" aria-label="Actor模型的直接链接" title="Actor模型的直接链接">​</a></h3>
 <p><img loading="lazy" alt="rpc" src="http://phoenix-website.sz.iquantex.com/assets/images/actor-636bf93c5bf7429f3d6ccfda529e2929.png" width="686" height="377" class="img_ev3q"></p>
@@ -531,7 +531,7 @@ Kafka 将多余流量推入队列），如需了解更多负载模型的背景�
 </blockquote>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="介绍">介绍<a href="http://phoenix-website.sz.iquantex.com/blog/idempotent#%E4%BB%8B%E7%BB%8D" class="hash-link" aria-label="介绍的直接链接" title="介绍的直接链接">​</a></h2>
 <p><strong>Phoenix</strong>在执行<strong>act</strong>方法前都会对<strong>command message</strong>进行幂等判断，如果消息已处理则直接返回处理结果，不再执行<strong>act</strong>方法和<strong>on</strong>方法。</p>
-<p>{/*\s<em>truncate\s</em>*/}/</p>
+<!-- -->
 <p><img loading="lazy" alt="总体流程图" src="http://phoenix-website.sz.iquantex.com/assets/images/001-overall-a785bee8c3db6b49f9c00a96fdce175a.png" width="1638" height="679" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="幂等id">幂等ID<a href="http://phoenix-website.sz.iquantex.com/blog/idempotent#%E5%B9%82%E7%AD%89id" class="hash-link" aria-label="幂等ID的直接链接" title="幂等ID的直接链接">​</a></h2>
 <p>可以在<code>@CommandHandler</code>注解中定义幂等字段，<strong>Phoenix</strong>会调用相应字段的<strong>get</strong>方法并拼接为一个幂等ID，如果为定义则<strong>Phoenix</strong>会生成一个<strong>UUID</strong>来用作幂等ID。如果获取幂等ID失败，将抛出异常事件。</p>
@@ -544,7 +544,7 @@ Kafka 将多余流量推入队列），如需了解更多负载模型的背景�
 <li>内存幂等集合大小配置</li>
 </ul>
 <p>内存幂等集合大小为聚合根级别，可以通过<code>@EntityAggregateAnnotation</code>的<code>idempotentSize</code>属性进行配置，**默认值:**1000</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="数据库幂等">数据库幂等<a href="http://phoenix-website.sz.iquantex.com/blog/idempotent#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%82%E7%AD%89" class="hash-link" aria-label="数据库幂等的直接链接" title="数据�库幂等的直接链接">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="数据库幂等">数据库幂等<a href="http://phoenix-website.sz.iquantex.com/blog/idempotent#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%82%E7%AD%89" class="hash-link" aria-label="数据库幂等的直接链接" title="数据库幂等的直接链接">​</a></h3>
 <p>数据库幂等在内存幂等之后，如果内存幂等判定为未处理，且消息为重试消息，则会根<code>aggregateId</code>（聚合id）和<code>idempotentId</code>（幂等id）查询数据库。</p>]]></content>
         <author>
             <name>Zheng Jie</name>
@@ -562,7 +562,7 @@ Kafka 将多余流量推入队列），如需了解更多负载模型的背景�
         <content type="html"><![CDATA[<blockquote>
 <p>本篇文章介绍了宽拓科技Phoenix组如何使用GitLab进行高效的远程开发协作。</p>
 </blockquote>
-<p>{/*\s<em>truncate\s</em>*/}/</p>
+<!-- -->
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="开发流程介绍">开发流程介绍<a href="http://phoenix-website.sz.iquantex.com/blog/GitLab-workflow#%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B%E4%BB%8B%E7%BB%8D" class="hash-link" aria-label="开发流程介绍的直接链接" title="开发流程介绍的直接链接">​</a></h2>
 <p>总体流程分为Issue指定，开发，版本发布三个步骤。
 <img loading="lazy" alt="总体流程图" src="http://phoenix-website.sz.iquantex.com/assets/images/010-%E6%80%BB%E4%BD%93%E6%B5%81%E7%A8%8B%E5%9B%BE-4909b2ab89d3cf03ac9eab0121223b8d.png" width="1101" height="530" class="img_ev3q"></p>
@@ -598,7 +598,7 @@ Kafka 将多余流量推入队列），如需了解更多负载模型的背景�
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="集成测试">集成测试<a href="http://phoenix-website.sz.iquantex.com/blog/GitLab-workflow#%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95" class="hash-link" aria-label="集成测试的直接链接" title="集成测试的直接链接">​</a></h3>
 <p>OKR中的所有任务都开发完成，需要罗列出OKR关联所有变动的测试案例进行封板测试。封板测试案例：</p>
 <p><img loading="lazy" alt="image" src="http://phoenix-website.sz.iquantex.com/assets/images/004-grableVer-a2cd11b39eb883b651df1e9f96458d06.png" width="807" height="1106" class="img_ev3q"></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="版本发布">版本发布<a href="http://phoenix-website.sz.iquantex.com/blog/GitLab-workflow#%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83" class="hash-link" aria-label="版本发布的直接��链接" title="版本发布的直接链接">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="版本发布">版本发布<a href="http://phoenix-website.sz.iquantex.com/blog/GitLab-workflow#%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83" class="hash-link" aria-label="版本发布的直接链接" title="版本发布��的直接链接">​</a></h3>
 <p>全部测试完成即可升级相应项目版本，并制作相应tag（建议在tag中表明本次升级的所有变动点）</p>
 <p><img loading="lazy" alt="tags" src="http://phoenix-website.sz.iquantex.com/assets/images/012-tags-c770265198f1c5fbc45a351609418531.png" width="1306" height="743" class="img_ev3q"></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="更新生产环境">更新生产环境<a href="http://phoenix-website.sz.iquantex.com/blog/GitLab-workflow#%E6%9B%B4%E6%96%B0%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83" class="hash-link" aria-label="更新生产环境的直接链接" title="更新生产环境的直接链接">​</a></h3>
@@ -688,7 +688,7 @@ Kafka 将多余流量推入队列），如需了解更多负载模型的背景�
 <blockquote>
 <p>摘要：Phoenix是宽拓科技架构团队研发的内存计算框架，借鉴了LMAX的架构思路，采用CQRS和EventSouring理念打造。本文简单介绍Phoenix，以及RocketMQ在Phoenix中的应用与实践。 注：该Phoenix不是Apache开源的那个Phoenix。</p>
 </blockquote>
-<p>{/*\s<em>truncate\s</em>*/}/</p>
+<p>{<strong>truncate</strong>}</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="行业背景">行业背景<a href="http://phoenix-website.sz.iquantex.com/blog/rocketmq-in-phoenix#%E8%A1%8C%E4%B8%9A%E8%83%8C%E6%99%AF" class="hash-link" aria-label="行业背景的直接链接" title="行业背景的直接链接">​</a></h2>
 <p>在金融资管投资交易领域，业务场景复杂，如在交易处理场景中，存在事前的风控头寸控制需求，导致交易事件必须串行处理，无法并发，且单次交易事件处理中，存在高密度的复杂业务逻辑计算且依赖数据范围广，所以系统的性能问题非常突出。</p>
 <p>目前业内一般基于关系型数据库来处理单个交易事件，会存在复杂SQL运算逻辑和多次IO读取数据，因此很难做到低延迟。并且由于业务逻辑比较复杂，经常陷入与表模型纠缠当中。</p>
