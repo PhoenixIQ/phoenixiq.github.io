@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="zh-cn" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-2.2.4 docs-doc-page docs-doc-id-page-header/phoenix-version-2x" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.0.0">
+<title data-rh="true">ReleaseNote | Phoenix</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="http://phoenix-website.sz.iquantex.com/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="http://phoenix-website.sz.iquantex.com/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="http://phoenix-website.sz.iquantex.com/docs/2.2.4/page-header/phoenix-version-2x"><meta data-rh="true" property="og:locale" content="zh_cn"><meta data-rh="true" name="docusaurus_locale" content="zh-cn"><meta data-rh="true" name="docsearch:language" content="zh-cn"><meta data-rh="true" name="docusaurus_version" content="2.2.4"><meta data-rh="true" name="docusaurus_tag" content="docs-default-2.2.4"><meta data-rh="true" name="docsearch:version" content="2.2.4"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-2.2.4"><meta data-rh="true" property="og:title" content="ReleaseNote | Phoenix"><meta data-rh="true" name="description" content="维护 phoenix 具体版本内容，包括 release node，以及和各个组件匹配的版本信息。下面每个标题内的表格代表了版本匹配关系。"><meta data-rh="true" property="og:description" content="维护 phoenix 具体版本内容，包括 release node，以及和各个组件匹配的版本信息。下面每个标题内的表格代表了版本匹配关系。"><link data-rh="true" rel="icon" href="/img/phoenix.png"><link data-rh="true" rel="canonical" href="http://phoenix-website.sz.iquantex.com/docs/2.2.4/page-header/phoenix-version-2x"><link data-rh="true" rel="alternate" href="http://phoenix-website.sz.iquantex.com/docs/2.2.4/page-header/phoenix-version-2x" hreflang="zh-cn"><link data-rh="true" rel="alternate" href="http://phoenix-website.sz.iquantex.com/docs/2.2.4/page-header/phoenix-version-2x" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Phoenix RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Phoenix Atom Feed">
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css" integrity="sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM" crossorigin="anonymous"><link rel="stylesheet" href="/assets/css/styles.9b752ffb.css">
+<script src="/assets/js/runtime~main.e6056bc2.js" defer="defer"></script>
+<script src="/assets/js/main.1ba9e3a2.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.png" alt="Phoenix Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo_dark.png" alt="Phoenix Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/">首页</a><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">文档</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/docs/introduce">介绍</a></li><li><a class="dropdown__link" href="/docs/phoenix">快速入门</a></li><li><a class="dropdown__link" href="/docs/phoenix-core">Phoenix 框架</a></li><li><a class="dropdown__link" href="/docs/phoenix-transaction">Phoenix 事务</a></li><li><a class="dropdown__link" href="/docs/phoenix-observability">Phoenix 可观测性</a></li></ul></div><a class="navbar__item navbar__link" href="/blog/">博客</a></div><div class="navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a class="navbar__link" aria-haspopup="true" aria-expanded="false" role="button" href="/docs/2.2.4/phoenix-2.x/phoenix/">2.2.4</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/docs/introduce">latest</a></li><li><a class="dropdown__link" href="/docs/2.6.0/introduce">2.6.0</a></li><li><a class="dropdown__link" href="/docs/2.5.5/phoenix-2.x/phoenix/phoenix-introduce">2.5.5</a></li><li><a class="dropdown__link" href="/docs/2.5.4/phoenix-2.x/phoenix/phoenix-introduce">2.5.4</a></li><li><a class="dropdown__link" href="/docs/2.5.3/phoenix-2.x/phoenix/phoenix-introduce">2.5.3</a></li><li><a class="dropdown__link" href="/docs/2.5.2/phoenix-2.x/phoenix/phoenix-introduce">2.5.2</a></li><li><a class="dropdown__link" href="/docs/2.5.1/phoenix-2.x/phoenix/phoenix-introduce">2.5.1</a></li><li><a class="dropdown__link" href="/docs/2.5.0/phoenix-2.x/phoenix/phoenix-introduce">2.5.0</a></li><li><a class="dropdown__link" href="/docs/2.4.4/phoenix-2.x/phoenix/phoenix-introduce">2.4.4</a></li><li><a class="dropdown__link" href="/docs/2.4.3/phoenix-2.x/phoenix/phoenix-introduce">2.4.3</a></li><li><a class="dropdown__link" href="/docs/2.4.2/phoenix-2.x/phoenix/phoenix-introduce">2.4.2</a></li><li><a class="dropdown__link" href="/docs/2.4.1/phoenix-2.x/phoenix/phoenix-introduce">2.4.1</a></li><li><a class="dropdown__link" href="/docs/2.4.0/phoenix-2.x/phoenix/phoenix-introduce">2.4.0</a></li><li><a aria-current="page" class="dropdown__link dropdown__link--active" href="/docs/2.2.4/page-header/phoenix-version-2x">2.2.4</a></li></ul></div><a href="https://github.com/PhoenixIQ" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="切换浅色/暗黑模式（当前为浅色模式）" aria-label="切换浅色/暗黑模式（当前为浅色模式）" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z"><input placeholder="搜索" aria-label="Search" class="navbar__search-input"><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到顶部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><main class="docMainContainer_TBSr docMainContainerEnhanced_lQrH"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="theme-doc-version-banner alert alert--warning margin-bottom--md" role="alert"><div>此为 <!-- -->Phoenix<!-- --> <b>2.2.4</b> 版的文档，现已不再积极维护。</div><div class="margin-top--md">最新的文档请参阅 <b><a href="/docs/introduce">最新版本</a></b> (<!-- -->latest<!-- -->)。</div></div><div class="docItemContainer_Djhp"><article><span class="theme-doc-version-badge badge badge--secondary">版本：2.2.4</span><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本页总览</button></div><div class="theme-doc-markdown markdown"><header><h1>ReleaseNote</h1></header><blockquote>
+<p>维护 phoenix 具体版 本内容，包括 release node，以及和各个组件匹配的版本信息。下面每个标题内的表格代表了版本匹配关系。</p>
+</blockquote>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="240-beta12021-07-02">2.4.0-beta.1(2021-07-02)<a href="#240-beta12021-07-02" class="hash-link" aria-label="2.4.0-beta.1(2021-07-02)的直接链接" title="2.4.0-beta.1(2021-07-02)的直接链接">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="版本下载列表">版本下载列表<a href="#版本下载列表" class="hash-link" aria-label="版本下载列表的直接链接" title="版本下载列表的直接链接">​</a></h3>
+<table><thead><tr><th>项目名</th><th>发版时间</th><th>版本号</th></tr></thead><tbody><tr><td>phoenix</td><td>2021-07-02</td><td>2.4.0-beta.1</td></tr><tr><td>phoenix-admin</td><td>2021-07-02</td><td>2.4.0-beta.1</td></tr><tr><td>phoenix-website</td><td>2021-07-02</td><td>2.4.0-beta.1</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-note">Release Note<a href="#release-note" class="hash-link" aria-label="Release Note的直接链接" title="Release Note的直接链接">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="feature">Feature<a href="#feature" class="hash-link" aria-label="Feature的直接链接" title="Feature的直接链接">​</a></h4>
+<ul>
+<li>phoenix 增加混沌测试并修复若干问题&amp;升级 akka 版本为 2.14 &amp;65</li>
+<li>dgc 性能调优&amp;清楚定位&amp;更新 DGC 文档 &amp;64</li>
+<li>phoenix 支持调用阻塞 api 落地 #1108</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="refactor">Refactor<a href="#refactor" class="hash-link" aria-label="Refactor的直接链接" title="Refactor的直接链接">​</a></h4>
+<ul>
+<li>优化启动时有没有表的校验 sql #1128</li>
+<li>kafka 消费额外配置支持用户可配 #1124</li>
+<li>openchaos 的 bank 模型完善 phoenix 网络分区测试 openchaos#4</li>
+<li>测试 IBOR #1122</li>
+<li>完善 DGC 实现 #1120</li>
+<li>DGC 缓存优化 #1103</li>
+<li>DGC 开关优化 #1100</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="bugfix">BugFix<a href="#bugfix" class="hash-link" aria-label="BugFix的直接链接" title="BugFix的直接链接">​</a></h4>
+<ul>
+<li>DgcKey hashCode 计算问题 #1118</li>
+<li>消除 phoenix 当中所有中文日志及异常信息 #1133</li>
+<li>聚合根查询遇到抛异常无法查看错误堆栈 #1134</li>
+<li>phoenix 扫包时可能会出现冲突异常 #1129</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="240-beta02021-05-28">2.4.0-beta.0(2021-05-28)<a href="#240-beta02021-05-28" class="hash-link" aria-label="2.4.0-beta.0(2021-05-28)的直接链接" title="2.4.0-beta.0(2021-05-28)的直接链接">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="版本下载列表-1">版本下载列表<a href="#版本下载列表-1" class="hash-link" aria-label="版本下载列表的直接链接" title="版本下载列表的直接链接">​</a></h3>
+<table><thead><tr><th>项目名</th><th>发版时间</th><th>版本号</th></tr></thead><tbody><tr><td>phoenix</td><td>2021/05/28</td><td>2.4.0-beta.0</td></tr><tr><td>phoenix-admin</td><td>2021/05/28</td><td>2.4.0-beta.0</td></tr><tr><td>phoenix-website</td><td>2021/05/28</td><td>2.4.0-beta.0</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-note-1">Release Note<a href="#release-note-1" class="hash-link" aria-label="Release Note的直接链接" title="Release Note的直接链接">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="feature-1">Feature<a href="#feature-1" class="hash-link" aria-label="Feature的直接链接" title="Feature的直接链接">​</a></h4>
+<ul>
+<li>phoenix-dgc 纳入 phoenix &amp;58</li>
+<li>phoenix 实体聚合根支持历史查询 &amp;62 (closed)</li>
+<li>phoenix 抛出异常事件时支持状态码 #1066 (closed)</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="refactor-1">Refactor<a href="#refactor-1" class="hash-link" aria-label="Refactor的直接链接" title="Refactor的直接链接">​</a></h4>
+<ul>
+<li>phoenix 的 serverWorker 采用建造者模式声明 #1048 (closed)</li>
+<li>对字段的 setter(writerMethod)/getter(readerWriter)做统一管理 #1083 (closed)</li>
+<li>phoenix 统一完善注释,去除代码破窗 #1045 (closed)</li>
+<li>phoenix 仓库纳入 phoenix-website #1057 (closed)</li>
+<li>去掉 phoenix 中多余的迭代 #1079 (closed)</li>
+<li>事务集群和事务集群可能存在死锁阻塞的问题 #1014(closed)</li>
+<li>ReceiverActor 的 actorId 变更 #1000(closed)</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="bugfix-1">BugFix<a href="#bugfix-1" class="hash-link" aria-label="BugFix的直接链接" title="BugFix的直接链接">​</a></h4>
+<ul>
+<li>phoenix-admin 查询事务调用链报错 #1050 (closed) phoenix-admin#52 (closed)</li>
+<li>PhoenixClient 启动时，execute 给线程池的 thread，设置的名称不会生效 #1078 (closed)</li>
+<li>kafka 未连接，却报错：Phoenix client not started #1082 (closed)</li>
+<li>protostuff 报错 #1054 (closed)</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="2302021-03-31">2.3.0(2021-03-31)<a href="#2302021-03-31" class="hash-link" aria-label="2.3.0(2021-03-31)的直接链接" title="2.3.0(2021-03-31)的直接链接">​</a></h2>
+<blockquote>
+<p>上个版本为 2.2.7,从 2.1.5~2.2.7 为内部迭代版本</p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="版本下载列表-2">版本下载列表<a href="#版本下载列表-2" class="hash-link" aria-label="版本下载列表的直接链接" title="版本下载列表的直接链接">​</a></h3>
+<table><thead><tr><th>项目名</th><th>发版时间</th><th>版本号</th></tr></thead><tbody><tr><td>phoenix</td><td>2021/03/31</td><td>2.3.0</td></tr><tr><td>phoenix-admin</td><td>2021/03/31</td><td>2.3.0</td></tr><tr><td>phoenix-website</td><td>2021/03/31</td><td>2.3.0</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-note-2">Release Note<a href="#release-note-2" class="hash-link" aria-label="Release Note的直接链接" title="Release Note的直接链接">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix-稳定性文档升级">phoenix 稳定性&amp;文档升级<a href="#phoenix-稳定性文档升级" class="hash-link" aria-label="phoenix 稳定性&amp;文档升级的直接链接" title="phoenix 稳定性&amp;文档升级的直接链接">​</a></h4>
+<ul>
+<li>获取聚合根 ID 增强 #493</li>
+<li>修复 admin 页面的展示问题 phoenix-admin#42 phoenix-admin#43 #46</li>
+<li>protobuf 性能测试 #950</li>
+<li>phoenix 最大节点数测试 #954</li>
+<li>梳理并更新官方文档 phoenix-website#4 phoenix-website#5 phoenix-website#7 phoenix-website#11 phoenix-website#6 phoenix-website#10 phoenix-website#8 phoenix-website#9 #12</li>
+<li>聚合根增加构造函数校验 #975</li>
+<li>单元测试稳定向 #977</li>
+<li>对响应体集合支持可变参数 #979</li>
+<li>phoenix 代码规范定义 #983</li>
+<li>优化日志输出 #1003</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix-发布分布式事务功能">phoenix 发布分布式事务功能<a href="#phoenix-发布分布式事务功能" class="hash-link" aria-label="phoenix 发布分布式事务功能的直接链接" title="phoenix 发布分布式事务功能的直接链接">​</a></h4>
+<ul>
+<li>phoenix 对事务超时时的框架支持 #116</li>
+<li>TransactionAggregateActor 在处理事务完成会被幂等掉的问题 #221</li>
+<li>启动时检查事务聚合根规范 #490</li>
+<li>samples/github 增加事务模型 #554 #555</li>
+<li>事务快速入门文档 #984</li>
+<li>事务使用文档介绍 #557</li>
+<li>事务模式介绍文档 #558</li>
+<li>事务主键冲突场景 bug #612</li>
+<li>事务聚合根查询命令幂等不住问题 #717</li>
+<li>测试报告：带事务的性能测试 #902 #982</li>
+<li>分布式事务支持空补偿和防悬挂 #957</li>
+<li>丰富分布式事务超时以及其他 TCC/SAGA 测试案例 #971</li>
+<li>事务模  块测试覆盖率达到 80% #962 #969 #967 #965 #961 #960 #968 #966 #972 #980</li>
+<li>用户自定义配置超时策略参数 #973</li>
+<li>子事务状态枚举类升级 #978</li>
+<li>事务聚合根心跳逻辑优化 #992</li>
+<li>关于探索查询与默认没有 ci 时的异常问题 #990</li>
+<li>事务异常状态监控方案梳理&amp;落地 #981 #99 #999</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix-发布-commandsouring">phoenix 发布 CommandSouring<a href="#phoenix-发布-commandsouring" class="hash-link" aria-label="phoenix 发布 CommandSouring的直接链接" title="phoenix 发布 CommandSouring的直接链接">​</a></h4>
+<ul>
+<li>CommandSouring 可行性验证&amp;代码开发 #307</li>
+<li>CommandSouring 单元测试覆盖 #576</li>
+<li>CS Samples 案例补充 #577</li>
+<li>CS 官方文档补充 #578</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="2152020-05-29">2.1.5(2020-05-29)<a href="#2152020-05-29" class="hash-link" aria-label="2.1.5(2020-05-29)的直接链接" title="2.1.5(2020-05-29)的直接链接">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="版本下载列表-3">版本下载列表<a href="#版本下载列表-3" class="hash-link" aria-label="版本下载列表的直接链接" title="版本下载列表的直接链接">​</a></h3>
+<table><thead><tr><th>项目名</th><th>发版时间</th><th>版本号</th></tr></thead><tbody><tr><td>phoenix</td><td>2020/05/29</td><td>2.1.5</td></tr><tr><td>phoenix-admin</td><td>2020/05/29</td><td>2.1.5</td></tr><tr><td>phoenix-website</td><td>2020/05/29</td><td>2.1.18</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-note-3">Release Note<a href="#release-note-3" class="hash-link" aria-label="Release Note的直接链接" title="Release Note的直接链接">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix215">phoenix(2.1.5)<a href="#phoenix215" class="hash-link" aria-label="phoenix(2.1.5)的直接链接" title="phoenix(2.1.5)的直接链接">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="enhancement">Enhancement<a href="#enhancement" class="hash-link" aria-label="Enhancement的直接链接" title="Enhancement的直接链接">​</a></h5>
+<ul>
+<li>幂等集合和快照间隔在注解头上 #465</li>
+<li>phoenix 支持多数据源订阅 #436 #500 #505</li>
+<li>phoenix 支持非回复开关 #275</li>
+<li>支持集成化使用 event-publish #453 #492 #454</li>
+<li>phoenix 支持业务幂等 #466</li>
+<li>自动化测试方案设计&amp;初步实现 #444 #471</li>
+<li>事务支持延后指定补偿请求 #512</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="test">Test<a href="#test" class="hash-link" aria-label="Test的直接链接" title="Test的直接链接">​</a></h5>
+<ul>
+<li>phoenix-event-publish 严格测试 #487</li>
+<li>samples 支持主动订阅 topic 案例 #505</li>
+<li>samples 支持业务幂等案例测试 #509</li>
+<li>samples 支持非回复开关案例 #506</li>
+<li>2.1.5 发版前功能测试&amp;回归测试 #508</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="bugfixes">BugFixes<a href="#bugfixes" class="hash-link" aria-label="BugFixes的直接链接" title="BugFixes的直接链接">​</a></h5>
+<ul>
+<li>Phoenix 解决打印 N 次 ON 日志 #459</li>
+<li>mysql 在 append 版本冲突的情况返回了幂等 Id 冲突 #484</li>
+<li>phoenix 默认不能非本地 ip 组集群 #496</li>
+<li>producer 发送失败的问题 #456</li>
+<li>ActReturn 不填 retMessage 报错 NPE #469</li>
+<li>phoenix-client 会出现很多个消费 group #481</li>
+<li>phoenix-admin 的 ActorTree 信息的获取支持重试 #518</li>
+<li>eventsouring 重复递增进行 #519</li>
+<li>phoenix-event-publish 从 event-store 中读取的 batch 中有乱序 #515</li>
+<li>event-publish 开关有问题 #513</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="other">Other<a href="#other" class="hash-link" aria-label="Other的直接链接" title="Other的直接链接">​</a></h5>
+<ul>
+<li>富国 tsp 二期部署 admin2.x #497</li>
+<li>Phoenix 对比 Axon 梳理 #468</li>
+<li>富国 TSP 二期交付 Phoenix2.1.4 版本 #464</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix-admin215">phoenix-admin(2.1.5)<a href="#phoenix-admin215" class="hash-link" aria-label="phoenix-admin(2.1.5)的直接链接" title="phoenix-admin(2.1.5)的直接链接">​</a></h4>
+<ul>
+<li>Phoenix-Admin 架构重新设计 #364</li>
+<li>Phoenix-admin 集成 Phoenix-persist #462 #472</li>
+<li>phoenix-admin 支持 docker-compose 交付 #482</li>
+<li>phoenix-admin 支持加载 api #502 #501</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix-website2118">phoenix-website(2.1.18)<a href="#phoenix-website2118" class="hash-link" aria-label="phoenix-website(2.1.18)的直接链接" title="phoenix-website(2.1.18)的直接链接">​</a></h4>
+<ul>
+<li>phoenix-admin 文档完善 #510</li>
+<li>EventPublish 客户端如何消费文档说明 #454</li>
+<li>2.1.5 文档相关完善 #489</li>
+<li>event-publish 集成文档配置 #511</li>
+<li>github 快速入门调整&amp;官网文档调整 #520</li>
+<li>幂等相关文档博客编写 #489</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="2132020-04-17">2.1.3(2020-04-17)<a href="#2132020-04-17" class="hash-link" aria-label="2.1.3(2020-04-17)的直接链接" title="2.1.3(2020-04-17)的直接链接">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="版本下载列表-4">版本下载列表<a href="#版本下载列表-4" class="hash-link" aria-label="版本下载列表的直接链接" title="版本下载列表的直接链接">​</a></h3>
+<table><thead><tr><th>项目名</th><th>发版时间</th><th>版本号</th></tr></thead><tbody><tr><td>phoenix</td><td>2020/04/17</td><td>2.1.3</td></tr><tr><td>phoenix-admin</td><td>2020/04/17</td><td>2.1.3</td></tr><tr><td>phoenix-website</td><td>2020/04/17</td><td>2.1.17</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-note-4">Release Note<a href="#release-note-4" class="hash-link" aria-label="Release Note的直接链接" title="Release Note的直接链接">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix213">phoenix(2.1.3)<a href="#phoenix213" class="hash-link" aria-label="phoenix(2.1.3)的直接链接" title="phoenix(2.1.3)的直接链接">​</a></h4>
+<p><strong>Enhancement</strong></p>
+<ul>
+<li>Q 端服务支持查询命令 #283</li>
+<li>聚合根实例被 spring 管理 #355</li>
+<li>EventStore 领域事件发布组件 #356</li>
+<li><code>CommandHandler</code>增加是否自动创建聚合根的判断 #374 #410</li>
+<li>phoenix 支持提供自动回收聚合根的策略 #396 #449</li>
+<li>Phoenix 相关应用的日志接入 ELK #397</li>
+<li>银行转账使用 queryCmd 获取数据 #402</li>
+<li>RpcResult.getData 支持泛型 #429</li>
+<li>支持 CMD 中多个字段作为聚合跟 ID #393</li>
+<li>Phoenix 对用户的 INFO 日志调整 #404</li>
+<li>phoenix 默认提供 license 降低使用门槛 #406</li>
+</ul>
+<p><strong>Test</strong></p>
+<ul>
+<li>Phoenix 在千万级消息量下的稳定性 #378</li>
+<li>Phoenix 模板适配新版本 #431</li>
+<li>Phoenix 整体回归测试(2.1.3 版本) #432</li>
+<li>事件发布功能炒股大赛引入测试 #433</li>
+<li>GitHub 上案例测试 #435</li>
+</ul>
+<p><strong>BugFixes</strong></p>
+<ul>
+<li>CmdMsgExtractor 未能 catch 异常 #401</li>
+<li>修改 SpringBeanUtil 命名，避免和用户冲突 #437</li>
+<li>账户管理查询账户会有 null 的账户列表 #448</li>
+<li>所有子事务无 ci 的情况下 ti 失败，导致事务异常 #322</li>
+<li>打印两次 on 的日志问题 #392</li>
+</ul>
+<p><strong>Other</strong></p>
+<ul>
+<li>估值现在数据的维护改造 demo 开发 #417</li>
+<li>昆仑整合 Showcase-Phoenxi 相关开发 #418</li>
+<li>GitHub phoenix-samples 工程 phoenix 版本升级为 dev-SNAPSHOT #425</li>
+<li>GitHub phoenix-sample-risk 工程 phoenix 版本升级为 dev-SNAPSHOT #428</li>
+<li>公开 helloworld，账户管理，事中风控案例到 github #415</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix-website2117">phoenix-website(2.1.17)<a href="#phoenix-website2117" class="hash-link" aria-label="phoenix-website(2.1.17)的直接链接" title="phoenix-website(2.1.17)的直接链接">​</a></h4>
+<ul>
+<li>Phoenix 开发者社区建立 #361</li>
+<li>license 的配置文档位置不对 #377</li>
+<li>Phoenix 快速入门重写 #379</li>
+<li>Phoenix 官网社区链接调整 #380</li>
+<li>编写 phoenix gitlab issue 使用教程文档 #420</li>
+<li>Phoenix 官网首页重新设计 #383</li>
+<li>Phoenix 开发者官网 review 所有 #430</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix-admin213">phoenix-admin(2.1.3)<a href="#phoenix-admin213" class="hash-link" aria-label="phoenix-admin(2.1.3)的直接链接" title="phoenix-admin(2.1.3)的直接链接">​</a></h4>
+<ul>
+<li>写死 phoenix-admin 展示的用户名 #394</li>
+<li>Phoenix-admin 支持接入带有 servlet-path 的 Phoenix 应用 #400</li>
+<li>phoenix-admin 内存查询报错 #399</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="2122020-03-13">2.1.2(2020-03-13)<a href="#2122020-03-13" class="hash-link" aria-label="2.1.2(2020-03-13)的直接链接" title="2.1.2(2020-03-13)的直接链接">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="版本下载列表-5">版本下载列表<a href="#版本下载列表-5" class="hash-link" aria-label="版本下载列表的直接链接" title="版本下载列表的直接链接">​</a></h3>
+<table><thead><tr><th>项目名</th><th>发版时间</th><th>版本号</th></tr></thead><tbody><tr><td>phoenix</td><td>2020/03/13</td><td>2.1.2</td></tr><tr><td>phoenix-admin</td><td>2020/03/13</td><td>2.1.2</td></tr><tr><td>phoenix-website</td><td>2020/03/13</td><td>2.1.15</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-notes">release notes<a href="#release-notes" class="hash-link" aria-label="release notes的直接链接" title="release notes的直接链接">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix212">phoenix(2.1.2)<a href="#phoenix212" class="hash-link" aria-label="phoenix(2.1.2)的直接链接" title="phoenix(2.1.2)的直接链接">​</a></h4>
+<p><strong>Enhancement</strong></p>
+<ul>
+<li>phoenix 包里面嵌入 license 功能 #349</li>
+<li>phoenix 做简单的代码混淆 #328</li>
+<li>解决编译过程的 Warning 问题,引入 mvnw #343</li>
+<li>研究 Snonar 的其他指标用于增加代码质量 #342</li>
+<li>事中风控视频教程录制 #347</li>
+</ul>
+<p><strong>Test</strong></p>
+<ul>
+<li>测试昆仑外仓使用&amp;梳理交付方式 #348</li>
+<li>服务实例 JVM OOM 下服务高可用验证 #310</li>
+<li>统一 Phoenix 对外发布项目的编程风格&amp;完善注释 #351</li>
+<li>调整 sonar 执行的位置 #352</li>
+<li>2.1.2 发版回归测试 #372</li>
+</ul>
+<p><strong>BugFixes</strong></p>
+<ul>
+<li>eventstore 建立连接失败的情况下无法打印 server 端配置 #345</li>
+<li>实体聚合根没有实现 Serializable 导致不断重试的问题 #337</li>
+<li>AggregateRootIdAnnotation 中聚合根 ID 填写错误客户端 rpc 调用超时 #339</li>
+<li>phoenix 官网下载中 helm-chart 的链接放到官网里面 #346</li>
+<li>Saga 服务扫描 EntityAggregate 导致的 bug #366</li>
+<li>demo 环境下单 eventStore 报错 #371</li>
+</ul>
+<p><strong>Other</strong></p>
+<ul>
+<li>phoenix-license 需兼容只校验过期时间 #358</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix-website219">phoenix-website(2.1.9)<a href="#phoenix-website219" class="hash-link" aria-label="phoenix-website(2.1.9)的直接链接" title="phoenix-website(2.1.9)的直接链接">​</a></h4>
+<ul>
+<li>更新官网文档的配图 #354</li>
+<li>Phoenix 官网首页开发 #350</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix-admin212">phoenix-admin(2.1.2)<a href="#phoenix-admin212" class="hash-link" aria-label="phoenix-admin(2.1.2)的直接链接" title="phoenix-admin(2.1.2)的直接链接">​</a></h4>
+<ul>
+<li>测试昆仑外仓使用&amp;梳理交付方式 #348</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="2112020-02-28">2.1.1(2020-02-28)<a href="#2112020-02-28" class="hash-link" aria-label="2.1.1(2020-02-28)的直接链接" title="2.1.1(2020-02-28)的直接链接">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="版本下载列表-6">版本下载列表<a href="#版本下载列表-6" class="hash-link" aria-label="版本下载列表的直接链接" title="版本下载列表的直接链接">​</a></h3>
+<table><thead><tr><th>项目名</th><th>发版时间</th><th>版本号</th></tr></thead><tbody><tr><td>phoenix</td><td>2020/02/28</td><td>2.1.1</td></tr><tr><td>phoenix-admin</td><td>2020/02/28</td><td>2.1.1</td></tr><tr><td>phoenix-website</td><td>2020/02/28</td><td>2.1.1</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-notes-1">release notes<a href="#release-notes-1" class="hash-link" aria-label="release notes的直接链接" title="release notes的直接链接">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix211">phoenix(2.1.1)<a href="#phoenix211" class="hash-link" aria-label="phoenix(2.1.1)的直接链接" title="phoenix(2.1.1)的直接链接">​</a></h4>
+<p><strong>Enhancement</strong></p>
+<ul>
+<li>银行转账页面增加清理数据按钮 #225</li>
+<li>聚合根分隔符进行调整 #316</li>
+<li>phoenix-server 端 kafka 接口重构 #230</li>
+<li>添加接口获取服务的路由表 #248</li>
+<li>提高测试覆盖率 80%&amp;覆盖率加入 CI #286</li>
+<li>维护 phoenix 开发模板 #288</li>
+<li>业务代码单元测试支持 #287,#293</li>
+<li>phoenix 服务启动的时候支持在日志中输出 phoenix 配置信息 #335</li>
+<li>全环境回归测试 #331</li>
+<li>按照新的项目结构重构 bank-account 项目 #323</li>
+<li>事中风控培训 demo 开发教程制作 #284,#305</li>
+</ul>
+<p><strong>BugFixes</strong></p>
+<ul>
+<li>客户端和服务端写在一块会出现 rpc 失败 #278</li>
+<li>Client 模块代码 Sonar 扫描覆盖率为 0 #285</li>
+<li>akka 配置  默认不设置应该能跑起来 #289</li>
+<li>账户总览查询接口报 ArrayIndexOutOfBoundsException #317</li>
+<li>整体 review 问题解决 #327</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix-admin211">phoenix-admin(2.1.1)<a href="#phoenix-admin211" class="hash-link" aria-label="phoenix-admin(2.1.1)的直接链接" title="phoenix-admin(2.1.1)的直接链接">​</a></h4>
+<ul>
+<li>增加可以查看 phoenix 的扇子功能 #264</li>
+<li>phoenix-admin 调用 grafana datasource api 失败 #332</li>
+<li>完善 phoenix-admin 服务详情前端页面 #299</li>
+<li>phoenix grafna dashboard 添加 filter 功能 #314</li>
+<li>整体 review 问题解决 #327</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix-website211">phoenix-website(2.1.1)<a href="#phoenix-website211" class="hash-link" aria-label="phoenix-website(2.1.1)的直接链接" title="phoenix-website(2.1.1)的直接链接">​</a></h4>
+<ul>
+<li>测试文档: 对比 1.6 升级报告 #300</li>
+<li>伸缩性测试需要完善证明动态伸缩 #302</li>
+<li>文档: 单聚合根处理的性能测试 #303</li>
+<li>Phoenix 官网快速入门重写 #319</li>
+<li>Phoenix 官网配置详情内容更新 #320</li>
+<li>使用文档：整理 phoenix 的依赖列表(服务,核心 jar 包,版本) #301</li>
+<li>整体 review 问题解决 #327</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="210-beta2020-01-22">2.1.0-beta(2020-01-22)<a href="#210-beta2020-01-22" class="hash-link" aria-label="2.1.0-beta(2020-01-22)的直接链接" title="2.1.0-beta(2020-01-22)的直接链接">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="版本下载列表-7">版本下载列表<a href="#版本下载列表-7" class="hash-link" aria-label="版本下载列表的直接链接" title="版本下载列表的直接链接">​</a></h3>
+<table><thead><tr><th>项目名</th><th>发版时间</th><th>版本号</th></tr></thead><tbody><tr><td>phoenix</td><td>2020/01/21</td><td>2.1.0-beta</td></tr><tr><td>phoenix-admin</td><td>2020/01/21</td><td>2.0.7-alpha</td></tr><tr><td>phoenix-website</td><td>2020/01/21</td><td>2.1.0-alpha</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="release-notes-2">release notes<a href="#release-notes-2" class="hash-link" aria-label="release notes的直接链接" title="release notes的直接链接">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix210-beta">phoenix(2.1.0-beta)<a href="#phoenix210-beta" class="hash-link" aria-label="phoenix(2.1.0-beta)的直接链接" title="phoenix(2.1.0-beta)的直接链接">​</a></h4>
+<ul>
+<li>整体单元测试覆盖 #222,#269</li>
+<li>EntityAggregate 支持批量处理 #241</li>
+<li>优化 Message 类使用方式 #259,#265</li>
+<li>代码细节持续调优 #260,#258,#256,#261,#247,#253,#252</li>
+<li>快照代码细节完善 #251</li>
+<li>phoenix 性能测试报告&amp;调优(不带事务) #229</li>
+<li>phoenix 白皮书编写 #238</li>
+<li>phoenix 功能性测试报告 #267</li>
+<li>phoenix 非功能测试报告 #239</li>
+<li>phoenix 官网升级&amp;细节优化 #273</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix-admin207-alpha">phoenix-admin(2.0.7-alpha)<a href="#phoenix-admin207-alpha" class="hash-link" aria-label="phoenix-admin(2.0.7-alpha)的直接链接" title="phoenix-admin(2.0.7-alpha)的直接链接">​</a></h4>
+<ul>
+<li>phoenix-admin 集成 grafana #188</li>
+<li>phoenix-admin 完善服务详情后端接口&amp;文档 #263</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="phoenix-website210-alpha">phoenix-website(2.1.0-alpha)<a href="#phoenix-website210-alpha" class="hash-link" aria-label="phoenix-website(2.1.0-alpha)的直接链接" title="phoenix-website(2.1.0-alpha)的直接链接">​</a></h4>
+<ul>
+<li>phoenix 官网升级&amp;细节优化 #273</li>
+<li>phoenix 性能测试报告(不带事务) #229</li>
+<li>phoenix 白皮书编写 #238</li>
+<li>phoenix 功能性测试报告 #267</li>
+<li>phoenix 非功能测试报告 #239</li>
+<li>phoenix-admin 完善介绍文档 #263</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/PhoenixIQ/versioned_docs/version-2.2.4/page-header/version.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_vwxv"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="文件选项卡"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#240-beta12021-07-02" class="table-of-contents__link toc-highlight">2.4.0-beta.1(2021-07-02)</a><ul><li><a href="#版本下载列表" class="table-of-contents__link toc-highlight">版本下载列表</a></li><li><a href="#release-note" class="table-of-contents__link toc-highlight">Release Note</a><ul><li><a href="#feature" class="table-of-contents__link toc-highlight">Feature</a></li><li><a href="#refactor" class="table-of-contents__link toc-highlight">Refactor</a></li><li><a href="#bugfix" class="table-of-contents__link toc-highlight">BugFix</a></li></ul></li></ul></li><li><a href="#240-beta02021-05-28" class="table-of-contents__link toc-highlight">2.4.0-beta.0(2021-05-28)</a><ul><li><a href="#版本下载列表-1" class="table-of-contents__link toc-highlight">版本下载列表</a></li><li><a href="#release-note-1" class="table-of-contents__link toc-highlight">Release Note</a><ul><li><a href="#feature-1" class="table-of-contents__link toc-highlight">Feature</a></li><li><a href="#refactor-1" class="table-of-contents__link toc-highlight">Refactor</a></li><li><a href="#bugfix-1" class="table-of-contents__link toc-highlight">BugFix</a></li></ul></li></ul></li><li><a href="#2302021-03-31" class="table-of-contents__link toc-highlight">2.3.0(2021-03-31)</a><ul><li><a href="#版本下载列表-2" class="table-of-contents__link toc-highlight">版本下载列表</a></li><li><a href="#release-note-2" class="table-of-contents__link toc-highlight">Release Note</a><ul><li><a href="#phoenix-稳定性文档升级" class="table-of-contents__link toc-highlight">phoenix 稳定性&amp;文档升级</a></li><li><a href="#phoenix-发布分布式事务功能" class="table-of-contents__link toc-highlight">phoenix 发布分布式事务功能</a></li><li><a href="#phoenix-发布-commandsouring" class="table-of-contents__link toc-highlight">phoenix 发布 CommandSouring</a></li></ul></li></ul></li><li><a href="#2152020-05-29" class="table-of-contents__link toc-highlight">2.1.5(2020-05-29)</a><ul><li><a href="#版本下载列表-3" class="table-of-contents__link toc-highlight">版本下载列表</a></li><li><a href="#release-note-3" class="table-of-contents__link toc-highlight">Release Note</a><ul><li><a href="#phoenix215" class="table-of-contents__link toc-highlight">phoenix(2.1.5)</a></li><li><a href="#phoenix-admin215" class="table-of-contents__link toc-highlight">phoenix-admin(2.1.5)</a></li><li><a href="#phoenix-website2118" class="table-of-contents__link toc-highlight">phoenix-website(2.1.18)</a></li></ul></li></ul></li><li><a href="#2132020-04-17" class="table-of-contents__link toc-highlight">2.1.3(2020-04-17)</a><ul><li><a href="#版本下载列表-4" class="table-of-contents__link toc-highlight">版本下载列表</a></li><li><a href="#release-note-4" class="table-of-contents__link toc-highlight">Release Note</a><ul><li><a href="#phoenix213" class="table-of-contents__link toc-highlight">phoenix(2.1.3)</a></li><li><a href="#phoenix-website2117" class="table-of-contents__link toc-highlight">phoenix-website(2.1.17)</a></li><li><a href="#phoenix-admin213" class="table-of-contents__link toc-highlight">phoenix-admin(2.1.3)</a></li></ul></li></ul></li><li><a href="#2122020-03-13" class="table-of-contents__link toc-highlight">2.1.2(2020-03-13)</a><ul><li><a href="#版本下载列表-5" class="table-of-contents__link toc-highlight">版本下载列表</a></li><li><a href="#release-notes" class="table-of-contents__link toc-highlight">release notes</a><ul><li><a href="#phoenix212" class="table-of-contents__link toc-highlight">phoenix(2.1.2)</a></li><li><a href="#phoenix-website219" class="table-of-contents__link toc-highlight">phoenix-website(2.1.9)</a></li><li><a href="#phoenix-admin212" class="table-of-contents__link toc-highlight">phoenix-admin(2.1.2)</a></li></ul></li></ul></li><li><a href="#2112020-02-28" class="table-of-contents__link toc-highlight">2.1.1(2020-02-28)</a><ul><li><a href="#版本下载列表-6" class="table-of-contents__link toc-highlight">版本下载列表</a></li><li><a href="#release-notes-1" class="table-of-contents__link toc-highlight">release notes</a><ul><li><a href="#phoenix211" class="table-of-contents__link toc-highlight">phoenix(2.1.1)</a></li><li><a href="#phoenix-admin211" class="table-of-contents__link toc-highlight">phoenix-admin(2.1.1)</a></li><li><a href="#phoenix-website211" class="table-of-contents__link toc-highlight">phoenix-website(2.1.1)</a></li></ul></li></ul></li><li><a href="#210-beta2020-01-22" class="table-of-contents__link toc-highlight">2.1.0-beta(2020-01-22)</a><ul><li><a href="#版本下载列表-7" class="table-of-contents__link toc-highlight">版本下载列表</a></li><li><a href="#release-notes-2" class="table-of-contents__link toc-highlight">release notes</a><ul><li><a href="#phoenix210-beta" class="table-of-contents__link toc-highlight">phoenix(2.1.0-beta)</a></li><li><a href="#phoenix-admin207-alpha" class="table-of-contents__link toc-highlight">phoenix-admin(2.0.7-alpha)</a></li><li><a href="#phoenix-website210-alpha" class="table-of-contents__link toc-highlight">phoenix-website(2.1.0-alpha)</a></li></ul></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">文档</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/introduce">Phoenix介绍</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/phoenix/quick-start-example/bookings-architecture">快速入门</a></li></ul></div><div class="col footer__col"><div class="footer__title">案例</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/PhoenixIQ/phoenix-samples/tree/master/bank-account" target="_blank" rel="noopener noreferrer" class="footer__link-item">账户管理<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/PhoenixIQ/phoenix-sample-risk" target="_blank" rel="noopener noreferrer" class="footer__link-item">交易风控<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/PhoenixIQ/phoenix-samples/tree/master/shopping-cart" target="_blank" rel="noopener noreferrer" class="footer__link-item">购物车<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/PhoenixIQ/hotel-booking" target="_blank" rel="noopener noreferrer" class="footer__link-item">酒店预订<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">资源</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">博客</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">北京宽拓智融科技有限公司 Copyright @2013 - 2023 iQuantex.com All Rights Reserved. 宽拓公司 版权所有</div></div></div></footer></div>
+</body>
+</html>

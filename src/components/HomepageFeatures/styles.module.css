@@ -1,0 +1,133 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+@media screen and (min-width: 800px) {
+
+    .conception img {
+        margin-top: 30px;
+        width: 100%;
+    }
+
+    /* Phoenix架构图 */
+    .featuresWrap {
+        color: #000;
+    }
+
+    [data-theme='dark'] .featuresWrap {
+        color: #fff;
+    }
+
+
+    .featuresWrap {
+        min-width: 1366px;
+        background: #fff;
+    }
+
+    .features {
+        width: 1000px;
+        height: 796px;
+        margin: 0 auto;
+        padding: 67px 0 120px;
+    }
+
+    .featuresCon {
+        margin-bottom: 75px !important;
+    }
+
+    .features h1 {
+        padding-bottom: 96px;
+        font: 500 28px/40px PingFangSC-Medium, PingFang SC;
+        margin: 0;
+    }
+
+    .featureImage {
+        width: 53px;
+        height: 58px;
+        margin-bottom: 26px;
+    }
+
+    .features h3 {
+        font: 500 18px/25px PingFangSC-Medium, PingFang SC;
+        margin-bottom: 16px;
+    }
+
+    .features p {
+        padding: 0;
+        margin: 0;
+    }
+
+    @media screen and (max-width: 2560px) and (min-width: 1980px) {
+
+
+        /* Phoenix的特性 */
+
+        .featuresWrap {
+            min-width: 1366px;
+            background: #fff;
+        }
+
+        .features {
+            min-width: 1366px;
+            height: 820px;
+        }
+
+        .featuresCon {
+            margin-bottom: 75px !important;
+        }
+
+        .features h1 {
+            font-size: 30px;
+        }
+
+        .features h3 {
+            font-size: 20px;
+        }
+
+        .features p {
+            line-height: 26px;
+            font-size: 16px;
+        }
+    }
+}
+
+@media screen and (max-width: 599px) {
+
+
+    /* Phoenix特性 */
+    .featuresWrap {
+        width: 90%;
+        margin: auto;
+        margin-top: 60px;
+    }
+    .featuresWrap .features {
+    }
+    .featuresWrap .features h1 {
+        text-align: center;
+        font-size: 28px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #303133;
+        padding-bottom: 16px;
+    }
+    .feature {
+        padding: 0 !important;
+        margin: 24px 0;
+    }
+    .featureImage {
+        width: 80px;
+        /* height: 80px; */
+    }
+    .feature h3 {
+        margin: 0;
+        margin: 24px 0;
+        color: #606266;
+    }
+    .feature p {
+        margin: 0;
+        line-height: 2.4;
+        padding: 0 24px;
+        color: #909399;
+    }
+}

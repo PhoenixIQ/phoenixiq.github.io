@@ -1,0 +1,108 @@
+{
+  "docs": [
+    {
+      "type": "category",
+      "label": "整体介绍",
+      "collapsible": false,
+      "items": [
+        "phoenix-2.x/phoenix/phoenix-introduce",
+        "phoenix-2.x/phoenix/why-event-driven-microservice",
+        "phoenix-2.x/phoenix/how-event-driven-microservice",
+        {
+          "type": "category",
+          "label": "快速入门案例",
+          "collapsible": true,
+          "collapsed": true,
+          "items": [
+            "phoenix-2.x/phoenix/quick-start-example/bookings-architecture",
+            "phoenix-2.x/phoenix/quick-start-example/setup-environment",
+            "phoenix-2.x/phoenix/quick-start-example/bookings-microservice",
+            "phoenix-2.x/phoenix/quick-start-example/popularity-projection",
+            "phoenix-2.x/phoenix/quick-start-example/order-microservice",
+            "phoenix-2.x/phoenix/quick-start-example/cluster"
+          ]
+        },
+        "phoenix-2.x/phoenix/phoenix-all-future",
+        "phoenix-2.x/phoenix/phoenix-glossary",
+        {
+          "type": "category",
+          "label": "Release Notes",
+          "collapsible": true,
+          "collapsed": true,
+          "items": [
+            "phoenix-2.x/phoenix/upgrade/2-5-0"
+          ]
+        },
+        "phoenix-2.x/phoenix/phoenix-faq"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Phoenix Framework",
+      "collapsible": false,
+      "items": [
+        "phoenix-2.x/phoenix-core/phoenix-core-client",
+        "phoenix-2.x/phoenix-core/phoenix-core-entity-aggregate",
+        "phoenix-2.x/phoenix-core/phoenix-core-event-souring",
+        "phoenix-2.x/phoenix-core/phoenix-core-event-store",
+        "phoenix-2.x/phoenix-core/phoenix-distributed-data",
+        "phoenix-2.x/phoenix-core/phoenix-subscribe-pub",
+        "phoenix-2.x/phoenix-core/phoenix-cluster-manager",
+        "phoenix-2.x/phoenix-core/phoenix-core-config"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Phoenix Transaction",
+      "collapsible": false,
+      "items": [
+        "phoenix-2.x/phoenix-transaction/phoenix-transaction-module",
+        "phoenix-2.x/phoenix-transaction/phoenix-transaction-aggregate"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Phoenix Event Publish",
+      "collapsible": false,
+      "items": [
+        "phoenix-2.x/phoenix-event-publish/event-publish-readme",
+        "phoenix-2.x/phoenix-event-publish/event-publish-integration",
+        "phoenix-2.x/phoenix-event-publish/event-publish-client-usage"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Phoenix DGC",
+      "collapsible": false,
+      "items": [
+        "phoenix-2.x/phoenix-dgc/phoenix-dgc-introduce",
+        "phoenix-2.x/phoenix-dgc/phoenix-dgc-api"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Phoenix 监控管理",
+      "collapsible": false,
+      "items": [
+        "phoenix-2.x/phoenix-console/phoenix-console-overall",
+        "phoenix-2.x/phoenix-console/phoenix-console-service-management",
+        "phoenix-2.x/phoenix-console/phoenix-console-business-monitor",
+        "phoenix-2.x/phoenix-console/phoenix-console-system-monitor"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "测试报告",
+      "collapsible": false,
+      "items": [
+        "phoenix-2.x/phoenix-test/features-test",
+        "phoenix-2.x/phoenix-test/performance-test",
+        "phoenix-2.x/phoenix-test/available-test",
+        "phoenix-2.x/phoenix-test/elasticity-test",
+        "phoenix-2.x/phoenix-test/reliability-test",
+        "phoenix-2.x/phoenix-test/pressure-test",
+        "phoenix-2.x/phoenix-test/balance-test"
+      ]
+    }
+  ]
+}

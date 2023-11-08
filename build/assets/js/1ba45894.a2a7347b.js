@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkphoenix_website_next=self.webpackChunkphoenix_website_next||[]).push([[38836],{44095:e=>{e.exports=JSON.parse('{"label":"openchaos","permalink":"/blog/tags/openchaos","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

@@ -1,0 +1,148 @@
+{
+  "docs": [
+    {
+      "type": "category",
+      "label": "整体介绍",
+      "items": [
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix/phoenix-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix/phoenix-quick-start-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix/phoenix-faq-2x"
+        }
+      ],
+      "collapsible": false,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Phoenix Core",
+      "items": [
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-core/phoenix-core-client-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-core/phoenix-core-entity-aggregate-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-core/phoenix-core-transaction-aggregate-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-core/phoenix-core-event-store-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-core/phoenix-core-config-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-core/phoenix-core-http-api-2x"
+        }
+      ],
+      "collapsible": false,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Phoenix Event Publish",
+      "items": [
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-event-publish/event-publish-readme-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-event-publish/event-publish-integration-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-event-publish/event-publish-client-usage-2x"
+        }
+      ],
+      "collapsible": false,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Phoenix Admin",
+      "items": [
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-admin/phoenix-admin-readme-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-admin/phoenix-admin-use-2x"
+        }
+      ],
+      "collapsible": false,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "测试报告",
+      "items": [
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-test/features-test-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-test/performance-test-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-test/available-test-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-test/elasticity-test-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-test/reliability-test-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-test/pressure-test-2x"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/phoenix-test/balance-test-2x"
+        }
+      ],
+      "collapsible": false,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "升级指南",
+      "items": [
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/upgrade/phoenix-upgrade-2-2-1"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/upgrade/phoenix-upgrade-2-2-2"
+        },
+        {
+          "type": "doc",
+          "id": "phoenix-2.x/upgrade/phoenix-upgrade-2-2-4"
+        }
+      ],
+      "collapsible": false,
+      "collapsed": true
+    }
+  ]
+}

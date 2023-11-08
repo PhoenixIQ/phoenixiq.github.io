@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkphoenix_website_next=self.webpackChunkphoenix_website_next||[]).push([[65744],{73272:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/stateful","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

@@ -1,0 +1,125 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+
+@media screen and (min-width: 800px) {
+
+    .conception img {
+        margin-top: 30px;
+        width: 100%;
+    }
+
+    /* Phoenix架构图 */
+    .introductWrap {
+        min-width: 1366px;
+        color: #000;
+    }
+
+    [data-theme='dark'] .introductWrap {
+        color: #fff;
+    }
+
+    .introduct {
+        width: 1000px;
+        /* height: 496px; */
+        margin: 0 auto;
+        padding: 67px 0 60px;
+    }
+
+    .introduct .article {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .introduct h2 {
+        font-size: 28px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        /* color: rgba(38, 113, 250, 1); */
+        line-height: 40px;
+        padding-bottom: 40px;
+        text-align: center;
+    }
+
+    .introduct p {
+        font-size: 18px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        padding: 0;
+        margin: 0;
+    }
+
+
+    @media screen and (max-width: 2560px) and (min-width: 1980px) {
+        /* Phoenix架构图 */
+        .introduct {
+            width: 1366px;
+            margin: 0 auto;
+            padding: 54px 0 55px;
+        }
+
+        /* .introduct .article {
+          width: 400px;
+          text-align: justify;
+          margin-top: 110px;
+        } */
+        .introduct h2 {
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .introduct p {
+            font-size: 22px;
+        }
+
+        .conception img {
+            margin-top: 30px;
+            width: 100%;
+        }
+
+    }
+}
+
+@media screen and (max-width: 599px) {
+
+    /* Phoenix架构图 */
+    .introductWrap {
+        width: 90%;
+        margin: auto;
+        margin-top: 60px;
+    }
+
+    .introduct {
+        margin: 0 auto;
+        justify-content: space-between;
+    }
+
+    .introduct .article {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .introduct h2 {
+        text-align: center;
+        font-size: 28px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #303133;
+        padding-bottom: 16px;
+    }
+
+    .introduct p {
+        font-size: 16px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        color: #000;
+        padding: 0;
+        margin: 0;
+    }
+
+    .conception img {
+        margin-top: 30px;
+        width: 100%;
+    }
+
+}

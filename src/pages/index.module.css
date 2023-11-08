@@ -1,0 +1,377 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+@media screen and (min-width: 800px) {
+
+    .heroBanner {
+        position: relative;
+        width: 100%;
+        height: 627px;
+        text-align: left;
+        font: 300 38px/53px PingFangSC-Light, PingFang SC;
+        text-shadow: 0px 2px 150px rgba(0, 0, 0, 0.29);
+        overflow: hidden;
+        background-color: #fff !important;
+    }
+
+    .topBanner {
+        font-size: 20px;
+        padding: 20px;
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .topBannerTitle {
+        font-size: 54px;
+        font-weight: bold;
+        margin-bottom: 0.4rem;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .topBannerTitle {
+            font-size: 34px;
+        }
+    }
+
+    .topBannerTitleText {
+        background: linear-gradient(45deg, #399cff, #00c775 80%);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .topBannerTitleText:hover {
+        border-bottom: solid 2px;
+    }
+
+    html[data-theme='dark'] .topBannerTitleText {
+        background: linear-gradient(45deg, #399cff, #00ff95 80%);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .topBannerDescription {
+        font-size: 20px;
+    }
+    @media only screen and (max-width: 768px) {
+        .topBannerDescription {
+            font-size: 16px;
+            white-space: normal;
+        }
+    }
+
+    .containerBanner {
+        height: 100%;
+        margin: 0 auto;
+        min-width: 1366px;
+        background: url("/img/banner.png") center no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .containerBanner .container {
+        margin: 0 auto;
+        width: 1000px;
+        height: 627px;
+        padding-top: 98px;
+        color: #fff;
+    }
+
+    .containerBanner h1 {
+        font: 600 50px/70px PingFangSC-Semibold, PingFang SC;
+    }
+
+    .containerBanner .content {
+        width: 350px;
+        font: 18px/25px PingFangSC-Regular, PingFang SC;
+        padding: 10px 0 30px;
+        margin: 0;
+    }
+
+    .indexCtasGitHubButton {
+        margin-right: 0px;
+        width: 160px;
+        height: 30px;
+        color: #fff;
+        border: none;
+        overflow: hidden;
+    }
+
+    .indexCtasGitHubButton.mr {
+        margin-right: -16px;
+    }
+
+    .link {
+        margin-bottom: 20px;
+    }
+
+    .getStarted {
+        padding: 6px 19px;
+        margin-right: 30px;
+        width: 110px;
+        height: 36px;
+        color: #fff;
+        opacity: 0.6;
+        font: 600 18px/25px PingFangSC-Semibold, PingFang SC;
+        border: 1px solid rgba(255, 255, 255, 1);
+    }
+
+    .getStarted:hover {
+        color: rgba(38, 113, 250, 1);
+        background: #fff;
+        opacity: 1;
+        text-decoration: none;
+    }
+
+    .release {
+        color: #fff;
+        font: 500 14px/20px PingFangSC-Medium, PingFang SC;
+    }
+
+    .release p {
+        margin: 0;
+        padding: 0;
+    }
+
+    .release .version {
+        margin-top: 12px;
+        padding: 2px 0;
+        width: 172px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .release .date {
+        padding-top: 10px;
+    }
+
+    .steps {
+        display: flex;
+        align-items: center;
+        padding: 2rem 0;
+        width: 100%;
+        background-color: #f7f7f7;
+    }
+
+    .stepsImage {
+        margin: 15px 5px 20px 20px;
+        height: 500px;
+        width: 900px;
+    }
+
+
+    @media screen and (max-width: 2560px) and (min-width: 1980px) {
+        .heroBanner {
+            height: 814px;
+        }
+
+        .containerBanner .container {
+            padding-top: 198px;
+            min-width: 1366px;
+        }
+
+        .containerBanner .content {
+            width: 408px;
+            font: 24px/25px PingFangSC-Regular, PingFang SC;
+            text-align: justify;
+            line-height: 40px;
+        }
+
+        .link {
+            margin-bottom: 20px;
+        }
+
+        .getStarted {
+            padding: 6px 12px;
+            font: 600 22px/25px PingFangSC-Semibold, PingFang SC;
+        }
+
+        .release {
+            color: #fff;
+            font: 500 18px/20px PingFangSC-Medium, PingFang SC;
+        }
+
+        .release .version {
+            margin-top: 12px;
+            padding: 6px 0;
+            width: 204px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .release .date {
+            padding-top: 18px;
+        }
+
+    }
+}
+
+@media screen and (max-width: 599px) {
+    .navbar__brand img {
+        height: 80%;
+    }
+
+    .heroBanner {
+        position: relative;
+        width: 100%;
+        /* height: 627px; */
+        text-align: left;
+        font: 300 38px/53px PingFangSC-Light, PingFang SC;
+        text-shadow: 0px 2px 150px rgba(0, 0, 0, 0.29);
+        overflow: hidden;
+        background-color: #fff !important;
+    }
+
+    .topBanner {
+        font-size: 20px;
+        padding: 20px;
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .topBannerTitle {
+        font-size: 54px;
+        font-weight: bold;
+        margin-bottom: 0.4rem;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .topBannerTitle {
+            font-size: 34px;
+        }
+    }
+
+    .topBannerTitleText {
+        background: linear-gradient(45deg, #399cff, #00c775 80%);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .topBannerTitleText:hover {
+        border-bottom: solid 2px;
+    }
+
+    html[data-theme='dark'] .topBannerTitleText {
+        background: linear-gradient(45deg, #399cff, #00ff95 80%);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .topBannerDescription {
+        font-size: 20px;
+    }
+    @media only screen and (max-width: 768px) {
+        .topBannerDescription {
+            font-size: 16px;
+            white-space: normal;
+        }
+    }
+
+    .containerBanner {
+        /* height: 100%; */
+        margin: 0 auto;
+        /* min-width: 1366px; */
+        background: url("/img/banner-mobile.png") center no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .containerBanner .container {
+        margin: 0 auto;
+        /* width: 1000px; */
+        /* height: 627px; */
+        /* padding-top: 98px; */
+        padding: 24px;
+        color: #fff;
+    }
+
+    .containerBanner h1 {
+        font: 600 50px/70px PingFangSC-Semibold, PingFang SC;
+    }
+
+    .containerBanner .content {
+        /* width: 350px; */
+        font: 18px/25px PingFangSC-Regular, PingFang SC;
+        padding: 10px 0 30px;
+        margin: 0;
+    }
+
+    .indexCtasGitHubButton {
+        margin-right: 0px;
+        width: 160px;
+        height: 30px;
+        color: #fff;
+        border: none;
+        overflow: hidden;
+    }
+
+    .indexCtasGitHubButton.mr {
+        margin-right: -16px;
+    }
+
+    .link {
+        margin-bottom: 20px;
+    }
+
+    .getStarted {
+        padding: 6px 19px;
+        margin-right: 30px;
+        width: 110px;
+        height: 36px;
+        color: #fff;
+        opacity: 0.6;
+        font: 600 18px/25px PingFangSC-Semibold, PingFang SC;
+        border: 1px solid rgba(255, 255, 255, 1);
+    }
+
+    .getStarted:hover {
+        color: rgba(38, 113, 250, 1);
+        background: #fff;
+        opacity: 1;
+        text-decoration: none;
+    }
+
+    .release {
+        color: #fff;
+        font: 500 14px/20px PingFangSC-Medium, PingFang SC;
+    }
+
+    .release p {
+        margin: 0;
+        padding: 0;
+    }
+
+    .release .version {
+        margin-top: 12px;
+        padding: 2px 0;
+        width: 172px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .release .date {
+        padding-top: 10px;
+    }
+
+    .steps {
+        display: flex;
+        align-items: center;
+        padding: 2rem 0;
+        width: 100%;
+        background-color: #f7f7f7;
+    }
+
+    .stepsImage {
+        margin: 15px 5px 20px 20px;
+        /* height: 500px;
+        width: 900px; */
+    }
+
+}
