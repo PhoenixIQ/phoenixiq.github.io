@@ -196,39 +196,39 @@ Phoenix Transaction的Saga模式集群中实际使用时同样需要注意一下
 
 TCC和Saga的一阶段和二阶段是可以匹配起来的。
 
-|事务名称|一阶段|二阶段|
-|---|---|---|
-|TCC|Try|Confirm or Cancel|
-|Saga|Ti|null or Ci|
+| 事务名称 | 一阶段 | 二阶段               |
+|------|-----|-------------------|
+| TCC  | Try | Confirm or Cancel |
+| Saga | Ti  | null or Ci        |
 
 所以在实际使用场景中，可以支持一个事务聚合根同时包含TCC和Saga的处理。
 
 ```java
-    @TransactionStart
-    public TransactionReturn on(BuyGoodsCmd request) {
-        this.request = request;
-        double frozenAmt = request.getQty() * request.getPrice();
-        return TransactionReturn.builder()
-                 // TCC子事务
-                .addAction(
-                        TccAction.builder()
-                                .tryCmd(new AccountTryCmd(request.getAccountCode(), frozenAmt))
-                                .confirmCmd(
-                                        new AccountConfirmCmd(request.getAccountCode(), frozenAmt))
-                                .cancelCmd(
-                                        new AccountCancelCmd(request.getAccountCode(), frozenAmt))
-                                .build())
-                 // Saga子事务
-                .addAction(
-                        SagaAction.builder()
-                                .targetTopic("")
-                                .tiCmd(new GoodsSellCmd(request.getGoodsCode(), request.getQty()))
-                                .ciCmd(
-                                        new GoodsSellCompensateCmd(
-                                                request.getGoodsCode(), request.getQty()))
-                                .build())
-                .build();
-    }
+@TransactionStart
+public TransactionReturn on(BuyGoodsCmd request) {
+    this.request = request;
+    double frozenAmt = request.getQty() * request.getPrice();
+    return TransactionReturn.builder()
+             // TCC子事务
+            .addAction(
+                    TccAction.builder()
+                            .tryCmd(new AccountTryCmd(request.getAccountCode(), frozenAmt))
+                            .confirmCmd(
+                                    new AccountConfirmCmd(request.getAccountCode(), frozenAmt))
+                            .cancelCmd(
+                                    new AccountCancelCmd(request.getAccountCode(), frozenAmt))
+                            .build())
+             // Saga子事务
+            .addAction(
+                    SagaAction.builder()
+                            .targetTopic("")
+                            .tiCmd(new GoodsSellCmd(request.getGoodsCode(), request.getQty()))
+                            .ciCmd(
+                                    new GoodsSellCompensateCmd(
+                                            request.getGoodsCode(), request.getQty()))
+                            .build())
+            .build();
+}
 ```
 
 ## 总结展望 \{#conclusion\}

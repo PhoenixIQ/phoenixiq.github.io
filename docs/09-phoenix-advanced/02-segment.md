@@ -12,7 +12,7 @@ description: 支持将聚合根代码拆分到多个类的能力
 
 在不拆分聚合的情况下，阅读一个聚合根的业务逻辑十分复杂。因此 Phoenix 提供了能够拆分聚合根代码并同时保持内聚的特性：**聚合根片段代码特性**
 
-:::info 注意
+:::info[注意]
 
 需要注意的是，Phoenix 只支持一个命令只能被一个聚合根处理, 如果某个 SubAggregate 想要被多个不同类型聚合根共享，请使用对象组合 + 委派模式（Delegation Pattern）而不是本文的特性。
 
@@ -25,20 +25,23 @@ description: 支持将聚合根代码拆分到多个类的能力
 3. 在片段代码的类头部增加 `@AggregateSegment` 注解
 4. （可选）在需要被递归扫描的成员上使用 `@Inject` 注解标识
 
-:::tip 提示
+:::tip[提示]
 如果用户觉得 @Inject 的方式太过于繁琐, 也可以在 `quantex.phoenix.server.method-lookup-strategy-class-name` 实现自己的片段代码扫描特性, 只需要实现 `com.iquantex.phoenix.server.aggregate.cls.AggregateRelatedStrategy` 并返回需要扫描的类即可, Phoenix 会检索并过滤不包含 `@AggregateSegment` 的类.
 :::
 
 :::warning
+
 注意，事务聚合根处理时会使用序列化深拷贝一个副本用于 "try" 执行用户代码，因此当使用业务对象组合、片段代码等特性时，需要特别注意一些对象的序列化。
+
 :::
 
 ## Spring 支持 \{#spring\}
 
 使用片段代码特性的聚合根片段支持 Spring 的依赖注入，并且在聚合根单元测试中也支持了 Mock 一个 Bean 的能力。
 
-:::info 提示
-目前 Phoenix 的依赖注入需要使用注解 @Inject 标识成员，并且只支持注入根聚合根的成员，当嵌套层次较深时暂不支持. 如:
+:::info[提示]
+
+目前 Phoenix 的依赖注入需要使用注解 @Inject 标识成员，并且支持多层嵌套. 如:
 
 ```java
 public class Parent {
@@ -50,7 +53,13 @@ public class ChildrenSegment {
 public class GrandChildSegment {
     @Autowired private MockService service;
 }
+
 ```
+:::
+
+:::danger[性能提示]
+
+除了初始化的依赖注入外，片段代码还需要在每次执行时找到正确的对象来执行方法。（用户需注意到这可能 是一个隐含的性能风险，并避免使用太深层级的片段代码对象）
 
 :::
 
@@ -84,8 +93,10 @@ public class ChildrenSegment {
 
 ## 使用说明 \{#usage\}
 
-:::info 提示
+:::info[提示]
+
 SegmentAggregateRelatedStrategy 不会重复扫描同一个类, 且不会扫描成员的接口, 只有被 `@Inject` 的成员及其也被 `@Inject` 的成员才会被扫描, 未被 `@Inject` 标识的成员并不会被扫描.
+
 :::
 
 下面的代码中 `Parent` 聚合根同时拥有 `ImplementationSegmentA`,`ImplementationSegmentB`,`InheritanceSegment`,`CompositionSubOneSegment`,`CompositionSubTwoSegment`,`CompositionSubTwoSubSegment` 的 act()、on() 方法, 示例代码如下：

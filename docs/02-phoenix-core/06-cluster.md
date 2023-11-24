@@ -66,8 +66,11 @@ quantex:
         eureka-port: 8761 # Eureka 端口
         eureka-path: eureka # 资源路径, 最终组成 http://127.0.0.1:8761/eureka/
         group-name: default # 可选参数, 分组名
-        register-host-name: localhost # 可选参数, 自定义注册到 Eureka 上的 InstanceID, 默认使用本地 DNS 的 Hostname
         renew-interval: 30000 # 可选参数, 续租间隔(ms)
+        home-page-url: github.com/PhoenixIQ # 可选参数，配置主页 URL，默认 ip + service-port
+        status-page-url: google.com/search/PhoenixIQ/ # 可选参数，配置状态检查 URL，默认为 akka 集群探针
+        health-page-url: phoenix.iquantex.com # 可选参数，配置健康 URL，默认为 akka 集群探针
+        service-port: 31556 # 可选参数，当配置了上述 URL 时，作为额外的端口，默认为 80
 ```
 
 ### 1. 本地单点运行 \{#singleton\}
@@ -111,7 +114,7 @@ JVM参数配置方式：
 ```
 
 
-:::info 注意
+:::info[注意]
 
 本地组建集群时需要注意
 
@@ -299,9 +302,96 @@ quantex:
         eureka-port: 8761 # Eureka 端口
         eureka-path: eureka # 资源路径, 最终组成 http://127.0.0.1:8761/eureka/
         group-name: default # 可选参数, 分组名
-        register-host-name: localhost # 可选参数, 自定义注册到 Eureka 上的 InstanceID, 默认使用本地 DNS 的 Hostname
         renew-interval: 30000 # 可选参数, 续租间隔(ms)
 ```
+
+上述配置注册到 eureka 的结果如下：
+
+```xml
+<applications>
+  <versions__delta>1</versions__delta>
+  <apps__hashcode>UP_1_</apps__hashcode>
+  <application>
+    <name>BANK-ACCOUNT</name>
+    <instance>
+      <!-- UUID 使用服务名 + HOSTNAME -->
+      <instanceId>bank-account-localhost</instanceId>
+      <!-- HOSTNAME 读取本地 DNS -->
+      <hostName>localhost</hostName>
+      <app>BANK-ACCOUNT</app>
+      <!-- IP 通过 NIC 读取 -->
+      <ipAddr>127.0.0.1</ipAddr>
+      <status>UP</status>
+      <overriddenstatus>UNKNOWN</overriddenstatus>
+      <!--此端口内部使用(akka), 而非用户应用端口-->
+      <port enabled="true">8558</port>
+      <!--此端口内部使用(akka), 而非用户应用端口-->
+      <securePort enabled="true">8558</securePort>
+      <countryId>1</countryId>
+      <dataCenterInfo class="com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo">
+        <name>MyOwn</name>
+      </dataCenterInfo>
+      <leaseInfo>
+        <renewalIntervalInSecs>30</renewalIntervalInSecs>
+        <durationInSecs>90</durationInSecs>
+        <registrationTimestamp>1700130177834</registrationTimestamp>
+        <lastRenewalTimestamp>1700130177834</lastRenewalTimestamp>
+        <evictionTimestamp>0</evictionTimestamp>
+        <serviceUpTimestamp>1700130176755</serviceUpTimestamp>
+      </leaseInfo>
+      <metadata class="java.util.Collections$EmptyMap"/>
+      <!--Phoenix 多 DC 使用，分组能力-->
+      <appGroupName>DEFAULT_GROUP</appGroupName>
+      <!--默认 Home page, IP + ServicePort-->
+      <homePageUrl>http://127.0.0.1:80</homePageUrl>
+      <!-- 默认状态 API, 默认探测 akka 集群接口 -->
+      <statusPageUrl>http://127.0.0.1:8558/health/ready</statusPageUrl>
+      <!-- 默认健康 API, 默认探测 akka 集群接口 -->
+      <healthCheckUrl>http://127.0.0.1:8558/health/alive</healthCheckUrl>
+      <vipAddress>bank-account</vipAddress>
+      <secureVipAddress>bank-account</secureVipAddress>
+      <isCoordinatingDiscoveryServer>false</isCoordinatingDiscoveryServer>
+      <lastUpdatedTimestamp>1700130177834</lastUpdatedTimestamp>
+      <lastDirtyTimestamp>1700130175765</lastDirtyTimestamp>
+      <actionType>ADDED</actionType>
+    </instance>
+  </application>
+</applications>
+```
+
+对于部分有定制需求的用户，Eureka 还支持如下的定制配置：
+
+```yaml
+quantex:
+  phoenix:
+    cluster:
+      eureka:
+        // ... 其他默认配置
+        home-page-url: github.com/PhoenixIQ
+        status-page-url: google.com/search/PhoenixIQ/
+        health-page-url: phoenix.iquantex.com
+        service-port: 31556
+```
+
+上面的配置注册到 Eureka 的结果如下(只展示变化的 URL 部分）：
+
+```xml
+<applications>
+  <versions__delta>1</versions__delta>
+  <apps__hashcode>UP_2_</apps__hashcode>
+  <application>
+    <name>BANK-ACCOUNT</name>
+    <instance>
+      <!-- 省略其他-->
+      <homePageUrl>http://github.com:31556/PhoenixIQ/</homePageUrl>
+      <statusPageUrl>http://google.com:31556/search/PhoenixIQ/</statusPageUrl>
+      <healthCheckUrl>http://phoenix.iquantex.com:31556</healthCheckUrl>
+      <!-- 省略其他-->
+    </instance>
+  </application>
+</applications>
+```
+
 
 ## 分区容忍性 \{#partition\}
 
@@ -393,7 +483,7 @@ phoenix-console 提供的应用总览页面，可以查看一下两个信息：
 ## 中间件集群兼容性 \{#compatibility\}
 
 
-:::info 兼容性说明
+:::info[兼容性说明]
 
 目前 Phoenix 集群的中间件集群都是使用的 HTTP 的方式查找服务而非 DNS. Eureka 则不支持 DNS 方式.
 

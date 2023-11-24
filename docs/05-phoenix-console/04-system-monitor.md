@@ -41,7 +41,7 @@ Phoenix 的监控经 2.2.1 以及 2.6.0 两个大版本的迭代, 现已建立�
 Phoenix OpenTelemetry 的指标导出器增加了性能指标的直方图，因此部分 Grafana Dashboard 在 JMX 下不可用。
 
 
-:::tip 提示
+:::tip[提示]
 
 Telemetry 和 Metrics 的关系为：Telemetry 是 Metrics 的采集器, 而 Metrics 则是 Telemetry 采集的结果.
 

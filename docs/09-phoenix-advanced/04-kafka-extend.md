@@ -50,7 +50,7 @@ Kafka 扩展（主要是 Large Message 的支持）需要双端使用统一客�
 ### 使用说明 \{#kafka-extend-usage\}
 
 
-:::caution 注意
+:::caution[注意]
 Phoenix Kafka Extend 目前仅支持 K/V 为 `<String,byte[]>` 的序列化和反序列化. 如果需要支持 `<String,String>`，请传入时使用 `String.getBytes()` 
 或提前将 Value 序列化
 :::
@@ -69,7 +69,7 @@ Phoenix Kafka Extend 目前仅支持 K/V 为 `<String,byte[]>` 的序列化和�
 
 #### 1. Phoenix Client、内部订阅等 \{#kafka-extend-client\}
 
-:::tip 提示
+:::tip[提示]
 当您在 Kubernetes 环境中通过环境变量配置 `spring-kafka-properties` 时，可以用下面这种格式：
 
 `QUANTEX_PHOENIX_KAFKA_EXTEND_SPRING-KAFKA-PROPERTIES_BOOTSTRAP_SERVERS` 也可以使用 `QUANTEX_PHOENIX_KAFKA_EXTEND_SPRING_KAFKA_PROPERTIES_BOOTSTRAP_SERVERS`
@@ -115,7 +115,7 @@ quantex:
 
 #### 2. 自定义订阅 \{#kafka-extend-subscribe\}
 
-:::info 注意事项
+:::info[注意事项]
 当 KafkaExtend 用于扩展时，从 Kafka 接收的消息体积可能会大于 256KB，此时会超出 Phoenix 内部 akka 的限制，如果需要让大于 256KB 的消息发能够
 发送到聚合根，则需要更改配置，如更改为 4MB 的相关配置为：（使用 `quantex.phoenix.akka.akka-conf` 自定义 akka 配置）
 
@@ -266,7 +266,7 @@ Phoenix 支持对 KafkaProducer 发送的消息实现分区选择策略, 支持�
 - phoenix-event-publish：事件投递通过 EventPublish 投递时，分区的选择策略
 - phoenix-distribution-data：分布式数据发布更新事件时，分区的选择策略
 
-:::tip 提示
+:::tip[提示]
 除了作为分区选择器之外，该接口实现也可以用于监控用途. 例如在内部采集流量后, 返回 -1 的分区号，此时 Phoenix 不会选定投递的分区，而是让 Kafka 根据 Key 自行决定。
 :::
 
