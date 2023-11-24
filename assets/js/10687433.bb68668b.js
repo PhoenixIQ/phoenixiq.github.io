@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkphoenixiq_github_io=self.webpackChunkphoenixiq_github_io||[]).push([[82978],{56325:e=>{e.exports=JSON.parse('{"label":"EventPublish","permalink":"/blog/tags/event-publish","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

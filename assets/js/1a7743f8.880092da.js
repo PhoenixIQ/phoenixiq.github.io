@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkphoenixiq_github_io=self.webpackChunkphoenixiq_github_io||[]).push([[37263],{70860:a=>{a.exports=JSON.parse('{"label":"Backtrack","permalink":"/blog/tags/backtrack","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

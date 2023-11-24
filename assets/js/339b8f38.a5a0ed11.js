@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkphoenixiq_github_io=self.webpackChunkphoenixiq_github_io||[]).push([[94460],{6370:i=>{i.exports=JSON.parse('{"label":"Migration","permalink":"/blog/tags/migration","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

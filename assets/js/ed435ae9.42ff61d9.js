@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkphoenixiq_github_io=self.webpackChunkphoenixiq_github_io||[]).push([[31583],{92696:e=>{e.exports=JSON.parse('{"label":"Phoenix","permalink":"/blog/tags/phoenix","allTagsPath":"/blog/tags","count":7,"unlisted":false}')}}]);
