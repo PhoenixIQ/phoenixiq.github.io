@@ -22,7 +22,7 @@ description: 构建服务端的最小执行单元
 
 ## 实体聚合根 \{#entity-aggregate\}
 
-:::tip 提示
+:::tip[提示]
 
 聚合根类成员变量支持 `WildcardType`,`TypeVariable`,`GenericArrayType`, 在聚合根类合法性校验中,
 会跳过这些类型的校验。但开发者必须实现这些类型的序列化接口.
@@ -38,7 +38,7 @@ description: 构建服务端的最小执行单元
 2. 聚合根类以及聚合根类中的实体均需实现 `Serializable` 接口，并定义 `serialVersionUID`。
 3. 聚合根类需要提供无参构造函数。
 
-:::info 注意
+:::info[注意]
 
 在聚合根上添加 `@EntityAggregateAnnotation` 注解时，需要通过 `aggregateRootType` 指定一个聚合根的类别。用来区分不同的聚合根类，该聚合根类别是全局唯一的。
 
@@ -56,17 +56,20 @@ public class BankAccountAggregate implements Serializable {
 
 #### 参数配置 \{#aggregate-config\}
 
-| 配置项                     | 描述                                            | 类型      | 默认值                  |
-|:------------------------|:----------------------------------------------|:--------|:---------------------|
-| aggregateRootType       | 聚合根类型                                         | String  | 必填项                  |
-| surviveTime             | 聚合根生存时间，超过该时间聚合根将被从JVM中淘汰，下一次使用时再重建，减少内存使用    | long    | Long.MAX_VALUE       |
-| snapshotInterval        | 快照间隔，每隔snapshotInterval条消息打印一次快照，加速聚合根重建，0为关闭 | long    | 1000                 |
-| numberOfRetainSnapshots | 需要保留的快照数量, Long.MAX_VALUE 为关闭                 | long    | Long.MAX_VALUE       |
-| idempotentSize          | 聚合根幂等集合大小，取值应大于零，否则可能会导致启动失败                  | long    | 1000                 |
-| bloomSize               | 布隆过滤器大小，内存中识别幂等，减少读库判断                        | long    | 100000L              |
-| dispatcher              | 选择聚合根的调度者，缓解阻塞问题，支持自定义线程池                     | String  | "phoenix-dispatcher" |
-| runningMode             | 聚合根的运行模式, 支持同步和异步两种                           | enum    | SYNC                 |
-| allowPassivation        | 允许聚合根钝化（仅从内存上清除聚合根，仍会在 EventStore 中保留聚合根历史状态） | boolean | true                 |
+| 配置项                     | 描述                                            | 类型      | 默认值                      |
+|:------------------------|:----------------------------------------------|:--------|:-------------------------|
+| aggregateRootType       | 聚合根类型                                         | String  | 必填项                      |
+| surviveTime             | 聚合根生存时间，超过该时间聚合根将被从JVM中淘汰，下一次使用时再重建，减少内存使用    | long    | Long.MAX_VALUE           |
+| snapshotMode            | 快照模式，可用于关闭快照或使用 Lazy 的快照模式                    | enum    | EAGER, 可选: DISABLE, LAZY |
+| snapshotInterval        | 快照间隔，每隔snapshotInterval条消息打印一次快照，加速聚合根重建      | long    | 1000                     |
+| numberOfRetainSnapshots | 需要保留的快照数量, Long.MAX_VALUE 为关闭                 | long    | Long.MAX_VALUE           |
+| idempotentSize          | 聚合根幂等集合大小，取值应大于零，否则可能会导致启动失败                  | long    | 1000                     |
+| bloomSize               | 布隆过滤器大小，内存中识别幂等，减少读库判断                        | long    | 100000L                  |
+| dispatcher              | 选择聚合根的调度者，缓解阻塞问题，支持自定义线程池                     | String  | "phoenix-dispatcher"     |
+| runningMode             | 聚合根的运行模式, 支持同步和异步两种                           | enum    | SYNC                     |
+| allowPassivation        | 允许聚合根钝化（仅从内存上清除聚合根，仍会在 EventStore 中保留聚合根历史状态） | boolean | true                     |
+| batchWeight             | 聚合根最大攒批大小 (尽力而为的攒批模式, 当下游可用时总是会优先交付)          | int     | 200                      |
+| bufferSize              | 异步模式下，持久化时允许缓存的消息批次（package)数量                | Int     | 100                      |
 
 ## 命令处理 \{#command-handler\}
 
@@ -98,7 +101,7 @@ public ActReturn act(AccountCreateCmd createCmd) {
 }
 ```
 
-:::info 注意
+:::info[注意]
 
 聚合根 ID `aggregateRootId` 是该聚合根的唯一标识, 其大小限制随着 Event-Store 中的 aggregateRootIdSize 配置改变, 但不能超过 256 的字节长度, 因为过长的聚合根 ID 会导致索引性能下降. 
 如果您的聚合根 ID 长度需要转义成更长的字符串，请自行转换成更精简的表达.
@@ -200,7 +203,7 @@ Phoenix提供了查询聚合根状态的能力。通过在**act()**方法上添�
  }
 ```
 
-:::tip 小提示
+:::tip[小提示]
 
 实体聚合根处理扫描支持对象关系. 如支持在父类中定义 `act`, `on` 方法来帮助整理一个聚合根类的代码，但暂不支持用泛型的方式复用这些方法.
 
@@ -245,7 +248,7 @@ public class BankAccountAggregate implements Serializable {}
 | 100000    | 179.982KB  |
 | 1000000   | 1797.982KB |
 
-:::tip 提示
+:::tip[提示]
 
 布隆过滤器只是为了减少判断幂等时的查库频率，一般推荐设置10000即可，实际测试size=10000即可比较准确的判断最近10W个左右的命令。
 
@@ -269,47 +272,13 @@ Phoenix 会再次将该聚合根唤醒并且回溯到淘汰前状态（通过 Ev
 
 默认情况下，聚合根总是会开启钝化，也就是每个聚合根都是永久存在于 EventStore 中，通过淘汰机制能够让不活跃的聚合根释放内存资源。
 
-:::tip 提示
+:::tip[提示]
 聚合根可以通过关闭注解上的钝化配置（`allowPassivation`），让聚合根在淘汰之后同时释放到内存 & EventStore 的资源
 :::
 
-## 注解配置 \{#annotation-config\}
-
-从phoenix-server 2.2.4开始，依赖了phoenix-stater的环境下，@EntityAggregateAnnotation支持从启动参数/环境变量/配置文件中读取参数。
-
-配置优先级:启动参数 > 环境变量 > 配置文件 > 代码注解自定义 > 注解默认值
-
-| 配置项                                                                                  | 描述               | 类型          | 对应的注解函数                 |
-|:-------------------------------------------------------------------------------------|:-----------------|:------------|:------------------------|
-| `{aggregateRootType}`                                                                | 聚合根类型，无法从配置文件中读取 | String      | aggregateRootType       |
-| `quantex.phoenix.server.entityAggregate.{aggregateRootType}.surviveTime`             | 聚合根生存时间          | long        | surviveTime             |
-| `quantex.phoenix.server.entityAggregate.{aggregateRootType}.snapshotInterval`        | 快照间隔             | long        | snapshotInterval        |
-| `quantex.phoenix.server.entityAggregate.{aggregateRootType}.numberOfRetainSnapshots` | 需要保留的快照数量        | long        | numberOfRetainSnapshots |
-| `quantex.phoenix.server.entityAggregate.{aggregateRootType}.idempotentSize`          | 聚合根幂等集合大小        | long        | idempotentSize          |
-| `quantex.phoenix.server.entityAggregate.{aggregateRootType}.bloomSize`               | 布隆过滤器大小          | long        | bloomSize               |
-| `quantex.phoenix.server.entityAggregate.{aggregateRootType}.dispatcher`              | 聚合根运行线程池         | string      | dispatcher              |
-| `quantex.phoenix.server.entityAggregate.{aggregateRootType}.runningMode`             | 聚合根运行模式          | enum string | runningMode             |
-| `quantex.phoenix.server.entityAggregate.{aggregateRootType}.allowPassivation`        | 聚合根是否允许钝化        | boolean     | allowPassivation        |
-
-以yaml配置文件为例:
-
-当使用了`@EntityAggregateAnnotation`，并且`aggregateRootType`为`BankAccount`。则:
-
-```yaml
-quantex:
-  phoenix:
-    server:
-      entityAggregate:
-        BankAccount: # {aggregateRootType}
-          surviveTime: 10
-          snapshotInterval: 10
-          idempotentSize: 10
-          bloomSize: 10
-```
-
 ### 运行模式 \{#run-mode\}
 
-:::tip 自定义运行模式配置
+:::tip[自定义运行模式配置]
 聚合根运行模式可以通过在聚合根注解`@EntityAggregateAnnotation`的属性 `runningMode` 中指定. 在 Spring
 环境下也可以使用环境变量`quantex.phoenix.server.entityAggregate.{aggregateRootType}.runningMode=ASYNC`来指定.
 :::
@@ -322,7 +291,7 @@ quantex:
 
 ### 自定义线程池 \{#dispatcher\}
 
-:::tip 自定义线程池配置
+:::tip[自定义线程池配置]
 自定义线程池可以通过在聚合根注解`@EntityAggregateAnnotation`的属性 `dispatcher` 中指定. 在 Spring
 环境下也可以使用环境变量`quantex.phoenix.server.entityAggregate.{aggregateRootType}.dispatcher=aggregate-dispatcher`
 来指定.
@@ -482,7 +451,15 @@ public SnapshotData getSnapshot() {
 
 ## 序列化 \{#serializer\}
 
-Phoenix传输的Message目前支持Java原生，protobuf，protostuff, json协议。用户可以根据自己的需要配置使用协议，参考配置。
+:::tip[建议]
+
+Phoenix 目前默认消息（命令、事件）持久化策略是 Java 序列化，对于有性能、安全要求的用户，则建议修改成 JSON、PROTOBUF 等方法。
+
+:::
+
+Phoenix传输的Message目前支持Java原生，Protocol Buffer，protostuff, JSON 协议。用户可以根据自己的需要配置使用协议，并且 Phoenix 支持两种配置模式：
+
+### 1. 全局配置
 
 ```yaml
 quantex:
@@ -490,6 +467,25 @@ quantex:
     server:
       default-serializer: proto_stuff
 ```
+
+### 2. 单独配置
+
+通过注解 `@CustomSerializer` 可以为单个类单独配置序列化.
+
+```java
+// 替换命令为 JSON 序列化 
+@CustomSerializer(serializerType = Serializers.Type.JSON)
+public class AccountCreateCmd implements Serializable {
+    
+    /** 划拨账户 */
+    private String accountCode;
+
+    /** 账户余额 */
+    private double balanceAmt;
+}
+```
+
+### 3. 性能对比
 
 下面有四种序列化测试结果对比，如果追求性能最高的话，推荐使用protobuf，如果追求开发运维便利，推荐使用json/protostuff协议。
 

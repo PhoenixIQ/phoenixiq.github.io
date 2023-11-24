@@ -26,7 +26,7 @@ Phoenix框架提供了事务模块，用来解决分布式事务问题。目前�
 2. 聚合根类以及聚合根类中的实体均需实现 `Serializable` 接口，并定义serialVersionUID。
 
 
-:::caution 注意
+:::caution[注意]
 
 在聚合根上添加 `@TransactionAggregateAnnotation` 注解时，需要通过 `aggregateRootType` 指定一个聚合根的类别。用来区分不同的聚合根类。
 
@@ -41,6 +41,22 @@ public class ShoppingAggregateSagaTcc implements Serializable {
     // ... act and on method
 }
 ```
+
+## 注解配置
+
+| 配置项                    | 描述                                   | 类型     | 默认值                             |
+|:-----------------------|:-------------------------------------|:-------|:--------------------------------|
+| aggregateRootType      | 聚合根类型                                | String | 必填项                             |
+| heartbeatTickInterval  | 心跳滴答间隔, 该参数可以降低事务聚合根的 CPU 开销(提高间隔).  | int    | 1                               |
+| heartbeatCheckInterval | 多少次心跳触发一次超时和重试的检测                    | int    | 2                               |
+| retryStrategy          | 重试策略, 默认为指数退避, 可选(指数退避, 固定频率)        | enum   | EXPONENTIAL_BACKOFF 可选 FIX_RATE |
+| maxRetryNum            | 总事务最大重试次数                            | int    | Integer.MAX_VALUE               |
+| batchWeight            | 聚合根最大攒批大小 (尽力而为的攒批模式, 当下游可用时总是会优先交付) | int    | 200                             |
+
+
+对于事务聚合根而言，每次重试的间隔相当于：`heartbeatTickInterval * heartbeatCheckInterval` 
+
+`heartbeatCheckInterval` 相当于重试策略的基数，例如在指数退避模式下，重试间隔为则为: `(2 << 0), (2 << 1), (2 << 2), (2 << 3)`
 
 ## 事务入口 \{#start\}
 

@@ -25,7 +25,7 @@ Phoenix中提供了可集成于Phoenix Server服务中的EventPublish功能模�
 
 ## 使用说明 \{#readme\}
 
-:::tip 提示
+:::tip[提示]
 
 当 EventStore 的 Event-Query-Type 类型为 Slice 模式时，也就是支持切片时， EventPublish 可以通过调节并行度 `quantex.phoenix.server.event-publish.parallelism` 来启动多个读取、处理线程.
 
