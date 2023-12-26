@@ -65,7 +65,7 @@ quantex:
 1. 自动归档： 每隔一段时间触发一次归档（间隔时间可配置，默认不启动自动归档）
 2. 快照数量触发归档：当快照数量累计到一定数量后触发一次归档（最大累积快照数量可配置，默认不触发归档）
 
-:::info 配置提示
+:::info[配置提示]
 
 自动归档间隔配置：`autoArchiveInterval` （long 单位 ms） 默认为 `1000 * 60 * 60`，每小时心跳一次，判断有哪些聚合根需要归档 （全局配置：`quantex.phoenix.server.event-store.auto-archive-interval`）
 

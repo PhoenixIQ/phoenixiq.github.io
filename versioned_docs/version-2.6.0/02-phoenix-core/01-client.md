@@ -63,7 +63,7 @@ public final class MessageMetaData {
 
 启动**Phoenix**项目后，**Phoenix**会自动创建**PhoenixClient Bean**,可以通过`@Autowired`进行依赖注入
 
-:::caution 注意
+:::caution[注意]
 默认配置下，PhoenixClient 投递到多分区的 Partition 是不保证顺序的，请参考文档按需配置消息的发送顺序规则。
 :::
 
@@ -164,7 +164,7 @@ Phoenix 客户端提供试算接口供用户端使用，当用户有如下需求
 - 试算场景（修改了某个值之后，查看其他值的变化。但是当前操作又不希望修改状态，只去计算当下的结果就行。）
 - 按指定版本/时间戳进行试算
 
-:::info 提示
+:::info[提示]
 
 Phoenix 所提供的试算功能，是通过克隆副本聚合根来进行时试算，对原聚合根不会造成任何影响。且针对同一个聚合根的多个试算请求可以做到并发处理。
 
@@ -321,7 +321,7 @@ MessageMetaData sendNoReplyWithPriority(
         Object msg, String targetTopic, String requestId, MessagePriority priority);
 ```
 
-:::tip 提示
+:::tip[提示]
 除了在 PhoenixClient 中用 API 指定消息优先级外，也可以在 SourceCollect 中是用 MessageFactory 构建 Phoenix 的 ProtoBuffer 消息，然后使用 `withPriority()` 方法指定消息优先级
 :::
 

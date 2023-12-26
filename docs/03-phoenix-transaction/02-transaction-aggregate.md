@@ -202,288 +202,47 @@ public Object onFinish() {
 }
 ```
 
-## 完整案例 \{#full-example\}
+## 超时、重试机制  \{#timout-and-retry\}
 
-购买商品是很常见的业务场景，一般涉及购买方账户扣减，以及商家库存扣减，和订单生成。该案例为了简化实现，不生成订单。
+Phoenix 事务模块使用心跳检查来触发重试，并且针对总事务和子事务均有最大重试，超时机制。下面是一些参数的说明：
 
-整个业务逻辑由2个聚合根(微服务)构成:
+- 注解 `heartbeatTickInterval`：触发一次心跳更新状态的周期（秒），心跳打印聚合根状态，触发重试策略计数器自增。
+- 注解 `heartbeatCheckInterval`：多少次心跳触发一次检查，是重试、超时机制的计数器的基数，用于判断超时和重试
+- 注解 `maxRetryNum`：事务聚合根会在多少次重试之后超时结束（不会触发事务补偿）
+- 子事务属性 `tryMaxRetryNum`：子事务在多少次重试之后超时结束，触发补偿和回滚动作。
 
-1. 仓储服务: 对给定的商品扣除仓储数量。
-2. 账户服务: 从用户账户中扣除余额。
+心跳 Tick 只会打印事务聚合根和修改重试策略的计数器状态，重试需要心跳滴答到 Check 的次数之后，才会触发，并判断是否超时。
 
-![show](../assets/phoenix-lite/shopping-1.png)
+简而言之，重试周期 = `heartbeatTickInterval * heartbeatCheckInterval`
 
-> 该案例使用的是`TCC+Saga`模式。
->
-> 更多的事务模式请参见：[PhoenixIQ/phoenix-samples/shopping](https://github.com/PhoenixIQ/phoenix-samples/tree/master/shopping)
+超时周期 = `重试周期 * maxRetryNum/tryMaxRetryNum`
 
-#### command/event定义 \{#define\}
+可以将 heartbeatCheckInterval 设置为 1，以方便计算，heartbeatCheckInterval 的主要作用是作为重试策略的基数：
 
-Phoenix支持 `protostuff` 和 `javaBean` 协议进行序列化，可以通过以下配置进行指定，设定值分别为:`proto_stuff`和`java`
+- `FIX_RATE`: 以 heartbeatCheckInterval 为一个周期重试
+- `EXPONENTIAL_BACKOFF`: 以 heartbeatCheckInterval 为基数指数增加，如 heartbeatCheckInterval = 2，则
+  - 第一次重试：`2 << 0 `
+  - 第二次重试：`2 << 1`
+  - 第三次重试：`2 << 2`
+  - ...
+  - 第 N 次重试： `2 << n - 1`
 
-```yaml
-quantex.phoenix.server.default-serializer: java
-```
+如：用户需要 30s 全局事务超时，和每个子事务拥有 10s 的超时时间，则可以配置为：
 
-这里使用`javaBean`序列化协议进行示范。
+- 注解 `heartbeatTickInterval = 1`： 每秒心跳一次
+- 注解 `heartbeatCheckInterval = 2`：每两次心跳检查一次
+- 注解 `maxRetryNum = 14`：重试 14 次后超时
+- 子事务 `tryMaxRetryNum = 4`：重试 4 次后超时
 
-
-**事务服务相关事件**
-
-```java
-@Getter
-@AllArgsConstructor
-public class BuyGoodsCmd implements Serializable {
-    private static final long serialVersionUID = -8667685124103764667L;
-    private String            accountCode;
-    private String            goodsCode;
-    private long              qty;
-    private double            price;
-}
-```
-
-**账户服务相关事件**
-
-```java
-@Getter
-@AllArgsConstructor
-public class AccountTryCmd implements Serializable {
-    private static final long serialVersionUID = 4778468915465985552L;
-    private String accountCode;
-    private double frozenAmt;
-}
-
-@Getter
-@AllArgsConstructor
-public class AccountConfirmCmd implements Serializable {
-    private static final long serialVersionUID = 6915539313674995272L;
-    private String accountCode;
-    private double frozenAmt;
-}
-
-@Getter
-@AllArgsConstructor
-public class AccountCancelCmd implements Serializable {
-    private static final long serialVersionUID = 3086192070311956483L;
-    private String accountCode;
-    private double frozenAmt;
-}
-
-@Getter
-@Setter
-@AllArgsConstructor
-public class AccountTryOkEvent implements Serializable {
-    private static final long serialVersionUID = 1525408241428571363L;
-    private String accountCode;
-    private double frozenAmt;
-}
-
-@Getter
-@Setter
-@AllArgsConstructor
-public class AccountTryFailEvent implements Serializable {
-    private static final long serialVersionUID = -8352616962272592136L;
-    private String accountCode;
-    private double frozenAmt;
-    private String remark;
-}
-
-@Getter
-@Setter
-@AllArgsConstructor
-public class AccountConfirmOkEvent implements Serializable {
-    private static final long serialVersionUID = -6789245872360028227L;
-    private String accountCode;
-    private double frozenAmt;
-}
-
-@Getter
-@Setter
-@AllArgsConstructor
-public class AccountCancelOkEvent implements Serializable {
-    private static final long serialVersionUID = -1017410771260579937L;
-    private String accountCode;
-    private double frozenAmt;
-}
+为什么重试次数总是少了 1 呢？这是因为 maxRetryNum 是重试的次数，而第一次发送不认为是重试，那么则有如下计算公式：
 
 ```
-
-**仓储服务相关事件**
-
-```java
-
-@Getter
-@AllArgsConstructor
-public class GoodsSellCmd implements Serializable {
-    private static final long serialVersionUID = -4615713736312293797L;
-    private String goodsCode;
-    private long   qty;
-}
-
-@Getter
-@AllArgsConstructor
-public class GoodsSellCompensateCmd implements Serializable {
-    private static final long serialVersionUID = -1797830080849363235L;
-    private String goodsCode;
-    private long   qty;
-}
-
-@Getter
-@Setter
-@AllArgsConstructor
-public class GoodsSellOkEvent implements Serializable {
-    private static final long serialVersionUID = 873406977804359197L;
-    private String goodsCode;
-    private long   qty;
-}
-
-@Getter
-@Setter
-@AllArgsConstructor
-public class GoodsSellFailEvent implements Serializable {
-    private static final long serialVersionUID = 4825942818190006297L;
-    private String goodsCode;
-    private long   qty;
-    private String remark;
-}
-
-@Getter
-@Setter
-@AllArgsConstructor
-public class GoodsSellCompensateOkEvent implements Serializable {
-    private static final long serialVersionUID = 3256345453720913064L;
-    private String goodsCode;
-    private long   qty;
-}
+重试周期 = heartbeatTickInterval * heartbeatCheckInterval
+超时时间 = 重试周期 + (重试周期 * maxRetryNum)
 ```
 
+也就是
 
-#### 定义事务聚合根 \{#define-aggregate\}
-
-事务聚合根在接收到购买命令时，分别返回`账户服务TCC`和`仓储服务Saga`的命令给到事务状态机，事务状态机会发送并协调驱动达到最终状态。
-
-事务聚合根可以独立运行，也可以和实体聚合根一起运行。独立运行的情况下，设置targetTopic为实体聚合根的Topic，这里为了方便就设置为空串""代表和实体聚合根集成运行。
-
-事务聚合根的具体定义规则请参考上文 [事务聚合根定义](#事务聚合根)
-
-```java
-@TransactionAggregateAnnotation(aggregateRootType = "ShoppingAggregateSagaTcc")
-public class ShoppingAggregateSagaTcc implements Serializable {
-    private static final long serialVersionUID = 7007603076743033374L;
-    private BuyGoodsCmd       request;
-    private String            remark           = "";
-
-    @TransactionStart
-    public TransactionReturn on(BuyGoodsCmd request) {
-        this.request = request;
-        double frozenAmt = request.getQty() * request.getPrice();
-        return TransactionReturn
-            .builder()
-            .addAction(
-                TccAction.builder().tryCmd(new AccountTryCmd(request.getAccountCode(), frozenAmt))
-                    .confirmCmd(new AccountConfirmCmd(request.getAccountCode(), frozenAmt))
-                    .cancelCmd(new AccountCancelCmd(request.getAccountCode(), frozenAmt)).targetTopic("")
-                    .subTransId(UUID.randomUUID().toString()).tryMaxRetryNum(2).confirmRetryNum(3).cancelRetryNum(3)
-                    .build())
-            .addAction(
-                SagaAction.builder().targetTopic("").tiCmd(new GoodsSellCmd(request.getGoodsCode(), request.getQty()))
-                    .ciCmd(new GoodsSellCompensateCmd(request.getGoodsCode(), request.getQty())).tiMaxRetryNum(2)
-                    .ciMaxRetryNum(2).subTransId(UUID.randomUUID().toString()).build()).build();
-    }
-
-    // ... on method
-}
 ```
-
-#### 定义实体聚合根 \{#define-entity-aggregate\}
-
-实体聚合根中对 **Command** 的处理需要遵循 SAGA 或 TCC 规范，具体的定义规则可以参考 [实体聚合根定义](/docs/phoenix-core/phoenix-core-entity-aggregate)
-
-```java
-@EntityAggregateAnnotation(aggregateRootType = "AccountAggregate")
-public class AccountAggregate implements Serializable {
-    private static final long serialVersionUID = 1989248847513267951L;
-    private double            amt;
-    private double            frozenAmt;
-    
-    @CommandHandler(aggregateRootId = "accountCode")
-    public ActReturn act(AccountTryCmd cmd) {
-        if (amt - frozenAmt > cmd.getFrozenAmt()) {
-            return ActReturn.builder().retCode(RetCode.SUCCESS)
-                .event(new AccountTryOkEvent(cmd.getAccountCode(), cmd.getFrozenAmt())).build();
-        } else {
-            String retMessage = String.format("资金可用不足，剩余:%f, 当前需要冻结:%f", amt - frozenAmt, cmd.getFrozenAmt());
-            return ActReturn.builder().retCode(RetCode.FAIL).retMessage(retMessage)
-                .event(new AccountTryFailEvent(cmd.getAccountCode(), cmd.getFrozenAmt(), retMessage)).build();
-        }
-    }
-
-    public void on(AccountTryOkEvent event) {
-        frozenAmt += event.getFrozenAmt();
-    }
-
-    public void on(AccountTryFailEvent event) { }
-
-    @CommandHandler(aggregateRootId = "accountCode")
-    public ActReturn act(AccountConfirmCmd cmd) {
-        return ActReturn.builder().retCode(RetCode.SUCCESS)
-            .event(new AccountConfirmOkEvent(cmd.getAccountCode(), cmd.getFrozenAmt())).build();
-    }
-
-    public void on(AccountConfirmOkEvent event) {
-        amt -= event.getFrozenAmt();
-        frozenAmt -= event.getFrozenAmt();
-    }
-
-    @CommandHandler(aggregateRootId = "accountCode")
-    public ActReturn act(AccountCancelCmd cmd) {
-        return ActReturn.builder().retCode(RetCode.SUCCESS)
-            .event(new AccountCancelOkEvent(cmd.getAccountCode(), cmd.getFrozenAmt())).build();
-    }
-
-    public void on(AccountCancelOkEvent event) {
-        frozenAmt -= event.getFrozenAmt();
-    }
-}
-
-@EntityAggregateAnnotation(aggregateRootType = "GoodsTcc")
-public class GoodsAggregate implements Serializable {
-    private static final long serialVersionUID = -6111851668488622895L;
-    private long              qty;
-    private long              frozenQty;
-
-    @CommandHandler(aggregateRootId = "goodsCode")
-    public ActReturn act(GoodsSellCmd cmd) {
-        if (cmd.getQty() < 0) {
-            throw new RuntimeException("数不能小于0");
-        }
-        if (qty > cmd.getQty()) {
-            return ActReturn.builder().retCode(RetCode.SUCCESS)
-                .event(new GoodsSellOkEvent(cmd.getGoodsCode(), cmd.getQty())).build();
-        } else {
-            String ret = String.format("余额不足，剩余:%d, 当前需要:%d", qty, cmd.getQty());
-            return ActReturn.builder().retCode(RetCode.FAIL).retMessage(ret)
-                .event(new GoodsSellFailEvent(cmd.getGoodsCode(), cmd.getQty(), ret)).build();
-        }
-    }
-
-    public void on(GoodsSellOkEvent event) {
-        qty -= event.getQty();
-    }
-
-    public void on(GoodsSellFailEvent event) { }
-
-    @CommandHandler(aggregateRootId = "goodsCode")
-    public ActReturn act(GoodsSellCompensateCmd cmd) {
-        return ActReturn.builder().retCode(RetCode.SUCCESS)
-            .event(new GoodsSellCompensateOkEvent(cmd.getGoodsCode(), cmd.getQty())).build();
-    }
-
-    public void on(GoodsSellCompensateOkEvent event) {
-        qty += event.getQty();
-    }
-}
+事务聚合根初始化 -> 心跳周期 -> (心跳判断 + 第一次重发) -> 心跳周期 ->  (心跳判断 + 第二次重发) -> ....
 ```
-
-> 完整的案例请参考：[PhoenixIQ/phoenix-samples/shopping](https://github.com/PhoenixIQ/phoenix-samples/tree/master/shopping)
-

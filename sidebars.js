@@ -95,6 +95,8 @@ const sidebars = {
                         'phoenix-advanced/phoenix-kafka-extend',
                         "phoenix-advanced/starvation-detector",
                         "phoenix-advanced/cluster-pool",
+                        "phoenix-advanced/annotation-resolver",
+                        "phoenix-advanced/extension",
                     ],
                 },
                 "phoenix-core/phoenix-core-config",
@@ -114,6 +116,7 @@ const sidebars = {
             items: [
                 "phoenix-transaction/phoenix-transaction-module",
                 "phoenix-transaction/phoenix-transaction-aggregate",
+                "phoenix-transaction/phoenix-transaction-sample",
             ],
         },
         {

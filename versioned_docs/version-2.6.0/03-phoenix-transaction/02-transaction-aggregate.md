@@ -26,7 +26,7 @@ Phoenix框架提供了事务模块，用来解决分布式事务问题。目前�
 2. 聚合根类以及聚合根类中的实体均需实现 `Serializable` 接口，并定义serialVersionUID。
 
 
-:::caution 注意
+:::caution[注意]
 
 在聚合根上添加 `@TransactionAggregateAnnotation` 注解时，需要通过 `aggregateRootType` 指定一个聚合根的类别。用来区分不同的聚合根类。
 

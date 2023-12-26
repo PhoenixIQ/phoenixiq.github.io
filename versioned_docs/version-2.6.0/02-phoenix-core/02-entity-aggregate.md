@@ -22,7 +22,7 @@ description: 构建服务端的最小执行单元
 
 ## 实体聚合根 \{#entity-aggregate\}
 
-:::tip 提示
+:::tip[提示]
 
 聚合根类成员变量支持 `WildcardType`,`TypeVariable`,`GenericArrayType`, 在聚合根类合法性校验中,
 会跳过这些类型的校验。但开发者必须实现这些类型的序列化接口.
@@ -38,7 +38,7 @@ description: 构建服务端的最小执行单元
 2. 聚合根类以及聚合根类中的实体均需实现 `Serializable` 接口，并定义 `serialVersionUID`。
 3. 聚合根类需要提供无参构造函数。
 
-:::info 注意
+:::info[注意]
 
 在聚合根上添加 `@EntityAggregateAnnotation` 注解时，需要通过 `aggregateRootType` 指定一个聚合根的类别。用来区分不同的聚合根类，该聚合根类别是全局唯一的。
 
@@ -98,7 +98,7 @@ public ActReturn act(AccountCreateCmd createCmd) {
 }
 ```
 
-:::info 注意
+:::info[注意]
 
 聚合根 ID `aggregateRootId` 是该聚合根的唯一标识, 其大小限制随着 Event-Store 中的 aggregateRootIdSize 配置改变, 但不能超过 256 的字节长度, 因为过长的聚合根 ID 会导致索引性能下降. 
 如果您的聚合根 ID 长度需要转义成更长的字符串，请自行转换成更精简的表达.
@@ -200,7 +200,7 @@ Phoenix提供了查询聚合根状态的能力。通过在**act()**方法上添�
  }
 ```
 
-:::tip 小提示
+:::tip[小提示]
 
 实体聚合根处理扫描支持对象关系. 如支持在父类中定义 `act`, `on` 方法来帮助整理一个聚合根类的代码，但暂不支持用泛型的方式复用这些方法.
 
@@ -245,7 +245,7 @@ public class BankAccountAggregate implements Serializable {}
 | 100000    | 179.982KB  |
 | 1000000   | 1797.982KB |
 
-:::tip 提示
+:::tip[提示]
 
 布隆过滤器只是为了减少判断幂等时的查库频率，一般推荐设置10000即可，实际测试size=10000即可比较准确的判断最近10W个左右的命令。
 
@@ -269,7 +269,7 @@ Phoenix 会再次将该聚合根唤醒并且回溯到淘汰前状态（通过 Ev
 
 默认情况下，聚合根总是会开启钝化，也就是每个聚合根都是永久存在于 EventStore 中，通过淘汰机制能够让不活跃的聚合根释放内存资源。
 
-:::tip 提示
+:::tip[提示]
 聚合根可以通过关闭注解上的钝化配置（`allowPassivation`），让聚合根在淘汰之后同时释放到内存 & EventStore 的资源
 :::
 
@@ -309,7 +309,7 @@ quantex:
 
 ### 运行模式 \{#run-mode\}
 
-:::tip 自定义运行模式配置
+:::tip[自定义运行模式配置]
 聚合根运行模式可以通过在聚合根注解`@EntityAggregateAnnotation`的属性 `runningMode` 中指定. 在 Spring
 环境下也可以使用环境变量`quantex.phoenix.server.entityAggregate.{aggregateRootType}.runningMode=ASYNC`来指定.
 :::
@@ -322,7 +322,7 @@ quantex:
 
 ### 自定义线程池 \{#dispatcher\}
 
-:::tip 自定义线程池配置
+:::tip[自定义线程池配置]
 自定义线程池可以通过在聚合根注解`@EntityAggregateAnnotation`的属性 `dispatcher` 中指定. 在 Spring
 环境下也可以使用环境变量`quantex.phoenix.server.entityAggregate.{aggregateRootType}.dispatcher=aggregate-dispatcher`
 来指定.

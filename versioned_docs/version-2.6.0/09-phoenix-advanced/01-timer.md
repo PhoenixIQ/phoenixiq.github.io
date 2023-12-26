@@ -17,7 +17,7 @@ Phoenix 的聚合根拥有通过 API 定时给自身发送消息的特性，简�
 3. 定时器的 API 的作用域仅作用于聚合根本身, A 聚合根不能取消 B 聚合根的定时任务.
 4. 聚合根定时任务的调度是基于高吞吐率而设计的, 基于 `TimerWheel` 实现, 因此定时任务的触发时间不是精确的, 存在一定的误差.
 
-:::caution 注意
+:::caution[注意]
 
 定时任务会随着快照以及事件持久化（一次的定时任务不会被持久化）, 仅当开发者手动取消定时任务时才会取消任务执行, 且定时任务发送的消息不会被幂等.
 
@@ -45,7 +45,7 @@ Phoenix 的聚合根拥有通过 API 定时给自身发送消息的特性，简�
 - **聚合根 Command **：用户自定义消息
 - **com.iquantex.phoenix.core.message.Message**：Phoenix 消息 Protobuf 代理类. 通过 `MessageFactory.getCmdMsg()` 创建.
 
-:::tip 小提示
+:::tip[小提示]
 
 基于 `MessageFactory.getCmdMsg()` 创建的消息支持自定义 source(src) topic，能够在聚合根处理完成之后回复/投递到此 Topic.
 

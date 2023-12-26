@@ -35,7 +35,7 @@ title: 分布式数据
 
 两者的共同点是都实现了 `DistributedDataRemote` 接口。该接口是与分布式数据服务端通信的工具，可以利用该接口 API 方便的进行分布式数据的维护。该对象不支持序列化。
 
-:::tip 提示
+:::tip[提示]
 
 删除分布式数据可以通过在 addDData 方法中传入值为 `null` 的方式实现。
 
@@ -264,7 +264,7 @@ public interface ExtendDDataSource {
 
 使用案例如下：
 
-:::info 提示
+:::info[提示]
 
 注意：在注入 Bean 的时候必须要指定 Bean 的 name 为 `ExtendDDataSource.NAME`
 
@@ -330,7 +330,7 @@ public class ExtendDDataSourceBean {
 2. 当用户没有自定义 `ExtendDDataSource`时, 值过期后清除。
 
 
-:::caution 注意
+:::caution[注意]
 
 值过期后，订阅者接收值过期的变更不是可靠的，可能会存在订阅者没有接收到分布式数据值过期后变更的 DdataChangeCmd。
 

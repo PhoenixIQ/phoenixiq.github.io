@@ -20,7 +20,7 @@ description: 构建服务端的最小执行单元
 </dependency>
 ```
 
-## 实体聚合根 \{#entity-aggregate\}
+## 定义实体聚合根 \{#entity-aggregate\}
 
 :::tip[提示]
 
@@ -31,11 +31,10 @@ description: 构建服务端的最小执行单元
 
 :::
 
-实体聚合根需要使用`@EntityAggregateAnnotation`
-来标记类，服务启动后phoenix会校验定义规范和创建实体聚合根类对象。实体聚合根类需要遵循如下规范:
+实体聚合根使用注解`@EntityAggregateAnnotation`来定义，服务启动后 Phoenix 会扫描和校验符合规范的实体聚合根对象，并在接收命令时创建实体聚合根类对象。实体聚合根类需要遵循如下规范:
 
 1. 聚合根类需要使用 `@EntityAggregateAnnotation` 注解进行标记。
-2. 聚合根类以及聚合根类中的实体均需实现 `Serializable` 接口，并定义 `serialVersionUID`。
+2. 聚合根类以及聚合根类中的成员均需实现 `Serializable` 接口，并定义 `serialVersionUID`。
 3. 聚合根类需要提供无参构造函数。
 
 :::info[注意]
@@ -54,7 +53,7 @@ public class BankAccountAggregate implements Serializable {
 }
 ```
 
-#### 参数配置 \{#aggregate-config\}
+#### 注解配置 \{#aggregate-config\}
 
 | 配置项                     | 描述                                            | 类型      | 默认值                      |
 |:------------------------|:----------------------------------------------|:--------|:-------------------------|
@@ -73,17 +72,17 @@ public class BankAccountAggregate implements Serializable {
 
 ## 命令处理 \{#command-handler\}
 
-实体聚合根中需要提供 **act()** 方法，用来处理Command消息。
+在 EventSouring 中，聚合根的生命周期是：`接收命令 -> 处理 -> 产生事件 -> 更改状态`，因此本小节的内容是说明 Phoenix 如何定义一个聚合根命令处理的声明：
 
-一般会产生该领域将会发生的Event事件，通过Event事件修改聚合根状态，也可以直接修改(使用CommandSouring模式)。
+实体聚合根中定义处理命令的方法是：提供返回值是 ActReturn 的 **act()** 方法，签名是：`public ActReturn act(Command cmd)`，并使用注解 `@CommandHandler` 声明其配置。
+
+命令处理会产生该领域接收命令后产生的事件，然后通过事件来修改聚合根状态，也可以直接修改(使用`CommandSouring`模式, 避免在 EventSouring 模式下在 act 方法中修改状态，这样会污染内存状态)。
 
 对于Command命令和Event事件，Phoenix支持三种协议，详情请参见`序列化`。
 
 - protobuf
 - protostuff
-- java serializable
-
-实体聚合根中的 **act()** 方法上需要添加 `@CommandHandler` 注解进行标识。
+- Java serializable：默认，但并不推荐，Java 序列化的性能和安全性都偏差
 
 #### 示例代码 \{#command-handler-example\}
 
@@ -108,7 +107,7 @@ public ActReturn act(AccountCreateCmd createCmd) {
 
 :::
 
-#### 参数配置 \{#handler-config\}
+#### 注解配置 \{#handler-config\}
 
 | 配置项                   | 描述                                                                         | 类型       | 默认值              |
 |:----------------------|:---------------------------------------------------------------------------|:---------|:-----------------|
@@ -117,7 +116,7 @@ public ActReturn act(AccountCreateCmd createCmd) {
 | idempotentIds         | 幂等id(参考`幂等操作`段落详解)                                                         | String[] | 采用phoenix默认的幂等id |
 | isCommandSourcing     | 是否是command sourcing，默认是event sourcing                                      | boolean  | false            |
 
-> 关于支持多聚合根Id并且嵌套的使用方式
+> 聚合根 ID 支持同时使用组合和嵌套的使用方式
 
 ```java
 class CommandA {
@@ -139,26 +138,41 @@ public ActReturn act(A cmd) {
 
 #### ActReturn \{#return\}
 
-**act()** 方法在处理 Command 命令之后需要返回处理的结果以及一些必要的信息，Phoenix对**act**方法的返回值做了一层封装，统一放到了ActReturn中。
-ActReturn中Event事件将会到达两个地方调用方和on方法处理逻辑当中。
+:::warning[注意]
+
+Reply 可用于返回 RPC 结果，快速发送到指定 Topic（参考 Phoenix Client API）来缩短 EventPublish 路径，当需要特别注意的是，Reply 的交付语义是至多一次的。
+也就是说 Reply 仅会事件处理结果后发送一次（一次性）。在幂等时、主键冲突等情况下，Reply 不会再次交付，而是返回 Event。
+
+:::
+
+ActReturn 定义了命令处理的结果，包含处理状态、事件等，其 Java 定义如下：
 
 ```java
 public class ActReturn {
-    // 处理状态码
+    // 处理状态码，必填参数
     private final RetCode retCode;
-    // 返回消息
-    @Builder.Default
+    // 返回消息，必填参数
     private final String retMessage = "";
-    // 返回事件
+    // 持久化事件，必填参数
     private final Object event;
+    // 回复事件，可选参数，至多一次交付语义
+    private final Object reply;
+    // 元数据注册
+    private final List<RegistryCollectData> registryCollectDataList;
 }
 ```
 
 ## 事件处理 \{#event-handler\}
 
-在EventSourcing模式下，实体聚合根中需要定义 **on()** 方法，处理 **act()** 方法中处理Command命令所产生的Event事件。
+在 EventSouring 中，聚合根的生命周期是：`接收命令 -> 处理 -> 产生事件 -> 更改状态`，因此本小节的内容是说明 Phoenix 如何定义一个聚合根事件处理的声明：
 
-同时Event事件会进行持久化处理(EventStore)，当需要重建聚合根内存状态时，通过 EventSourcing 进行状态重塑。
+实体聚合根中定义处理命令的方法是：提供没有返回值的 **on()** 方法，签名是：`public void on(Event cmd)`。
+
+实体聚合根接收会接收 `act()` 方法产生的事件，并调用自身的命令处理逻辑来修改状态。事件仅会在持久化成功之后才会发送到聚合根，因此用户可以认为在 `on()`方法中
+修改的状态总是可靠的，而 `act()` 方法修改的状态总是不可靠的。用户在这个语义下可以在 `act()` 中执行外部交互方法（如 IO），并将结果存入事件，这样每当聚合根溯源时，
+不会重复于外部交互。
+
+事件会进行持久化处理(EventStore)，当需要重建聚合根内存状态时，通过 EventSourcing 进行状态重塑。
 
 在重塑时可以通过快照进行加速。快照相关配置请参考:[配置详情](./phoenix-core-config)
 

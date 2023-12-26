@@ -25,7 +25,7 @@ title: 实体聚合根
 2. 聚合根类以及聚合根类中的实体均需实现 `Serializable` 接口，并定义serialVersionUID。
 3. 聚合根类需要提供无参构造函数。
 
-:::info 注意
+:::info[注意]
 
 在聚合根上添加 `@EntityAggregateAnnotation` 注解时，需要通过 `aggregateRootType` 指定一个聚合根的类别。用来区分不同的聚合根类，该聚合根类别是全局唯一的。且聚合根ID的长度要小于64个字符。
 
@@ -199,7 +199,7 @@ public class BankAccountAggregate implements Serializable {}
 |100000|179.982KB|
 |1000000|1797.982KB|
 
-:::tip 提示
+:::tip[提示]
 
 布隆过滤器只是为了减少判断幂等时的查库频率，一般推荐设置10000即可，实际测试size=10000即可比较准确的判断最近10W个左右的命令。
 
@@ -277,7 +277,7 @@ Phoenix针对每个聚合根类型提供了一种淘汰机制，对于长时间�
 ```
 
 
-:::info 提示
+:::info[提示]
 
 聚合根对象被释放不代表该聚合根就不可用,如果有命令触发该聚合根做操作,则会通过EventSouring的机制恢复。释放只是为了释放出JVM内存的占用。
 

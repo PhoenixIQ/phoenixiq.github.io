@@ -111,7 +111,7 @@ JVM参数配置方式：
 ```
 
 
-:::info 注意
+:::info[注意]
 
 本地组建集群时需要注意
 
@@ -393,7 +393,7 @@ phoenix-console 提供的应用总览页面，可以查看一下两个信息：
 ## 中间件集群兼容性 \{#compatibility\}
 
 
-:::info 兼容性说明
+:::info[兼容性说明]
 
 目前 Phoenix 集群的中间件集群都是使用的 HTTP 的方式查找服务而非 DNS. Eureka 则不支持 DNS 方式.
 

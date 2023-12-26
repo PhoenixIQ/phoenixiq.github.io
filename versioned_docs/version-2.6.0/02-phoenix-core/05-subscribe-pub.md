@@ -47,7 +47,7 @@ public class PhoenixSubscribeConfig {
 
 可以注意到，除了Kafka基本的配置之外，用户还需要提供一个`SourceCollect`的实现。
 
-:::tip 提示
+:::tip[提示]
 
 `KafkaSubscribe` 默认会订阅 `Topic` 下的所有 `Partition`, 但是用户也可以通过以下方式自定义订阅 `Partition`
 
@@ -179,13 +179,13 @@ public interface SourceCollect {
 
 #### 性能、死锁问题 \{#perf\}
 
-:::caution 死锁问题
+:::caution[死锁问题]
 
 Distributed-Data（分布式数据）的响应会经过 SourceCollect, 避免在 SourceCollect 中对 DData 发起同步调用，以避免发生业务上的死锁。
 
 :::
 
-:::danger 性能问题
+:::danger[性能问题]
 
 SourceCollect 是消息入口, 应避免/禁止在此发起 I/O 调用, 否则将会导致性能问题，如应用需要在流量入口对命令加工并该信息能通过聚合根提供，
 请使用 Phoenix 的 MetaData 能力。
@@ -335,8 +335,7 @@ public class PhoenixSubscribeConfig {
     }
 ```
 
-:::caution
-注意：在用户配置了聚合根的**存活时间**后，当实体聚合根从内存中淘汰后，框架会自动取消该聚合根所有的注册数据，并且在聚合根恢复后，也不会自动恢复注册。
+:::caution[注意：在用户配置了聚合根的**存活时间**后，当实体聚合根从内存中淘汰后，框架会自动取消该聚合根所有的注册数据，并且在聚合根恢复后，也不会自动恢复注册。]
 :::
 
 ```java

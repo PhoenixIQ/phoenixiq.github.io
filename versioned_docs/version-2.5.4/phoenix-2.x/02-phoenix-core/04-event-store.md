@@ -65,7 +65,7 @@ quantex:
 1. 快照数量触发归档：当快照数量累计到一定数量后触发一次归档（最大累积快照数量可配置，默认不触发归档）
 2. 手动一键归档： 在 `PhoenixConsole` 的事件管理中，通过 API 触发一键全量归档.
 
-:::info 配置提示
+:::info[配置提示]
 
 最大累积快照数量配置：`numberOfRetainSnapshots` （int） 默认为 `Integer.MAX_VALUE`，不触发归档 （聚合根级别配置）
 

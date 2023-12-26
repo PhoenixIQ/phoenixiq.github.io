@@ -266,7 +266,7 @@ public interface ExtendDDataSource {
 
 使用案例如下：
 
-:::info 提示
+:::info[提示]
 
 注意：在注入 Bean 的时候必须要指定 Bean 的 name 为 `ExtendDDataSource.NAME`
 
@@ -332,7 +332,7 @@ public class ExtendDDataSourceBean {
 2. 当用户没有自定义 `ExtendDDataSource`时, 值过期后清除.
 
 
-:::caution 注意
+:::caution[注意]
 
 值过期后，订阅者接收值过期的变更不是可靠的，可能会存在订阅者没有接收到分布式数据值过期后变更的 DdataChangeCmd。
 

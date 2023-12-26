@@ -45,7 +45,7 @@ public class PhoenixSubscribeConfig {
 
 可以注意到，除了Kafka基本的配置之外，用户还需要提供一个`SourceCollect`的实现。
 
-:::tip 提示
+:::tip[提示]
 
 `KafkaSubscribe` 默认会订阅 `Topic` 下的所有 `Partition`, 但是用户也可以通过以下方式自定义订阅 `Partition`
 

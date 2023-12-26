@@ -45,7 +45,7 @@ public class PhoenixSubscribeConfig {
 
 可以注意到，除了Kafka基本的配置之外，用户还需要提供一个`SourceCollect`的实现。
 
-:::tip 提示
+:::tip[提示]
 
 `KafkaSubscribe` 默认会订阅 `Topic` 下的所有 `Partition`, 但是用户也可以通过以下方式自定义订阅 `Partition`
 
@@ -175,8 +175,7 @@ public class SelfSourceCollect implements SourceCollect {
     }
 ```
 
-:::caution
-注意：在用户配置了聚合根的**存活时间**后，当实体聚合根从内存中淘汰后，框架会自动取消该聚合根所有的注册数据，并且在聚合根恢复后，也不会自动恢复注册。
+:::caution[注意：在用户配置了聚合根的**存活时间**后，当实体聚合根从内存中淘汰后，框架会自动取消该聚合根所有的注册数据，并且在聚合根恢复后，也不会自动恢复注册。]
 :::
 
 ```java
