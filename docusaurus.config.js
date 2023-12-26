@@ -24,6 +24,7 @@ export default {
     organizationName: 'PhoenixIQ', // Usually your GitHub org/user name.
     projectName: 'phoenixiq.github.io',
     trailingSlash: false,
+    deploymentBranch: 'gh-pages',
 
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'warn',
